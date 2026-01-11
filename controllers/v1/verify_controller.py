@@ -1,6 +1,5 @@
 from sentence_transformers import SentenceTransformer
 from sqlalchemy import select
-from pgvector.sqlalchemy import Vector
 from schemas.article_vector_schema import ArticleVector
 from schemas.article_schema import Article
 from models.article_vector_model import ArticleVectorModel

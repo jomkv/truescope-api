@@ -1,3 +1,4 @@
+from sqlalchemy import Index
 import uuid
 from core.db import Base
 from sqlalchemy import UUID, Column, String, ForeignKey
@@ -14,3 +15,15 @@ class ArticleVector(Base):
     source = Column(String, nullable=False)
     type = Column(String, nullable=False)
     source_bias = Column(String, nullable=False)
+
+    # Improves performance and potentially the accuracy of results
+    __table_args__ = (
+        Index(
+            "hnsw_cosine_idx",
+            "embedding",
+            postgresql_using="hnsw",
+            # Experimental
+            postgresql_with={"m": 16, "ef_construction": 64},
+            postgresql_ops={"embedding": "vector_cosine_ops"},
+        ),
+    )
