@@ -22,7 +22,9 @@ async def verify_claim(claim: Annotated[str, Body()]):
 
     # 1, 2, 3 (no 2.1 yet)
     with Session() as session:
-        articles: list[ArticleModel] = controller.get_relevant_articles(session, claim)
+        articles: list[ArticleModel] = controller.get_relevant_articles(
+            session, claim, 10
+        )
 
     # 4
     # TODO
