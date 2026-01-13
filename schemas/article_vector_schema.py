@@ -9,8 +9,9 @@ class ArticleVector(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     chunk_id = Column(String, unique=True, nullable=False)
+    chunk_content = Column(String, nullable=False)
     doc_id = Column(String, ForeignKey("articles.doc_id"), nullable=False)
     embedding = Column(VECTOR(384), nullable=False)
-    source = Column(String, nullable=False)
-    type = Column(String, nullable=False)
-    source_bias = Column(String, nullable=False)
+    source = Column(String)
+    type = Column(String)
+    source_bias = Column(String)
