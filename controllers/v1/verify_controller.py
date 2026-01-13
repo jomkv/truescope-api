@@ -1,3 +1,5 @@
+import re
+from datetime import datetime, timedelta
 from sentence_transformers import SentenceTransformer
 from sqlalchemy import select
 from pgvector.sqlalchemy import Vector
@@ -22,6 +24,7 @@ from constants.keywords import (
     STATEMENT_CLAIM_PATTERNS,
     NEGATION_PATTERNS,
     QUANTIFIER_PATTERNS,
+    SPECIFIC_PLACES,
 )
 
 
@@ -94,7 +97,6 @@ class VerifyController:
         Extract named entities (organizations, people, locations) from text.
         Returns dict with lists of extracted entities.
         """
-        import re
         
         entities = {
             "organizations": [],
@@ -145,7 +147,6 @@ class VerifyController:
         
         Stricter matching: Entity must be the subject/actor, not just mentioned.
         """
-        import re
         
         article_text_lower = article_text.lower()
         article_title_lower = article_title.lower()
@@ -218,21 +219,7 @@ class VerifyController:
             location_lower = location.lower()
             
             # For specific provinces/cities/municipalities, require exact match
-            # These are specific places that shouldn't match generic location references
-            specific_places = [
-                'nueva vizcaya', 'nueva ecija', 'la union', 'quezon city', 'manila',
-                'aurora', 'cagayan', 'isabela', 'quirino', 'batanes', 'ilocos norte',
-                'ilocos sur', 'pangasinan', 'benguet', 'ifugao', 'kalinga', 'apayao',
-                'abra', 'mountain province', 'bulacan', 'pampanga', 'tarlac', 'zambales',
-                'bataan', 'cavite', 'laguna', 'batangas', 'rizal', 'quezon', 'marinduque',
-                'romblon', 'palawan', 'occidental mindoro', 'oriental mindoro', 'albay',
-                'camarines norte', 'camarines sur', 'catanduanes', 'masbate', 'sorsogon',
-                'cebu', 'bohol', 'negros occidental', 'negros oriental', 'leyte',
-                'southern leyte', 'samar', 'eastern samar', 'northern samar', 'biliran',
-                'aklan', 'antique', 'capiz', 'iloilo', 'guimaras', 'siquijor'
-            ]
-            
-            is_specific_place = any(sp in location_lower for sp in specific_places)
+            is_specific_place = any(sp in location_lower for sp in SPECIFIC_PLACES)
             
             if is_specific_place:
                 # Strict: Must appear in article for specific places
@@ -256,8 +243,6 @@ class VerifyController:
         Extract temporal references from claim (e.g., 'late November 2025', 'early 2024', 'November 9 to November 12, 2025').
         Returns dict with year, month, and relative timing if found.
         """
-        import re
-        from datetime import datetime, timedelta
         
         timeframe = {
             "years": [],
@@ -423,7 +408,6 @@ class VerifyController:
         Check if article's publish date falls within claim's timeframe.
         Returns True if relevant, False if outside timeframe.
         """
-        from datetime import timedelta
         
         if not claim_timeframe["date_range"] or not article_date:
             return True  # No timeframe restriction
@@ -439,8 +423,7 @@ class VerifyController:
         Extract dates and numbers with qualifiers from text for fact-checking.
         Returns dict with dates, numbers, and their qualifiers.
         """
-        import re
-        
+
         result = {"dates": [], "numbers": [], "number_qualifiers": []}
         
         # Extract dates (various formats)
@@ -488,7 +471,6 @@ class VerifyController:
         Normalize temporal language to reduce false mismatches from tense differences.
         Converts future/past tense to present tense for better semantic matching.
         """
-        import re
         
         # Apply all normalization patterns
         for pattern, replacement in TEMPORAL_NORMALIZATION_PATTERNS:
@@ -531,7 +513,6 @@ class VerifyController:
         - all_scores: dict with scores for all three categories
         - warnings: list of detected mismatches
         """
-        import re
         
         # Detect if this is a statement/attribution claim (X said/claimed/announced Y)
         is_statement_claim = any(re.search(pattern, user_claim.lower()) for pattern in STATEMENT_CLAIM_PATTERNS)
@@ -832,3 +813,64 @@ class VerifyController:
         results.extend(skipped_articles)
         
         return results
+
+    @staticmethod
+    def calculate_summary_statistics(results: list[dict]) -> dict:
+        """
+        Calculate summary statistics from verification results.
+        
+        Args:
+            results: List of article results from verify_claim_with_articles
+        
+        Returns:
+            Dictionary with summary statistics including counts, averages, and breakdowns
+        """
+        # Calculate counts
+        analyzed_count = sum(1 for r in results if r.get("nli_result"))
+        skipped_count = sum(1 for r in results if r.get("skip_reason"))
+        supports_count = sum(1 for r in results if r.get("nli_result") and r["nli_result"]["relation"] == "supports")
+        refutes_count = sum(1 for r in results if r.get("nli_result") and r["nli_result"]["relation"] == "refutes")
+        neutral_count = sum(1 for r in results if r.get("nli_result") and r["nli_result"]["relation"] == "neutral")
+        
+        # Breakdown by claim source
+        source_breakdown = {}
+        for r in results:
+            if r.get("nli_result"):
+                source = r["nli_result"].get("claim_source", "unknown")
+                source_breakdown[source] = source_breakdown.get(source, 0) + 1
+        
+        # Calculate average scores for analyzed vs skipped articles
+        analyzed_results = [r for r in results if r.get("nli_result")]
+        skipped_results = [r for r in results if r.get("skip_reason")]
+        
+        analyzed_avg_sim = sum(r["similarity_score"] for r in analyzed_results) / len(analyzed_results) if analyzed_results else 0
+        analyzed_avg_entity = sum(r["entity_match_score"] for r in analyzed_results) / len(analyzed_results) if analyzed_results else 0
+        analyzed_avg_combined = sum(r["combined_relevance_score"] for r in analyzed_results) / len(analyzed_results) if analyzed_results else 0
+        
+        skipped_avg_sim = sum(r["similarity_score"] for r in skipped_results) / len(skipped_results) if skipped_results else 0
+        skipped_avg_entity = sum(r["entity_match_score"] for r in skipped_results if r["entity_match_score"] is not None) / len([r for r in skipped_results if r["entity_match_score"] is not None]) if any(r["entity_match_score"] is not None for r in skipped_results) else 0
+        skipped_avg_combined = sum(r["combined_relevance_score"] for r in skipped_results if r["combined_relevance_score"] is not None) / len([r for r in skipped_results if r["combined_relevance_score"] is not None]) if any(r["combined_relevance_score"] is not None for r in skipped_results) else 0
+        
+        # Count skip reasons
+        skip_reasons_count = {}
+        for r in skipped_results:
+            for reason in r.get("skip_reason", []):
+                reason_key = "low_similarity" if "similarity" in reason else "missing_entities"
+                skip_reasons_count[reason_key] = skip_reasons_count.get(reason_key, 0) + 1
+        
+        return {
+            "total_articles": len(results),
+            "articles_analyzed": analyzed_count,
+            "articles_skipped": skipped_count,
+            "avg_similarity_analyzed": round(analyzed_avg_sim, 4),
+            "avg_similarity_skipped": round(skipped_avg_sim, 4),
+            "avg_entity_match_analyzed": round(analyzed_avg_entity, 4),
+            "avg_entity_match_skipped": round(skipped_avg_entity, 4),
+            "avg_combined_relevance_analyzed": round(analyzed_avg_combined, 4),
+            "avg_combined_relevance_skipped": round(skipped_avg_combined, 4),
+            "skip_reasons": skip_reasons_count,
+            "supports": supports_count,
+            "refutes": refutes_count,
+            "neutral": neutral_count,
+            "claim_sources": source_breakdown
+        }

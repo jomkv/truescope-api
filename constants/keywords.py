@@ -164,3 +164,16 @@ TEMPORAL_NORMALIZATION_PATTERNS = [
     (r'\bdrew? (?:huge |massive |large )?crowd to\b', 'holds rally for'),
     (r'\bdrew? (?:huge |massive |large )?crowd (?:to|at|in)\b', 'holds rally at'),
 ]
+
+SPECIFIC_PLACES = [
+    'nueva vizcaya', 'nueva ecija', 'la union', 'quezon city', 'manila',
+    'aurora', 'cagayan', 'isabela', 'quirino', 'batanes', 'ilocos norte',
+    'ilocos sur', 'pangasinan', 'benguet', 'ifugao', 'kalinga', 'apayao',
+    'abra', 'mountain province', 'bulacan', 'pampanga', 'tarlac', 'zambales',
+    'bataan', 'cavite', 'laguna', 'batangas', 'rizal', 'quezon', 'marinduque',
+    'romblon', 'palawan', 'occidental mindoro', 'oriental mindoro', 'albay',
+    'camarines norte', 'camarines sur', 'catanduanes', 'masbate', 'sorsogon',
+    'cebu', 'bohol', 'negros occidental', 'negros oriental', 'leyte',
+    'southern leyte', 'samar', 'eastern samar', 'northern samar', 'biliran',
+    'aklan', 'antique', 'capiz', 'iloilo', 'guimaras', 'siquijor'
+]
