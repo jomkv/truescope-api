@@ -13,11 +13,11 @@ class ArticleVector(Base):
     chunk_content = Column(String, nullable=False)
     doc_id = Column(String, ForeignKey("articles.doc_id"), nullable=False)
     embedding = Column(VECTOR(384), nullable=False)
-    source = Column(String, nullable=False)
-    type = Column(String, nullable=False)
-    source_bias = Column(String, nullable=False)
+    source = Column(String)
+    type = Column(String)
+    source_bias = Column(String)
 
-    # Improves performance and potentially the accuracy of results
+        # Improves performance and potentially the accuracy of results
     __table_args__ = (
         Index(
             "hnsw_cosine_idx",
