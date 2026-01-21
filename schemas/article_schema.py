@@ -12,3 +12,6 @@ class Article(Base):
     verdict = Column(String)
     publish_date = Column(DateTime, nullable=False)
     url = Column(String, nullable=False)
+    source = Column(String)
+    type = Column(String)
+    source_bias = Column(String)
