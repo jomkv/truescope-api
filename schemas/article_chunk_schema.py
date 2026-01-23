@@ -5,20 +5,19 @@ from sqlalchemy import UUID, Column, String, ForeignKey
 from pgvector.sqlalchemy import VECTOR
 
 
-class ArticleVector(Base):
-    __tablename__ = "article_vectors"
+class ArticleChunk(Base):
+    __tablename__ = "article_chunks"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     chunk_id = Column(String, unique=True, nullable=False)
     chunk_content = Column(String, nullable=False)
     doc_id = Column(String, ForeignKey("articles.doc_id"), nullable=False)
     embedding = Column(VECTOR(384), nullable=False)
-    source_bias = Column(String)
 
-        # Improves performance and potentially the accuracy of results
+    # Improves performance and potentially the accuracy of results
     __table_args__ = (
         Index(
-            "hnsw_cosine_article_vectors_idx",
+            "hnsw_cosine_article_chunks_idx",
             "embedding",
             postgresql_using="hnsw",
             # Experimental
