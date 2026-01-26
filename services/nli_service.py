@@ -1,5 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
-from torch import torch, Tensor
+import torch
+from torch import Tensor
+from constants.enums import NLILabel
 
 
 class NLIService:
@@ -10,7 +12,11 @@ class NLIService:
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name)
         self.model.eval()
 
-        self.LABEL_MAP = {0: "contradiction", 1: "neutral", 2: "entailment"}
+        self.LABEL_MAP: dict[int, NLILabel] = {
+            0: NLILabel.REFUTE,
+            1: NLILabel.NEUTRAL,
+            2: NLILabel.SUPPORT,
+        }
 
     @staticmethod
     def _get_average_probability(probs_tensor: Tensor) -> float:
@@ -20,7 +26,9 @@ class NLIService:
 
         return total_probs / 3
 
-    def classify_nli(self, premise: str, hypothesis: str) -> tuple[str, float, float]:
+    def classify_nli(
+        self, premise: str, hypothesis: str
+    ) -> tuple[NLILabel, float, float]:
         inputs = self.tokenizer(
             premise, hypothesis, return_tensors="pt", truncation=True, max_length=512
         )
@@ -29,7 +37,7 @@ class NLIService:
             outputs = self.model(**inputs)
             probs = torch.softmax(outputs.logits, dim=-1)[0]
 
-        label_id = torch.argmax(probs).item()
+        label_id = int(torch.argmax(probs).item())
         return (
             self.LABEL_MAP[label_id],
             probs[label_id].item(),
