@@ -1,4 +1,3 @@
-from schemas.article_chunk_schema import ArticleChunk
 from schemas.article_schema import Article
 from schemas.claim_schema import Claim
 from constants.weights import (
@@ -33,11 +32,19 @@ class VerifyController:
     @staticmethod
     def normalize_text(text: str) -> str:
         """
-        Normalize text for consistent processing:
-        - Lowercase
-        - Strip leading/trailing whitespace
-        - Remove extra spaces
+        Normalize input text for consistent downstream processing.
+
+        Steps:
         - Unicode normalization (NFKC)
+        - Lowercasing
+        - Removal of extra whitespace
+        - Stripping leading/trailing whitespace
+
+        Args:
+            text (str): The input text to normalize.
+
+        Returns:
+            str: The normalized text.
         """
         if not isinstance(text, str):
             return ""
@@ -55,11 +62,16 @@ class VerifyController:
         session: Session, embedding: list[float], top_k: int = 20
     ) -> list[tuple[Claim, Article, float]]:
         """
-        Search for top_k most similar claim vectors in the database using the HNSW indices.
-        Found claim vectors will be paired with their equivalent article.
-        Skips claims with verdict 'UNKNOWN'.
-        Returns list of tuples: (Claim, ArticleModel, similarity_score)
-        where similarity_score is 1 - cosine_distance (higher = more similar)
+        Retrieves the top_k most similar claims from the database using HNSW vector search,
+        skipping claims with an 'UNKNOWN' verdict, and pairs each claim with its corresponding article.
+
+        Args:
+            session (Session): SQLAlchemy session for database access.
+            embedding (list[float]): Embedding vector for the user claim.
+            top_k (int, optional): Number of top similar claims to retrieve. Defaults to 20.
+
+        Returns:
+            list[tuple[Claim, Article, float]]: List of tuples containing the claim, its article, and the similarity score.
         """
 
         # Use HNSW index for efficient vector search
@@ -90,18 +102,33 @@ class VerifyController:
 
     def extract_entities(self, text: str) -> list[str]:
         """
-        Extract entities from text.
+        Extracts named entities from the given text using the entity extraction service.
+
+        Args:
+            text (str): The input text from which to extract entities.
+
+        Returns:
+            list[str]: List of extracted entity names.
         """
         entities_with_label = self.entity_extraction_service.extract_entities(text)
 
+        # Extract entity names only, exclude label
         return [entity[0] for entity in entities_with_label]
 
     def calculate_entity_match_score(
         self, claim_entities: list[str], text: str, article_title: str = ""
     ) -> float:
         """
-        Calculate entity match score between claim entities and article text/title.
-        Returns score from 0.0 to 1.0 indicating entity overlap.
+        Calculates the entity match score between a list of claim entities and the provided text/article title.
+        The score represents the proportion of claim entities found as whole words in the text or title.
+
+        Args:
+            claim_entities (list[str]): List of entities extracted from the claim.
+            text (str): The text (e.g., article content) to search for entities.
+            article_title (str, optional): The article title to also search for entities. Defaults to "".
+
+        Returns:
+            float: Entity match score between 0.0 and 1.0.
         """
         if not claim_entities:
             return 0.0
@@ -122,48 +149,71 @@ class VerifyController:
 
         return matches / total if total > 0 else 0.0
 
-    def extract_claim_timeframe(self, claim: str) -> list[tuple[str, datetime]]:
+    def extract_claim_timeframe(self, user_claim: str) -> list[tuple[str, datetime]]:
         """
-        Extract temporal references from claim (e.g., 'late November 2025', 'early 2024', 'November 9 to November 12, 2025').
-        Returns dict with year, month, and relative timing if found.
+        Extracts temporal references (e.g., dates, periods) from a claim using dateparser.
+
+        Args:
+            claim (str): The user-provided claim to analyze for time expressions.
+
+        Returns:
+            list[tuple[str, datetime]]: List of tuples containing the matched time string and its parsed datetime.
         """
 
-        # null
+        # TODO: Still unsure on how to use extracted timeframe on the current logic
 
-        # SPAN
-        # needs a pair of element, each with strings with prefixes of "(start)" and "(end)"
-        #  [
-        #     "last week (start)",
-        #     "2026-01-05T13:08:41.266185"
-        # ],
-        # [
-        #     "last week (end)",
-        #     "2026-01-11T13:08:41.266185"
-        # ]
-
-        #
-
-        timeframe = {
-            "years": [],
-            "months": [],
-            "relative_timing": None,  # "early", "late", "mid"
-            "date_range": None,  # (start_date, end_date) tuple
-            "temporal_relation": None,  # "after", "before", "during"
-        }
-
-        return search_dates(claim, settings={"RETURN_TIME_SPAN": True})
+        return search_dates(user_claim, settings={"RETURN_TIME_SPAN": True})
 
     @staticmethod
     def compute_final_score(
         verdict: Verdict, source_bias: SourceBias, nli_label: NLILabel, nli_score: float
     ) -> float:
+        """
+        Computes a final score for a claim-article pair based on the verdict, source bias, NLI label, and NLI confidence.
+
+        The output is a fuzzified score in the range [-1, 1]:
+            - A score close to 1 means strong support for the user claim (completely true).
+            - A score close to -1 means strong refutation of the user claim (completely false).
+            - A score near 0 means the evidence is neutral or inconclusive.
+        The magnitude reflects the strength of the evidence, and the sign reflects the direction (support or refute).
+
+        Args:
+            verdict (Verdict): The verdict of the found claim (as an enum).
+            source_bias (SourceBias): The bias of the article's source (as an enum).
+            nli_label (NLILabel): The NLI relationship label between user and found claim.
+            nli_score (float): The NLI model's confidence score for the label (0.0 to 1.0).
+
+        Returns:
+            float: The computed final score (signed and fuzzified, with magnitude reflecting strength).
+        """
+
         verdict_weight = VERDICT_WEIGHT_MAP.get(verdict, 0.5)
         bias_weight = SOURCE_BIAS_WEIGHT_MAP.get(source_bias, 0.7)
         nli_label_weight = NLI_LABEL_WEIGHT_MAP.get(nli_label, 0.5)
 
         return round(nli_score * bias_weight * verdict_weight * nli_label_weight, 2)
 
-    def verify_claim(self, session, user_claim: str, use_fallback: bool = True):
+    def verify_claim(
+        self, session: Session, user_claim: str, use_fallback: bool = True
+    ):
+        """
+        Main entry point for verifying a user claim.
+
+        Steps:
+        - Embeds the user claim and searches for similar claims in the database.
+        - Extracts entities from the user claim and calculates entity match scores.
+        - For each found claim-article pair, runs NLI to determine the relationship and computes a final score.
+        - Filters and sorts results based on relevance and entity match.
+
+        Args:
+            session (Session): SQLAlchemy session for database access.
+            user_claim (str): The user-provided claim to verify.
+            use_fallback (bool, optional): Whether to use fallback logic if no strong matches are found. Defaults to True.
+
+        Returns:
+            list[dict]: List of result dictionaries, each containing article and claim details, NLI results, scores, and skip reasons.
+        """
+
         user_claim_norm = self.normalize_text(user_claim)
         claim_embedding = self.embedding_service.embed_text(user_claim_norm)
         search_results = self.find_claims_with_articles(session, claim_embedding)
