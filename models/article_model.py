@@ -7,7 +7,8 @@ class ArticleModel(BaseModel):
     doc_id: str
     title: str
     content: str
-    claim: Optional[str] = None
-    verdict: Optional[str] = None
     publish_date: datetime
     url: str
+    source = str
+    type = str
+    source_bias = str

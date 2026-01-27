@@ -9,7 +9,8 @@ from alembic import context
 from core.db import Base
 from core.config import DATABASE_URI
 from schemas.article_schema import Article
-from schemas.article_vector_schema import ArticleVector
+from schemas.article_chunk_schema import ArticleChunk
+from schemas.claim_schema import Claim
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
