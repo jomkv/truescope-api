@@ -1,4 +1,3 @@
-from unittest import result
 from schemas.article_schema import Article
 from schemas.claim_schema import Claim
 from schemas.article_chunk_schema import ArticleChunk
@@ -235,6 +234,8 @@ class VerifyController:
             nli_score (float): The NLI model's confidence score for the label (0.0 to 1.0).
             is_factcheck (bool): Whether the claim is from a fact-checking source.
             similarity_score: float = 0.0,
+
+        Returns:
             float: The computed final score (signed and fuzzified, with magnitude reflecting strength).
         """
         if not is_factcheck:
