@@ -173,47 +173,35 @@ class VerifyController:
         self, claim_entities: list[str], text: str, article_title: str = ""
     ) -> float:
         """
-        Calculates the entity match score between claim entities and text.
-        Handles multi-word entities by progressively removing leading words.
+        Calculates the entity match score between a list of claim entities and the provided text/article title.
+        The score represents the proportion of claim entities found as whole words in the text or title.
+
+        Args:
+            claim_entities (list[str]): List of entities extracted from the claim.
+            text (str): The text (e.g., article content) to search for entities.
+            article_title (str, optional): The article title to also search for entities. Defaults to "".
+
+        Returns:
+            float: Entity match score between 0.0 and 1.0.
         """
         if not claim_entities:
             return 0.0
 
         text_norm = self.normalize_text(text)
         article_title_norm = self.normalize_text(article_title)
-        combined_text = text_norm + " " + article_title_norm
 
-        matches = 0.0
+        matches = 0
+        total = len(claim_entities)
 
         for entity in claim_entities:
-            entity_lower = self.normalize_text(entity)
-            entity_words = entity_lower.split()
-            
-            # Try exact phrase match first: "storm uwan"
-            if re.search(r"\b" + re.escape(entity_lower) + r"\b", combined_text):
-                matches += 1.0
-                continue
-            
-            # Try removing leading words progressively: "uwan"
-            found_match = False
-            if len(entity_words) > 1:
-                for i in range(1, len(entity_words)):
-                    partial = " ".join(entity_words[i:])
-                    if re.search(r"\b" + re.escape(partial) + r"\b", combined_text):
-                        matches += 1.0
-                        found_match = True
-                        break
-            
-            # If no match yet, try word-by-word (only words > 2 chars)
-            if not found_match:
-                main_words = [w for w in entity_words if len(w) > 2]
-                if main_words:
-                    found_words = sum(1 for w in main_words 
-                                    if re.search(r"\b" + re.escape(w) + r"\b", combined_text))
-                    if found_words > 0:
-                        matches += found_words / len(main_words)
+            entity_lower = entity.lower()
+            # Match as whole word in text or title
+            if re.search(
+                r"\b" + re.escape(entity_lower) + r"\b", text_norm
+            ) or re.search(r"\b" + re.escape(entity_lower) + r"\b", article_title_norm):
+                matches += 1
 
-        return round(matches / len(claim_entities), 4)
+        return matches / total if total > 0 else 0.0
 
     def _try_word_matching(self, words: list[str], text: str, matches_obj: dict) -> float:
         """Helper to try matching individual words from entity."""
