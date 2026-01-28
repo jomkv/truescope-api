@@ -55,14 +55,6 @@ class VerifyController:
         # Unicode normalization
         text = unicodedata.normalize("NFKC", text)
         
-        # Replace curly quotes and special punctuation with standard versions
-        replacements = {
-            '“': '"', '”': '"', '‘': "'", '’': "'",
-            '–': '-', '—': '-', '…': '...'
-        }
-        for old, new in replacements.items():
-            text = text.replace(old, new)
-        
         # Lowercase
         text = text.lower()
         
