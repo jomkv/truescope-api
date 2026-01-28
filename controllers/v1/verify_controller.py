@@ -51,16 +51,16 @@ class VerifyController:
         """
         if not isinstance(text, str):
             return ""
-        
+
         # Unicode normalization
         text = unicodedata.normalize("NFKC", text)
-        
+
         # Lowercase
         text = text.lower()
-        
+
         # Remove extra whitespace
         text = re.sub(r"\s+", " ", text)
-        
+
         # Strip leading/trailing whitespace
         return text.strip()
 
@@ -106,7 +106,7 @@ class VerifyController:
                 combined_results.append((vector, article, 1 - distance))
 
         return combined_results
-    
+
     @staticmethod
     def find_news_articles(
         session: Session, embedding: list[float], top_k: int = 20
@@ -140,10 +140,10 @@ class VerifyController:
                 article = session.query(Article).filter(Article.doc_id == doc_id).first()  # type: ignore
                 if article:
                     article_map[doc_id] = (article, similarity_score)
-        
+
         results = list(article_map.values())
         results.sort(key=lambda x: x[1], reverse=True)
-        
+
         return results[:top_k]
 
     def extract_entities(self, text: str) -> list[str]:
@@ -195,7 +195,6 @@ class VerifyController:
 
         return matches / total if total > 0 else 0.0
 
-
     def extract_claim_timeframe(self, user_claim: str) -> list[tuple[str, datetime]]:
         """
         Extracts temporal references (e.g., dates, periods) from a claim using dateparser.
@@ -214,8 +213,8 @@ class VerifyController:
     @staticmethod
     def compute_final_score(
         verdict: Verdict,
-        source_bias: SourceBias, 
-        nli_label: NLILabel, 
+        source_bias: SourceBias,
+        nli_label: NLILabel,
         nli_score: float,
         is_factcheck: bool = True,
         similarity_score: float = 0.0,
@@ -239,20 +238,22 @@ class VerifyController:
             float: The computed final score (signed and fuzzified, with magnitude reflecting strength).
         """
         if not is_factcheck:
-            
+
             if nli_label == NLILabel.SUPPORT:
                 base_score = 0.75
             elif nli_label == NLILabel.REFUTE:
                 base_score = -0.75
             else:
-                base_score = similarity_score # some news articles may be neutral but relevant, so instead of relying only on NLI, use similarity score directly
+                base_score = similarity_score  # some news articles may be neutral but relevant, so instead of relying only on NLI, use similarity score directly
 
             confidence_multiplier = 0.5 + (nli_score * 0.5)
 
-            bias_weight = SOURCE_BIAS_WEIGHT_MAP.get(source_bias, 0.7) if  source_bias else 0.7
+            bias_weight = (
+                SOURCE_BIAS_WEIGHT_MAP.get(source_bias, 0.7) if source_bias else 0.7
+            )
 
             return round(base_score * confidence_multiplier * bias_weight, 2)
-        
+
         if verdict is None or source_bias is None:
             return 0.0
 
@@ -322,7 +323,7 @@ class VerifyController:
                 is_factcheck=False,
             )
             results.append(result)
-        
+
         results.sort(
             key=lambda x: (
                 0 if x["nli_result"] else 1,
@@ -330,10 +331,9 @@ class VerifyController:
                 -x["combined_relevance_score"],
             )
         )
-        
+
         return results
- 
-    
+
     def _process_result(
         self,
         user_claim_norm: str,
@@ -345,7 +345,7 @@ class VerifyController:
         source_bias: str | None,
         is_factcheck: bool,
     ) -> dict:
-        
+
         # For entity matching: use claim text for FC, or article content+title for news
         if is_factcheck and claim_text:
             entity_comparison_text = claim_text
@@ -354,7 +354,7 @@ class VerifyController:
             # For news articles, combine content and title
             entity_comparison_text = article.content or ""
             entity_comparison_title = article.title
-        
+
         entity_match_score = self.calculate_entity_match_score(
             claim_entities, entity_comparison_text, entity_comparison_title
         )
@@ -392,7 +392,11 @@ class VerifyController:
             similarity_score >= self.RELEVANCE_THRESHOLD
             and entity_match_score >= self.ENTITY_THRESHOLD
         ):
-            nli_text = claim_text if is_factcheck and claim_text else (article.content or article.title)
+            nli_text = (
+                claim_text
+                if is_factcheck and claim_text
+                else (article.content or article.title)
+            )
             nli_label, nli_score, nli_avg = self.nli_service.classify_nli(
                 user_claim_norm, nli_text
             )
@@ -402,7 +406,7 @@ class VerifyController:
                 "relationship_confidence": nli_score,
                 "relationship_avg": nli_avg,
                 "claim_source": article.source,
-                "analyzed_text": nli_text[:200] if not is_factcheck else claim_text
+                "analyzed_text": nli_text[:200] if not is_factcheck else claim_text,
             }
 
             # verdict for FC
@@ -435,7 +439,5 @@ class VerifyController:
                     f"Key entities not found ({entity_match_score:.3f} < {self.ENTITY_THRESHOLD})"
                 )
             if not result["skip_reason"]:
-                result["skip_reason"].append(
-                    "Did not meet filtering criteria"
-                )
+                result["skip_reason"].append("Did not meet filtering criteria")
         return result
