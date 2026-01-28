@@ -1,5 +1,6 @@
 from schemas.article_schema import Article
 from schemas.claim_schema import Claim
+from schemas.article_chunk_schema import ArticleChunk
 from constants.weights import (
     VERDICT_WEIGHT_MAP,
     SOURCE_BIAS_WEIGHT_MAP,
@@ -7,7 +8,12 @@ from constants.weights import (
 )
 from constants.enums import Verdict, NLILabel, SourceBias
 from dateparser.search import search_dates
-from services import EmbeddingService, EntityExtractionService, NLIService
+from services import (
+    EmbeddingService,
+    EntityExtractionService,
+    NLIService,
+    RemarksGenerationService,
+)
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 import unicodedata
@@ -20,7 +26,7 @@ class VerifyController:
         self.embedding_service = EmbeddingService()
         self.entity_extraction_service = EntityExtractionService()
         self.nli_service = NLIService()
-
+        self.remarks_generation_service = RemarksGenerationService()
         # Fixed thresholds for article filtering
         self.RELEVANCE_THRESHOLD = 0.3
         self.ENTITY_THRESHOLD = 0.4
@@ -48,18 +54,21 @@ class VerifyController:
         """
         if not isinstance(text, str):
             return ""
+
         # Unicode normalization
         text = unicodedata.normalize("NFKC", text)
+
         # Lowercase
         text = text.lower()
+
         # Remove extra whitespace
         text = re.sub(r"\s+", " ", text)
+
         # Strip leading/trailing whitespace
         return text.strip()
 
-    @staticmethod
     def find_claims_with_articles(
-        session: Session, embedding: list[float], top_k: int = 20
+        self, session: Session, embedding: list[float], user_claim: str, top_k: int = 20
     ) -> list[tuple[Claim, Article, float]]:
         """
         Retrieves the top_k most similar claims from the database using HNSW vector search,
@@ -76,6 +85,7 @@ class VerifyController:
 
         # Use HNSW index for efficient vector search
         distance_col = Claim.embedding.cosine_distance(embedding)  # type: ignore
+
         claim_stmt = (
             select(Claim, distance_col)  # type: ignore
             .where(Claim.verdict != "UNKNOWN")  # Skip claims with "UNKNOWN" verdicts
@@ -96,9 +106,72 @@ class VerifyController:
         for vector, distance in claim_results:
             article = article_map.get(vector.doc_id)
             if article:
-                combined_results.append((vector, article, 1 - distance))
+                # collect chunk contents of the article and generate remarks
+                chunks = (
+                    session.query(ArticleChunk)
+                    .filter(ArticleChunk.doc_id == article.doc_id)
+                    .all()
+                )
+                chunk_texts = " ".join(
+                    [c.chunk_content for c in chunks if c.chunk_content]
+                )
+                remarks = self.remarks_generation_service.generate_remarks(
+                    chunk_texts, user_claim
+                )
+                combined_results.append((vector, article, 1 - distance, remarks))
 
         return combined_results
+
+    def find_news_articles(
+        self, session: Session, embedding: list[float], user_claim: str, top_k: int = 20
+    ) -> list[tuple[Article, float]]:
+        """
+        Retrieves the top_k most similar articles from the database using HNSW vector search.
+
+        Args:
+            session (Session): SQLAlchemy session for database access.
+            embedding (list[float]): Embedding vector for the user claim.
+            top_k (int, optional): Number of top similar articles to retrieve. Defaults to 20.
+
+        Returns:
+            list[tuple[Article, float]]: List of tuples containing the article and the similarity score.
+        """
+        distance_col = ArticleChunk.embedding.cosine_distance(embedding)  # type: ignore
+
+        chunk_stmt = (
+            select(ArticleChunk, distance_col)  # type: ignore
+            .order_by(distance_col)
+            .limit(top_k)
+        )
+        chunk_results = session.execute(chunk_stmt).all()
+
+        article_map: dict[str, Article] = {}
+        results: list[tuple[Article, float, str]] = []
+        for chunk, distance in chunk_results:
+            similarity_score = 1 - distance
+            doc_id = chunk.doc_id
+
+            if doc_id not in article_map:
+                article = session.query(Article).filter(Article.doc_id == doc_id).first()  # type: ignore
+                if article:
+                    article_map[doc_id] = (article, similarity_score)
+                    # collect chunk contents of the article and generate remarks
+                    chunks = (
+                        session.query(ArticleChunk)
+                        .filter(ArticleChunk.doc_id == article.doc_id)
+                        .all()
+                    )
+                    chunk_texts = " ".join(
+                        [c.chunk_content for c in chunks if c.chunk_content]
+                    )
+                    remarks = self.remarks_generation_service.generate_remarks(
+                        chunk_texts, user_claim
+                    )
+                    results.append((article, similarity_score, remarks))
+
+        results.sort(key=lambda x: x[1], reverse=True)
+
+        return results[:top_k]
 
     def extract_entities(self, text: str) -> list[str]:
         """
@@ -166,7 +239,12 @@ class VerifyController:
 
     @staticmethod
     def compute_final_score(
-        verdict: Verdict, source_bias: SourceBias, nli_label: NLILabel, nli_score: float
+        verdict: Verdict | None,
+        source_bias: SourceBias | None,
+        nli_label: NLILabel,
+        nli_score: float,
+        is_factcheck: bool = True,
+        similarity_score: float = 0.0,
     ) -> float:
         """
         Computes a final score for a claim-article pair based on the verdict, source bias, NLI label, and NLI confidence.
@@ -182,10 +260,31 @@ class VerifyController:
             source_bias (SourceBias): The bias of the article's source (as an enum).
             nli_label (NLILabel): The NLI relationship label between user and found claim.
             nli_score (float): The NLI model's confidence score for the label (0.0 to 1.0).
+            is_factcheck (bool): Whether the claim is from a fact-checking source.
+            similarity_score: float = 0.0,
 
         Returns:
             float: The computed final score (signed and fuzzified, with magnitude reflecting strength).
         """
+        if not is_factcheck:
+
+            if nli_label == NLILabel.SUPPORT:
+                base_score = 0.75
+            elif nli_label == NLILabel.REFUTE:
+                base_score = -0.75
+            else:
+                base_score = similarity_score  # some news articles may be neutral but relevant, so instead of relying only on NLI, use similarity score directly
+
+            confidence_multiplier = 0.5 + (nli_score * 0.5)
+
+            bias_weight = (
+                SOURCE_BIAS_WEIGHT_MAP.get(source_bias, 0.7) if source_bias else 0.7
+            )
+
+            return round(base_score * confidence_multiplier * bias_weight, 2)
+
+        if verdict is None or source_bias is None:
+            return 0.0
 
         verdict_weight = VERDICT_WEIGHT_MAP.get(verdict, 0.5)
         bias_weight = SOURCE_BIAS_WEIGHT_MAP.get(source_bias, 0.7)
@@ -216,90 +315,165 @@ class VerifyController:
 
         user_claim_norm = self.normalize_text(user_claim)
         claim_embedding = self.embedding_service.embed_text(user_claim_norm)
-        search_results = self.find_claims_with_articles(session, claim_embedding)
-        claim_entities = self.extract_entities(user_claim_norm)
 
+        # serach for both FC and news articles
+        factcheck_results = self.find_claims_with_articles(
+            session, claim_embedding, user_claim
+        )
+        news_results = self.find_news_articles(session, claim_embedding, user_claim)
+
+        claim_entities = self.extract_entities(user_claim_norm)
         results = []
 
-        for claim, article, similarity_score in search_results:
-            entity_match_score = self.calculate_entity_match_score(
-                claim_entities, claim.claim_text, article.title
+        # Process FC results
+        for claim, article, similarity_score, remarks in factcheck_results:
+            result = self._process_result(
+                user_claim_norm=user_claim_norm,
+                claim_entities=claim_entities,
+                similarity_score=similarity_score,
+                article=article,
+                claim_text=claim.claim_text,
+                claim_verdict=claim.verdict,
+                source_bias=article.source_bias,
+                is_factcheck=True,
+                remarks=remarks,
             )
-            combined_relevance_score = (similarity_score * self.SEMANTIC_WEIGHT) + (
-                entity_match_score * self.ENTITY_WEIGHT
+            results.append(result)
+
+        # Process news results
+        for article, similarity_score, remarks in news_results:
+            if (article.type or "").strip().lower() == "fact-check":
+                continue
+            result = self._process_result(
+                user_claim_norm=user_claim_norm,
+                claim_entities=claim_entities,
+                similarity_score=similarity_score,
+                article=article,
+                claim_text=None,
+                claim_verdict=None,
+                source_bias=article.source_bias,
+                is_factcheck=False,
+                remarks=remarks,
             )
+            results.append(result)
 
-            article_dict = {
-                "doc_id": article.doc_id,
-                "title": article.title,
-                "content": (
-                    article.content[:500] + "..."
-                    if len(article.content) > 500
-                    else article.content
-                ),
-                "found_claim": claim.claim_text,
-                "found_verdict": claim.verdict,
-                "publish_date": (
-                    article.publish_date.isoformat() if article.publish_date else None
-                ),
-                "url": article.url,
-                "similarity_score": round(similarity_score, 4),
-                "entity_match_score": round(entity_match_score, 4),
-                "combined_relevance_score": round(combined_relevance_score, 4),
-                "nli_result": None,
-                "verdict": None,
-                "skip_reason": [],
-            }
-
-            if (
-                similarity_score >= self.RELEVANCE_THRESHOLD
-                and entity_match_score >= self.ENTITY_THRESHOLD
-            ):
-                nli_label, nli_score, nli_avg = self.nli_service.classify_nli(
-                    user_claim_norm, claim.claim_text
-                )
-                nli_result_payload = {
-                    "relationship": nli_label,
-                    "relationship_confidence": nli_score,
-                    "relationship_avg": nli_avg,
-                    "claim_source": article.source,
-                    "analyzed_text": claim.claim_text,
-                }
-                article_dict["nli_result"] = nli_result_payload
-                article_dict["verdict"] = self.compute_final_score(
-                    Verdict(claim.verdict),
-                    SourceBias(article.source_bias),
-                    nli_label,
-                    nli_score,
-                )
-            else:
-                if similarity_score < self.RELEVANCE_THRESHOLD:
-                    article_dict["skip_reason"].append(
-                        f"Low semantic similarity ({similarity_score:.3f} < {self.RELEVANCE_THRESHOLD})"
-                    )
-                if entity_match_score < self.ENTITY_THRESHOLD:
-                    article_dict["skip_reason"].append(
-                        f"Key entities not found ({entity_match_score:.3f} < {self.ENTITY_THRESHOLD})"
-                    )
-                if not article_dict["skip_reason"]:
-                    article_dict["skip_reason"].append(
-                        "Did not meet filtering criteria"
-                    )
-
-            results.append(article_dict)
-
-        # Sort: NLI results first, explicit claims first, then by combined score
         results.sort(
             key=lambda x: (
                 0 if x["nli_result"] else 1,
-                (
-                    0
-                    if x["nli_result"]
-                    and x["nli_result"]["claim_source"] == "explicit_claim"
-                    else 1
-                ),
+                0 if x.get("found_claim") else 1,
                 -x["combined_relevance_score"],
             )
         )
 
         return results
+
+    def _process_result(
+        self,
+        user_claim_norm: str,
+        claim_entities: list[str],
+        similarity_score: float,
+        article: Article,
+        claim_text: str | None,
+        claim_verdict: str | None,
+        source_bias: str | None,
+        is_factcheck: bool,
+        remarks: str | None,
+    ) -> dict:
+
+        # For entity matching: use claim text for FC, or article content+title for news
+        if is_factcheck and claim_text:
+            entity_comparison_text = claim_text
+            entity_comparison_title = ""  # Claim text is self-contained
+        else:
+            # For news articles, combine content and title
+            entity_comparison_text = article.content or ""
+            entity_comparison_title = article.title
+
+        entity_match_score = self.calculate_entity_match_score(
+            claim_entities, entity_comparison_text, entity_comparison_title
+        )
+        combined_relevance_score = (similarity_score * self.SEMANTIC_WEIGHT) + (
+            entity_match_score * self.ENTITY_WEIGHT
+        )
+
+        # Truncate content ONLY for display
+        display_content = (
+            article.content[:500] + "..."
+            if article.content and len(article.content) > 500
+            else (article.content or "")
+        )
+
+        result = {
+            "doc_id": article.doc_id,
+            "title": article.title,
+            "content": display_content,
+            "found_claim": claim_text,
+            "found_verdict": claim_verdict,
+            "publish_date": (
+                article.publish_date.isoformat() if article.publish_date else None
+            ),
+            "url": article.url,
+            "similarity_score": round(similarity_score, 4),
+            "entity_match_score": round(entity_match_score, 4),
+            "combined_relevance_score": round(combined_relevance_score, 4),
+            "nli_result": None,
+            "verdict": None,
+            "skip_reason": [],
+            "source_type": "fact_check" if is_factcheck else "news_article",
+            "remarks": remarks,
+        }
+
+        if (
+            similarity_score >= self.RELEVANCE_THRESHOLD
+            and entity_match_score >= self.ENTITY_THRESHOLD
+        ):
+            nli_text = (
+                claim_text
+                if is_factcheck and claim_text
+                else (article.content or article.title)
+            )
+            nli_label, nli_score, nli_avg = self.nli_service.classify_nli(
+                user_claim_norm, nli_text
+            )
+
+            result["nli_result"] = {
+                "relationship": nli_label,
+                "relationship_confidence": nli_score,
+                "relationship_avg": nli_avg,
+                "claim_source": article.source,
+                "analyzed_text": nli_text[:200] if not is_factcheck else claim_text,
+            }
+
+            # verdict for FC
+            if is_factcheck and claim_verdict and source_bias:
+                result["verdict"] = self.compute_final_score(
+                    verdict=Verdict(claim_verdict),
+                    source_bias=SourceBias(source_bias) if source_bias else None,
+                    nli_label=nli_label,
+                    nli_score=nli_score,
+                    is_factcheck=is_factcheck,
+                    similarity_score=similarity_score,
+                )
+            # verdict for news articles
+            else:
+                result["verdict"] = self.compute_final_score(
+                    verdict=None,
+                    source_bias=SourceBias(source_bias) if source_bias else None,
+                    nli_label=nli_label,
+                    nli_score=nli_score,
+                    is_factcheck=is_factcheck,
+                    similarity_score=similarity_score,
+                )
+        else:
+            if similarity_score < self.RELEVANCE_THRESHOLD:
+                result["skip_reason"].append(
+                    f"Low semantic similarity ({similarity_score:.3f} < {self.RELEVANCE_THRESHOLD})"
+                )
+            if entity_match_score < self.ENTITY_THRESHOLD:
+                result["skip_reason"].append(
+                    f"Key entities not found ({entity_match_score:.3f} < {self.ENTITY_THRESHOLD})"
+                )
+            if not result["skip_reason"]:
+                result["skip_reason"].append("Did not meet filtering criteria")
+
+        return result
