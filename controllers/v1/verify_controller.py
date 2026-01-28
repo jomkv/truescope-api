@@ -210,8 +210,8 @@ class VerifyController:
 
     @staticmethod
     def compute_final_score(
-        verdict: Verdict,
-        source_bias: SourceBias,
+        verdict: Verdict | None,
+        source_bias: SourceBias | None,
         nli_label: NLILabel,
         nli_score: float,
         is_factcheck: bool = True,
