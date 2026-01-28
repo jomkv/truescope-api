@@ -246,7 +246,11 @@ class VerifyController:
 
     @staticmethod
     def compute_final_score(
-        verdict: Verdict, source_bias: SourceBias, nli_label: NLILabel, nli_score: float
+        verdict: Verdict,
+        source_bias: SourceBias, 
+        nli_label: NLILabel, 
+        nli_score: float,
+        is_factcheck: bool = True,
     ) -> float:
         """
         Computes a final score for a claim-article pair based on the verdict, source bias, NLI label, and NLI confidence.
@@ -262,10 +266,24 @@ class VerifyController:
             source_bias (SourceBias): The bias of the article's source (as an enum).
             nli_label (NLILabel): The NLI relationship label between user and found claim.
             nli_score (float): The NLI model's confidence score for the label (0.0 to 1.0).
-
+            is_factcheck (bool): Whether the claim is from a fact-checking source.
         Returns:
             float: The computed final score (signed and fuzzified, with magnitude reflecting strength).
         """
+        if not is_factcheck:
+            
+            base_scores = {
+                NLILabel.REFUTE: -0.75,
+                NLILabel.NEUTRAL: 0.0,
+                NLILabel.SUPPORT: 0.75,
+            }
+            base_score = base_scores.get(nli_label, 0.0)
+
+            confidence_mmultiplier = 0.5 + (nli_score / 2)  
+            return round(base_score * confidence_mmultiplier, 2)
+        
+        if verdict is None or source_bias is None:
+            return 0.0
 
         verdict_weight = VERDICT_WEIGHT_MAP.get(verdict, 0.5)
         bias_weight = SOURCE_BIAS_WEIGHT_MAP.get(source_bias, 0.7)
@@ -414,13 +432,23 @@ class VerifyController:
                 "analyzed_text": nli_text[:200] if not is_factcheck else claim_text
             }
 
-            # only computes verdict for FC
+            # verdict for FC
             if is_factcheck and claim_verdict and source_bias:
                 result["verdict"] = self.compute_final_score(
-                    Verdict(claim_verdict),
-                    SourceBias(source_bias),
-                    nli_label,
-                    nli_score,
+                    verdict=Verdict(claim_verdict),
+                    source_bias=SourceBias(source_bias),
+                    nli_label=nli_label,
+                    nli_score=nli_score,
+                    is_factcheck=is_factcheck,
+                )
+            # verdict for news articles
+            else:
+                result["verdict"] = self.compute_final_score(
+                    verdict=None,
+                    source_bias=None,
+                    nli_label=nli_label,
+                    nli_score=nli_score,
+                    is_factcheck=is_factcheck,
                 )
         else:
             if similarity_score < self.RELEVANCE_THRESHOLD:
