@@ -37,7 +37,6 @@ class VerifyController:
 
         Steps:
         - Unicode normalization (NFKC)
-        - Remove special quotes and punctuation that interfere with matching
         - Lowercasing
         - Removal of extra whitespace
         - Stripping leading/trailing whitespace
