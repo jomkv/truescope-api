@@ -203,19 +203,6 @@ class VerifyController:
 
         return matches / total if total > 0 else 0.0
 
-    def _try_word_matching(self, words: list[str], text: str, matches_obj: dict) -> float:
-        """Helper to try matching individual words from entity."""
-        main_words = [w for w in words if len(w) > 2]
-        
-        if not main_words:
-            return 0.0
-        
-        found_words = sum(1 for w in main_words 
-                         if re.search(r"\b" + re.escape(w) + r"\b", text))
-        
-        if found_words > 0:
-            return found_words / len(main_words)
-        return 0.0
 
     def extract_claim_timeframe(self, user_claim: str) -> list[tuple[str, datetime]]:
         """
