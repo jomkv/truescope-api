@@ -251,6 +251,7 @@ class VerifyController:
         nli_label: NLILabel, 
         nli_score: float,
         is_factcheck: bool = True,
+        similarity_score: float = 0.0,
     ) -> float:
         """
         Computes a final score for a claim-article pair based on the verdict, source bias, NLI label, and NLI confidence.
@@ -267,20 +268,23 @@ class VerifyController:
             nli_label (NLILabel): The NLI relationship label between user and found claim.
             nli_score (float): The NLI model's confidence score for the label (0.0 to 1.0).
             is_factcheck (bool): Whether the claim is from a fact-checking source.
-        Returns:
+            similarity_score: float = 0.0,
             float: The computed final score (signed and fuzzified, with magnitude reflecting strength).
         """
         if not is_factcheck:
             
-            base_scores = {
-                NLILabel.REFUTE: -0.75,
-                NLILabel.NEUTRAL: 0.0,
-                NLILabel.SUPPORT: 0.75,
-            }
-            base_score = base_scores.get(nli_label, 0.0)
+            if nli_label == NLILabel.SUPPORT:
+                base_score = 0.75
+            elif nli_label == NLILabel.REFUTE:
+                base_score = -0.75
+            else:
+                base_score = similarity_score # some news articles may be neutral but relevant, so instead of relying only on NLI, use similarity score directly
 
-            confidence_mmultiplier = 0.5 + (nli_score / 2)  
-            return round(base_score * confidence_mmultiplier, 2)
+            confidence_multiplier = 0.5 + (nli_score * 0.5)
+
+            bias_weight = SOURCE_BIAS_WEIGHT_MAP.get(source_bias, 0.7) if  source_bias else 0.7
+
+            return round(base_score * confidence_multiplier * bias_weight, 2)
         
         if verdict is None or source_bias is None:
             return 0.0
@@ -338,6 +342,8 @@ class VerifyController:
 
         # Process news results
         for article, similarity_score in news_results:
+            if (article.type or "").strip().lower() == "fact-check":
+                continue
             result = self._process_result(
                 user_claim_norm=user_claim_norm,
                 claim_entities=claim_entities,
@@ -345,7 +351,7 @@ class VerifyController:
                 article=article,
                 claim_text=None,
                 claim_verdict=None,
-                source_bias=None,
+                source_bias=article.source_bias,
                 is_factcheck=False,
             )
             results.append(result)
@@ -436,19 +442,21 @@ class VerifyController:
             if is_factcheck and claim_verdict and source_bias:
                 result["verdict"] = self.compute_final_score(
                     verdict=Verdict(claim_verdict),
-                    source_bias=SourceBias(source_bias),
+                    source_bias=SourceBias(source_bias) if source_bias else None,
                     nli_label=nli_label,
                     nli_score=nli_score,
                     is_factcheck=is_factcheck,
+                    similarity_score=similarity_score,
                 )
             # verdict for news articles
             else:
                 result["verdict"] = self.compute_final_score(
                     verdict=None,
-                    source_bias=None,
+                    source_bias=SourceBias(source_bias) if source_bias else None,
                     nli_label=nli_label,
                     nli_score=nli_score,
                     is_factcheck=is_factcheck,
+                    similarity_score=similarity_score,
                 )
         else:
             if similarity_score < self.RELEVANCE_THRESHOLD:
