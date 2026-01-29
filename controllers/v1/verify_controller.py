@@ -115,10 +115,7 @@ class VerifyController:
                 chunk_texts = " ".join(
                     [c.chunk_content for c in chunks if c.chunk_content]
                 )
-                remarks = self.remarks_generation_service.generate_remarks(
-                    chunk_texts, user_claim
-                )
-                combined_results.append((vector, article, 1 - distance, remarks))
+                combined_results.append((vector, article, 1 - distance, chunk_texts))
 
         return combined_results
 
@@ -164,10 +161,7 @@ class VerifyController:
                     chunk_texts = " ".join(
                         [c.chunk_content for c in chunks if c.chunk_content]
                     )
-                    remarks = self.remarks_generation_service.generate_remarks(
-                        chunk_texts, user_claim
-                    )
-                    results.append((article, similarity_score, remarks))
+                    results.append((article, similarity_score, chunk_texts))
 
         results.sort(key=lambda x: x[1], reverse=True)
 
@@ -326,7 +320,7 @@ class VerifyController:
         results = []
 
         # Process FC results
-        for claim, article, similarity_score, remarks in factcheck_results:
+        for claim, article, similarity_score, chunk_texts in factcheck_results:
             result = self._process_result(
                 user_claim_norm=user_claim_norm,
                 claim_entities=claim_entities,
@@ -336,12 +330,12 @@ class VerifyController:
                 claim_verdict=claim.verdict,
                 source_bias=article.source_bias,
                 is_factcheck=True,
-                remarks=remarks,
+                chunk_texts=chunk_texts,
             )
             results.append(result)
 
         # Process news results
-        for article, similarity_score, remarks in news_results:
+        for article, similarity_score, chunk_texts in news_results:
             if (article.type or "").strip().lower() == "fact-check":
                 continue
             result = self._process_result(
@@ -353,7 +347,7 @@ class VerifyController:
                 claim_verdict=None,
                 source_bias=article.source_bias,
                 is_factcheck=False,
-                remarks=remarks,
+                chunk_texts=chunk_texts,
             )
             results.append(result)
 
@@ -377,7 +371,7 @@ class VerifyController:
         claim_verdict: str | None,
         source_bias: str | None,
         is_factcheck: bool,
-        remarks: str | None,
+        chunk_texts: list[str] | None,
     ) -> dict:
 
         # For entity matching: use claim text for FC, or article content+title for news
@@ -420,7 +414,7 @@ class VerifyController:
             "verdict": None,
             "skip_reason": [],
             "source_type": "fact_check" if is_factcheck else "news_article",
-            "remarks": remarks,
+            "remarks": None,
         }
 
         if (
@@ -446,7 +440,7 @@ class VerifyController:
 
             # verdict for FC
             if is_factcheck and claim_verdict and source_bias:
-                result["verdict"] = self.compute_final_score(
+                verdict_score = self.compute_final_score(
                     verdict=Verdict(claim_verdict),
                     source_bias=SourceBias(source_bias) if source_bias else None,
                     nli_label=nli_label,
@@ -454,15 +448,24 @@ class VerifyController:
                     is_factcheck=is_factcheck,
                     similarity_score=similarity_score,
                 )
+                result["verdict"] = verdict_score
             # verdict for news articles
             else:
-                result["verdict"] = self.compute_final_score(
+                verdict_score = self.compute_final_score(
                     verdict=None,
                     source_bias=SourceBias(source_bias) if source_bias else None,
                     nli_label=nli_label,
                     nli_score=nli_score,
                     is_factcheck=is_factcheck,
                     similarity_score=similarity_score,
+                )
+                result["verdict"] = verdict_score
+
+            # Generate remarks after verdict computation
+            if chunk_texts:
+                claim_context = claim_text if claim_text else article.title
+                result["remarks"] = self.remarks_generation_service.generate_remarks(
+                    chunk_texts, claim_context, verdict_score
                 )
         else:
             if similarity_score < self.RELEVANCE_THRESHOLD:
