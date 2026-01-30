@@ -1,11 +1,13 @@
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForCausalLM
 import torch
+import langdetect
+from services.translation_service import TranslationService
 
 
 class RemarksGenerationService:
     def __init__(self):
-        # Base Model for now, we can use other version if we want to improve quality over speed later
-        model_name = "google/flan-t5-large"
+
+        model_name = "facebook/bart-large-cnn"
 
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
@@ -14,11 +16,26 @@ class RemarksGenerationService:
     def generate_remarks(
         self, input_text: str, claim: str, verdict_score: float, max_length: int = 128
     ) -> str:
+        # Detect language of input_text and translate if not in English
+        try:
+            lang = langdetect.detect(input_text)
+        except langdetect.lang_detect_exception.LangDetectException:
+            lang = "unknown"
+
+        if lang != "en":
+            translator = TranslationService()
+            input_text = translator.translate_to_english(input_text)
+
         prompt = (
-            f"It was said in this article that: {input_text}\n"
-            f"Which {'contradicts' if 'not' in claim.lower() or 'false' in claim.lower() else 'supports or relates to'} the user claim: {claim}.\n"
-            f"Final verdict score for this match: {verdict_score} (Scale: -1 = strongly refute, 0 = neutral, 1 = strongly support/true).\n"
-            f"Summarize this relationship in a concise English remark. At the end, add a sentence explaining what the verdict score means in this context."
+            f"Article summary: {input_text}\n"
+            f"User claim: {claim}\n"
+            f"Relationship: This article {'contradicts' if 'not' in claim.lower() or 'false' in claim.lower() else 'supports or relates to'} the user claim.\n"
+            f"Verdict score: {verdict_score} (Scale: -1 = strongly refute, 0 = neutral, 1 = strongly support/true).\n"
+            "Instructions:\n"
+            "1. Write at least 3 clear, concise sentences summarizing how the article content relates to the user claim.\n"
+            "2. Reference specific details from the article if possible.\n"
+            "3. At the end, add a separate sentence that explains what the verdict score means in this context.\n"
+            "Respond in fluent, natural translated English."
         )
 
         inputs = self.tokenizer(

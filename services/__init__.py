@@ -2,3 +2,4 @@ from .embedding_service import EmbeddingService
 from .nli_service import NLIService
 from .entity_extraction_service import EntityExtractionService
 from .remarks_generation_service import RemarksGenerationService
+from .translation_service import TranslationService
