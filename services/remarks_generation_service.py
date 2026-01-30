@@ -1,4 +1,4 @@
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import torch
 import langdetect
 from services.translation_service import TranslationService
@@ -29,7 +29,6 @@ class RemarksGenerationService:
         prompt = (
             f"Article summary: {input_text}\n"
             f"User claim: {claim}\n"
-            f"Relationship: This article {'contradicts' if 'not' in claim.lower() or 'false' in claim.lower() else 'supports or relates to'} the user claim.\n"
             f"Verdict score: {verdict_score} (Scale: -1 = strongly refute, 0 = neutral, 1 = strongly support/true).\n"
             "Instructions:\n"
             "1. Write at least 3 clear, concise sentences summarizing how the article content relates to the user claim.\n"
