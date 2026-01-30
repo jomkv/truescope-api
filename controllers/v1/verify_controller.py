@@ -8,7 +8,12 @@ from constants.weights import (
 )
 from constants.enums import Verdict, NLILabel, SourceBias
 from dateparser.search import search_dates
-from services import EmbeddingService, EntityExtractionService, NLIService
+from services import (
+    EmbeddingService,
+    EntityExtractionService,
+    NLIService,
+    RemarksGenerationService,
+)
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 import unicodedata
@@ -21,7 +26,7 @@ class VerifyController:
         self.embedding_service = EmbeddingService()
         self.entity_extraction_service = EntityExtractionService()
         self.nli_service = NLIService()
-
+        self.remarks_generation_service = RemarksGenerationService()
         # Fixed thresholds for article filtering
         self.RELEVANCE_THRESHOLD = 0.3
         self.ENTITY_THRESHOLD = 0.4
@@ -62,9 +67,8 @@ class VerifyController:
         # Strip leading/trailing whitespace
         return text.strip()
 
-    @staticmethod
     def find_claims_with_articles(
-        session: Session, embedding: list[float], top_k: int = 20
+        self, session: Session, embedding: list[float], user_claim: str, top_k: int = 20
     ) -> list[tuple[Claim, Article, float]]:
         """
         Retrieves the top_k most similar claims from the database using HNSW vector search,
@@ -81,6 +85,7 @@ class VerifyController:
 
         # Use HNSW index for efficient vector search
         distance_col = Claim.embedding.cosine_distance(embedding)  # type: ignore
+
         claim_stmt = (
             select(Claim, distance_col)  # type: ignore
             .where(Claim.verdict != "UNKNOWN")  # Skip claims with "UNKNOWN" verdicts
@@ -101,13 +106,21 @@ class VerifyController:
         for vector, distance in claim_results:
             article = article_map.get(vector.doc_id)
             if article:
-                combined_results.append((vector, article, 1 - distance))
+                # collect chunk contents of the article and generate remarks
+                chunks = (
+                    session.query(ArticleChunk)
+                    .filter(ArticleChunk.doc_id == article.doc_id)
+                    .all()
+                )
+                chunk_texts = " ".join(
+                    [c.chunk_content for c in chunks if c.chunk_content]
+                )
+                combined_results.append((vector, article, 1 - distance, chunk_texts))
 
         return combined_results
 
-    @staticmethod
     def find_news_articles(
-        session: Session, embedding: list[float], top_k: int = 20
+        self, session: Session, embedding: list[float], user_claim: str, top_k: int = 20
     ) -> list[tuple[Article, float]]:
         """
         Retrieves the top_k most similar articles from the database using HNSW vector search.
@@ -121,6 +134,7 @@ class VerifyController:
             list[tuple[Article, float]]: List of tuples containing the article and the similarity score.
         """
         distance_col = ArticleChunk.embedding.cosine_distance(embedding)  # type: ignore
+
         chunk_stmt = (
             select(ArticleChunk, distance_col)  # type: ignore
             .order_by(distance_col)
@@ -129,7 +143,7 @@ class VerifyController:
         chunk_results = session.execute(chunk_stmt).all()
 
         article_map: dict[str, Article] = {}
-
+        results: list[tuple[Article, float, str]] = []
         for chunk, distance in chunk_results:
             similarity_score = 1 - distance
             doc_id = chunk.doc_id
@@ -138,8 +152,17 @@ class VerifyController:
                 article = session.query(Article).filter(Article.doc_id == doc_id).first()  # type: ignore
                 if article:
                     article_map[doc_id] = (article, similarity_score)
+                    # collect chunk contents of the article and generate remarks
+                    chunks = (
+                        session.query(ArticleChunk)
+                        .filter(ArticleChunk.doc_id == article.doc_id)
+                        .all()
+                    )
+                    chunk_texts = " ".join(
+                        [c.chunk_content for c in chunks if c.chunk_content]
+                    )
+                    results.append((article, similarity_score, chunk_texts))
 
-        results = list(article_map.values())
         results.sort(key=lambda x: x[1], reverse=True)
 
         return results[:top_k]
@@ -288,14 +311,16 @@ class VerifyController:
         claim_embedding = self.embedding_service.embed_text(user_claim_norm)
 
         # serach for both FC and news articles
-        factcheck_results = self.find_claims_with_articles(session, claim_embedding)
-        news_results = self.find_news_articles(session, claim_embedding)
+        factcheck_results = self.find_claims_with_articles(
+            session, claim_embedding, user_claim
+        )
+        news_results = self.find_news_articles(session, claim_embedding, user_claim)
 
         claim_entities = self.extract_entities(user_claim_norm)
         results = []
 
         # Process FC results
-        for claim, article, similarity_score in factcheck_results:
+        for claim, article, similarity_score, chunk_texts in factcheck_results:
             result = self._process_result(
                 user_claim_norm=user_claim_norm,
                 claim_entities=claim_entities,
@@ -305,11 +330,12 @@ class VerifyController:
                 claim_verdict=claim.verdict,
                 source_bias=article.source_bias,
                 is_factcheck=True,
+                chunk_texts=chunk_texts,
             )
             results.append(result)
 
         # Process news results
-        for article, similarity_score in news_results:
+        for article, similarity_score, chunk_texts in news_results:
             if (article.type or "").strip().lower() == "fact-check":
                 continue
             result = self._process_result(
@@ -321,6 +347,7 @@ class VerifyController:
                 claim_verdict=None,
                 source_bias=article.source_bias,
                 is_factcheck=False,
+                chunk_texts=chunk_texts,
             )
             results.append(result)
 
@@ -344,6 +371,7 @@ class VerifyController:
         claim_verdict: str | None,
         source_bias: str | None,
         is_factcheck: bool,
+        chunk_texts: list[str] | None,
     ) -> dict:
 
         # For entity matching: use claim text for FC, or article content+title for news
@@ -386,6 +414,7 @@ class VerifyController:
             "verdict": None,
             "skip_reason": [],
             "source_type": "fact_check" if is_factcheck else "news_article",
+            "remarks": None,
         }
 
         if (
@@ -411,7 +440,7 @@ class VerifyController:
 
             # verdict for FC
             if is_factcheck and claim_verdict and source_bias:
-                result["verdict"] = self.compute_final_score(
+                verdict_score = self.compute_final_score(
                     verdict=Verdict(claim_verdict),
                     source_bias=SourceBias(source_bias) if source_bias else None,
                     nli_label=nli_label,
@@ -419,15 +448,24 @@ class VerifyController:
                     is_factcheck=is_factcheck,
                     similarity_score=similarity_score,
                 )
+                result["verdict"] = verdict_score
             # verdict for news articles
             else:
-                result["verdict"] = self.compute_final_score(
+                verdict_score = self.compute_final_score(
                     verdict=None,
                     source_bias=SourceBias(source_bias) if source_bias else None,
                     nli_label=nli_label,
                     nli_score=nli_score,
                     is_factcheck=is_factcheck,
                     similarity_score=similarity_score,
+                )
+                result["verdict"] = verdict_score
+
+            # Generate remarks after verdict computation
+            if chunk_texts:
+                claim_context = claim_text if claim_text else article.title
+                result["remarks"] = self.remarks_generation_service.generate_remarks(
+                    chunk_texts, claim_context, verdict_score
                 )
         else:
             if similarity_score < self.RELEVANCE_THRESHOLD:
@@ -440,4 +478,5 @@ class VerifyController:
                 )
             if not result["skip_reason"]:
                 result["skip_reason"].append("Did not meet filtering criteria")
+
         return result
