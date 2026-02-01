@@ -69,7 +69,7 @@ class VerifyController:
 
     def find_claims_with_articles(
         self, session: Session, embedding: list[float], user_claim: str, top_k: int = 20
-    ) -> list[tuple[Claim, Article, float]]:
+    ) -> list[tuple[Claim, Article, float, str]]:
         """
         Retrieves the top_k most similar claims from the database using HNSW vector search,
         skipping claims with an 'UNKNOWN' verdict, and pairs each claim with its corresponding article.
@@ -102,7 +102,7 @@ class VerifyController:
 
         # Combine results into a tuple
         # (claim, article, similarity_score)
-        combined_results: list[tuple[Claim, Article, float]] = []
+        combined_results: list[tuple[Claim, Article, float, str]] = []
         for vector, distance in claim_results:
             article = article_map.get(vector.doc_id)
             if article:
@@ -112,16 +112,14 @@ class VerifyController:
                     .filter(ArticleChunk.doc_id == article.doc_id)
                     .all()
                 )
-                chunk_texts = " ".join(
-                    [c.chunk_content for c in chunks if c.chunk_content]
-                )
+                chunk_texts = self._build_remarks_context(chunks)
                 combined_results.append((vector, article, 1 - distance, chunk_texts))
 
         return combined_results
 
     def find_news_articles(
         self, session: Session, embedding: list[float], user_claim: str, top_k: int = 20
-    ) -> list[tuple[Article, float]]:
+    ) -> list[tuple[Article, float, str]]:
         """
         Retrieves the top_k most similar articles from the database using HNSW vector search.
 
@@ -158,9 +156,7 @@ class VerifyController:
                         .filter(ArticleChunk.doc_id == article.doc_id)
                         .all()
                     )
-                    chunk_texts = " ".join(
-                        [c.chunk_content for c in chunks if c.chunk_content]
-                    )
+                    chunk_texts = self._build_remarks_context(chunks)
                     results.append((article, similarity_score, chunk_texts))
 
         results.sort(key=lambda x: x[1], reverse=True)
@@ -215,6 +211,61 @@ class VerifyController:
                 matches += 1
 
         return matches / total if total > 0 else 0.0
+
+    @staticmethod
+    def _build_remarks_context(
+        chunks: list[ArticleChunk],
+        max_chars: int = 800,
+        max_chunks: int = 3,
+    ) -> str:
+        """
+        Builds a short context string for remarks generation.
+        Keeps a few chunk excerpts to avoid sending full article content.
+        """
+        if not chunks:
+            return ""
+
+        parts: list[str] = []
+        used_chars = 0
+
+        for chunk in chunks:
+            if not chunk.chunk_content:
+                continue
+
+            if len(parts) >= max_chunks or used_chars >= max_chars:
+                break
+
+            remaining = max_chars - used_chars
+            content = chunk.chunk_content.strip()
+            if not content:
+                continue
+
+            snippet = content[:remaining].rsplit(" ", 1)[0].strip()
+            if not snippet:
+                continue
+
+            parts.append(snippet)
+            used_chars += len(snippet) + 1
+
+        return " ".join(parts).strip()
+
+    @staticmethod
+    def _truncate_at_sentence(text: str, max_chars: int = 200) -> str:
+        if not text:
+            return ""
+
+        cleaned = re.sub(r"\s+", " ", text.strip())
+        if len(cleaned) <= max_chars:
+            return cleaned
+
+        truncated = cleaned[:max_chars]
+        sentence_matches = list(re.finditer(r"[.!?](?=\s+[A-Z0-9]|$)", truncated))
+
+        if sentence_matches:
+            last_end = sentence_matches[-1].end()
+            return cleaned[:last_end].strip()
+
+        return truncated.rsplit(" ", 1)[0].rstrip() + "..."
 
     def extract_claim_timeframe(self, user_claim: str) -> list[tuple[str, datetime]]:
         """
@@ -371,7 +422,7 @@ class VerifyController:
         claim_verdict: str | None,
         source_bias: str | None,
         is_factcheck: bool,
-        chunk_texts: list[str] | None,
+        chunk_texts: str | None,
     ) -> dict:
 
         # For entity matching: use claim text for FC, or article content+title for news
@@ -421,6 +472,7 @@ class VerifyController:
             similarity_score >= self.RELEVANCE_THRESHOLD
             and entity_match_score >= self.ENTITY_THRESHOLD
         ):
+            # For NLI: use claim for FC, article content for news
             nli_text = (
                 claim_text
                 if is_factcheck and claim_text
@@ -430,12 +482,15 @@ class VerifyController:
                 user_claim_norm, nli_text
             )
 
+            # For remarks: always use article content for better evidence
+            remarks_text = article.content or article.title or ""
+
             result["nli_result"] = {
                 "relationship": nli_label,
                 "relationship_confidence": nli_score,
                 "relationship_avg": nli_avg,
                 "claim_source": article.source,
-                "analyzed_text": nli_text[:200] if not is_factcheck else claim_text,
+                "analyzed_text": self._truncate_at_sentence(remarks_text, 200),
             }
 
             # verdict for FC
@@ -462,10 +517,19 @@ class VerifyController:
                 result["verdict"] = verdict_score
 
             # Generate remarks after verdict computation
-            if chunk_texts:
+            # Pass full article content as input_text for better BART summarization
+            full_content = article.content or article.title or chunk_texts or ""
+
+            if full_content:
                 claim_context = claim_text if claim_text else article.title
                 result["remarks"] = self.remarks_generation_service.generate_remarks(
-                    chunk_texts, claim_context, verdict_score
+                    full_content,
+                    claim_context,
+                    verdict_score,
+                    nli_relationship=result["nli_result"].get(
+                        "relationship", "neutral"
+                    ),
+                    use_llm=not is_factcheck,
                 )
         else:
             if similarity_score < self.RELEVANCE_THRESHOLD:
