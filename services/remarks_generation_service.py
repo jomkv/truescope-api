@@ -441,7 +441,6 @@ class RemarksGenerationService:
     def generate_remarks(
         self,
         input_text: str,
-        claim: str,
         verdict_score: float,
         nli_relationship: str = "neutral",
         use_llm: bool = True,

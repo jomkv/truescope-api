@@ -521,10 +521,8 @@ class VerifyController:
             full_content = article.content or article.title or chunk_texts or ""
 
             if full_content:
-                claim_context = claim_text if claim_text else article.title
                 result["remarks"] = self.remarks_generation_service.generate_remarks(
                     full_content,
-                    claim_context,
                     verdict_score,
                     nli_relationship=result["nli_result"].get(
                         "relationship", "neutral"
