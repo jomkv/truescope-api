@@ -260,14 +260,6 @@ class RemarksGenerationService:
         cleaned = re.sub(r"\s+", " ", text.strip())
         cleaned = re.sub(r"(?:\.\.\.|…)$", "", cleaned).strip()
 
-        # Remove "IF YOUR TIME IS SHORT" metadata
-        cleaned = re.sub(
-            r"\s*IF YOUR TIME IS SHORT\s*",
-            " ",
-            cleaned,
-            flags=re.IGNORECASE,
-        )
-
         # Remove common news article prefixes
         cleaned = re.sub(r"^\(UPDATED\)\s*", "", cleaned, flags=re.IGNORECASE)
         cleaned = re.sub(
@@ -279,7 +271,7 @@ class RemarksGenerationService:
         # Remove fact-check metadata
         cleaned = re.sub(r"^Claim:\s*", "", cleaned, flags=re.IGNORECASE)
         cleaned = re.sub(r"^Rating:\s*", "", cleaned, flags=re.IGNORECASE)
-        
+
         # Remove fact-check rating labels (True, False, Mostly True, etc.)
         cleaned = re.sub(
             r"^(True|False|Mostly\s+True|Mostly\s+False|Mixed|No\s+Evidence|Needs\s+Context|Partially\s+True|Partially\s+False)\s*:?\s*",
@@ -372,13 +364,6 @@ class RemarksGenerationService:
         ):
             return excerpt
 
-        if re.search(
-            r"\b(typhoon|super\s+typhoon|storm|cyclone|tropical|par|pagasa|ndrrmc|signal|kph|km|mph)\b|\d",
-            excerpt_text,
-            re.I,
-        ):
-            return excerpt
-
         if re.search(r"[\(\"']$", excerpt_text):
             return excerpt
 
@@ -438,6 +423,16 @@ class RemarksGenerationService:
         except Exception:
             return excerpt
 
+    def _format_remarks_with_article(
+        self, excerpt: str, meaning: str, verdict_score: float
+    ) -> str:
+        """Format remarks with article context"""
+        return (
+            f"The article reports that {excerpt} "
+            f"Based on this evidence, the claim {meaning}, "
+            f"with a verdict score of {verdict_score:.2f} on a scale from -1 to 1."
+        )
+
     def generate_remarks(
         self,
         input_text: str,
@@ -445,8 +440,6 @@ class RemarksGenerationService:
         nli_relationship: str = "neutral",
         use_llm: bool = True,
     ) -> str:
-
-        original_input = input_text
 
         # Detect language and translate
         try:
@@ -460,6 +453,7 @@ class RemarksGenerationService:
             allow_paraphrase = False
 
         excerpt = self._clean_excerpt(self._extract_excerpt(input_text))
+        meaning = self._verdict_score_meaning(verdict_score, nli_relationship)
 
         # Use BART if excerpt is broken
         if self._is_nonsensical_excerpt(excerpt):
@@ -468,42 +462,46 @@ class RemarksGenerationService:
                     input_text, verdict_score, nli_relationship
                 )
             else:
-                meaning = self._verdict_score_meaning(verdict_score, nli_relationship)
+                # Try BART fallback even if use_llm is False
+                bart_result = self._generate_remarks_from_full_text(
+                    input_text, verdict_score, nli_relationship
+                )
+                if "The article reports that" in bart_result:
+                    return bart_result
+                # Only return no-context remark if BART also failed
                 return (
                     f"The claim {meaning}, "
                     f"with a verdict score of {verdict_score:.2f} on a scale from -1 to 1."
                 )
 
-        meaning = self._verdict_score_meaning(verdict_score, nli_relationship)
-
-        if excerpt:
-            # Normalize determiners
-            if re.match(r"^(A|An|The|There|This|That|These|Those)\s", excerpt):
-                excerpt = excerpt[0].lower() + excerpt[1:]
-            if not re.search(r"[.!?]$", excerpt):
-                excerpt = excerpt.rstrip() + "."
-
-            base_explanation = (
-                f"The article reports that {excerpt} "
-                f"Based on this evidence, the claim {meaning}, "
-                f"with a verdict score of {verdict_score:.2f} on a scale from -1 to 1."
-            )
-        else:
-            base_explanation = (
+        if not excerpt:
+            # Try BART fallback for empty excerpt
+            if use_llm and allow_paraphrase:
+                bart_result = self._generate_remarks_from_full_text(
+                    input_text, verdict_score, nli_relationship
+                )
+                if "The article reports that" in bart_result:
+                    return bart_result
+            return (
                 f"The claim {meaning}, "
                 f"with a verdict score of {verdict_score:.2f} on a scale from -1 to 1."
             )
 
+        # Normalize determiners
+        if re.match(r"^(A|An|The|There|This|That|These|Those)\s", excerpt):
+            excerpt = excerpt[0].lower() + excerpt[1:]
+        if not re.search(r"[.!?]$", excerpt):
+            excerpt = excerpt.rstrip() + "."
+
         # Apply T5 paraphrasing
-        if not use_llm or not allow_paraphrase or not excerpt:
-            return base_explanation
+        if use_llm and allow_paraphrase:
+            paraphrased_excerpt = self._paraphrase_excerpt(excerpt)
+            paraphrased_excerpt = self._normalize_leading_determiner(
+                paraphrased_excerpt
+            )
+            paraphrased_excerpt = self._ensure_sentence_end(paraphrased_excerpt)
+            return self._format_remarks_with_article(
+                paraphrased_excerpt, meaning, verdict_score
+            )
 
-        paraphrased_excerpt = self._paraphrase_excerpt(excerpt)
-        paraphrased_excerpt = self._normalize_leading_determiner(paraphrased_excerpt)
-        paraphrased_excerpt = self._ensure_sentence_end(paraphrased_excerpt)
-
-        return (
-            f"The article reports that {paraphrased_excerpt} "
-            f"Based on this evidence, the claim {meaning}, "
-            f"with a verdict score of {verdict_score:.2f} on a scale from -1 to 1."
-        )
+        return self._format_remarks_with_article(excerpt, meaning, verdict_score)
