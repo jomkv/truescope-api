@@ -29,7 +29,7 @@ async def verify_claim(verify: VerifyClaimModel):
     - use_fallback: Whether to analyze titles/content when no explicit claim (default: true)
     """
     with Session() as session:
-        interfence_scores = controller.verify_claim(session, verify.claim)
+        interfence_scores = await controller.verify_claim(session, verify.claim)
 
     entities = controller.extract_entities(verify.claim)
     timeframe = controller.extract_claim_timeframe(verify.claim)

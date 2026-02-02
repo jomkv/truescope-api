@@ -19,6 +19,8 @@ from sqlalchemy.orm import Session
 import unicodedata
 import re
 from datetime import datetime
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
 
 
 class VerifyController:
@@ -34,6 +36,12 @@ class VerifyController:
         # Weights for combined relevance score (60% semantic, 40% entity)
         self.SEMANTIC_WEIGHT = 0.6
         self.ENTITY_WEIGHT = 0.4
+
+        # Thread pool for CPU-intensive ML operations (2 workers optimal for PyTorch models)
+        self.executor = ThreadPoolExecutor(max_workers=2)
+
+        # Limit deep analysis to top results to avoid excessive NLI + remarks tasks
+        self.MAX_DEEP_ANALYSIS = 5
 
     @staticmethod
     def normalize_text(text: str) -> str:
@@ -100,18 +108,24 @@ class VerifyController:
         article_results = session.execute(articles_stmt).scalars().all()
         article_map = {article.doc_id: article for article in article_results}
 
+        # Batch-load all chunks at once (N+1 query fix)
+        all_chunks = (
+            session.query(ArticleChunk)
+            .filter(ArticleChunk.doc_id.in_(claim_doc_ids))
+            .all()
+        )
+        chunk_map = {}
+        for chunk in all_chunks:
+            chunk_map.setdefault(chunk.doc_id, []).append(chunk)
+
         # Combine results into a tuple
-        # (claim, article, similarity_score)
+        # (claim, article, similarity_score, chunk_texts)
         combined_results: list[tuple[Claim, Article, float, str]] = []
         for vector, distance in claim_results:
             article = article_map.get(vector.doc_id)
             if article:
-                # collect chunk contents of the article and generate remarks
-                chunks = (
-                    session.query(ArticleChunk)
-                    .filter(ArticleChunk.doc_id == article.doc_id)
-                    .all()
-                )
+                # Get chunks from batch-loaded map
+                chunks = chunk_map.get(article.doc_id, [])
                 chunk_texts = self._build_remarks_context(chunks)
                 combined_results.append((vector, article, 1 - distance, chunk_texts))
 
@@ -141,23 +155,39 @@ class VerifyController:
         chunk_results = session.execute(chunk_stmt).all()
 
         article_map: dict[str, Article] = {}
+        doc_ids_seen: set[str] = set()
         results: list[tuple[Article, float, str]] = []
+
+        # First pass: collect unique doc_ids
+        for chunk, distance in chunk_results:
+            doc_id = chunk.doc_id
+            if doc_id not in doc_ids_seen:
+                doc_ids_seen.add(doc_id)
+
+        # Batch-load all articles and chunks at once (N+1 query fix)
+        articles = session.query(Article).filter(Article.doc_id.in_(doc_ids_seen)).all()
+        article_map = {article.doc_id: article for article in articles}
+
+        all_chunks = (
+            session.query(ArticleChunk)
+            .filter(ArticleChunk.doc_id.in_(doc_ids_seen))
+            .all()
+        )
+        chunk_map = {}
+        for chunk in all_chunks:
+            chunk_map.setdefault(chunk.doc_id, []).append(chunk)
+
+        # Second pass: build results using cached data
         for chunk, distance in chunk_results:
             similarity_score = 1 - distance
             doc_id = chunk.doc_id
 
-            if doc_id not in article_map:
-                article = session.query(Article).filter(Article.doc_id == doc_id).first()  # type: ignore
-                if article:
-                    article_map[doc_id] = (article, similarity_score)
-                    # collect chunk contents of the article and generate remarks
-                    chunks = (
-                        session.query(ArticleChunk)
-                        .filter(ArticleChunk.doc_id == article.doc_id)
-                        .all()
-                    )
-                    chunk_texts = self._build_remarks_context(chunks)
-                    results.append((article, similarity_score, chunk_texts))
+            if doc_id in article_map and doc_id not in {r[0].doc_id for r in results}:
+                article = article_map[doc_id]
+                # Get chunks from batch-loaded map
+                chunks = chunk_map.get(doc_id, [])
+                chunk_texts = self._build_remarks_context(chunks)
+                results.append((article, similarity_score, chunk_texts))
 
         results.sort(key=lambda x: x[1], reverse=True)
 
@@ -337,11 +367,11 @@ class VerifyController:
 
         return round(nli_score * bias_weight * verdict_weight * nli_label_weight, 2)
 
-    def verify_claim(
+    async def verify_claim(
         self, session: Session, user_claim: str, use_fallback: bool = True
     ):
         """
-        Main entry point for verifying a user claim.
+        Main entry point for verifying a user claim (async version).
 
         Steps:
         - Embeds the user claim and searches for similar claims in the database.
@@ -359,48 +389,65 @@ class VerifyController:
         """
 
         user_claim_norm = self.normalize_text(user_claim)
-        claim_embedding = self.embedding_service.embed_text(user_claim_norm)
 
-        # serach for both FC and news articles
+        # Run embedding and entity extraction in parallel
+        loop = asyncio.get_event_loop()
+        claim_embedding, claim_entities = await asyncio.gather(
+            loop.run_in_executor(
+                self.executor, self.embedding_service.embed_text, user_claim_norm
+            ),
+            loop.run_in_executor(self.executor, self.extract_entities, user_claim_norm),
+        )
+
+        # search for both FC and news articles (DB queries can't be parallelized with same session)
         factcheck_results = self.find_claims_with_articles(
             session, claim_embedding, user_claim
         )
         news_results = self.find_news_articles(session, claim_embedding, user_claim)
 
-        claim_entities = self.extract_entities(user_claim_norm)
-        results = []
+        # Limit deep analysis to top results to avoid excessive parallelization (FIX 1)
+        factcheck_results = factcheck_results[: self.MAX_DEEP_ANALYSIS]
+        news_results = news_results[: self.MAX_DEEP_ANALYSIS]
+
+        # Process all results in parallel
+        tasks = []
 
         # Process FC results
         for claim, article, similarity_score, chunk_texts in factcheck_results:
-            result = self._process_result(
-                user_claim_norm=user_claim_norm,
-                claim_entities=claim_entities,
-                similarity_score=similarity_score,
-                article=article,
-                claim_text=claim.claim_text,
-                claim_verdict=claim.verdict,
-                source_bias=article.source_bias,
-                is_factcheck=True,
-                chunk_texts=chunk_texts,
+            tasks.append(
+                self._process_result_async(
+                    user_claim_norm=user_claim_norm,
+                    claim_entities=claim_entities,
+                    similarity_score=similarity_score,
+                    article=article,
+                    claim_text=claim.claim_text,
+                    claim_verdict=claim.verdict,
+                    source_bias=article.source_bias,
+                    is_factcheck=True,
+                    chunk_texts=chunk_texts,
+                )
             )
-            results.append(result)
 
         # Process news results
         for article, similarity_score, chunk_texts in news_results:
             if (article.type or "").strip().lower() == "fact-check":
                 continue
-            result = self._process_result(
-                user_claim_norm=user_claim_norm,
-                claim_entities=claim_entities,
-                similarity_score=similarity_score,
-                article=article,
-                claim_text=None,
-                claim_verdict=None,
-                source_bias=article.source_bias,
-                is_factcheck=False,
-                chunk_texts=chunk_texts,
+            tasks.append(
+                self._process_result_async(
+                    user_claim_norm=user_claim_norm,
+                    claim_entities=claim_entities,
+                    similarity_score=similarity_score,
+                    article=article,
+                    claim_text=None,
+                    claim_verdict=None,
+                    source_bias=article.source_bias,
+                    is_factcheck=False,
+                    chunk_texts=chunk_texts,
+                )
             )
-            results.append(result)
+
+        # Wait for all processing to complete
+        results = await asyncio.gather(*tasks)
 
         results.sort(
             key=lambda x: (
@@ -412,7 +459,7 @@ class VerifyController:
 
         return results
 
-    def _process_result(
+    async def _process_result_async(
         self,
         user_claim_norm: str,
         claim_entities: list[str],
@@ -478,8 +525,14 @@ class VerifyController:
                 if is_factcheck and claim_text
                 else (article.content or article.title)
             )
-            nli_label, nli_score, nli_avg = self.nli_service.classify_nli(
-                user_claim_norm, nli_text
+
+            # Run NLI classification in thread pool
+            loop = asyncio.get_event_loop()
+            nli_label, nli_score, nli_avg = await loop.run_in_executor(
+                self.executor,
+                self.nli_service.classify_nli,
+                user_claim_norm,
+                nli_text,
             )
 
             # For remarks: always use article content for better evidence
@@ -517,18 +570,21 @@ class VerifyController:
                 result["verdict"] = verdict_score
 
             # Generate remarks after verdict computation
-            # Pass full article content as input_text for better BART summarization
-            full_content = article.content or article.title or chunk_texts or ""
+            # Only generate remarks for high-relevance items (combined_relevance_score >= 0.6)
+            # Use chunk_texts preferentially (already optimized excerpts)
+            if combined_relevance_score >= 0.6:
+                remarks_input = chunk_texts or article.title or ""
 
-            if full_content:
-                result["remarks"] = self.remarks_generation_service.generate_remarks(
-                    full_content,
-                    verdict_score,
-                    nli_relationship=result["nli_result"].get(
-                        "relationship", "neutral"
-                    ),
-                    use_llm=not is_factcheck,
-                )
+                if remarks_input:
+                    # Run remarks generation in thread pool
+                    result["remarks"] = await loop.run_in_executor(
+                        self.executor,
+                        self.remarks_generation_service.generate_remarks,
+                        remarks_input,
+                        verdict_score,
+                        result["nli_result"].get("relationship", "neutral"),
+                        not is_factcheck,
+                    )
         else:
             if similarity_score < self.RELEVANCE_THRESHOLD:
                 result["skip_reason"].append(
