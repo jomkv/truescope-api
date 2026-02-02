@@ -22,6 +22,7 @@ from datetime import datetime
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from typing import cast
+from collections import defaultdict
 
 
 class VerifyController:
@@ -94,7 +95,7 @@ class VerifyController:
         chunk_res = session.execute(chunk_stmt).all()
 
         # Group by doc_id and normalize distance (-1)
-        grouped: dict[str, list[tuple[ArticleChunk, float]]] = {}
+        grouped: dict[str, list[tuple[ArticleChunk, float]]] = defaultdict(list)
         for chunk, distance in chunk_res:
             grouped[chunk.doc_id].append((chunk, 1 - distance))
 
