@@ -14,7 +14,7 @@ class TranslationService:
 
         self.tgt_lang = "eng_Latn"  # English target
 
-    def _protect_storm_names(self, text: str) -> tuple[str, dict[str, str]]:
+    def protect_storm_names(self, text: str) -> tuple[str, dict[str, str]]:
         """
         Protect Filipino storm names (e.g., "bagyong Ineng") from mistranslation.
 
@@ -40,7 +40,7 @@ class TranslationService:
 
         return protected_text, placeholder_map
 
-    def _restore_storm_names(self, text: str, placeholder_map: dict[str, str]) -> str:
+    def restore_storm_names(self, text: str, placeholder_map: dict[str, str]) -> str:
         """
         Restore protected storm names after translation.
         """
@@ -49,7 +49,7 @@ class TranslationService:
             restored = restored.replace(placeholder, name)
         return restored
 
-    def _detect_source_language(self, text: str) -> str:
+    def detect_language(self, text: str) -> str:
         """
         Detect source language and return appropriate NLLB language code.
         """
@@ -60,24 +60,23 @@ class TranslationService:
 
         # Map langdetect codes to NLLB language codes
         lang_map = {
+            "en": "eng_Latn",  # English
             "tl": "tgl_Latn",  # Tagalog
             "fil": "fil_Latn",  # Filipino
             "es": "spa_Latn",  # Spanish
             "la": "lat_Latn",  # Latin
         }
 
-        # Default to Filipino for unknown/Tagalog-like text
         return lang_map.get(detected_lang, "fil_Latn")
 
-    def translate_to_english(self, input_text: str, max_length: int = 512) -> str:
+    def translate_to_english(
+        self, input_text: str, src_lang: str, max_length: int = 512
+    ) -> str:
         """
         Translate text to English using NLLB-200.
         Handles Filipino/Tagalog and other languages with auto-detection.
         """
-        # Autodetect source language
-        src_lang = self._detect_source_language(input_text)
-
-        protected_text, placeholder_map = self._protect_storm_names(input_text)
+        protected_text, placeholder_map = self.protect_storm_names(input_text)
 
         self.tokenizer.src_lang = src_lang
 
@@ -99,15 +98,15 @@ class TranslationService:
 
         generated_ids = outputs[0]
         translated_text = self.tokenizer.decode(generated_ids, skip_special_tokens=True)
-        translated_text = self._restore_storm_names(translated_text, placeholder_map)
+        translated_text = self.restore_storm_names(translated_text, placeholder_map)
 
         # If translation seems to have failed (still contains Filipino words) try it with tgl_Latn
-        if src_lang == "fil_Latn" and self._has_untranslated_tagalog(translated_text):
-            return self._translate_with_fallback(input_text, "tgl_Latn", max_length)
+        if src_lang == "fil_Latn" and self.has_untranslated_tagalog(translated_text):
+            return self.translate_with_fallback(input_text, "tgl_Latn", max_length)
 
         return translated_text
 
-    def _translate_with_fallback(
+    def translate_with_fallback(
         self, input_text: str, fallback_lang: str, max_length: int = 512
     ) -> str:
         """
@@ -115,7 +114,7 @@ class TranslationService:
         """
         self.tokenizer.src_lang = fallback_lang
 
-        protected_text, placeholder_map = self._protect_storm_names(input_text)
+        protected_text, placeholder_map = self.protect_storm_names(input_text)
 
         inputs = self.tokenizer(
             protected_text, return_tensors="pt", truncation=True, max_length=512
@@ -135,11 +134,11 @@ class TranslationService:
 
         generated_ids = outputs[0]
         translated_text = self.tokenizer.decode(generated_ids, skip_special_tokens=True)
-        translated_text = self._restore_storm_names(translated_text, placeholder_map)
+        translated_text = self.restore_storm_names(translated_text, placeholder_map)
 
         return translated_text
 
-    def _has_untranslated_tagalog(self, text: str) -> bool:
+    def has_untranslated_tagalog(self, text: str) -> bool:
         """
         Check if text still contains common Tagalog words that should have been translated.
         """
