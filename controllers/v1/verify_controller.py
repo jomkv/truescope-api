@@ -14,8 +14,6 @@ from services import (
     NLIService,
     RemarksGenerationService,
 )
-from sqlalchemy import select
-from sqlalchemy.orm import Session
 import unicodedata
 import re
 from datetime import datetime
@@ -23,6 +21,7 @@ import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from typing import cast
 from collections import defaultdict
+from databases.verify import VerifyDatabase
 
 
 class VerifyController:
@@ -31,6 +30,7 @@ class VerifyController:
         self.entity_extraction_service = EntityExtractionService()
         self.nli_service = NLIService()
         self.remarks_generation_service = RemarksGenerationService()
+        self.db = VerifyDatabase()
 
         # Fixed thresholds for article filtering
         self.RELEVANCE_THRESHOLD = 0.3
@@ -78,35 +78,39 @@ class VerifyController:
         # Strip leading/trailing whitespace
         return text.strip()
 
-    @staticmethod
-    def find_relevant_chunks_batch(
-        session: Session, embedding: list[float], doc_ids: set[str], top_n: int = 3
+    def get_chunk_map(
+        self,
+        embedding: list[float],
+        doc_ids: set[str],
+        top_n: int = 3,
     ) -> dict[str, list[tuple[ArticleChunk, float]]]:
         """
         For each doc_id in doc_ids, find the top-N most relevant chunks.
         Returns a dict mapping doc_id -> list of ArticleChunk.
         """
-        distance_col = ArticleChunk.embedding.cosine_distance(embedding)  # type: ignore
+        chunks = self.db.find_similar_chunks_from_doc_ids(embedding, doc_ids)
 
-        # Query all chunks for the given doc_ids, with their distance
-        chunk_stmt = select(ArticleChunk, distance_col).where(  # type: ignore
-            ArticleChunk.doc_id.in_(doc_ids)
-        )
-        chunk_res = session.execute(chunk_stmt).all()
-
-        # Group by doc_id and normalize distance (-1)
-        grouped: dict[str, list[tuple[ArticleChunk, float]]] = defaultdict(list)
-        for chunk, distance in chunk_res:
-            grouped[chunk.doc_id].append((chunk, 1 - distance))
+        # Group by doc_id
+        chunk_map: dict[str, list[tuple[ArticleChunk, float]]] = defaultdict(list)
+        for chunk, distance in chunks:
+            chunk_map[chunk.doc_id].append((chunk, 1 - distance))
 
         # For each doc_id, sort by distance and take top_n
-        for doc_id, chunk_list in grouped.items():
+        for doc_id, chunk_list in chunk_map.items():
             chunk_list.sort(key=lambda x: x[1])
-            grouped[doc_id] = [
+            chunk_map[doc_id] = [
                 (chunk, distance) for chunk, distance in chunk_list[:top_n]
             ]
 
-        return grouped
+        return chunk_map
+
+    def get_article_map(self, doc_ids: set[str]) -> dict[str, Article]:
+        article_results = self.db.find_articles_from_doc_ids(doc_ids)
+        article_map: dict[str, Article] = {
+            article.doc_id: article for article in article_results
+        }
+
+        return article_map
 
     @staticmethod
     def extract_unique_doc_ids(article_chunks: list[ArticleChunk | Claim]) -> set[str]:
@@ -120,7 +124,7 @@ class VerifyController:
         return unique_doc_ids
 
     def find_claims_with_articles(
-        self, session: Session, embedding: list[float], user_claim: str, top_k: int = 20
+        self, embedding: list[float], top_k: int = 20
     ) -> list[tuple[Claim, Article, float, str | None]]:
         """
         Retrieves the top_k most similar claims from the database using HNSW vector search,
@@ -134,54 +138,36 @@ class VerifyController:
         Returns:
             list[tuple[Claim, Article, float]]: List of tuples containing the claim, its article, and the similarity score.
         """
-
-        # Use HNSW index for efficient vector search
-        distance_col = Claim.embedding.cosine_distance(embedding)  # type: ignore
-
-        claim_stmt = (
-            select(Claim, distance_col)  # type: ignore
-            .where(Claim.verdict != "UNKNOWN")  # Skip claims with "UNKNOWN" verdicts
-            .order_by(distance_col)
-            .limit(top_k)
-        )
-        claim_results: list[tuple[Claim, float]] = session.execute(claim_stmt).all()
-        unique_doc_ids = self.extract_unique_doc_ids(claim_results)
+        similar_claims = self.db.find_similar_claims(embedding, top_k)
+        unique_doc_ids = self.extract_unique_doc_ids(similar_claims)
 
         # Get equivalent articles for all found vectors
-        articles_stmt = select(Article).where(Article.doc_id.in_(unique_doc_ids))  # type: ignore
-        article_results = session.execute(articles_stmt).scalars().all()
-        article_map: dict[str, Article] = {
-            article.doc_id: article for article in article_results
-        }
+        article_map = self.get_article_map(unique_doc_ids)
 
         # Batch-load all chunks at once (N+1 query fix)
-        all_chunks_map = self.find_relevant_chunks_batch(
-            session, embedding, unique_doc_ids
-        )
+        all_chunks_map = self.get_chunk_map(embedding, unique_doc_ids)
 
-        # Combine results into a tuple
+        # Combine all results into a tuple
         # (claim, article, similarity_score, relevant_chunk_text)
         results: list[tuple[Claim, Article, float, str | None]] = []
 
-        for claim, distance in claim_results:
+        for claim, distance in similar_claims:
             article = cast(Article, article_map.get(claim.doc_id))
             article_relevant_chunks = all_chunks_map[article.doc_id]
 
             if len(article_relevant_chunks) == 0:
-                results.append((claim, article, 0.0, None))
+                results.append((claim, article, 1 - distance, None))
                 continue
 
-            # Get first el of relevant chunk, then get its distance (index 1 of tuple)
-            top_similarity_score = article_relevant_chunks[0][1]
-            chunk_texts = self._build_remarks_context(
+            chunk_text = self.build_chunk_text(
                 [chunk for chunk, _ in article_relevant_chunks]
             )
-            results.append((claim, article, top_similarity_score, chunk_texts))
+            results.append((claim, article, 1 - distance, chunk_text))
 
         return results
 
     def find_news_articles(
-        self, session: Session, embedding: list[float], user_claim: str, top_k: int = 20
+        self, embedding: list[float], top_k: int = 20
     ) -> list[tuple[Article, float, str | None]]:
         """
         Retrieves the top_k most similar articles from the database using HNSW vector search.
@@ -195,27 +181,16 @@ class VerifyController:
             list[tuple[Article, float]]: List of tuples containing the article and the similarity score.
         """
         # 1: Get all similar chunks
-        distance_col = ArticleChunk.embedding.cosine_distance(embedding)  # type: ignore
-
-        chunk_stmt = (
-            select(ArticleChunk, distance_col)  # type: ignore
-            .order_by(distance_col)
-            .limit(top_k)
-        )
-        chunk_results = session.execute(chunk_stmt).all()
+        chunk_results = self.db.find_similar_chunks(embedding, top_k)
 
         # 2: Collect unique doc_ids from chunks
         unique_doc_ids = self.extract_unique_doc_ids(chunk_results)
 
-        # 3: Batch-load all articles related to chunks
-        articles = (
-            session.query(Article).filter(Article.doc_id.in_(unique_doc_ids)).all()
-        )
+        # 3: Get all articles related to chunks
+        articles = self.db.find_articles_from_doc_ids(unique_doc_ids)
 
         # 4: Find MORE relevant chunks for each article (yield more chunks per article for better result)
-        all_chunks_map = self.find_relevant_chunks_batch(
-            session, embedding, unique_doc_ids
-        )
+        all_chunks_map = self.get_chunk_map(embedding, unique_doc_ids)
 
         # 5: build results using collected data
         results: list[tuple[Article, float, str | None]] = []
@@ -229,10 +204,10 @@ class VerifyController:
 
             # Get first el of relevant chunk, then get its distance (index 1 of tuple)
             top_similarity_score = article_relevant_chunks[0][1]
-            chunk_texts = self._build_remarks_context(
+            chunk_text = self.build_chunk_text(
                 [chunk for chunk, _ in article_relevant_chunks]
             )
-            results.append((article, top_similarity_score, chunk_texts))
+            results.append((article, top_similarity_score, chunk_text))
 
         results.sort(key=lambda x: x[1], reverse=True)
 
@@ -288,7 +263,7 @@ class VerifyController:
         return matches / total if total > 0 else 0.0
 
     @staticmethod
-    def _build_remarks_context(
+    def build_chunk_text(
         chunks: list[ArticleChunk],
         max_chars: int = 800,
         max_chunks: int = 3,
@@ -322,7 +297,7 @@ class VerifyController:
         return "\n\n".join(parts).strip()
 
     @staticmethod
-    def _truncate_at_sentence(text: str, max_chars: int = 200) -> str:
+    def truncate_at_sentence(text: str, max_chars: int = 200) -> str:
         cleaned = re.sub(r"\s+", " ", text.strip())
         if len(cleaned) <= max_chars:
             return cleaned
@@ -406,9 +381,7 @@ class VerifyController:
 
         return round(nli_score * bias_weight * verdict_weight * nli_label_weight, 2)
 
-    async def verify_claim(
-        self, session: Session, user_claim: str, use_fallback: bool = True
-    ):
+    async def verify_claim(self, user_claim: str, use_fallback: bool = True):
         """
         Main entry point for verifying a user claim (async version).
 
@@ -438,11 +411,11 @@ class VerifyController:
             loop.run_in_executor(self.executor, self.extract_entities, user_claim_norm),
         )
 
-        # search for both FC and news articles (DB queries can't be parallelized with same session)
+        # search for both FC and news articles
         factcheck_results = self.find_claims_with_articles(
-            session, claim_embedding, user_claim
+            claim_embedding, self.MAX_DEEP_ANALYSIS
         )
-        news_results = self.find_news_articles(session, claim_embedding, user_claim)
+        news_results = self.find_news_articles(claim_embedding, self.MAX_DEEP_ANALYSIS)
 
         # Limit deep analysis to top results to avoid excessive parallelization (FIX 1)
         factcheck_results = factcheck_results[: self.MAX_DEEP_ANALYSIS]
@@ -577,7 +550,7 @@ class VerifyController:
                 "relationship_confidence": nli_score,
                 "relationship_avg": nli_avg,
                 "claim_source": article.source,
-                "analyzed_text": self._truncate_at_sentence(nli_text, 200),
+                "analyzed_text": self.truncate_at_sentence(nli_text, 200),
             }
 
             verdict_score = self.compute_final_score(

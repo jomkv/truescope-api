@@ -2,7 +2,6 @@ from fastapi import APIRouter
 
 from controllers.v1.verify_controller import VerifyController
 from models.verify_claim_model import VerifyClaimModel
-from core.db import Session
 
 
 router = APIRouter()
@@ -28,10 +27,9 @@ async def verify_claim(verify: VerifyClaimModel):
     - limit: Number of articles to retrieve (1-50, default: 20)
     - use_fallback: Whether to analyze titles/content when no explicit claim (default: true)
     """
-    with Session() as session:
-        interfence_scores = await controller.verify_claim(session, verify.claim)
+    results = await controller.verify_claim(verify.claim)
 
     entities = controller.extract_entities(verify.claim)
     timeframe = controller.extract_claim_timeframe(verify.claim)
 
-    return {"entities": entities, "timeframe": timeframe, "scores": interfence_scores}
+    return {"entities": entities, "timeframe": timeframe, "scores": results}
