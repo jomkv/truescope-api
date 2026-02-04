@@ -23,6 +23,17 @@ class VerifyDatabase:
     def find_similar_claims(
         self, embedding: list[float], limit: int
     ) -> list[tuple[Claim, float]]:
+        """
+        Retrieves the most similar claims to the provided embedding using HNSW vector search,
+        excluding claims with an 'UNKNOWN' verdict.
+
+        Args:
+            embedding (list[float]): Embedding vector for the user claim.
+            limit (int): Maximum number of similar claims to retrieve.
+
+        Returns:
+            list[tuple[Claim, float]]: List of tuples containing the claim and its distance to the input embedding.
+        """
         try:
             distance_col = self.claim_distance_col(embedding)
 
@@ -40,6 +51,16 @@ class VerifyDatabase:
     def find_similar_chunks(
         self, embedding: list[float], limit: int
     ) -> list[tuple[ArticleChunk, float]]:
+        """
+        Retrieves the most similar article chunks to the provided embedding using HNSW vector search.
+
+        Args:
+            embedding (list[float]): Embedding vector for the user claim.
+            limit (int): Maximum number of similar chunks to retrieve.
+
+        Returns:
+            list[tuple[ArticleChunk, float]]: List of tuples containing the article chunk and its distance to the input embedding.
+        """
         try:
             distance_col = self.chunk_distance_col(embedding)
 
@@ -57,14 +78,14 @@ class VerifyDatabase:
         self, embedding: list[float], doc_ids: set[str]
     ) -> list[tuple[ArticleChunk, float]]:
         """
-        For each doc_id in doc_ids, find the most relevant chunks.
+        Retrieves the most relevant article chunks for each doc_id in doc_ids using vector search.
 
         Args:
-            embedding (list[float]): Embedded user claim
-            doc_ids (list[str]): Document IDs of articles on which we will run the search on
+            embedding (list[float]): Embedding vector for the user claim.
+            doc_ids (set[str]): Set of document IDs to restrict the search.
 
         Returns:
-            chunks_with_distance (list[tuple[ArticleChunk, float]]): List of tuples containing the chunk and its distance.
+            list[tuple[ArticleChunk, float]]: List of tuples containing the article chunk and its distance to the input embedding.
         """
         try:
             distance_col = self.chunk_distance_col(embedding)
@@ -79,6 +100,15 @@ class VerifyDatabase:
             raise e
 
     def find_articles_from_doc_ids(self, doc_ids: set[str]) -> list[Article]:
+        """
+        Retrieves articles from the database for the given set of document IDs.
+
+        Args:
+            doc_ids (set[str]): Set of document IDs.
+
+        Returns:
+            list[Article]: List of Article objects matching the provided doc_ids.
+        """
         try:
             return self.session.query(Article).filter(Article.doc_id.in_(doc_ids)).all()
         except Exception as e:

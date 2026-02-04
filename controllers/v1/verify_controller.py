@@ -85,8 +85,15 @@ class VerifyController:
         top_n: int = 3,
     ) -> dict[str, list[tuple[ArticleChunk, float]]]:
         """
-        For each doc_id in doc_ids, find the top-N most relevant chunks.
-        Returns a dict mapping doc_id -> list of ArticleChunk.
+        For each doc_id in doc_ids, finds the top-N most relevant article chunks using vector search.
+
+        Args:
+            embedding (list[float]): Embedding vector for the user claim.
+            doc_ids (set[str]): Set of unique document IDs to search within.
+            top_n (int, optional): Number of top chunks to retrieve per document. Defaults to 3.
+
+        Returns:
+            dict[str, list[tuple[ArticleChunk, float]]]: Mapping from doc_id to list of (chunk, similarity score) tuples.
         """
         chunks = self.db.find_similar_chunks_from_doc_ids(embedding, doc_ids)
 
@@ -105,6 +112,15 @@ class VerifyController:
         return chunk_map
 
     def get_article_map(self, doc_ids: set[str]) -> dict[str, Article]:
+        """
+        Retrieves articles from the database for the given set of doc_ids.
+
+        Args:
+            doc_ids (set[str]): Set of unique document IDs.
+
+        Returns:
+            dict[str, Article]: Mapping from doc_id to Article object.
+        """
         article_results = self.db.find_articles_from_doc_ids(doc_ids)
         article_map: dict[str, Article] = {
             article.doc_id: article for article in article_results
@@ -114,6 +130,15 @@ class VerifyController:
 
     @staticmethod
     def extract_unique_doc_ids(article_chunks: list[ArticleChunk | Claim]) -> set[str]:
+        """
+        Extracts unique document IDs from a list of ArticleChunk or Claim objects.
+
+        Args:
+            article_chunks (list[ArticleChunk | Claim]): List of article chunks or claims.
+
+        Returns:
+            set[str]: Set of unique document IDs.
+        """
         unique_doc_ids: set[str] = set()
 
         for chunk, _ in article_chunks:
@@ -131,12 +156,11 @@ class VerifyController:
         skipping claims with an 'UNKNOWN' verdict, and pairs each claim with its corresponding article.
 
         Args:
-            session (Session): SQLAlchemy session for database access.
             embedding (list[float]): Embedding vector for the user claim.
             top_k (int, optional): Number of top similar claims to retrieve. Defaults to 20.
 
         Returns:
-            list[tuple[Claim, Article, float]]: List of tuples containing the claim, its article, and the similarity score.
+            list[tuple[Claim, Article, float, str | None]]: List of tuples containing the claim, article, similarity score, and relevant chunk text.
         """
         similar_claims = self.db.find_similar_claims(embedding, top_k)
         unique_doc_ids = self.extract_unique_doc_ids(similar_claims)
@@ -170,15 +194,16 @@ class VerifyController:
         self, embedding: list[float], top_k: int = 20
     ) -> list[tuple[Article, float, str | None]]:
         """
-        Retrieves the top_k most similar articles from the database using HNSW vector search.
+        Retrieves the top_k most relevant news articles, then grouping and ranking articles based on
+        the highest similarity of their associated chunks. For each article, also provides the most
+        relevant chunk text as context.
 
         Args:
-            session (Session): SQLAlchemy session for database access.
             embedding (list[float]): Embedding vector for the user claim.
             top_k (int, optional): Number of top similar articles to retrieve. Defaults to 20.
 
         Returns:
-            list[tuple[Article, float]]: List of tuples containing the article and the similarity score.
+            list[tuple[Article, float, str | None]]: List of tuples containing the article, similarity score, and relevant chunk text.
         """
         # 1: Get all similar chunks
         chunk_results = self.db.find_similar_chunks(embedding, top_k)
@@ -269,8 +294,16 @@ class VerifyController:
         max_chunks: int = 3,
     ) -> str | None:
         """
-        Builds a short context string for remarks generation.
-        Keeps a few chunk excerpts to avoid sending full article content.
+        Builds a short context string for remarks generation by concatenating up to max_chunks chunk excerpts,
+        with a total character limit of max_chars.
+
+        Args:
+            chunks (list[ArticleChunk]): List of article chunks.
+            max_chars (int, optional): Maximum total characters in the output. Defaults to 800.
+            max_chunks (int, optional): Maximum number of chunks to include. Defaults to 3.
+
+        Returns:
+            str | None: Concatenated chunk text or None if no chunks are provided.
         """
         if len(chunks) == 0:
             return None
@@ -298,6 +331,16 @@ class VerifyController:
 
     @staticmethod
     def truncate_at_sentence(text: str, max_chars: int = 200) -> str:
+        """
+        Truncates the input text at the nearest sentence boundary within max_chars characters.
+
+        Args:
+            text (str): The input text to truncate.
+            max_chars (int, optional): Maximum number of characters. Defaults to 200.
+
+        Returns:
+            str: Truncated text ending at a sentence boundary or word.
+        """
         cleaned = re.sub(r"\s+", " ", text.strip())
         if len(cleaned) <= max_chars:
             return cleaned
@@ -345,12 +388,12 @@ class VerifyController:
         The magnitude reflects the strength of the evidence, and the sign reflects the direction (support or refute).
 
         Args:
-            verdict (Verdict): The verdict of the found claim (as an enum).
-            source_bias (SourceBias): The bias of the article's source (as an enum).
+            verdict (Verdict | None): The verdict of the found claim (as an enum).
+            source_bias (SourceBias | None): The bias of the article's source (as an enum).
             nli_label (NLILabel): The NLI relationship label between user and found claim.
             nli_score (float): The NLI model's confidence score for the label (0.0 to 1.0).
-            is_factcheck (bool): Whether the claim is from a fact-checking source.
-            similarity_score: float = 0.0,
+            is_factcheck (bool, optional): Whether the claim is from a fact-checking source. Defaults to True.
+            similarity_score (float, optional): Similarity score for news articles. Defaults to 0.0.
 
         Returns:
             float: The computed final score (signed and fuzzified, with magnitude reflecting strength).
@@ -392,7 +435,6 @@ class VerifyController:
         - Filters and sorts results based on relevance and entity match.
 
         Args:
-            session (Session): SQLAlchemy session for database access.
             user_claim (str): The user-provided claim to verify.
             use_fallback (bool, optional): Whether to use fallback logic if no strong matches are found. Defaults to True.
 
@@ -427,7 +469,7 @@ class VerifyController:
         # Process FC results
         for claim, article, similarity_score, chunk_texts in factcheck_results:
             tasks.append(
-                self._process_result_async(
+                self.process_result_async(
                     user_claim_norm=user_claim_norm,
                     claim_entities=claim_entities,
                     similarity_score=similarity_score,
@@ -445,7 +487,7 @@ class VerifyController:
             if (article.type or "").strip().lower() == "fact-check":
                 continue
             tasks.append(
-                self._process_result_async(
+                self.process_result_async(
                     user_claim_norm=user_claim_norm,
                     claim_entities=claim_entities,
                     similarity_score=similarity_score,
@@ -471,7 +513,7 @@ class VerifyController:
 
         return results
 
-    async def _process_result_async(
+    async def process_result_async(
         self,
         user_claim_norm: str,
         claim_entities: list[str],
@@ -483,6 +525,23 @@ class VerifyController:
         is_factcheck: bool,
         chunk_texts: str | None,
     ) -> dict:
+        """
+        Asynchronously processes a single claim-article or article result, computing entity match, relevance, NLI, verdict, and remarks.
+
+        Args:
+            user_claim_norm (str): Normalized user claim text.
+            claim_entities (list[str]): List of entities extracted from the user claim.
+            similarity_score (float): Semantic similarity score between user claim and article/claim.
+            article (Article): The article object being evaluated.
+            claim_text (str | None): The matched claim text, if available.
+            claim_verdict (str | None): The verdict of the matched claim, if available.
+            source_bias (str): The bias of the article's source.
+            is_factcheck (bool): Whether the result is from a fact-checking source.
+            chunk_texts (str | None): Relevant chunk text(s) for context.
+
+        Returns:
+            dict: Dictionary containing article and claim details, NLI results, scores, remarks, and skip reasons.
+        """
 
         # For entity matching: use claim text for FC, or article content+title for news
         if is_factcheck and claim_text:
