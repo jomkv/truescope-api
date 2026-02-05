@@ -6,7 +6,7 @@ import statistics
 
 
 class ArticleRetrievalEvaluator:
-    def __init__(self, dataset_path: str = "tests/test_dataset.json"):
+    def __init__(self, dataset_path: str = "tests/datasets/test_dataset.json"):
         self.dataset_path = dataset_path
         # Quality thresholds for article qualification
         self.quality_thresholds = {
