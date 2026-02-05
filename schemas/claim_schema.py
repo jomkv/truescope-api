@@ -1,7 +1,6 @@
-from sqlalchemy import Index
 import uuid
 from core.db import Base
-from sqlalchemy import UUID, Column, String, ForeignKey
+from sqlalchemy import UUID, Index, Column, String, ForeignKey
 from pgvector.sqlalchemy import VECTOR
 
 
@@ -14,7 +13,6 @@ class Claim(Base):
     claim_text = Column(String, nullable=False)
     verdict = Column(String)
 
-        # Improves performance and potentially the accuracy of results
     __table_args__ = (
         Index(
             "hnsw_cosine_claims_idx",

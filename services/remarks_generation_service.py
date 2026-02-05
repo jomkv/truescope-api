@@ -1,9 +1,6 @@
-import os
-from typing import Optional
 import re
 
 import torch
-import langdetect
 from transformers import (
     AutoTokenizer,
     AutoModelForSeq2SeqLM,
@@ -12,21 +9,17 @@ from transformers import (
 )
 
 from services.translation_service import TranslationService
+from constants.enums import NLILabel
 
 
 class RemarksGenerationService:
     def __init__(
         self,
-        micro_llm_model: Optional[str] = None,
         use_llm: bool = True,
     ):
 
         self.translation_service = TranslationService()
-        self.micro_llm_model_name = (
-            micro_llm_model
-            or os.getenv("MICRO_LLM_MODEL")
-            or "Vamsi/T5_Paraphrase_Paws"
-        )
+        self.micro_llm_model_name = "Vamsi/T5_Paraphrase_Paws"
         self.use_llm = use_llm
 
         self.micro_tokenizer = None
@@ -61,40 +54,44 @@ class RemarksGenerationService:
             except Exception:
                 pass
 
-    def _verdict_score_meaning(
-        self, verdict_score: float, nli_relationship: str = "neutral"
-    ) -> str:
-        relationship = (nli_relationship or "neutral").lower()
+    def verdict_score_meaning(self, verdict_score: float, nli_relationship: str) -> str:
+        relationship = nli_relationship.lower()
 
         # Neutral: softer language
-        if relationship == "neutral":
+        if relationship == NLILabel.NEUTRAL:
+            neutral_meaning = "is inconclusive or mostly supported"
+
             if verdict_score < 0:
-                return "is inconclusive or slightly refuted"
-            if verdict_score < 0.33:
-                return "is inconclusive"
-            if verdict_score < 0.66:
-                return "is inconclusive or slightly supported"
-            return "is inconclusive or mostly supported"
+                neutral_meaning = "is inconclusive or slightly refuted"
+            elif verdict_score < 0.33:
+                neutral_meaning = "is inconclusive"
+            elif verdict_score < 0.66:
+                neutral_meaning = "is inconclusive or slightly supported"
+
+            return neutral_meaning
 
         # Align verdict sign with NLI relationship
-        if relationship in {"refute", "contradiction"}:
+        if relationship == NLILabel.REFUTE:
             verdict_score = -abs(verdict_score)
-        elif relationship in {"support", "entailment"}:
+        elif relationship == NLILabel.SUPPORT:
             verdict_score = abs(verdict_score)
 
         # Map score to category
+        meaning = "is strongly supported"
+
         if verdict_score <= -0.66:
-            return "is strongly refuted"
-        if verdict_score <= -0.33:
-            return "is mostly refuted"
-        if verdict_score < 0.33:
-            return "is neither clearly supported nor refuted"
-        if verdict_score < 0.66:
-            return "is mostly supported"
-        return "is strongly supported"
+            meaning = "is strongly refuted"
+        elif verdict_score <= -0.33:
+            meaning = "is mostly refuted"
+        elif verdict_score < 0.33:
+            meaning = "is neither clearly supported nor refuted"
+        elif verdict_score < 0.66:
+            meaning = "is mostly supported"
+
+        return meaning
 
     @staticmethod
-    def _is_nonsensical_excerpt(text: str) -> bool:
+    def is_nonsensical_excerpt(text: str) -> bool:
         """Detect truncated or incomplete excerpts"""
         if not text:
             return True
@@ -173,11 +170,11 @@ class RemarksGenerationService:
 
         return False
 
-    def _generate_remarks_from_full_text(
-        self, full_text: str, verdict_score: float, nli_relationship: str = "neutral"
+    def generate_remarks_from_full_text(
+        self, full_text: str, verdict_score: float, nli_relationship: NLILabel
     ) -> str:
         """BART fallback for nonsensical excerpts"""
-        meaning = self._verdict_score_meaning(verdict_score, nli_relationship)
+        meaning = self.verdict_score_meaning(verdict_score, nli_relationship)
 
         if not self.bart_summarizer or not full_text or len(full_text) < 50:
             return (
@@ -204,8 +201,8 @@ class RemarksGenerationService:
 
             summary_text = summary[0]["summary_text"] if summary else ""
             if summary_text:
-                summary_text = self._normalize_leading_determiner(summary_text)
-                summary_text = self._ensure_sentence_end(summary_text)
+                summary_text = self.normalize_leading_determiner(summary_text)
+                summary_text = self.ensure_sentence_end(summary_text)
                 return (
                     f"The article reports that {summary_text} "
                     f"Based on this evidence, the claim {meaning}, "
@@ -220,7 +217,7 @@ class RemarksGenerationService:
         )
 
     @staticmethod
-    def _normalize_leading_determiner(text: str) -> str:
+    def normalize_leading_determiner(text: str) -> str:
         """Lower-case leading determiners"""
         return re.sub(
             r"^(a|an|the|there|this|that|these|those|according)\b",
@@ -230,7 +227,7 @@ class RemarksGenerationService:
         )
 
     @staticmethod
-    def _ensure_sentence_end(text: str) -> str:
+    def ensure_sentence_end(text: str) -> str:
         """Add sentence punctuation if missing"""
         if not text:
             return ""
@@ -252,10 +249,7 @@ class RemarksGenerationService:
         return stripped + "."
 
     @staticmethod
-    def _extract_excerpt(text: str, max_chars: int = 240) -> str:
-
-        if not text:
-            return ""
+    def extract_excerpt(text: str, max_chars: int = 240) -> str:
 
         cleaned = re.sub(r"\s+", " ", text.strip())
         cleaned = re.sub(r"(?:\.\.\.|…)$", "", cleaned).strip()
@@ -308,7 +302,7 @@ class RemarksGenerationService:
         return snippet
 
     @staticmethod
-    def _clean_excerpt(excerpt: str) -> str:
+    def clean_excerpt(excerpt: str) -> str:
 
         if not excerpt:
             return ""
@@ -343,7 +337,7 @@ class RemarksGenerationService:
         excerpt = re.sub(r"([.!?][\"”'])\.+$", r"\1", excerpt)
         return re.sub(r"\s{2,}", " ", excerpt).strip()
 
-    def _paraphrase_excerpt(self, excerpt: str) -> str:
+    def paraphrase_excerpt(self, excerpt: str) -> str:
 
         if (
             not self.use_llm
@@ -423,7 +417,7 @@ class RemarksGenerationService:
         except Exception:
             return excerpt
 
-    def _format_remarks_with_article(
+    def format_remarks_with_article(
         self, excerpt: str, meaning: str, verdict_score: float
     ) -> str:
         """Format remarks with article context"""
@@ -437,48 +431,47 @@ class RemarksGenerationService:
         self,
         input_text: str,
         verdict_score: float,
-        nli_relationship: str = "neutral",
+        nli_label: NLILabel,
         use_llm: bool = True,
     ) -> str:
 
         # Detect language and translate
-        try:
-            lang = langdetect.detect(input_text)
-        except langdetect.lang_detect_exception.LangDetectException:
-            lang = "unknown"
+        lang = self.translation_service.detect_language(input_text)
 
         allow_paraphrase = True
-        if lang != "en":
-            input_text = self.translation_service.translate_to_english(input_text)
+
+        if lang != "eng_Latn":
+            input_text = self.translation_service.translate_to_english(input_text, lang)
             allow_paraphrase = False
 
-        excerpt = self._clean_excerpt(self._extract_excerpt(input_text))
-        meaning = self._verdict_score_meaning(verdict_score, nli_relationship)
+        excerpt = self.clean_excerpt(self.extract_excerpt(input_text))
+        meaning = self.verdict_score_meaning(verdict_score, nli_label)
 
         # Use BART if excerpt is broken
-        if self._is_nonsensical_excerpt(excerpt):
+        if self.is_nonsensical_excerpt(excerpt):
             if use_llm and allow_paraphrase:
-                return self._generate_remarks_from_full_text(
-                    input_text, verdict_score, nli_relationship
+                return self.generate_remarks_from_full_text(
+                    input_text, verdict_score, nli_label
                 )
-            else:
-                # Try BART fallback even if use_llm is False
-                bart_result = self._generate_remarks_from_full_text(
-                    input_text, verdict_score, nli_relationship
-                )
-                if "The article reports that" in bart_result:
-                    return bart_result
-                # Only return no-context remark if BART also failed
-                return (
-                    f"The claim {meaning}, "
-                    f"with a verdict score of {verdict_score:.2f} on a scale from -1 to 1."
-                )
+
+            # Try BART fallback even if use_llm is False
+            bart_result = self.generate_remarks_from_full_text(
+                input_text, verdict_score, nli_label
+            )
+            if "The article reports that" in bart_result:
+                return bart_result
+
+            # Only return no-context remark if BART also failed
+            return (
+                f"The claim {meaning}, "
+                f"with a verdict score of {verdict_score:.2f} on a scale from -1 to 1."
+            )
 
         if not excerpt:
             # Try BART fallback for empty excerpt
             if use_llm and allow_paraphrase:
-                bart_result = self._generate_remarks_from_full_text(
-                    input_text, verdict_score, nli_relationship
+                bart_result = self.generate_remarks_from_full_text(
+                    input_text, verdict_score, nli_label
                 )
                 if "The article reports that" in bart_result:
                     return bart_result
@@ -495,13 +488,11 @@ class RemarksGenerationService:
 
         # Apply T5 paraphrasing
         if use_llm and allow_paraphrase:
-            paraphrased_excerpt = self._paraphrase_excerpt(excerpt)
-            paraphrased_excerpt = self._normalize_leading_determiner(
-                paraphrased_excerpt
-            )
-            paraphrased_excerpt = self._ensure_sentence_end(paraphrased_excerpt)
-            return self._format_remarks_with_article(
+            paraphrased_excerpt = self.paraphrase_excerpt(excerpt)
+            paraphrased_excerpt = self.normalize_leading_determiner(paraphrased_excerpt)
+            paraphrased_excerpt = self.ensure_sentence_end(paraphrased_excerpt)
+            return self.format_remarks_with_article(
                 paraphrased_excerpt, meaning, verdict_score
             )
 
-        return self._format_remarks_with_article(excerpt, meaning, verdict_score)
+        return self.format_remarks_with_article(excerpt, meaning, verdict_score)
