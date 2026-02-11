@@ -1,0 +1,332 @@
+{
+  "timestamp": "2026-02-11 10:30:02.320236",
+  "config": {
+    "api_endpoint": "http://127.0.0.1:8000/v1/verify",
+    "timeout": 30
+  },
+  "aggregate_metrics": {
+    "total_cases": 20,
+    "avg_recall": 0.9583,
+    "avg_precision": 0.9833,
+    "avg_f1": 0.9633,
+    "recall_stdev": 0.1311,
+    "precision_stdev": 0.0745,
+    "perfect_f1_count": 17,
+    "good_f1_count": 19,
+    "fair_f1_count": 1,
+    "poor_f1_count": 0
+  },
+  "case_results": [
+    {
+      "test_id": "VERIFY001",
+      "claim": "The Department of Trade and Industry announced plans to review e-commerce regulations in Metro Manila.",
+      "expected_entities": [
+        "Department of Trade and Industry",
+        "Metro Manila"
+      ],
+      "extracted_entities": [
+        "Department of Trade",
+        "Metro Manila"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY002",
+      "claim": "The Department of Health reported increased hospital admissions in Central Luzon.",
+      "expected_entities": [
+        "Department of Health",
+        "Central Luzon"
+      ],
+      "extracted_entities": [
+        "Department of Health",
+        "Central Luzon"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY003",
+      "claim": "Bangko Sentral ng Pilipinas discussed inflation trends during its latest monetary briefing.",
+      "expected_entities": [
+        "Bangko Sentral ng Pilipinas"
+      ],
+      "extracted_entities": [
+        "Bangko Sentral ng Pilipinas discussed inflation"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY004",
+      "claim": "Senator Risa Hontiveros raised concerns about education funding during a Senate committee hearing.",
+      "expected_entities": [
+        "Risa Hontiveros",
+        "Senate"
+      ],
+      "extracted_entities": [
+        "Risa Hontiveros",
+        "Senate"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY005",
+      "claim": "The Philippine National Police confirmed ongoing operations related to public safety in Quezon City.",
+      "expected_entities": [
+        "Philippine National Police",
+        "Quezon City"
+      ],
+      "extracted_entities": [
+        "Philippine National Police",
+        "Quezon City"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY006",
+      "claim": "The Department of Energy announced renewable energy initiatives targeting Mindanao.",
+      "expected_entities": [
+        "Department of Energy",
+        "Mindanao"
+      ],
+      "extracted_entities": [
+        "Department of Energy",
+        "renewable energy",
+        "Mindanao"
+      ],
+      "recall": 1.0,
+      "precision": 0.6667,
+      "f1_score": 0.8,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY007",
+      "claim": "ABS-CBN and GMA Network reported developments related to fuel price adjustments.",
+      "expected_entities": [
+        "ABS-CBN",
+        "GMA Network"
+      ],
+      "extracted_entities": [
+        "ABS-CBN",
+        "GMA Network"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY008",
+      "claim": "The Asian Development Bank discussed infrastructure financing with Philippine government representatives.",
+      "expected_entities": [
+        "Asian Development Bank",
+        "Philippine government"
+      ],
+      "extracted_entities": [
+        "Asian Development Bank"
+      ],
+      "recall": 0.5,
+      "precision": 1.0,
+      "f1_score": 0.6667,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY009",
+      "claim": "The Department of Transportation reviewed rail expansion proposals affecting Southern Luzon.",
+      "expected_entities": [
+        "Department of Transportation",
+        "Southern Luzon"
+      ],
+      "extracted_entities": [
+        "Department of Transportation",
+        "Southern Luzon"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY010",
+      "claim": "The Bureau of Customs reported seizures of undeclared goods at Ninoy Aquino International Airport.",
+      "expected_entities": [
+        "Bureau of Customs",
+        "Ninoy Aquino International Airport"
+      ],
+      "extracted_entities": [
+        "Bureau of Customs",
+        "Ninoy Aquino International Airport"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY011",
+      "claim": "Vice President Sara Duterte attended discussions with ASEAN representatives on regional cooperation.",
+      "expected_entities": [
+        "Sara Duterte",
+        "ASEAN"
+      ],
+      "extracted_entities": [
+        "Sara Duterte",
+        "ASEAN representatives on regional cooperation"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY012",
+      "claim": "The Philippine Coast Guard conducted maritime exercises in the West Philippine Sea.",
+      "expected_entities": [
+        "Philippine Coast Guard",
+        "West Philippine Sea"
+      ],
+      "extracted_entities": [
+        "Philippine Coast Guard",
+        "West Philippine Sea"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY013",
+      "claim": "Manila Water Company and Maynilad Services discussed water service improvements.",
+      "expected_entities": [
+        "Manila Water Company",
+        "Maynilad Services"
+      ],
+      "extracted_entities": [
+        "Manila Water Company",
+        "Maynilad Services"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY014",
+      "claim": "The Commission on Higher Education announced funding opportunities for public universities.",
+      "expected_entities": [
+        "Commission on Higher Education"
+      ],
+      "extracted_entities": [
+        "Commission on Higher Education"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY015",
+      "claim": "The Philippine Stock Exchange released an advisory regarding market volatility.",
+      "expected_entities": [
+        "Philippine Stock Exchange"
+      ],
+      "extracted_entities": [
+        "Philippine Stock Exchange"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY016",
+      "claim": "The World Health Organization coordinated with the Department of Health on disease surveillance.",
+      "expected_entities": [
+        "World Health Organization",
+        "Department of Health"
+      ],
+      "extracted_entities": [
+        "World Health Organization",
+        "Department of Health"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY017",
+      "claim": "The Department of Agriculture reviewed food supply conditions following weather disturbances.",
+      "expected_entities": [
+        "Department of Agriculture"
+      ],
+      "extracted_entities": [
+        "Department of Agriculture"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY018",
+      "claim": "Cebu Pacific announced adjustments to selected domestic flight schedules.",
+      "expected_entities": [
+        "Cebu Pacific"
+      ],
+      "extracted_entities": [
+        "Cebu Pacific"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY019",
+      "claim": "Reuters reported diplomatic discussions involving Philippine and United States officials.",
+      "expected_entities": [
+        "Reuters",
+        "Philippines",
+        "United States"
+      ],
+      "extracted_entities": [
+        "Reuters",
+        "Philippine and United States"
+      ],
+      "recall": 0.6667,
+      "precision": 1.0,
+      "f1_score": 0.8,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY020",
+      "claim": "The International Monetary Fund released an assessment of economic conditions in Southeast Asia.",
+      "expected_entities": [
+        "International Monetary Fund",
+        "Southeast Asia"
+      ],
+      "extracted_entities": [
+        "Monetary Fund",
+        "Southeast Asia"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    }
+  ]
+}

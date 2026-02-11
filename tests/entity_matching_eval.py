@@ -6,7 +6,7 @@ import statistics
 
 
 class EntityMatchingEvaluator:
-    def __init__(self, dataset_path: str = "tests/datasets/test_dataset.json"):
+    def __init__(self, dataset_path: str = "tests/datasets/test_dataset_9.json"):
         self.dataset_path = dataset_path
         self.results = {
             "timestamp": str(datetime.now()),

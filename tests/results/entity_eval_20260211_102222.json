@@ -1,0 +1,347 @@
+{
+  "timestamp": "2026-02-11 10:21:09.877329",
+  "config": {
+    "api_endpoint": "http://127.0.0.1:8000/v1/verify",
+    "timeout": 30
+  },
+  "aggregate_metrics": {
+    "total_cases": 20,
+    "avg_recall": 0.8917,
+    "avg_precision": 0.8958,
+    "avg_f1": 0.8795,
+    "recall_stdev": 0.2552,
+    "precision_stdev": 0.252,
+    "perfect_f1_count": 13,
+    "good_f1_count": 17,
+    "fair_f1_count": 2,
+    "poor_f1_count": 1
+  },
+  "case_results": [
+    {
+      "test_id": "VERIFY001",
+      "claim": "Sinabi ng Department of Trade and Industry na magkakaroon ng bagong regulations para sa e-commerce sa Metro Manila.",
+      "expected_entities": [
+        "Department of Trade and Industry",
+        "Metro Manila"
+      ],
+      "extracted_entities": [
+        "Department of Trade",
+        "Metro Manila"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY002",
+      "claim": "Ang Bagyong Gemma ay nagdulot ng malaking pagbabaha sa Cebu City at karatig lugar.",
+      "expected_entities": [
+        "Bagyong Gemma",
+        "Cebu City"
+      ],
+      "extracted_entities": [
+        "Bagyong Gemma",
+        "Cebu City"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY003",
+      "claim": "Pinagsama ng Globe Telecom at PLDT ang kanilang operations upang bumuo ng isang telecommunications entity.",
+      "expected_entities": [
+        "Globe Telecom",
+        "PLDT"
+      ],
+      "extracted_entities": [
+        "Globe Telecom",
+        "PLDT"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY004",
+      "claim": "Nilagyan ng karamihan ang Pangulo Ferdinand Marcos Jr. ng executive order para sa bagong commission.",
+      "expected_entities": [
+        "Pangulo Ferdinand Marcos Jr."
+      ],
+      "extracted_entities": [
+        "Pangulo Ferdinand Marcos"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY005",
+      "claim": "Ang Korte Suprema ay nag-rule sa isang kaso tungkol sa lupa sa Davao City.",
+      "expected_entities": [
+        "Korte Suprema",
+        "Davao City"
+      ],
+      "extracted_entities": [
+        "Korte Suprema",
+        "Davao City"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY006",
+      "claim": "Sinasabi ng Tsina na sari-sari nito ang buong South China Sea kasama ang teritoryo ng Pilipinas.",
+      "expected_entities": [
+        "Tsina",
+        "South China Sea",
+        "Pilipinas"
+      ],
+      "extracted_entities": [
+        "Tsina",
+        "South China Sea"
+      ],
+      "recall": 0.6667,
+      "precision": 1.0,
+      "f1_score": 0.8,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY007",
+      "claim": "Itataas ng BDO Unibank ang interest rates sa savings accounts ng 2% sa Marso 2026.",
+      "expected_entities": [
+        "BDO Unibank",
+        "Marso",
+        "2026"
+      ],
+      "extracted_entities": [],
+      "recall": 0.0,
+      "precision": 0.0,
+      "f1_score": 0.0,
+      "entities_match": false
+    },
+    {
+      "test_id": "VERIFY008",
+      "claim": "Pumasa ang House of Representatives ng bill na naglalaan ng PHP 500 bilyon para sa disaster relief.",
+      "expected_entities": [
+        "House of Representatives",
+        "PHP 500 bilyon"
+      ],
+      "extracted_entities": [
+        "Pumasa",
+        "House of Representatives",
+        "PHP 500 bilyon"
+      ],
+      "recall": 1.0,
+      "precision": 0.6667,
+      "f1_score": 0.8,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY009",
+      "claim": "Kinumpirma ng DOH na may bagong disease outbreak sa Quezon City.",
+      "expected_entities": [
+        "DOH",
+        "Quezon City"
+      ],
+      "extracted_entities": [
+        "DOH",
+        "Quezon City"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY010",
+      "claim": "Inianunsyo ng dating Pangulo Rodrigo Duterte na tatakbo siya para sa Senado sa 2028.",
+      "expected_entities": [
+        "Rodrigo Duterte",
+        "Senado",
+        "2028"
+      ],
+      "extracted_entities": [
+        "Inianunsyo",
+        "Rodrigo Duterte",
+        "Senado",
+        "2028"
+      ],
+      "recall": 1.0,
+      "precision": 0.75,
+      "f1_score": 0.8571,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY011",
+      "claim": "Ang Philippine National Police ay nag-arrest ng mahigit 100 drug pushers sa Maynila ngayong buwan.",
+      "expected_entities": [
+        "Philippine National Police",
+        "Maynila"
+      ],
+      "extracted_entities": [
+        "Philippine National Police",
+        "Maynila"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY012",
+      "claim": "Ipinahayag ng Microsoft ang partnership sa University of the Philippines para sa AI research.",
+      "expected_entities": [
+        "Microsoft",
+        "University of the Philippines"
+      ],
+      "extracted_entities": [
+        "Microsoft",
+        "University of the Philippines"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY013",
+      "claim": "Itataas ng Bureau of Internal Revenue ang personal income tax rates ng 5%.",
+      "expected_entities": [
+        "Bureau of Internal Revenue"
+      ],
+      "extracted_entities": [
+        "Bureau of Internal Revenue",
+        "5%"
+      ],
+      "recall": 1.0,
+      "precision": 0.5,
+      "f1_score": 0.6667,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY014",
+      "claim": "Nag-invest ang SM Investments ng PHP 10 bilyon sa bagong retail complex sa BGC.",
+      "expected_entities": [
+        "SM Investments",
+        "PHP 10 bilyon",
+        "BGC"
+      ],
+      "extracted_entities": [
+        "SM Investments",
+        "PHP 10 bilyon",
+        "BGC"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY015",
+      "claim": "Nagpulong ang Vice President Sara Duterte sa mga opisyal mula Japan tungkol sa bilateral trade.",
+      "expected_entities": [
+        "Vice President Sara Duterte",
+        "Japan"
+      ],
+      "extracted_entities": [
+        "Vice",
+        "Sara Duterte",
+        "Japan"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY016",
+      "claim": "Hinulaan ng PAGASA na may super typhoon na darating sa Pilipinas sa katapusan ng Pebrero.",
+      "expected_entities": [
+        "PAGASA",
+        "Pilipinas",
+        "Pebrero"
+      ],
+      "extracted_entities": [
+        "PAGASA",
+        "Pebrero"
+      ],
+      "recall": 0.6667,
+      "precision": 1.0,
+      "f1_score": 0.8,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY017",
+      "claim": "Ilunsad ng Department of Education ang bagong curriculum reform sa susunod na school year.",
+      "expected_entities": [
+        "Department of Education"
+      ],
+      "extracted_entities": [
+        "Department of Education"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY018",
+      "claim": "Ulat ng ABS-CBN News na ang inflation sa bansa ay umabot na sa 4.5% sa Enero 2026.",
+      "expected_entities": [
+        "ABS-CBN News",
+        "Enero 2026",
+        "4.5%"
+      ],
+      "extracted_entities": [
+        "ABS-CBN News",
+        "4.5%",
+        "Enero",
+        "2026"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY019",
+      "claim": "Hinuli ng Philippine Coast Guard ang mga smugglers na may kontrabandong nagkakahalaga ng PHP 50 milyon sa Palawan.",
+      "expected_entities": [
+        "Philippine Coast Guard",
+        "PHP 50 milyon",
+        "Palawan"
+      ],
+      "extracted_entities": [
+        "Philippine Coast Guard",
+        "PHP 50 milyon",
+        "Palawan"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "VERIFY020",
+      "claim": "Inilabas ng WikiLeaks ang classified diplomatic cables na may kinalaman sa mga opisyal ng Pilipinas at ibang bansa.",
+      "expected_entities": [
+        "WikiLeaks",
+        "Pilipinas"
+      ],
+      "extracted_entities": [
+        "WikiLeaks"
+      ],
+      "recall": 0.5,
+      "precision": 1.0,
+      "f1_score": 0.6667,
+      "entities_match": true
+    }
+  ]
+}
