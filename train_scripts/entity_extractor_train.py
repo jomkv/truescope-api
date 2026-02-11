@@ -46,23 +46,23 @@ class EntityExtractorTrainer:
             Path(__file__).resolve().parents[1]
             / "tests"
             / "datasets"
-            / "test_dataset_2.json",
+            / "train_dataset_2.json",
             Path(__file__).resolve().parents[1]
             / "tests"
             / "datasets"
-            / "test_dataset_3.json",
+            / "train_dataset_3.json",
             Path(__file__).resolve().parents[1]
             / "tests"
             / "datasets"
-            / "test_dataset_4.json",
+            / "train_dataset_4.json",
             Path(__file__).resolve().parents[1]
             / "tests"
             / "datasets"
-            / "test_dataset_5.json",
+            / "train_dataset_5.json",
             Path(__file__).resolve().parents[1]
             / "tests"
             / "datasets"
-            / "test_dataset_6.json",
+            / "train_dataset_6.json",
         ]
 
         training_data: list[tuple[str, list[tuple[int, int, str]]]] = []
