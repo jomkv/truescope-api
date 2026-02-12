@@ -7,7 +7,7 @@ from pydantic import BaseModel
 
 class VerifyResultModel(BaseModel):
     entities: list[str]
-    timeframe: list
+    timeframe: list | None
     skipped: list[ArticleResultModel]
     results: list[ArticleResultModel]
     overall_verdict: float

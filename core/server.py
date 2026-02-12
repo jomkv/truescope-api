@@ -16,6 +16,8 @@ def init_cors(_app: FastAPI) -> None:
     _app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],
+        allow_methods=["*"],
+        allow_headers=["*"],
     )
 
 
