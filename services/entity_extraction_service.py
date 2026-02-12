@@ -1,35 +1,16 @@
-from pathlib import Path
-
 import spacy
 
 
 class EntityExtractionService:
     def __init__(self):
-        self.primary_extractor = self._load_model()
+        model_name = "xx_ent_wiki_sm"
+        self.entity_extractor = spacy.load(model_name)
 
     def extract_entities(self, text: str) -> list[tuple[str, str]]:
-        if not self.primary_extractor:
-            return []
+        doc = self.entity_extractor(text)
+        entities = []
 
-        doc = self.primary_extractor(text)
-        entities = [(ent.text, ent.label_) for ent in doc.ents]
-
-        if not entities:
-            return []
+        for ent in doc.ents:
+            entities.append((ent.text, ent.label_))
 
         return entities
-
-    def _load_model(self) -> spacy.language.Language | None:
-
-        model_dir = (
-            Path(__file__).resolve().parents[1]
-            / "trained_model"
-            / "entity_extractor_model"
-        )
-        if model_dir.exists():
-            return spacy.load(model_dir)
-
-        print(
-            f"[entity_extraction] Model not found at {model_dir}. Please run train_scripts/entity_extractor_train.py to train the model."
-        )
-        return None

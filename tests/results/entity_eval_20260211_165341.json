@@ -1,0 +1,313 @@
+{
+  "timestamp": "2026-02-11 16:52:33.064474",
+  "config": {
+    "api_endpoint": "http://127.0.0.1:8000/v1/verify",
+    "timeout": 30
+  },
+  "aggregate_metrics": {
+    "total_cases": 20,
+    "avg_recall": 1.0,
+    "avg_precision": 1.0,
+    "avg_f1": 1.0,
+    "recall_stdev": 0.0,
+    "precision_stdev": 0.0,
+    "perfect_f1_count": 20,
+    "good_f1_count": 20,
+    "fair_f1_count": 0,
+    "poor_f1_count": 0
+  },
+  "case_results": [
+    {
+      "test_id": "GLOBAL001",
+      "claim": "The World Health Organization issued updated guidance on infectious disease preparedness.",
+      "expected_entities": [
+        "World Health Organization"
+      ],
+      "extracted_entities": [
+        "World Health Organization"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL002",
+      "claim": "The United Nations discussed humanitarian aid coordination during a Security Council meeting.",
+      "expected_entities": [
+        "United Nations",
+        "Security Council"
+      ],
+      "extracted_entities": [
+        "United Nations",
+        "Security Council"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL003",
+      "claim": "Reuters reported diplomatic talks between officials from the United States and China.",
+      "expected_entities": [
+        "Reuters",
+        "United States",
+        "China"
+      ],
+      "extracted_entities": [
+        "Reuters",
+        "United States",
+        "China"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL004",
+      "claim": "The International Monetary Fund released an assessment of global economic growth trends.",
+      "expected_entities": [
+        "International Monetary Fund"
+      ],
+      "extracted_entities": [
+        "International Monetary Fund"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL005",
+      "claim": "European Union leaders held discussions on energy security during a regional summit.",
+      "expected_entities": [
+        "European Union"
+      ],
+      "extracted_entities": [
+        "European Union"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL006",
+      "claim": "The World Bank announced new financing initiatives targeting developing economies.",
+      "expected_entities": [
+        "World Bank"
+      ],
+      "extracted_entities": [
+        "World Bank"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL007",
+      "claim": "NASA confirmed progress in its lunar exploration program.",
+      "expected_entities": [
+        "NASA"
+      ],
+      "extracted_entities": [
+        "NASA"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL008",
+      "claim": "The International Energy Agency reviewed global fuel supply conditions.",
+      "expected_entities": [
+        "International Energy Agency"
+      ],
+      "extracted_entities": [
+        "International Energy Agency"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL009",
+      "claim": "The G7 issued a joint statement addressing climate change commitments.",
+      "expected_entities": [
+        "G7"
+      ],
+      "extracted_entities": [
+        "G7"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL010",
+      "claim": "The World Trade Organization discussed trade policy reforms during its annual forum.",
+      "expected_entities": [
+        "World Trade Organization"
+      ],
+      "extracted_entities": [
+        "World Trade Organization"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL011",
+      "claim": "BBC News reported protests related to labor reforms in France.",
+      "expected_entities": [
+        "BBC News",
+        "France"
+      ],
+      "extracted_entities": [
+        "BBC News",
+        "France"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL012",
+      "claim": "The African Union discussed regional peace initiatives involving member states.",
+      "expected_entities": [
+        "African Union"
+      ],
+      "extracted_entities": [
+        "African Union"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL013",
+      "claim": "The International Red Cross coordinated humanitarian assistance in conflict-affected areas.",
+      "expected_entities": [
+        "International Red Cross"
+      ],
+      "extracted_entities": [
+        "International Red Cross"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL014",
+      "claim": "Google announced updates to its data privacy policies affecting users worldwide.",
+      "expected_entities": [
+        "Google"
+      ],
+      "extracted_entities": [
+        "Google"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL015",
+      "claim": "The United States Federal Reserve reviewed interest rate policy during its latest meeting.",
+      "expected_entities": [
+        "United States Federal Reserve"
+      ],
+      "extracted_entities": [
+        "United States Federal Reserve"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL016",
+      "claim": "Japan\u00e2\u20ac\u2122s Ministry of Foreign Affairs engaged in diplomatic consultations with ASEAN representatives.",
+      "expected_entities": [
+        "Japan Ministry of Foreign Affairs",
+        "ASEAN"
+      ],
+      "extracted_entities": [
+        "Ministry of Foreign Affairs",
+        "ASEAN"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL017",
+      "claim": "The International Olympic Committee discussed preparations for upcoming global sporting events.",
+      "expected_entities": [
+        "International Olympic Committee"
+      ],
+      "extracted_entities": [
+        "International Olympic Committee"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL018",
+      "claim": "Meta Platforms reported efforts to address misinformation across its social media services.",
+      "expected_entities": [
+        "Meta Platforms"
+      ],
+      "extracted_entities": [
+        "Meta Platforms"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL019",
+      "claim": "The Organization for Economic Cooperation and Development released policy recommendations on education reform.",
+      "expected_entities": [
+        "Organization for Economic Cooperation and Development"
+      ],
+      "extracted_entities": [
+        "Organization for Economic Cooperation and Development"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    },
+    {
+      "test_id": "GLOBAL020",
+      "claim": "Al Jazeera reported developments related to ceasefire negotiations in the Middle East.",
+      "expected_entities": [
+        "Al Jazeera",
+        "Middle East"
+      ],
+      "extracted_entities": [
+        "Al Jazeera",
+        "Middle East"
+      ],
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1_score": 1.0,
+      "entities_match": true
+    }
+  ]
+}

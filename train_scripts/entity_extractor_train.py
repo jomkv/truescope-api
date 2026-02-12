@@ -1,6 +1,7 @@
 import json
 import re
 from pathlib import Path
+import random
 
 import spacy
 from spacy.training import Example
@@ -21,102 +22,164 @@ class EntityExtractorTrainer:
             print("[entity_extraction] No training data available")
             return
 
-        nlp = spacy.blank("en")
+        # Create blank English model (training from scratch)
+        nlp = spacy.blank("xx")
+
+        # Add NER component
         ner = nlp.add_pipe("ner")
         ner.add_label("ENTITY")
 
+        # Convert to spaCy Examples
         examples = []
         for text, spans in training_data:
             doc = nlp.make_doc(text)
             examples.append(Example.from_dict(doc, {"entities": spans}))
 
+        # Initialize model
         optimizer = nlp.initialize(get_examples=lambda: examples)
-        for epoch in range(1, 21):
-            print(f"[entity_extraction] Training epoch {epoch}/20...")
-            batches = minibatch(examples, size=compounding(2.0, 8.0, 1.5))
+
+        # Shuffle and split into train/dev
+        random.shuffle(examples)
+        split = int(len(examples) * 0.8)
+        train_examples = examples[:split]
+        dev_examples = examples[split:]
+
+        print(
+            f"[entity_extraction] Training with {len(train_examples)} examples, "
+            f"validating on {len(dev_examples)} examples..."
+        )
+
+        best_dev_loss = float("inf")
+        patience = 200
+        patience_counter = 0
+        max_epochs = 200
+
+        for epoch in range(1, max_epochs + 1):
+            print(f"[entity_extraction] Epoch {epoch}/{max_epochs}")
+
+            # Shuffle training data
+            random.shuffle(train_examples)
+
+            # Train
+            train_losses = {}
+            batches = minibatch(
+                train_examples,
+                size=compounding(4.0, 32.0, 1.5),
+            )
+
             for batch in batches:
-                nlp.update(batch, sgd=optimizer)
+                nlp.update(
+                    batch,
+                    sgd=optimizer,
+                    drop=0.2,
+                    losses=train_losses,
+                )
 
-        self.model_dir.mkdir(parents=True, exist_ok=True)
-        nlp.to_disk(self.model_dir)
-        print(f"[entity_extraction] Model saved to {self.model_dir}")
+            train_loss = train_losses.get("ner", 0.0)
 
-    def _build_training_data(self) -> list[tuple[str, list[tuple[int, int, str]]]]:
+            # Validate (NO weight updates)
+            dev_losses = {}
+            with nlp.select_pipes(enable=["ner"]):
+                for batch in minibatch(dev_examples, size=8):
+                    nlp.update(
+                        batch,
+                        sgd=None,  # 🚨 Prevent weight updates
+                        drop=0.0,
+                        losses=dev_losses,
+                    )
+
+            dev_loss = dev_losses.get("ner", 0.0)
+
+            print(f"  Train Loss: {train_loss:.4f} | Dev Loss: {dev_loss:.4f}")
+
+            # Early stopping check
+            if dev_loss < best_dev_loss:
+                best_dev_loss = dev_loss
+                patience_counter = 0
+
+                # Save best model checkpoint
+                self.model_dir.mkdir(parents=True, exist_ok=True)
+                nlp.to_disk(self.model_dir)
+                print(f"  ✅ New best model saved (Dev Loss: {best_dev_loss:.4f})")
+
+            else:
+                patience_counter += 1
+                print(f"  ⚠ No improvement ({patience_counter}/{patience})")
+
+            if patience_counter >= patience:
+                print(f"[entity_extraction] Early stopping at epoch {epoch}")
+                break
+
+        print(f"[entity_extraction] Training complete.")
+        print(f"[entity_extraction] Best validation loss: {best_dev_loss:.4f}")
+
+    def _build_training_data(self):
         dataset_paths = [
             Path(__file__).resolve().parents[1]
             / "tests"
             / "datasets"
-            / "train_dataset_2.json",
-            Path(__file__).resolve().parents[1]
-            / "tests"
-            / "datasets"
-            / "train_dataset_3.json",
-            Path(__file__).resolve().parents[1]
-            / "tests"
-            / "datasets"
-            / "train_dataset_4.json",
-            Path(__file__).resolve().parents[1]
-            / "tests"
-            / "datasets"
-            / "train_dataset_5.json",
-            Path(__file__).resolve().parents[1]
-            / "tests"
-            / "datasets"
-            / "train_dataset_6.json",
+            / f"train_dataset_{i}.json"
+            for i in range(2, 7)
         ]
 
-        training_data: list[tuple[str, list[tuple[int, int, str]]]] = []
-        total_examples = 0
+        training_data = []
+
         for path in dataset_paths:
             if not path.exists():
                 print(f"[entity_extraction] Dataset not found: {path}")
                 continue
+
             with path.open("r", encoding="utf-8") as handle:
                 data = json.load(handle)
+
             num_cases = len(data.get("test_cases", []))
-            print(f"[entity_extraction] Loaded {path.name} with {num_cases} examples")
-            total_examples += num_cases
+            print(
+                f"[entity_extraction] Loaded {path.name} " f"with {num_cases} examples"
+            )
+
             for case in data.get("test_cases", []):
                 text = case.get("claim", "")
                 ground_truth = case.get("ground_truth", {})
 
-                # Try to use pre-aligned entity offsets first (from fix_dataset_alignment.py)
-                spans: list[tuple[int, int, str]] = []
+                spans = []
+
+                # Use aligned offsets if available
                 if "entity_offsets" in ground_truth:
                     spans = ground_truth["entity_offsets"]
                 else:
-                    # Fallback: use regex-based extraction for legacy datasets
+                    # Fallback: regex match
                     entities = ground_truth.get("expected_entities", [])
                     for entity in entities:
                         for match in re.finditer(
-                            re.escape(entity), text, flags=re.IGNORECASE
+                            re.escape(entity),
+                            text,
+                            flags=re.IGNORECASE,
                         ):
                             spans.append((match.start(), match.end(), "ENTITY"))
 
-                    # Remove overlapping spans
                     spans = self._remove_overlapping_spans(spans)
 
                 if spans:
                     training_data.append((text, spans))
 
-        print(f"[entity_extraction] Total training examples: {len(training_data)}")
+        print(f"[entity_extraction] Total training examples: " f"{len(training_data)}")
+
         return training_data
 
-    def _remove_overlapping_spans(
-        self, spans: list[tuple[int, int, str]]
-    ) -> list[tuple[int, int, str]]:
-        """Remove overlapping entity spans, keeping longer ones."""
+    def _remove_overlapping_spans(self, spans):
         if not spans:
             return []
 
-        # Sort by start position, then by length (longer first)
-        sorted_spans = sorted(spans, key=lambda x: (x[0], -(x[1] - x[0])))
+        sorted_spans = sorted(
+            spans,
+            key=lambda x: (x[0], -(x[1] - x[0])),
+        )
 
         non_overlapping = []
         for span in sorted_spans:
             start, end, label = span
-            # Check if this span overlaps with any already selected span
             overlaps = False
+
             for existing_start, existing_end, _ in non_overlapping:
                 if start < existing_end and end > existing_start:
                     overlaps = True
@@ -125,7 +188,6 @@ class EntityExtractorTrainer:
             if not overlaps:
                 non_overlapping.append(span)
 
-        # Sort by start position for final output
         return sorted(non_overlapping, key=lambda x: x[0])
 
 
