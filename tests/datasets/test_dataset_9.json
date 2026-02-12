@@ -1,0 +1,212 @@
+{
+  "metadata": {
+    "version": "2.0",
+    "created_date": "2026-02-11",
+    "description": "Test dataset for verifying trained entity extraction model using global claims",
+    "total_cases": 20,
+    "focus": "Fresh English global claims for model verification",
+    "region": "Global"
+  },
+  "test_cases": [
+    {
+      "id": "GLOBAL001",
+      "claim": "The World Health Organization issued updated guidance on infectious disease preparedness.",
+      "ground_truth": {
+        "verdict": "TRUE",
+        "verdict_score_range": [0.8, 1.0],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["World Health Organization"]
+      }
+    },
+    {
+      "id": "GLOBAL002",
+      "claim": "The United Nations discussed humanitarian aid coordination during a Security Council meeting.",
+      "ground_truth": {
+        "verdict": "TRUE",
+        "verdict_score_range": [0.8, 1.0],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["United Nations", "Security Council"]
+      }
+    },
+    {
+      "id": "GLOBAL003",
+      "claim": "Reuters reported diplomatic talks between officials from the United States and China.",
+      "ground_truth": {
+        "verdict": "MOSTLY_TRUE",
+        "verdict_score_range": [0.65, 0.9],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["Reuters", "United States", "China"]
+      }
+    },
+    {
+      "id": "GLOBAL004",
+      "claim": "The International Monetary Fund released an assessment of global economic growth trends.",
+      "ground_truth": {
+        "verdict": "TRUE",
+        "verdict_score_range": [0.8, 1.0],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["International Monetary Fund"]
+      }
+    },
+    {
+      "id": "GLOBAL005",
+      "claim": "European Union leaders held discussions on energy security during a regional summit.",
+      "ground_truth": {
+        "verdict": "MOSTLY_TRUE",
+        "verdict_score_range": [0.65, 0.9],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["European Union"]
+      }
+    },
+    {
+      "id": "GLOBAL006",
+      "claim": "The World Bank announced new financing initiatives targeting developing economies.",
+      "ground_truth": {
+        "verdict": "TRUE",
+        "verdict_score_range": [0.8, 1.0],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["World Bank"]
+      }
+    },
+    {
+      "id": "GLOBAL007",
+      "claim": "NASA confirmed progress in its lunar exploration program.",
+      "ground_truth": {
+        "verdict": "TRUE",
+        "verdict_score_range": [0.8, 1.0],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["NASA"]
+      }
+    },
+    {
+      "id": "GLOBAL008",
+      "claim": "The International Energy Agency reviewed global fuel supply conditions.",
+      "ground_truth": {
+        "verdict": "MOSTLY_TRUE",
+        "verdict_score_range": [0.65, 0.9],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["International Energy Agency"]
+      }
+    },
+    {
+      "id": "GLOBAL009",
+      "claim": "The G7 issued a joint statement addressing climate change commitments.",
+      "ground_truth": {
+        "verdict": "TRUE",
+        "verdict_score_range": [0.75, 0.95],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["G7"]
+      }
+    },
+    {
+      "id": "GLOBAL010",
+      "claim": "The World Trade Organization discussed trade policy reforms during its annual forum.",
+      "ground_truth": {
+        "verdict": "TRUE",
+        "verdict_score_range": [0.8, 1.0],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["World Trade Organization"]
+      }
+    },
+    {
+      "id": "GLOBAL011",
+      "claim": "BBC News reported protests related to labor reforms in France.",
+      "ground_truth": {
+        "verdict": "MOSTLY_TRUE",
+        "verdict_score_range": [0.65, 0.85],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["BBC News", "France"]
+      }
+    },
+    {
+      "id": "GLOBAL012",
+      "claim": "The African Union discussed regional peace initiatives involving member states.",
+      "ground_truth": {
+        "verdict": "TRUE",
+        "verdict_score_range": [0.75, 0.95],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["African Union"]
+      }
+    },
+    {
+      "id": "GLOBAL013",
+      "claim": "The International Red Cross coordinated humanitarian assistance in conflict-affected areas.",
+      "ground_truth": {
+        "verdict": "MOSTLY_TRUE",
+        "verdict_score_range": [0.65, 0.9],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["International Red Cross"]
+      }
+    },
+    {
+      "id": "GLOBAL014",
+      "claim": "Google announced updates to its data privacy policies affecting users worldwide.",
+      "ground_truth": {
+        "verdict": "TRUE",
+        "verdict_score_range": [0.75, 0.95],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["Google"]
+      }
+    },
+    {
+      "id": "GLOBAL015",
+      "claim": "The United States Federal Reserve reviewed interest rate policy during its latest meeting.",
+      "ground_truth": {
+        "verdict": "TRUE",
+        "verdict_score_range": [0.8, 1.0],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["United States Federal Reserve"]
+      }
+    },
+    {
+      "id": "GLOBAL016",
+      "claim": "Japan’s Ministry of Foreign Affairs engaged in diplomatic consultations with ASEAN representatives.",
+      "ground_truth": {
+        "verdict": "MOSTLY_TRUE",
+        "verdict_score_range": [0.65, 0.9],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["Japan Ministry of Foreign Affairs", "ASEAN"]
+      }
+    },
+    {
+      "id": "GLOBAL017",
+      "claim": "The International Olympic Committee discussed preparations for upcoming global sporting events.",
+      "ground_truth": {
+        "verdict": "TRUE",
+        "verdict_score_range": [0.75, 0.95],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["International Olympic Committee"]
+      }
+    },
+    {
+      "id": "GLOBAL018",
+      "claim": "Meta Platforms reported efforts to address misinformation across its social media services.",
+      "ground_truth": {
+        "verdict": "MOSTLY_TRUE",
+        "verdict_score_range": [0.65, 0.85],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["Meta Platforms"]
+      }
+    },
+    {
+      "id": "GLOBAL019",
+      "claim": "The Organization for Economic Cooperation and Development released policy recommendations on education reform.",
+      "ground_truth": {
+        "verdict": "TRUE",
+        "verdict_score_range": [0.8, 1.0],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["Organization for Economic Cooperation and Development"]
+      }
+    },
+    {
+      "id": "GLOBAL020",
+      "claim": "Al Jazeera reported developments related to ceasefire negotiations in the Middle East.",
+      "ground_truth": {
+        "verdict": "MOSTLY_TRUE",
+        "verdict_score_range": [0.65, 0.85],
+        "should_match_nli": "SUPPORT",
+        "expected_entities": ["Al Jazeera", "Middle East"]
+      }
+    }
+  ]
+}
