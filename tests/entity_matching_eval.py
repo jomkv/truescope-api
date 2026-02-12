@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 from typing import List, Dict
-import requests
+from controllers.v1.verify_controller import VerifyController
 import statistics
 
 
@@ -11,45 +11,17 @@ class EntityMatchingEvaluator:
         self.results = {
             "timestamp": str(datetime.now()),
             "config": {
-                "api_endpoint": "http://127.0.0.1:8000/v1/verify",
                 "timeout": 30,
             },
             "aggregate_metrics": {},
             "case_results": [],
         }
+        self.verify_controller = VerifyController()
 
     def load_dataset(self) -> List[Dict]:
         with open(self.dataset_path) as f:
             data = json.load(f)
         return data["test_cases"]
-
-    def extract_entities_from_claim(self, claim: str) -> List[str]:
-        try:
-            response = requests.post(
-                "http://127.0.0.1:8000/v1/verify", json={"claim": claim}, timeout=30
-            )
-            response.raise_for_status()
-            result = response.json()
-
-            entities = result.get("entities", [])
-            extracted = []
-
-            for entity in entities:
-                if isinstance(entity, dict):
-                    name = (
-                        entity.get("name")
-                        or entity.get("text")
-                        or entity.get("entity_text")
-                    )
-                    if name:
-                        extracted.append(name)
-                elif isinstance(entity, str):
-                    extracted.append(entity)
-
-            return extracted
-        except Exception as e:
-            print(f"    ERROR: {type(e).__name__}: {e}")
-            return []
 
     def calculate_recall(self, extracted: list[str], expected: list[str]) -> float:
         if not expected:
@@ -96,7 +68,7 @@ class EntityMatchingEvaluator:
             claim = test_case["claim"]
             expected = test_case["ground_truth"]["expected_entities"]
 
-            extracted = self.extract_entities_from_claim(claim)
+            extracted = self.verify_controller.extract_entities(claim)
 
             recall = self.calculate_recall(extracted, expected)
             precision = self.calculate_precision(extracted, expected)
@@ -137,7 +109,7 @@ class EntityMatchingEvaluator:
         }
         return self.results
 
-    def save_results(self, output_path: str = None):
+    def save_results(self, output_path: str | None = None):
         if output_path is None:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             output_path = f"tests/results/entity_eval_{timestamp}.json"

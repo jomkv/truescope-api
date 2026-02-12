@@ -40,7 +40,7 @@ class ArticleRetrievalEvaluator:
             response.raise_for_status()
             result = response.json()
 
-            scores = result.get("scores", [])
+            scores = [*result.get("results", []), *result.get("skipped", [])]
             articles = []
 
             # Get ALL articles, not just top K
@@ -268,7 +268,7 @@ class ArticleRetrievalEvaluator:
 
         return self.results
 
-    def save_results(self, output_path: str = None):
+    def save_results(self, output_path: str | None = None):
         if output_path is None:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             output_path = f"tests/results/retrieval_eval_{timestamp}.json"
