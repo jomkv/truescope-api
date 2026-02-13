@@ -1,6 +1,7 @@
 from schemas.article_schema import Article
 from schemas.claim_schema import Claim
 from schemas.article_chunk_schema import ArticleChunk
+from models.article_result_model import ArticleResultModel
 from constants.weights import (
     VERDICT_WEIGHT_MAP,
     SOURCE_BIAS_WEIGHT_MAP,
@@ -424,6 +425,18 @@ class VerifyController:
 
         return round(nli_score * bias_weight * verdict_weight * nli_label_weight, 2)
 
+    @staticmethod
+    def compute_overall_verdict(results: list[ArticleResultModel]) -> float:
+        total_verdict: float = 0
+        count = 0
+
+        for result in results:
+            if result.verdict is not None:
+                total_verdict += result.verdict
+                count += 1
+
+        return round(total_verdict / count, 4) if count > 0 else 0.0
+
     async def verify_claim(self, user_claim: str, use_fallback: bool = True):
         """
         Main entry point for verifying a user claim (async version).
@@ -439,7 +452,7 @@ class VerifyController:
             use_fallback (bool, optional): Whether to use fallback logic if no strong matches are found. Defaults to True.
 
         Returns:
-            list[dict]: List of result dictionaries, each containing article and claim details, NLI results, scores, and skip reasons.
+            dict: Dict containing lists of results, each containing article and claim details, NLI results, scores, and skip reasons.
         """
 
         user_claim_norm = self.normalize_text(user_claim)
@@ -453,15 +466,11 @@ class VerifyController:
             loop.run_in_executor(self.executor, self.extract_entities, user_claim_norm),
         )
 
-        # search for both FC and news articles
+        # Search for both FC and news articles
         factcheck_results = self.find_claims_with_articles(
             claim_embedding, self.MAX_DEEP_ANALYSIS
         )
         news_results = self.find_news_articles(claim_embedding, self.MAX_DEEP_ANALYSIS)
-
-        # Limit deep analysis to top results to avoid excessive parallelization (FIX 1)
-        factcheck_results = factcheck_results[: self.MAX_DEEP_ANALYSIS]
-        news_results = news_results[: self.MAX_DEEP_ANALYSIS]
 
         # Process all results in parallel
         tasks = []
@@ -501,17 +510,33 @@ class VerifyController:
             )
 
         # Wait for all processing to complete
-        results = await asyncio.gather(*tasks)
+        results: list[ArticleResultModel] = await asyncio.gather(*tasks)
 
-        results.sort(
+        # Filter and sort results
+        skipped: list[ArticleResultModel] = []
+        filtered_results: list[ArticleResultModel] = []
+
+        for result in results:
+            if len(result.skip_reason) > 0:
+                skipped.append(result)
+            else:
+                filtered_results.append(result)
+
+        filtered_results.sort(
             key=lambda x: (
-                0 if x["nli_result"] else 1,
-                0 if x.get("found_claim") else 1,
-                -x["combined_relevance_score"],
+                0 if x.nli_result else 1,
+                0 if x.found_claim else 1,
+                -x.combined_relevance_score,
             )
         )
 
-        return results
+        overall_verdict = self.compute_overall_verdict(filtered_results)
+
+        return {
+            "skipped": skipped,
+            "results": filtered_results,
+            "overall_verdict": overall_verdict,
+        }
 
     async def process_result_async(
         self,
@@ -524,7 +549,7 @@ class VerifyController:
         source_bias: str,
         is_factcheck: bool,
         chunk_texts: str | None,
-    ) -> dict:
+    ) -> ArticleResultModel:
         """
         Asynchronously processes a single claim-article or article result, computing entity match, relevance, NLI, verdict, and remarks.
 
@@ -540,7 +565,7 @@ class VerifyController:
             chunk_texts (str | None): Relevant chunk text(s) for context.
 
         Returns:
-            dict: Dictionary containing article and claim details, NLI results, scores, remarks, and skip reasons.
+            ArticleResultModel: Article and claim details, NLI results, scores, remarks, and skip reasons.
         """
 
         # For entity matching: use claim text for FC, or article content+title for news
@@ -566,13 +591,14 @@ class VerifyController:
             else (article.content or "")
         )
 
-        result = {
+        result: dict = {
             "doc_id": article.doc_id,
             "title": article.title,
             "content": display_content,
             "found_claim": claim_text,
             "found_verdict": claim_verdict,
             "publish_date": article.publish_date.isoformat(),
+            "source": article.source,
             "url": article.url,
             "similarity_score": round(similarity_score, 4),
             "entity_match_score": round(entity_match_score, 4),
@@ -647,4 +673,4 @@ class VerifyController:
             if not result["skip_reason"]:
                 result["skip_reason"].append("Did not meet filtering criteria")
 
-        return result
+        return ArticleResultModel(**result)
