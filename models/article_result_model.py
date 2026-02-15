@@ -17,5 +17,5 @@ class ArticleResultModel(BaseModel):
     skip_reason: list[str]
     source: str
     source_type: str
-    source_bias: str | None
+    source_bias: str
     remarks: None | str

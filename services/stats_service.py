@@ -1,3 +1,6 @@
+from constants.weights import SOURCE_BIAS_SPECTRUM_MAP
+
+
 class StatsService:
     """
     Service for calculating core verification metrics:
@@ -6,16 +9,6 @@ class StatsService:
     3. Bias Divergence - Ideological spread across sources
     4. Truth Confidence Score - Confidence level in the verdict
     """
-
-    # Bias mapping for divergence calculations
-    BIAS_MAP = {
-        "LEFT": -2,
-        "LEFT-CENTER": -1,
-        "LEAST-BIASED": 0,
-        "RIGHT-CENTER": 1,
-        "RIGHT": 2,
-        "NEUTRAL": 0,
-    }
 
     @staticmethod
     def calculate_stats(results: list[dict]) -> dict:
@@ -46,14 +39,14 @@ class StatsService:
         )
 
         # 2. Calculate Bias Divergence
-        bias_divergence = StatsService._calculate_bias_divergence(results)
+        bias_divergence = StatsService.calculate_bias_divergence(results)
 
         # 3. Calculate Truth Confidence Score
         # Based on consistency of verdicts and NLI confidence
-        truth_confidence_score = StatsService._calculate_truth_confidence(results)
+        truth_confidence_score = StatsService.calculate_truth_confidence(results)
 
         # 4. Calculate Bias Consistency
-        bias_consistency = StatsService._calculate_bias_consistency(results)
+        bias_consistency = StatsService.calculate_bias_consistency(results)
 
         return {
             "overall_verdict": round(overall_verdict, 4),
@@ -64,7 +57,7 @@ class StatsService:
         }
 
     @staticmethod
-    def _calculate_bias_divergence(results: list[dict]) -> float:
+    def calculate_bias_divergence(results: list[dict]) -> float:
         """
         Calculate how ideologically diverse/divergent the sources are.
 
@@ -78,9 +71,9 @@ class StatsService:
             return 0.0
 
         bias_values = [
-            StatsService.BIAS_MAP.get(bias, 0)
+            SOURCE_BIAS_SPECTRUM_MAP.get(bias, 0)
             for bias in biases
-            if bias in StatsService.BIAS_MAP
+            if bias in SOURCE_BIAS_SPECTRUM_MAP
         ]
 
         if len(bias_values) < 2:
@@ -98,7 +91,7 @@ class StatsService:
         return bias_divergence
 
     @staticmethod
-    def _calculate_truth_confidence(results: list[dict]) -> float:
+    def calculate_truth_confidence(results: list[dict]) -> float:
         """
         Calculate confidence in the truth verdict.
 
@@ -146,7 +139,7 @@ class StatsService:
         return truth_confidence
 
     @staticmethod
-    def _calculate_bias_consistency(results: list[dict]) -> float:
+    def calculate_bias_consistency(results: list[dict]) -> float:
         """
         Calculate overall bias consistency - how well bias patterns align with verdicts.
 
@@ -171,7 +164,7 @@ class StatsService:
                 continue
 
             # Get bias value (-2 to 2)
-            bias_value = StatsService.BIAS_MAP.get(bias, 0)
+            bias_value = SOURCE_BIAS_SPECTRUM_MAP.get(bias, 0)
 
             # Calculate how well verdict aligns with bias direction
             # Bias consistency = how aligned the verdict is with the bias direction

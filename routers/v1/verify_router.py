@@ -85,5 +85,5 @@ async def websocket_verify_endpoint(websocket: WebSocket):
             await websocket.send_json({"type": "error", "message": str(e)})
         except Exception:
             pass
-        finally:
-            await websocket.close()
+    finally:
+        await websocket.close()
