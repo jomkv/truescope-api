@@ -14,7 +14,9 @@ from services import (
     EntityExtractionService,
     NLIService,
     RemarksGenerationService,
+    StatsService,
 )
+from sqlalchemy.orm import Session
 import unicodedata
 import re
 from datetime import datetime
@@ -31,6 +33,7 @@ class VerifyController:
         self.entity_extraction_service = EntityExtractionService()
         self.nli_service = NLIService()
         self.remarks_generation_service = RemarksGenerationService()
+        self.stats_service = StatsService()
         self.db = VerifyDatabase()
 
         # Fixed thresholds for article filtering
@@ -425,18 +428,6 @@ class VerifyController:
 
         return round(nli_score * bias_weight * verdict_weight * nli_label_weight, 2)
 
-    @staticmethod
-    def compute_overall_verdict(results: list[ArticleResultModel]) -> float:
-        total_verdict: float = 0
-        count = 0
-
-        for result in results:
-            if result.verdict is not None:
-                total_verdict += result.verdict
-                count += 1
-
-        return round(total_verdict / count, 4) if count > 0 else 0.0
-
     async def verify_claim(self, user_claim: str, use_fallback: bool = True):
         """
         Main entry point for verifying a user claim (async version).
@@ -530,12 +521,17 @@ class VerifyController:
             )
         )
 
-        overall_verdict = self.compute_overall_verdict(filtered_results)
+        # Convert to dicts for stats service
+        results_as_dicts = [r.model_dump() for r in filtered_results]
+        stats = self.stats_service.calculate_stats(results_as_dicts)
 
         return {
             "skipped": skipped,
             "results": filtered_results,
-            "overall_verdict": overall_verdict,
+            "overall_verdict": stats["overall_verdict"],
+            "bias_divergence": stats["bias_divergence"],
+            "truth_confidence_score": stats["truth_confidence_score"],
+            "bias_consistency": stats["bias_consistency"],
         }
 
     async def process_result_async(
@@ -607,6 +603,7 @@ class VerifyController:
             "verdict": None,
             "skip_reason": [],
             "source_type": "fact_check" if is_factcheck else "news_article",
+            "source_bias": source_bias,
             "remarks": None,
         }
 
@@ -674,3 +671,124 @@ class VerifyController:
                 result["skip_reason"].append("Did not meet filtering criteria")
 
         return ArticleResultModel(**result)
+
+    async def verify_claim_stream(self, session: Session, user_claim: str):
+        """
+        Async generator that streams verification results as they complete processing.
+
+        This is used by the WebSocket endpoint to stream articles one by one.
+
+        Args:
+            session (Session): Database session
+            user_claim (str): The claim to verify
+
+        Yields:
+            dict: Result items with type and data
+        """
+        user_claim_norm = self.normalize_text(user_claim)
+        loop = asyncio.get_event_loop()
+
+        # Run embedding and entity extraction in thread pool
+        claim_embedding = await loop.run_in_executor(
+            self.executor, self.embedding_service.embed_text, user_claim_norm
+        )
+        claim_entities = await loop.run_in_executor(
+            self.executor, self.extract_entities, user_claim_norm
+        )
+
+        # Search for both FC and news articles
+        factcheck_results = self.find_claims_with_articles(claim_embedding)
+        news_results = self.find_news_articles(claim_embedding)
+
+        # Create processing tasks
+        tasks = []
+
+        # Add FC results
+        for claim, article, similarity_score, chunk_texts in factcheck_results:
+            task = self.process_result_async(
+                user_claim_norm=user_claim_norm,
+                claim_entities=claim_entities,
+                similarity_score=similarity_score,
+                article=article,
+                claim_text=claim.claim_text,
+                claim_verdict=claim.verdict,
+                source_bias=article.source_bias,
+                is_factcheck=True,
+                chunk_texts=chunk_texts,
+            )
+            tasks.append(task)
+
+        # Add news results
+        for article, similarity_score, chunk_texts in news_results:
+            task = self.process_result_async(
+                user_claim_norm=user_claim_norm,
+                claim_entities=claim_entities,
+                similarity_score=similarity_score,
+                article=article,
+                claim_text=None,
+                claim_verdict=None,
+                source_bias=article.source_bias,
+                is_factcheck=False,
+                chunk_texts=chunk_texts,
+            )
+            tasks.append(task)
+
+        # Yield results as they complete
+        for coro in asyncio.as_completed(tasks):
+            result: ArticleResultModel = await coro
+
+            yield {
+                "type": "result",
+                "data": result.model_dump(),
+            }
+
+        # Yield completion message
+        yield {
+            "type": "complete",
+        }
+
+    async def verify_claim_stream_with_stats(self, session: Session, user_claim: str):
+        """
+        Async generator that streams verification results with live statistics.
+
+        This method accumulates results and calculates running stats for each article.
+
+        Args:
+            session (Session): Database session
+            user_claim (str): The claim to verify
+
+        Yields:
+            dict: Result items with type, data, index, and stats
+        """
+
+        # Accumulate results to calculate stats or for further use
+        accumulated_results = []
+
+        # Stream results from base method
+        async for item in self.verify_claim_stream(session, user_claim):
+            if item["type"] == "result":
+                # Accumulate article data
+                article_data = item["data"]
+                accumulated_results.append(article_data)
+
+                # Calculate running stats using Stats Service
+                stats = self.stats_service.calculate_stats(accumulated_results)
+
+                # Yield article with stats
+                yield {
+                    "type": "result",
+                    "index": len(accumulated_results) - 1,
+                    "data": article_data,
+                    "stats": stats,
+                }
+
+            elif item["type"] == "complete":
+                # Calculate final stats using Stats Service
+                final_stats = self.stats_service.calculate_stats(accumulated_results)
+
+                # Yield completion with final stats
+                yield {
+                    "type": "complete",
+                    "total_results": len(accumulated_results),
+                    "stats": final_stats,
+                }
