@@ -50,8 +50,10 @@ class StatsService:
         # 4. Calculate Bias Consistency
         bias_consistency = StatsService.calculate_bias_consistency(results)
 
-        # 5. Calculate Final Verdict (combination of overall_verdict and truth_confidence_score)
-        final_verdict = (overall_verdict + truth_confidence_score) / 2
+        # 5. Calculate Final Verdict using both overall_verdict and truth_confidence_score
+        final_verdict = StatsService.calculate_final_verdict(
+            overall_verdict, truth_confidence_score
+        )
 
         return {
             "final_verdict": round(final_verdict, 4),
@@ -186,4 +188,52 @@ class StatsService:
             sum(consistency_scores) / len(consistency_scores)
             if consistency_scores
             else 0.0
+        )
+
+    @staticmethod
+    def calculate_final_verdict(
+        overall_verdict: float, truth_confidence_score: float
+    ) -> float:
+        """
+        Calculate final verdict (0-1) using simplified formula.
+
+        Logic:
+        - If TCS is low (<0.33): Return middle ground (0.5) - unclear case
+        - If OV is at extremes (distance from 0.5 > 0.17):
+          - High TCS (>0.66): Average both (50/50) - confident verdict
+          - Mid TCS (0.33-0.66): Lean toward OV (70/30) - moderate confidence
+        - If OV is in middle (0.33-0.66): Average both - always (50/50)
+
+        Args:
+            overall_verdict (float): Average verdict score (0-1)
+            truth_confidence_score (float): Confidence in verdict (0-1)
+
+        Returns:
+            float: Final verdict (0-1)
+        """
+        HIGH_THRESHOLD = 0.66
+        LOW_THRESHOLD = 0.33
+        MID_POINT = 0.5
+
+        # Low confidence → pull to middle
+        if truth_confidence_score < LOW_THRESHOLD:
+            return MID_POINT
+
+        # Distance from middle determines if we're at extremes or in middle
+        ov_distance_from_middle = abs(overall_verdict - MID_POINT)
+
+        # At extremes (>0.17 from middle)
+        if ov_distance_from_middle > 0.17:
+            # High TCS at extremes: average both
+            if truth_confidence_score > HIGH_THRESHOLD:
+                ov_weight = 0.5
+            # Mid TCS at extremes: lean toward OV
+            else:
+                ov_weight = 0.7
+        # In middle range: always average
+        else:
+            ov_weight = 0.5
+
+        return (overall_verdict * ov_weight) + (
+            truth_confidence_score * (1 - ov_weight)
         )
