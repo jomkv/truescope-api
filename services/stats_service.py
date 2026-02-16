@@ -4,26 +4,28 @@ from constants.weights import SOURCE_BIAS_SPECTRUM_MAP
 class StatsService:
     """
     Service for calculating core verification metrics:
-    1. Bias Consistency - Overall consistency of bias patterns with verdicts
-    2. Overall Verdict - Average truth confidence score
-    3. Bias Divergence - Ideological spread across sources
-    4. Truth Confidence Score - Confidence level in the verdict
+    1. Final Verdict - Combined score (overall_verdict + truth_confidence_score) / 2
+    2. Overall Verdict - Average truth score across articles
+    3. Truth Confidence Score - Confidence level in the verdict
+    4. Bias Divergence - Ideological spread across sources
+    5. Bias Consistency - Overall consistency of bias patterns with verdicts
     """
 
     @staticmethod
     def calculate_stats(results: list[dict]) -> dict:
         """
-        Calculate 4 core metrics for verification results.
+        Calculate core verification metrics.
 
         Args:
             results (list[dict]): List of article result dictionaries
 
         Returns:
-            dict: Contains overall_verdict, bias_divergence, truth_confidence_score,
-                  and bias_consistency
+            dict: Contains final_verdict (0-1 decimal), overall_verdict, truth_confidence_score,
+                  bias_divergence, and bias_consistency
         """
         if not results:
             return {
+                "final_verdict": 0,
                 "overall_verdict": 0,
                 "bias_divergence": 0,
                 "truth_confidence_score": 0,
@@ -48,7 +50,11 @@ class StatsService:
         # 4. Calculate Bias Consistency
         bias_consistency = StatsService.calculate_bias_consistency(results)
 
+        # 5. Calculate Final Verdict (combination of overall_verdict and truth_confidence_score)
+        final_verdict = (overall_verdict + truth_confidence_score) / 2
+
         return {
+            "final_verdict": round(final_verdict, 4),
             "overall_verdict": round(overall_verdict, 4),
             "bias_divergence": round(bias_divergence, 4),
             "truth_confidence_score": round(truth_confidence_score, 4),
