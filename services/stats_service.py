@@ -4,7 +4,7 @@ from constants.weights import SOURCE_BIAS_SPECTRUM_MAP
 class StatsService:
     """
     Service for calculating core verification metrics:
-    1. Final Verdict - Combined score (overall_verdict + truth_confidence_score) / 2
+    1. Final Verdict - Overall verdict adjusted by confidence
     2. Overall Verdict - Average truth score across articles
     3. Truth Confidence Score - Confidence level in the verdict
     4. Bias Divergence - Ideological spread across sources
@@ -20,8 +20,8 @@ class StatsService:
             results (list[dict]): List of article result dictionaries
 
         Returns:
-            dict: Contains final_verdict (0-1 decimal), overall_verdict, truth_confidence_score,
-                  bias_divergence, and bias_consistency
+            dict: Contains final_verdict, overall_verdict, truth_confidence_score,
+                  bias_divergence, and bias_consistency on a -1 to 1 scale
         """
         if not results:
             return {
@@ -69,8 +69,8 @@ class StatsService:
         """
         Calculate how ideologically diverse/divergent the sources are.
 
-        Returns 0-1 where:
-        - 0 = sources clustered at one ideology (high consensus)
+        Returns -1 to 1 where:
+        - -1 = sources clustered at one ideology (high consensus)
         - 1 = sources spread across spectrum (high divergence)
         """
         biases = [r.get("source_bias") for r in results if r.get("source_bias")]
@@ -96,7 +96,7 @@ class StatsService:
         max_std_dev = 2.0
         bias_divergence = min(std_dev / max_std_dev, 1.0)
 
-        return bias_divergence
+        return (bias_divergence * 2) - 1
 
     @staticmethod
     def calculate_truth_confidence(results: list[dict]) -> float:
@@ -108,7 +108,7 @@ class StatsService:
         - NLI confidence scores
         - Number of supporting sources
 
-        Returns 0-1 where 1 is maximum confidence
+        Returns -1 to 1 where 1 is maximum confidence
         """
         if not results:
             return 0.0
@@ -125,9 +125,7 @@ class StatsService:
         verdict_variance = sum((v - mean_verdict) ** 2 for v in verdicts) / len(
             verdicts
         )
-        verdict_consistency = 1 - (
-            verdict_variance / 0.25
-        )  # Max variance is 0.25 for 0-1 scale
+        verdict_consistency = 1 - (verdict_variance / 1.0)  # Max variance is 1.0
         verdict_consistency = max(0, min(verdict_consistency, 1))  # Clamp to 0-1
 
         # NLI confidence
@@ -144,18 +142,19 @@ class StatsService:
         # Combined confidence (50% verdict consistency, 50% NLI confidence)
         truth_confidence = (verdict_consistency * 0.5) + (nli_confidence * 0.5)
 
-        return truth_confidence
+        # Map from 0..1 to -1..1 for external consistency
+        return (truth_confidence * 2) - 1
 
     @staticmethod
     def calculate_bias_consistency(results: list[dict]) -> float:
         """
         Calculate overall bias consistency - how well bias patterns align with verdicts.
 
-        Computes a score 0-1 based on how consistently biased sources produce aligned verdicts.
+        Computes a score on a -1 to 1 scale based on how consistently biased sources produce aligned verdicts.
         A high score means biased sources reliably produce verdicts consistent with their bias.
 
-        Returns 0-1 where:
-        - 0 = No consistency between bias and verdict
+        Returns -1 to 1 where:
+        - -1 = No consistency between bias and verdict
         - 1 = Perfect consistency between bias and verdict
         """
         if not results:
@@ -179,61 +178,64 @@ class StatsService:
             # Normalize bias_value to 0-1 range and compare with verdict
             bias_normalized = (bias_value + 2) / 4  # Convert -2 to 2 into 0 to 1
 
+            # Normalize verdict from -1..1 to 0..1 for alignment comparison
+            verdict_normalized = (verdict + 1) / 2
+
             # Consistency = 1 - |difference| between bias direction and verdict
-            alignment = 1 - abs(bias_normalized - verdict)
+            alignment = 1 - abs(bias_normalized - verdict_normalized)
             consistency_scores.append(alignment)
 
         # Return average consistency
-        return (
+        consistency = (
             sum(consistency_scores) / len(consistency_scores)
             if consistency_scores
             else 0.0
         )
+        return (consistency * 2) - 1
 
     @staticmethod
     def calculate_final_verdict(
         overall_verdict: float, truth_confidence_score: float
     ) -> float:
         """
-        Calculate final verdict (0-1) using simplified formula.
+                Calculate final verdict (-1 to 1) using simplified formula.
 
         Logic:
-        - If TCS is low (<0.33): Return middle ground (0.5) - unclear case
-        - If OV is at extremes (distance from 0.5 > 0.17):
-          - High TCS (>0.66): Average both (50/50) - confident verdict
-          - Mid TCS (0.33-0.66): Lean toward OV (70/30) - moderate confidence
-        - If OV is in middle (0.33-0.66): Average both - always (50/50)
+                - If TCS is low (<0.33): Return neutral (0.0) - unclear case
+                - If OV is at extremes (abs(OV) > 0.33):
+                    - High TCS (>0.66): Trust OV fully
+                    - Mid TCS (0.33-0.66): Lean toward OV (scale down)
+                - If OV is in middle (abs(OV) <= 0.33): Pull toward neutral
 
         Args:
-            overall_verdict (float): Average verdict score (0-1)
-            truth_confidence_score (float): Confidence in verdict (0-1)
+            overall_verdict (float): Average verdict score (-1 to 1)
+            truth_confidence_score (float): Confidence in verdict (-1 to 1)
 
         Returns:
-            float: Final verdict (0-1)
+            float: Final verdict (-1 to 1)
         """
         HIGH_THRESHOLD = 0.66
         LOW_THRESHOLD = 0.33
-        MID_POINT = 0.5
+        MID_POINT = 0.0
+        OV_EXTREME_THRESHOLD = 0.33
 
-        # Low confidence → pull to middle
-        if truth_confidence_score < LOW_THRESHOLD:
+        # Map signed confidence (-1..1) to unsigned (0..1) for thresholding
+        truth_confidence_unsigned = (truth_confidence_score + 1) / 2
+
+        # Low confidence → pull to neutral
+        if truth_confidence_unsigned < LOW_THRESHOLD:
             return MID_POINT
 
-        # Distance from middle determines if we're at extremes or in middle
-        ov_distance_from_middle = abs(overall_verdict - MID_POINT)
+        # Distance from neutral determines if we're at extremes or in middle
+        ov_distance_from_middle = abs(overall_verdict)
 
-        # At extremes (>0.17 from middle)
-        if ov_distance_from_middle > 0.17:
-            # High TCS at extremes: average both
-            if truth_confidence_score > HIGH_THRESHOLD:
-                ov_weight = 0.5
+        # At extremes (>0.33 from neutral)
+        if ov_distance_from_middle > OV_EXTREME_THRESHOLD:
+            # High TCS at extremes: trust OV fully
+            if truth_confidence_unsigned > HIGH_THRESHOLD:
+                return overall_verdict
             # Mid TCS at extremes: lean toward OV
-            else:
-                ov_weight = 0.7
-        # In middle range: always average
-        else:
-            ov_weight = 0.5
+            return overall_verdict * 0.7
 
-        return (overall_verdict * ov_weight) + (
-            truth_confidence_score * (1 - ov_weight)
-        )
+        # In middle range: pull toward neutral
+        return overall_verdict * 0.5
