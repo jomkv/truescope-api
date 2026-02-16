@@ -779,7 +779,6 @@ class VerifyController:
                     "type": "result",
                     "index": len(accumulated_results) - 1,
                     "data": article_data,
-                    "stats": stats,
                 }
 
             elif item["type"] == "complete":

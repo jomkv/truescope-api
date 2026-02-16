@@ -47,7 +47,7 @@ async def websocket_verify_endpoint(websocket: WebSocket):
 
     Server sends:
     1. {"entities": [...], "timeframe": null, "results": []} (initial metadata)
-    2. {"type": "result", "index": 0, "data": {...}, "stats": {...}} (each article with live stats)
+    2. {"type": "result", "data": {...}} (each article)
     3. {"type": "complete", "total_results": ..., "stats": {...}} (final stats)
     """
     await websocket.accept()
@@ -76,7 +76,14 @@ async def websocket_verify_endpoint(websocket: WebSocket):
             async for message in controller.verify_claim_stream_with_stats(
                 session, claim
             ):
-                await websocket.send_json(message)
+                # Remove stats from individual results, keep only for completion
+                if message["type"] == "result":
+                    await websocket.send_json(
+                        {"type": "result", "data": message["data"]}
+                    )
+                else:
+                    # Send complete message with final stats
+                    await websocket.send_json(message)
 
     except WebSocketDisconnect:
         print("Client disconnected from verify WebSocket")
