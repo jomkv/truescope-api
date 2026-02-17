@@ -672,14 +672,13 @@ class VerifyController:
 
         return ArticleResultModel(**result)
 
-    async def verify_claim_stream(self, session: Session, user_claim: str):
+    async def verify_claim_stream(self, user_claim: str):
         """
         Async generator that streams verification results as they complete processing.
 
         This is used by the WebSocket endpoint to stream articles one by one.
 
         Args:
-            session (Session): Database session
             user_claim (str): The claim to verify
 
         Yields:
@@ -700,38 +699,45 @@ class VerifyController:
         factcheck_results = self.find_claims_with_articles(claim_embedding)
         news_results = self.find_news_articles(claim_embedding)
 
+        # Track processed doc_ids to avoid duplicates
+        processed_doc_ids: set[str] = set()
+
         # Create processing tasks
         tasks = []
 
         # Add FC results
         for claim, article, similarity_score, chunk_texts in factcheck_results:
-            task = self.process_result_async(
-                user_claim_norm=user_claim_norm,
-                claim_entities=claim_entities,
-                similarity_score=similarity_score,
-                article=article,
-                claim_text=claim.claim_text,
-                claim_verdict=claim.verdict,
-                source_bias=article.source_bias,
-                is_factcheck=True,
-                chunk_texts=chunk_texts,
-            )
-            tasks.append(task)
+            if article.doc_id not in processed_doc_ids:
+                processed_doc_ids.add(article.doc_id)
+                task = self.process_result_async(
+                    user_claim_norm=user_claim_norm,
+                    claim_entities=claim_entities,
+                    similarity_score=similarity_score,
+                    article=article,
+                    claim_text=claim.claim_text,
+                    claim_verdict=claim.verdict,
+                    source_bias=article.source_bias,
+                    is_factcheck=True,
+                    chunk_texts=chunk_texts,
+                )
+                tasks.append(task)
 
         # Add news results
         for article, similarity_score, chunk_texts in news_results:
-            task = self.process_result_async(
-                user_claim_norm=user_claim_norm,
-                claim_entities=claim_entities,
-                similarity_score=similarity_score,
-                article=article,
-                claim_text=None,
-                claim_verdict=None,
-                source_bias=article.source_bias,
-                is_factcheck=False,
-                chunk_texts=chunk_texts,
-            )
-            tasks.append(task)
+            if article.doc_id not in processed_doc_ids:
+                processed_doc_ids.add(article.doc_id)
+                task = self.process_result_async(
+                    user_claim_norm=user_claim_norm,
+                    claim_entities=claim_entities,
+                    similarity_score=similarity_score,
+                    article=article,
+                    claim_text=None,
+                    claim_verdict=None,
+                    source_bias=article.source_bias,
+                    is_factcheck=False,
+                    chunk_texts=chunk_texts,
+                )
+                tasks.append(task)
 
         # Yield results as they complete
         for coro in asyncio.as_completed(tasks):
@@ -747,14 +753,13 @@ class VerifyController:
             "type": "complete",
         }
 
-    async def verify_claim_stream_with_stats(self, session: Session, user_claim: str):
+    async def verify_claim_stream_with_stats(self, user_claim: str):
         """
         Async generator that streams verification results with live statistics.
 
         This method accumulates results and calculates running stats for each article.
 
         Args:
-            session (Session): Database session
             user_claim (str): The claim to verify
 
         Yields:
@@ -765,7 +770,7 @@ class VerifyController:
         accumulated_results = []
 
         # Stream results from base method
-        async for item in self.verify_claim_stream(session, user_claim):
+        async for item in self.verify_claim_stream(user_claim):
             if item["type"] == "result":
                 # Accumulate article data
                 article_data = item["data"]

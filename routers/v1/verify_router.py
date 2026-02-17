@@ -72,18 +72,12 @@ async def websocket_verify_endpoint(websocket: WebSocket):
         )
 
         # Stream results with stats from controller
-        with Session() as session:
-            async for message in controller.verify_claim_stream_with_stats(
-                session, claim
-            ):
-                # Remove stats from individual results, keep only for completion
-                if message["type"] == "result":
-                    await websocket.send_json(
-                        {"type": "result", "data": message["data"]}
-                    )
-                else:
-                    # Send complete message with final stats
-                    await websocket.send_json(message)
+        async for message in controller.verify_claim_stream_with_stats(claim):
+            if message["type"] == "result":
+                await websocket.send_json({"type": "result", "data": message["data"]})
+            else:
+                # Send complete message with final stats
+                await websocket.send_json(message)
 
     except WebSocketDisconnect:
         print("Client disconnected from verify WebSocket")
