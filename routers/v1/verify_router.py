@@ -2,8 +2,6 @@ from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from controllers.v1.verify_controller import VerifyController
 from models.verify_claim_model import VerifyClaimModel
 from models.verify_result_model import VerifyResultModel
-from core.db import Session
-import json
 
 
 router = APIRouter()
