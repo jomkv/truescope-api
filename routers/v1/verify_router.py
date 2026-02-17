@@ -85,4 +85,7 @@ async def websocket_verify_endpoint(websocket: WebSocket):
         except Exception:
             pass
     finally:
-        await websocket.close()
+        try:
+            await websocket.close()
+        except RuntimeError:
+            pass
