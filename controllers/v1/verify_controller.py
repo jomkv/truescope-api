@@ -7,7 +7,7 @@ from constants.weights import (
     SOURCE_BIAS_WEIGHT_MAP,
     NLI_LABEL_WEIGHT_MAP,
 )
-from constants.enums import Verdict, NLILabel, SourceBias
+from constants.enums import Verdict, NLILabel, SourceBias, StreamEventType
 from dateparser.search import search_dates
 from services import (
     EmbeddingService,
@@ -16,7 +16,6 @@ from services import (
     RemarksGenerationService,
     StatsService,
 )
-from sqlalchemy.orm import Session
 import unicodedata
 import re
 from datetime import datetime
@@ -744,13 +743,13 @@ class VerifyController:
             result: ArticleResultModel = await coro
 
             yield {
-                "type": "result",
+                "type": StreamEventType.RESULT,
                 "data": result.model_dump(),
             }
 
         # Yield completion message
         yield {
-            "type": "complete",
+            "type": StreamEventType.COMPLETE,
         }
 
     async def verify_claim_stream_with_stats(self, user_claim: str):
@@ -771,7 +770,7 @@ class VerifyController:
 
         # Stream results from base method
         async for item in self.verify_claim_stream(user_claim):
-            if item["type"] == "result":
+            if item["type"] == StreamEventType.RESULT:
                 # Accumulate article data
                 article_data = item["data"]
                 accumulated_results.append(article_data)
@@ -781,18 +780,18 @@ class VerifyController:
 
                 # Yield article with stats
                 yield {
-                    "type": "result",
+                    "type": StreamEventType.RESULT,
                     "index": len(accumulated_results) - 1,
                     "data": article_data,
                 }
 
-            elif item["type"] == "complete":
+            elif item["type"] == StreamEventType.COMPLETE:
                 # Calculate final stats using Stats Service
                 final_stats = self.stats_service.calculate_stats(accumulated_results)
 
                 # Yield completion with final stats
                 yield {
-                    "type": "complete",
+                    "type": StreamEventType.COMPLETE,
                     "total_results": len(accumulated_results),
                     "stats": final_stats,
                 }
