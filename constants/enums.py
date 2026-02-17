@@ -28,3 +28,8 @@ class NLILabel(str, Enum):
     SUPPORT = "support"
     NEUTRAL = "neutral"
     REFUTE = "refute"
+
+
+class StreamEventType(str, Enum):
+    RESULT = "result"
+    COMPLETE = "complete"
