@@ -520,9 +520,7 @@ class VerifyController:
             )
         )
 
-        # Convert to dicts for stats service
-        results_as_dicts = [r.model_dump() for r in filtered_results]
-        stats = self.stats_service.calculate_stats(results_as_dicts)
+        stats = self.stats_service.calculate_stats(filtered_results)
 
         return {
             "skipped": skipped,
@@ -603,7 +601,7 @@ class VerifyController:
             "skip_reason": [],
             "source_type": "fact_check" if is_factcheck else "news_article",
             "source_bias": source_bias,
-            "remarks": None,
+            "chunk_texts": chunk_texts,
         }
 
         if (
@@ -643,20 +641,6 @@ class VerifyController:
                 similarity_score=similarity_score,
             )
             result["verdict"] = verdict_score
-
-            # Generate remarks after verdict computation
-            # Pass full article content as input_text for better BART summarization
-            full_content = chunk_texts or article.content
-
-            # Run remarks generation in thread pool
-            result["remarks"] = await loop.run_in_executor(
-                self.executor,
-                self.remarks_generation_service.generate_remarks,
-                full_content,
-                verdict_score,
-                nli_label,
-                not is_factcheck,
-            )
         else:
             if similarity_score < self.RELEVANCE_THRESHOLD:
                 result["skip_reason"].append(
@@ -671,22 +655,14 @@ class VerifyController:
 
         return ArticleResultModel(**result)
 
-    async def verify_claim_stream(self, user_claim: str):
+    async def verify_claim_stream_with_stats(self, user_claim: str):
         """
-        Async generator that streams verification results as they complete processing.
-
-        This is used by the WebSocket endpoint to stream articles one by one.
-
-        Args:
-            user_claim (str): The claim to verify
-
-        Yields:
-            dict: Result items with type and data
+        Streams search hits, then result items (filtered/skipped), then remarks updates.
         """
         user_claim_norm = self.normalize_text(user_claim)
         loop = asyncio.get_event_loop()
 
-        # Run embedding and entity extraction in thread pool
+        # Embedding & entity extraction
         claim_embedding = await loop.run_in_executor(
             self.executor, self.embedding_service.embed_text, user_claim_norm
         )
@@ -694,104 +670,123 @@ class VerifyController:
             self.executor, self.extract_entities, user_claim_norm
         )
 
-        # Search for both FC and news articles
+        # 1. Stream search hits
         factcheck_results = self.find_claims_with_articles(claim_embedding)
         news_results = self.find_news_articles(claim_embedding)
 
-        # Track processed doc_ids to avoid duplicates
-        processed_doc_ids: set[str] = set()
+        search_hits = []
+        for claim, article, _, chunk_texts in factcheck_results:
+            search_hits.append(
+                {
+                    "doc_id": article.doc_id,
+                    "title": article.title,
+                    "url": article.url,
+                    "publish_date": article.publish_date.strftime("%Y-%m-%d %H:%M:%S"),
+                    "source": article.source,
+                    "source_type": "fact_check",
+                }
+            )
+        for article, _, chunk_texts in news_results:
+            search_hits.append(
+                {
+                    "doc_id": article.doc_id,
+                    "title": article.title,
+                    "url": article.url,
+                    "publish_date": article.publish_date.strftime("%Y-%m-%d %H:%M:%S"),
+                    "source": article.source,
+                    "source_type": "news_article",
+                }
+            )
+        yield {
+            "type": StreamEventType.SEARCH_HITS,
+            "hits": search_hits,
+        }
 
-        # Create processing tasks
+        # 2. Stream results (filtered/skipped, remarks pending)
+        processed_doc_ids = set()
         tasks = []
 
-        # Add FC results
         for claim, article, similarity_score, chunk_texts in factcheck_results:
             if article.doc_id not in processed_doc_ids:
                 processed_doc_ids.add(article.doc_id)
-                task = self.process_result_async(
-                    user_claim_norm=user_claim_norm,
-                    claim_entities=claim_entities,
-                    similarity_score=similarity_score,
-                    article=article,
-                    claim_text=claim.claim_text,
-                    claim_verdict=claim.verdict,
-                    source_bias=article.source_bias,
-                    is_factcheck=True,
-                    chunk_texts=chunk_texts,
+                tasks.append(
+                    self.process_result_async(
+                        user_claim_norm=user_claim_norm,
+                        claim_entities=claim_entities,
+                        similarity_score=similarity_score,
+                        article=article,
+                        claim_text=claim.claim_text,
+                        claim_verdict=claim.verdict,
+                        source_bias=article.source_bias,
+                        is_factcheck=True,
+                        chunk_texts=chunk_texts,
+                    )
                 )
-                tasks.append(task)
 
-        # Add news results
         for article, similarity_score, chunk_texts in news_results:
             if article.doc_id not in processed_doc_ids:
                 processed_doc_ids.add(article.doc_id)
-                task = self.process_result_async(
-                    user_claim_norm=user_claim_norm,
-                    claim_entities=claim_entities,
-                    similarity_score=similarity_score,
-                    article=article,
-                    claim_text=None,
-                    claim_verdict=None,
-                    source_bias=article.source_bias,
-                    is_factcheck=False,
-                    chunk_texts=chunk_texts,
+                tasks.append(
+                    self.process_result_async(
+                        user_claim_norm=user_claim_norm,
+                        claim_entities=claim_entities,
+                        similarity_score=similarity_score,
+                        article=article,
+                        claim_text=None,
+                        claim_verdict=None,
+                        source_bias=article.source_bias,
+                        is_factcheck=False,
+                        chunk_texts=chunk_texts,
+                    )
                 )
-                tasks.append(task)
 
-        # Yield results as they complete
+        results: list[ArticleResultModel] = []
+        remarks_tasks: list[tuple[str, ArticleResultModel]] = []
+
         for coro in asyncio.as_completed(tasks):
             result: ArticleResultModel = await coro
-
+            # If not skipped, remarks will be generated later
+            if not result.skip_reason:
+                remarks_tasks.append((result.doc_id, result))
             yield {
                 "type": StreamEventType.RESULT,
                 "data": result.model_dump(),
+                "skipped": bool(result.skip_reason),
+            }
+            results.append(result)
+
+        # 3. Stream final stats
+        final_stats = self.stats_service.calculate_stats(results)
+        yield {
+            "type": StreamEventType.STATS,
+            "total_results": len(results),
+            "stats": final_stats,
+        }
+
+        # 4. Catch-up: Generate remarks and stream updates
+        for doc_id, result in remarks_tasks:
+            nli_label = (
+                result.nli_result.relationship
+                if result.nli_result
+                else NLILabel.NEUTRAL
+            )
+            verdict = result.verdict if result.verdict is not None else 0.0
+
+            remarks = await loop.run_in_executor(
+                self.executor,
+                self.remarks_generation_service.generate_remarks,
+                result.chunk_texts or result.content,
+                verdict,
+                nli_label,
+                not (result.source_type == "fact_check"),
+            )
+
+            yield {
+                "type": StreamEventType.REMARKS,
+                "doc_id": doc_id,
+                "remarks": remarks,
             }
 
-        # Yield completion message
         yield {
             "type": StreamEventType.COMPLETE,
         }
-
-    async def verify_claim_stream_with_stats(self, user_claim: str):
-        """
-        Async generator that streams verification results with live statistics.
-
-        This method accumulates results and calculates running stats for each article.
-
-        Args:
-            user_claim (str): The claim to verify
-
-        Yields:
-            dict: Result items with type, data, index, and stats
-        """
-
-        # Accumulate results to calculate stats or for further use
-        accumulated_results = []
-
-        # Stream results from base method
-        async for item in self.verify_claim_stream(user_claim):
-            if item["type"] == StreamEventType.RESULT:
-                # Accumulate article data
-                article_data = item["data"]
-                accumulated_results.append(article_data)
-
-                # Calculate running stats using Stats Service
-                stats = self.stats_service.calculate_stats(accumulated_results)
-
-                # Yield article with stats
-                yield {
-                    "type": StreamEventType.RESULT,
-                    "index": len(accumulated_results) - 1,
-                    "data": article_data,
-                }
-
-            elif item["type"] == StreamEventType.COMPLETE:
-                # Calculate final stats using Stats Service
-                final_stats = self.stats_service.calculate_stats(accumulated_results)
-
-                # Yield completion with final stats
-                yield {
-                    "type": StreamEventType.COMPLETE,
-                    "total_results": len(accumulated_results),
-                    "stats": final_stats,
-                }
