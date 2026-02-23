@@ -315,8 +315,6 @@ class VerifyController:
                 if token not in ENTITY_GENERIC_TOKENS and len(token) >= 3
             ]
 
-            # Generic-only entities like "super typhoon" should have lower influence
-            # than specific names like "uwan" to reduce noisy matches.
             entity_weight = (
                 0.25 if entity_tokens_all and not specific_entity_tokens else 1.0
             )
