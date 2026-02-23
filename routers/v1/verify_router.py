@@ -1,8 +1,8 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from controllers.v1.verify_controller import VerifyController
+from constants.enums import StreamEventType
 from models.verify_claim_model import VerifyClaimModel
 from models.verify_result_model import VerifyResultModel
-
 
 router = APIRouter()
 controller = VerifyController()
@@ -56,32 +56,29 @@ async def websocket_verify_endpoint(websocket: WebSocket):
         claim = data.get("claim")
 
         if not claim:
-            await websocket.send_json({"type": "error", "message": "No claim provided"})
+            await websocket.send_json(
+                {"type": StreamEventType.ERROR, "message": "No claim provided"}
+            )
             await websocket.close()
             return
 
         # Extract metadata
         entities = controller.extract_entities(claim)
-        timeframe = controller.extract_claim_timeframe(claim)
 
         # Send initial response
-        await websocket.send_json(
-            {"entities": entities, "timeframe": timeframe, "results": []}
-        )
+        await websocket.send_json({"entities": entities, "results": []})
 
-        # Stream results with stats from controller
+        # Stream results from controller
         async for message in controller.verify_claim_stream_with_stats(claim):
-            if message["type"] == "result":
-                await websocket.send_json({"type": "result", "data": message["data"]})
-            else:
-                # Send complete message with final stats
-                await websocket.send_json(message)
+            await websocket.send_json(message)
 
     except WebSocketDisconnect:
         print("Client disconnected from verify WebSocket")
     except Exception as e:
         try:
-            await websocket.send_json({"type": "error", "message": str(e)})
+            await websocket.send_json(
+                {"type": StreamEventType.ERROR, "message": str(e)}
+            )
         except Exception:
             pass
     finally:

@@ -1,4 +1,5 @@
 from constants.weights import SOURCE_BIAS_SPECTRUM_MAP
+from models.article_result_model import ArticleResultModel
 
 
 class StatsService:
@@ -12,7 +13,7 @@ class StatsService:
     """
 
     @staticmethod
-    def calculate_stats(results: list[dict]) -> dict:
+    def calculate_stats(results: list[ArticleResultModel]) -> dict:
         """
         Calculate core verification metrics.
 
@@ -33,12 +34,8 @@ class StatsService:
             }
 
         # 1. Calculate Overall Verdict
-        results_with_verdict = [r for r in results if r.get("verdict") is not None]
-        overall_verdict = (
-            sum(r["verdict"] for r in results_with_verdict) / len(results_with_verdict)
-            if results_with_verdict
-            else 0
-        )
+        verdicts = [r.verdict for r in results if r.verdict is not None]
+        overall_verdict = sum(verdicts) / len(verdicts) if verdicts else 0
 
         # 2. Calculate Bias Divergence
         bias_divergence = StatsService.calculate_bias_divergence(results)
@@ -65,7 +62,7 @@ class StatsService:
         }
 
     @staticmethod
-    def calculate_bias_divergence(results: list[dict]) -> float:
+    def calculate_bias_divergence(results: list[ArticleResultModel]) -> float:
         """
         Calculate how ideologically diverse/divergent the sources are.
 
@@ -73,7 +70,7 @@ class StatsService:
         - -1 = sources clustered at one ideology (high consensus)
         - 1 = sources spread across spectrum (high divergence)
         """
-        biases = [r.get("source_bias") for r in results if r.get("source_bias")]
+        biases = [r.source_bias for r in results if r.source_bias]
 
         if not biases:
             return 0.0
@@ -99,7 +96,7 @@ class StatsService:
         return (bias_divergence * 2) - 1
 
     @staticmethod
-    def calculate_truth_confidence(results: list[dict]) -> float:
+    def calculate_truth_confidence(results: list[ArticleResultModel]) -> float:
         """
         Calculate confidence in the truth verdict.
 
@@ -113,14 +110,13 @@ class StatsService:
         if not results:
             return 0.0
 
-        results_with_verdict = [r for r in results if r.get("verdict") is not None]
-        results_with_nli = [r for r in results if r.get("nli_result") is not None]
+        # Verdict consistency (low variance = high confidence)
+        results_with_nli = [r for r in results if r.nli_result is not None]
+        verdicts = [r.verdict for r in results if r.verdict is not None]
 
-        if not results_with_verdict:
+        if not verdicts:
             return 0.0
 
-        # Verdict consistency (low variance = high confidence)
-        verdicts = [r["verdict"] for r in results_with_verdict]
         mean_verdict = sum(verdicts) / len(verdicts)
         verdict_variance = sum((v - mean_verdict) ** 2 for v in verdicts) / len(
             verdicts
@@ -132,10 +128,9 @@ class StatsService:
         nli_confidence = 0
         if results_with_nli:
             nli_scores = [
-                r["nli_result"]["relationship_confidence"]
+                r.nli_result.relationship_confidence
                 for r in results_with_nli
-                if r.get("nli_result")
-                and r["nli_result"].get("relationship_confidence") is not None
+                if r.nli_result and r.nli_result.relationship_confidence is not None
             ]
             nli_confidence = sum(nli_scores) / len(nli_scores) if nli_scores else 0
 
@@ -146,7 +141,7 @@ class StatsService:
         return (truth_confidence * 2) - 1
 
     @staticmethod
-    def calculate_bias_consistency(results: list[dict]) -> float:
+    def calculate_bias_consistency(results: list[ArticleResultModel]) -> float:
         """
         Calculate overall bias consistency - how well bias patterns align with verdicts.
 
@@ -163,8 +158,8 @@ class StatsService:
         consistency_scores = []
 
         for result in results:
-            bias = result.get("source_bias")
-            verdict = result.get("verdict")
+            bias = result.source_bias
+            verdict = result.verdict
 
             # Skip if missing bias or verdict
             if not bias or verdict is None:

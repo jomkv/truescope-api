@@ -31,5 +31,9 @@ class NLILabel(str, Enum):
 
 
 class StreamEventType(str, Enum):
+    SEARCH_HITS = "search_hits"
     RESULT = "result"
+    STATS = "stats"
+    REMARKS = "remarks"
     COMPLETE = "complete"
+    ERROR = "error"
