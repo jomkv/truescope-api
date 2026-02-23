@@ -179,5 +179,3 @@ class StatsService:
             else 0.0
         )
         return (consistency * 2) - 1
-
-    # Removed calculate_final_verdict (final verdict logic no longer used)

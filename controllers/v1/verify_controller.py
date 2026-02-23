@@ -56,7 +56,7 @@ class VerifyController:
         self.MAX_DEEP_ANALYSIS = 5
 
     @staticmethod
-    def normalize_text(text: str, lowercase: bool = True) -> str:
+    def normalize_text(text: str) -> str:
         """
         Normalize input text for consistent downstream processing.
 
@@ -78,9 +78,8 @@ class VerifyController:
         # Unicode normalization
         text = unicodedata.normalize("NFKC", text)
 
-        if lowercase:
-            # Lowercase
-            text = text.lower()
+        # Lowercase
+        text = text.lower()
 
         # Remove extra whitespace
         text = re.sub(r"\s+", " ", text)
@@ -299,22 +298,28 @@ class VerifyController:
         matches = 0.0
         total_weight = 0.0
 
+        # Tokenize the normalized article content and title into sets of words
         text_tokens = set(re.findall(r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", text_norm))
         title_tokens = set(
             re.findall(r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", article_title_norm)
         )
+        # Combine tokens from both content and title for comparison
         comparison_tokens = text_tokens.union(title_tokens)
 
         for entity in claim_entities:
+            # Normalize the entity string
             entity_lower = self.normalize_text(entity)
+            # Tokenize the entity into words
             entity_tokens_all = re.findall(r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", entity_lower)
 
+            # Identify specific (non-generic) tokens in the entity
             specific_entity_tokens = [
                 token
                 for token in entity_tokens_all
                 if token not in ENTITY_GENERIC_TOKENS and len(token) >= 3
             ]
 
+            # Assign lower weight to generic-only entities, full weight to those with specifics
             entity_weight = (
                 0.25 if entity_tokens_all and not specific_entity_tokens else 1.0
             )
@@ -508,9 +513,6 @@ class VerifyController:
             elif nli_label == NLILabel.REFUTE:
                 base_score = -0.75
             else:
-
-                # Generalized scoring: boost based on semantic similarity and entity match
-                # No disaster/typhoon keyword bias
                 # Use entity match as a proxy for context relevance
                 entity_match = 0.0
                 if article_content and article_content.strip():
