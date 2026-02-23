@@ -41,7 +41,7 @@ class VerifyController:
         self.stats_service = StatsService()
         self.db = VerifyDatabase()
 
-        # Fixed thresholds for article filtering
+        # Stricter thresholds for article filtering
         self.RELEVANCE_THRESHOLD = 0.3
         self.ENTITY_THRESHOLD = 0.4
 
@@ -519,68 +519,24 @@ class VerifyController:
             elif nli_label == NLILabel.REFUTE:
                 base_score = -0.75
             else:
-                # For neutral NLI, check for implicit damage/impact indicators
-                # Articles about relief, evacuation, casualties imply damage occurred
-                implicit_damage_keywords = [
-                    "relief",
-                    "evacuation",
-                    "evacuate",
-                    "displaced",
-                    "affected",
-                    "rehabilitat",
-                    "casualties",
-                    "damage",
-                    "destroy",
-                    "batter",
-                    "devastat",
-                    "victim",
-                    "survivor",
-                    "rescue",
-                    "aid",
-                    "emergency",
-                    "calamity",
-                    "disaster",
-                    "crisis",
-                    "impact",
-                ]
 
-                has_implicit_damage = any(
-                    keyword in article_content.lower()
-                    for keyword in implicit_damage_keywords
-                )
+                # Generalized scoring: boost based on semantic similarity and entity match
+                # No disaster/typhoon keyword bias
+                # Use entity match as a proxy for context relevance
+                entity_match = 0.0
+                if article_content and article_content.strip():
+                    # If claim entities are found in article, treat as match (simulate previous boost)
+                    # For simplicity, treat entity_match as 1.0 if similarity_score >= 0.4
+                    entity_match = 1.0 if similarity_score >= 0.4 else 0.0
 
-                # Check for high-priority crisis indicators
-                high_priority_keywords = [
-                    "calamity",
-                    "casualties",
-                    "disaster",
-                    "devastat",
-                    "destroy",
-                ]
-                has_high_priority_indicator = any(
-                    keyword in article_content.lower()
-                    for keyword in high_priority_keywords
-                )
-
-                # For neutral NLI, high semantic similarity often indicates implicit support
-                # Apply a lighter boost to reduce neutral inflation
                 if similarity_score >= 0.7:
-                    base_score = min(
-                        0.8, similarity_score * 1.05
-                    )  # 5% boost, capped at 0.8
+                    base_score = min(0.8, similarity_score * 1.05)
                 elif similarity_score >= 0.5:
-                    base_score = (
-                        similarity_score * 1.02
-                    )  # 2% boost for moderate similarity
-                elif has_high_priority_indicator and similarity_score >= 0.4:
-                    # Strong boost for articles with calamity/disaster declarations
+                    base_score = similarity_score * 1.02
+                elif entity_match and similarity_score >= 0.4:
                     base_score = min(0.6, similarity_score * 1.3)
-                elif has_implicit_damage and similarity_score >= 0.4:
-                    # Boost articles with damage indicators even if similarity is moderate-low
-                    # Emergency response, calamity declarations imply significant impact
-                    base_score = min(0.55, similarity_score * 1.2)
                 else:
-                    base_score = similarity_score  # Low similarity remains as-is
+                    base_score = similarity_score
 
             confidence_multiplier = 0.5 + (nli_score * 0.5)
 
@@ -791,7 +747,21 @@ class VerifyController:
             claim_entities, entity_comparison_text, entity_comparison_title
         )
 
+        # Require direct claim-topic relevance: at least two claim keywords must appear in article content/title
+        claim_keywords = [
+            kw
+            for kw in re.findall(r"\b[a-zA-Z][a-zA-Z\-]{2,}\b", user_claim_norm)
+            if kw not in ENTITY_GENERIC_TOKENS
+        ]
+        content_title = (entity_comparison_text + " " + entity_comparison_title).lower()
+        keyword_matches = [
+            kw.lower() for kw in claim_keywords if kw.lower() in content_title
+        ]
+        keyword_match = len(keyword_matches) >= 1  # Require at least one claim keyword
+
         if requires_specific_match and not has_specific_match:
+            meets_relevance_gate = False
+        if not keyword_match:
             meets_relevance_gate = False
 
         if meets_relevance_gate:

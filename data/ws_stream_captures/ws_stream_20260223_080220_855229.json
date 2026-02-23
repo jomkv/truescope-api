@@ -1,0 +1,1696 @@
+[
+  {
+    "timestamp": "2026-02-23T08:02:20.869355+00:00",
+    "direction": "inbound",
+    "payload": {
+      "claim": "super typhoon uwan deals great damage in the philippines"
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:20.884951+00:00",
+    "direction": "outbound",
+    "payload": {
+      "entities": [
+        "super typhoon",
+        "uwan"
+      ],
+      "results": []
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.147218+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "search_hits",
+      "hits": [
+        {
+          "doc_id": "a5cab3a96c45d6a57db8a90d2e476527e61061a20d5f4517e6fb7c5b8bc280b6",
+          "title": "Clips DO NOT show super typhoon to hit PH",
+          "url": "https://verafiles.org/articles/fact-check-clips-do-not-show-super-typhoon-to-hit-ph",
+          "publish_date": "2024-09-17 15:54:25",
+          "source": "VERAFILES",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "717ef682a2134b89acee5d75b944c13f1bdf64598e7d850f3f6082a5b5f5a484",
+          "title": "‘Super Typhoon Lakas’ NOT real",
+          "url": "https://verafiles.org/articles/fact-check-super-typhoon-lakas-not-real",
+          "publish_date": "2024-07-19 17:46:49",
+          "source": "VERAFILES",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "60281a1c97af2b2e2bcbb2ac80a9e076807033323cc931d3414ac7618c2f7c97",
+          "title": "NO typhoon ‘bigger than PH’ coming in",
+          "url": "https://verafiles.org/articles/fact-check-no-typhoon-bigger-than-ph-coming-in",
+          "publish_date": "2024-09-12 08:44:00",
+          "source": "VERAFILES",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "24cf7f0a0da1fdd72d812c7550268c28bde08c94b7027f0815ff7b9bd6290848",
+          "title": "FACT CHECK: No super typhoon in PH until July 18",
+          "url": "https://www.rappler.com/newsbreak/fact-check/no-super-typhoon-philippines-july-18-2024/",
+          "publish_date": "2024-07-18 14:05:00",
+          "source": "RAPPLER",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "67dd5c4ac14a4db53a6d32f3d9b5c20b58bbe595c5c939714db6e97ac8ffe912",
+          "title": "Circulating graphic on ‘Super Typhoon Auring’ FAKE",
+          "url": "https://verafiles.org/articles/fact-check-circulating-graphic-on-super-typhoon-auring-fake",
+          "publish_date": "2025-06-09 23:43:56",
+          "source": "VERAFILES",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "a01c2a3a19a97ca79d6763084d54d9f5f53d8578ec75e4205a1c9e7bd9f6f236",
+          "title": "FALSE: Philippines in path of 2019’s ‘super typhoon’",
+          "url": "https://www.rappler.com/newsbreak/fact-check/229856-philippines-in-path-super-typhoon-2019/",
+          "publish_date": "2019-05-07 14:14:56",
+          "source": "RAPPLER",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "52c7da76bf7d93bcff2f685ee72e8cd0646eaab87510c71d632f473866232caa",
+          "title": "FACT CHECK: No reports of super typhoon forming in PH, as of July 26",
+          "url": "https://www.rappler.com/newsbreak/fact-check/no-report-super-typhoon-philippines-july-26-2024/",
+          "publish_date": "2024-07-26 13:58:44",
+          "source": "RAPPLER",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "521db5a32912eb260046230f081157ae57a95b4c4c56662e65afdd2eea464d5e",
+          "title": "FACT CHECK: No Super Typhoon Egay has entered PH Area of Responsibility",
+          "url": "https://www.rappler.com/newsbreak/fact-check/no-super-typhoon-egay-entered-philippine-area-of-responsibility-july-17-2023/",
+          "publish_date": "2023-07-17 14:30:46",
+          "source": "RAPPLER",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "b6329eb52efb82d22817371efbc627651bbfbd3f4379c31350878cbd5e8d6f45",
+          "title": "FACT CHECK: Tropical Depression Gener not a super typhoon as of September 16",
+          "url": "https://www.rappler.com/newsbreak/fact-check/tropical-depression-gener-not-super-typhoon-september-16-2024/",
+          "publish_date": "2024-09-16 21:59:30",
+          "source": "RAPPLER",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "9f0a5f3bb4d3e590eef234af5fc2a5e2b90ef2740314bbf399d09c9d3999d895",
+          "title": "Super Typhoon Nanmadol is not returning to the Philippines",
+          "url": "https://www.rappler.com/newsbreak/fact-check/super-typhoon-nanmadol-not-returning-philippines/",
+          "publish_date": "2022-09-19 18:00:00",
+          "source": "RAPPLER",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "de7b9a788c68baf4cd7ff61b37d978aa7513286feed7e10e1b6716590986c801",
+          "title": "HINDI TOTOO: May tatamang Super Typhoon Domeng sa Pilipinas nitong Mayo 2022",
+          "url": "https://www.rappler.com/newsbreak/fact-check/super-typhoon-domeng-philippine-area-responsibility-may-2022/",
+          "publish_date": "2022-06-01 10:20:00",
+          "source": "RAPPLER",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "cbbf10da109a11682467994994c4c6f2f0316dcad7ab94d33e82bab54be5a362",
+          "title": "FACT CHECK: No super typhoon making landfall in PH up until January 8",
+          "url": "https://www.rappler.com/newsbreak/fact-check/no-super-typhoon-making-landfall-philippines-up-until-january-8/",
+          "publish_date": "2024-01-08 12:36:04",
+          "source": "RAPPLER",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "96e271b4611ba290a9d0ff8965548c0527530813b46f3abf0683142566fa6064",
+          "title": "Imagen muestra \"potente terremoto … en medio de una tormenta solar\" en Filipinas.",
+          "url": "https://www.politifact.com/factchecks/2023/dec/05/facebook-posts/no-esta-imagen-no-muestra-terremoto-en-filipinas-e/",
+          "publish_date": "2023-12-05 08:00:00",
+          "source": "POLITIFACT",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "2345591fd13e8674f828bb512dfabc16d2aa266f72781a6b398c9fada694ac07",
+          "title": "NO Super Typhoon ‘Alakdan’ is threatening to hit the Philippines",
+          "url": "https://verafiles.org/articles/vera-files-fact-check-no-super-typhoon-alakdan-is-threatening-to-hit-the-philippines",
+          "publish_date": "2024-01-09 15:04:02",
+          "source": "VERAFILES",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "778304d354b51240a1a65291e96e9dde48c5f5e99913ec4bfc965b710265cfff",
+          "title": "FACT CHECK: Hindi super typhoon ang bagyong Kristine",
+          "url": "https://www.rappler.com/newsbreak/fact-check/tropical-cyclone-kristine-not-super-typhoon/",
+          "publish_date": "2024-10-23 14:34:32",
+          "source": "RAPPLER",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "eb71fb44afe5b44d9d8e630da2396abb668eabb7ab2a2a8c5fc50a125ef6cb8c",
+          "title": "FACT CHECK: Lumabas na ang bagyong Ineng noong Setyembre 6",
+          "url": "https://www.rappler.com/newsbreak/fact-check/tropical-depression-ineng-exits-philippines-september-6/",
+          "publish_date": "2023-09-12 14:55:00",
+          "source": "RAPPLER",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "95b05b2ed695686ab2243dbd745c5483e187ce837e43cbf73cf68330625819a3",
+          "title": "FACT CHECK: No Super Typhoon Dodong has entered PH Area of Responsibility",
+          "url": "https://www.rappler.com/newsbreak/fact-check/fact-check-no-super-typhoon-dodong-entered-philippine-area-of-responsibility-june-15-2023/",
+          "publish_date": "2023-06-15 17:37:44",
+          "source": "RAPPLER",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "5e03c528108c8d56b7260a8318cf64eac3ae97dd9bf25cf2467a2add62b2a5e1",
+          "title": "NO forecast on ‘powerful typhoon’ Dindo coming to PH this weekend",
+          "url": "https://verafiles.org/articles/fact-check-no-forecast-on-powerful-typhoon-dindo-coming-to-ph-this-weekend",
+          "publish_date": "2024-07-26 21:26:12",
+          "source": "VERAFILES",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "4099ed5c3b123fa423deabc2105815df9c544268931a95de7170828e8ddd46d7",
+          "title": "FACT CHECK: No super typhoons in PH Area of Responsibility so far in August",
+          "url": "https://www.rappler.com/newsbreak/fact-check/no-super-typhoons-philippine-area-of-responsibility-august-7-2023/",
+          "publish_date": "2023-08-08 08:00:00",
+          "source": "RAPPLER",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "175c81d7071011a0c950e604c694cf6fbc86d1fd850c00fab420c917ba71e4cc",
+          "title": "FALSE: Super Typhoon Ester arrives in the Philippines in June 2022",
+          "url": "https://www.rappler.com/newsbreak/fact-check/super-typhoon-ester-arrives-philippines-june-2022/",
+          "publish_date": "2022-06-29 20:22:07",
+          "source": "RAPPLER",
+          "source_type": "fact_check"
+        },
+        {
+          "doc_id": "47f832ecd70f15bcf9d3d85f9a9c8c7370cec06fac00aad4de23b85bc34bf8a1",
+          "title": "OCD: 'Exposed' PH population to Typhoon Uwan at 30.8 million",
+          "url": "https://www.gmanetwork.com/news/topstories/nation/965374/ocd-exposed-ph-population-to-typhoon-uwan-at-30-8-million/story/",
+          "publish_date": "2025-11-08 18:20:00",
+          "source": "GMANETWORK",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "f8895a95a294414ef0c99973e8fbf1292792b5ad43fd3fb7b4cb205e9ffa610a",
+          "title": "Uwan weakens into severe tropical storm outside PAR",
+          "url": "https://www.pna.gov.ph/articles/1263002",
+          "publish_date": "2025-11-11 11:34:00",
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "247ec6f3dca044ef4e922f0f7e3febb095cdb5ceadf62b144c3525a08b89a07c",
+          "title": "Uwan batters Luzon with storm surge, infra damage, power outages",
+          "url": "https://www.gmanetwork.com/news/topstories/nation/965527/uwan-batters-luzon-with-storm-surge-infra-damage-power-outages/story/",
+          "publish_date": "2025-11-10 12:17:00",
+          "source": "GMANETWORK",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "3cabbf7e3ee5a08647144c64a7f17c00f662aa7c87d837623d3cd08122b73b2e",
+          "title": "‘Uwan’ to affect Metro Manila, Visayas, PAGASA warns",
+          "url": "https://manilastandard.net/news/weather/314665251/uwan-to-affect-metro-manila-visayas-pagasa-warns.html",
+          "publish_date": "2025-11-07 00:58:51",
+          "source": "MANILASTANDARD",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "24cf7f0a0da1fdd72d812c7550268c28bde08c94b7027f0815ff7b9bd6290848",
+          "title": "FACT CHECK: No super typhoon in PH until July 18",
+          "url": "https://www.rappler.com/newsbreak/fact-check/no-super-typhoon-philippines-july-18-2024/",
+          "publish_date": "2024-07-18 14:05:00",
+          "source": "RAPPLER",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "5ed11b36d810d4821828c9c3ce549ceb0ba15a320117d73431edddc2293888bd",
+          "title": "NO new super typhoon hitting the country",
+          "url": "https://verafiles.org/articles/fact-check-no-new-super-typhoon-hitting-the-country",
+          "publish_date": "2025-11-15 10:47:08",
+          "source": "VERAFILES",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "f6635c5b2746ac52aaf8a6bed6bd15fa2a352fde24864bcd1940c6b0966b0de1",
+          "title": "Authorities work to reach areas isolated by ‘Uwan’",
+          "url": "https://manilastandard.net/news/314666734/death-toll-from-uwan-rises-to-6-ndrrmc.html",
+          "publish_date": "2025-11-11 13:53:04",
+          "source": "MANILASTANDARD",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "a9db896000362e098a5310dfaa22a9bcd4ccf8267d84ce21fca9c5894071d573",
+          "title": "Marcos orders nonstop relief, road repairs in typhoon-hit areas",
+          "url": "https://manilastandard.net/news/314666429/marcos-orders-nonstop-relief-road-repairs-in-typhoon-hit-areas.html",
+          "publish_date": "2025-11-11 14:29:19",
+          "source": "MANILASTANDARD",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "b272199f354c97bb53b6d57635f49dad5e67c1fac539ea703cf1b1f8ce3c7364",
+          "title": "Woman dies as millions flee from ‘Uwan’",
+          "url": "https://manilastandard.net/news/weather/314665978/woman-dies-as-millions-flee-from-uwan.html",
+          "publish_date": "2025-11-10 09:01:32",
+          "source": "MANILASTANDARD",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "a7a903c8cb5adda0f31c85cf310cae86907e9599451bcaea7b3ad6aba0ff3781",
+          "title": "DOH activates emergency operations center for typhoon response",
+          "url": "https://www.pna.gov.ph/articles/1262847",
+          "publish_date": "2025-11-08 13:38:00",
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "8849198d460dae8e490234c86911bc02691ee1ce7f0180f4abd476a5540a1d3c",
+          "title": "'Uwan' weakens outside PAR; strong winds still felt in Northern Luzon",
+          "url": "https://mb.com.ph/2025/11/11/uwan-weakens-outside-par-strong-winds-still-felt-in-northern-luzon",
+          "publish_date": "2025-11-11 13:08:00",
+          "source": "MANILA-BULLETIN",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "b4dd3627407ea2d75133620b7b42acd5989d998e65b7cdfb9a1e4351f5b71f1c",
+          "title": "More areas under storm signals as Typhoon Uwan nears PH",
+          "url": "https://www.pna.gov.ph/articles/1262843",
+          "publish_date": "2025-11-08 11:50:00",
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "7c140abbb36c664a9bb6dbc9ca0e4dcbdf806bfeaf0d23ac1bd8d55cb553c8fd",
+          "title": "Uwan intensifies into typhoon, now inside PAR",
+          "url": "https://www.pna.gov.ph/articles/1262826",
+          "publish_date": "2025-11-07 23:55:00",
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "41ae16813e6a2f1fb0dd3ad0f9d1b6f71ddb16dc002a6df97c673ac6357ee6dc",
+          "title": "Uwan now a super typhoon; Signal No. 5 up in Bicol",
+          "url": "https://www.pna.gov.ph/articles/1262873",
+          "publish_date": "2025-11-09 09:08:00",
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "f93d0aa161e2381afcc54c4c61fc59cc96ece002901fb06327d190eccf7e6290",
+          "title": "Super Typhoon Uwan maintains strength; life-threatening conditions persist ahead of landfall",
+          "url": "https://mb.com.ph/2025/11/09/super-typhoon-uwan-maintains-strength-life-threatening-conditions-persist",
+          "publish_date": "2025-11-09 11:47:00",
+          "source": "MANILA-BULLETIN",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "f562dff1f46439f1dab94d04676596456f309e60d3e5c35e62fc47d7997ed4d0",
+          "title": "Super typhoon may hit Philippines by Saturday",
+          "url": "https://www.philstar.com/headlines/2025/11/06/2485273/super-typhoon-may-hit-philippines-saturday",
+          "publish_date": "2025-11-06 00:00:00",
+          "source": "PHILSTAR",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "b5c003ebe0d50b66250875648351c309c91aad5a71964141850f8523c650d976",
+          "title": "Destructive winds lash Northern, Central Luzon as 'Uwan' crosses landmass",
+          "url": "https://mb.com.ph/2025/11/09/destructive-winds-lash-northern-central-luzon-as-uwan-crosses-landmass",
+          "publish_date": "2025-11-09 23:28:00",
+          "source": "MANILA-BULLETIN",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "42af340819f0e3ce0e6cf2063763e3b589a7581d7a79226f4e31cb488614254c",
+          "title": "Super Typhoon 'Uwan' leaves 2 dead, trail of destruction across Luzon, Visayas",
+          "url": "https://mb.com.ph/2025/11/10/super-typhoon-uwan-leaves-2-dead-trail-of-destruction-across-luzon-visayas",
+          "publish_date": "2025-11-10 10:58:00",
+          "source": "MANILA-BULLETIN",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "ed0fc9d056d6633bfe20218a51b9b178e42608de9eb21b1b796ecc2c83be6fa8",
+          "title": "EPD ready for emergencies amid ST Uwan threat",
+          "url": "https://mb.com.ph/2025/11/09/epd-ready-for-emergencies-amid-st-uwan-threat",
+          "publish_date": "2025-11-09 14:10:00",
+          "source": "MANILA-BULLETIN",
+          "source_type": "news_article"
+        },
+        {
+          "doc_id": "a130cb948ab275d5f0706751a6c9c08dbfccc9bcfd67ee610ccda5f120c8c5b4",
+          "title": "Typhoon Uwan disrupts power for 25 million",
+          "url": "https://manilastandard.net/news/314667177/typhoon-uwan-disrupts-power-for-25-million.html",
+          "publish_date": "2025-11-12 10:35:17",
+          "source": "MANILASTANDARD",
+          "source_type": "news_article"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.190483+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "de7b9a788c68baf4cd7ff61b37d978aa7513286feed7e10e1b6716590986c801",
+        "title": "HINDI TOTOO: May tatamang Super Typhoon Domeng sa Pilipinas nitong Mayo 2022",
+        "content": "Buod\nAng sabi-sabi: Mayroong super typhoon na may pangalang “Domeng” sa Philippine Area of Responsibility (PAR) nitong Mayo 31, 2022.\nMarka: HINDI TOTOO\nAng katotohanan: Walang super typhoon sa loob ng PAR nang isulat ang fact check na ito. Ayon sa Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA), isang Low Pressure Area (LPA) lang ang nasa loob ng PAR nang i-post ng YouTube channel ang sabi-sabi.\nBakit kailangang i-fact-check: Nang isulat ang fact check na i...",
+        "found_claim": "Mayroong super typhoon na may pangalang “Domeng” sa Philippine Area of Responsibility (PAR) nitong Mayo 31, 2022.",
+        "found_verdict": "FALSE",
+        "publish_date": "2022-06-01T10:20:00",
+        "url": "https://www.rappler.com/newsbreak/fact-check/super-typhoon-domeng-philippine-area-responsibility-may-2022/",
+        "similarity_score": 0.6443,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.4666,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "RAPPLER",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "Kung may nakikita kang kahina-hinalang Facebook pages, groups, accounts, websites, artikulo, o mga larawan sa iyong network, i-send ang mga ito sa factcheck@rappler.com. Maaari ring magsumite ng mga sabi-sabi sa #FactsFirstPH tipline. Ipadala lang ang mga ito bilang message sa Facebook ng Rappler, bilang direct message sa Twitter ng Newsbreak, o bilang message sa aming Viber fact check chatbot. Sa bawat fact check, labanan natin ang pagkalat ng mali o mapanlinlang na\n\nBuod Ang sabi-sabi: Mayroong super typhoon na may pangalang “Domeng” sa Philippine Area of Responsibility (PAR) nitong Mayo 31, 2022. Marka: HINDI TOTOO Ang katotohanan: Walang super typhoon sa loob ng PAR nang isulat ang fact check na ito. Ayon sa Philippine Atmospheric, Geophysical and Astronomical Services Administration"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.190483+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "52c7da76bf7d93bcff2f685ee72e8cd0646eaab87510c71d632f473866232caa",
+        "title": "FACT CHECK: No reports of super typhoon forming in PH, as of July 26",
+        "content": "Claim: A new tropical cyclone has developed into a super typhoon and will pass through Luzon.\nRating: FALSE\nWhy we fact-checked this: The claim was made in a YouTube video that was posted on Friday, July 26, that has garnered 45,114 views and 1,200 views as of writing. It was posted by a YouTube channel named “Bagong Pilipinas TV” with 48,700 subscribers.\nThe video’s title says: “Bagong Bagyo, magiging Super Typhoon! Dadaan sa Luzon” (New Tropical Cyclone, will be a Super Typhoon! Going through ...",
+        "found_claim": "A new tropical cyclone has developed into a super typhoon and will pass through Luzon.",
+        "found_verdict": "FALSE",
+        "publish_date": "2024-07-26T13:58:44",
+        "url": "https://www.rappler.com/newsbreak/fact-check/no-report-super-typhoon-philippines-july-26-2024/",
+        "similarity_score": 0.6903,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.4942,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "RAPPLER",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "Lastly, Visayas and Mindanao are expected to see partly cloudy to cloudy skies with isolated rainshowers or thunderstorms. The country’s latest super typhoon was Super Typhoon Carina (Gaemi), which intensified into a super typhoon on Wednesday, July 24. Carina exited PAR on Thursday morning, July 25, and has since weakened into a severe tropical storm over the southeastern part of China. Outdated weather report: The audio of the false video was taken from a PAGASA weather update on Typhoon Carina last July 25 at 5 pm. In that report, Typhoon Gaemi was seen 550 kilometers north northwest of Itbayat, Batanes, with winds of 120 km/h and gustiness of 180 km/h. Based on PAGASA’s July 26 4 am report, Gaemi is now 615 kilometers north northwest of Itbayat, with weakened winds of 95 km/h and\n\nClaim"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.190483+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "175c81d7071011a0c950e604c694cf6fbc86d1fd850c00fab420c917ba71e4cc",
+        "title": "FALSE: Super Typhoon Ester arrives in the Philippines in June 2022",
+        "content": "At a glance\nClaim: A Super Typhoon Ester that is stronger than Super Typhoon Odette is at Signal No. 3 as of June 28, 2022, and moving west across the Philippines.\nRating: FALSE.\nFacts: A Tropical Depression Ester was recorded in the Philippines in 2018. As of June 29, no super typhoon has been recorded in the country in the year 2022 so far.\nWhy we fact checked this: The YouTube video containing this claim has over 16,000 views, and the channel has over 277,000 subscribers.\nComplete details\nOn ...",
+        "found_claim": "A Super Typhoon Ester that is stronger than Super Typhoon Odette is at Signal No. 3 as of June 28, 2022, and moving west across the Philippines.",
+        "found_verdict": "FALSE",
+        "publish_date": "2022-06-29T20:22:07",
+        "url": "https://www.rappler.com/newsbreak/fact-check/super-typhoon-ester-arrives-philippines-june-2022/",
+        "similarity_score": 0.6187,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.4512,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "RAPPLER",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "FALSE: ‘Blot Echo Wind Map’ predicts earthquakes – Sofia Guanzon/Rappler.com Keep us aware of suspicious Facebook pages, groups, accounts, websites, articles, or photos in your network by contacting us at factcheck@rappler.com. You may also report dubious claims to #FactsFirstPH tipline by messaging Rappler on Facebook or Newsbreak via Twitter direct message. You may also report through our Viber fact check chatbot. Let us battle disinformation one Fact Check at a\n\nAt a glance Claim: A Super Typhoon Ester that is stronger than Super Typhoon Odette is at Signal No. 3 as of June 28, 2022, and moving west across the Philippines. Rating: FALSE. Facts: A Tropical Depression Ester was recorded in the Philippines in 2018. As of June 29, no super typhoon has been recorded in the country in the"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.198227+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "60281a1c97af2b2e2bcbb2ac80a9e076807033323cc931d3414ac7618c2f7c97",
+        "title": "NO typhoon ‘bigger than PH’ coming in",
+        "content": "A post on Facebook (FB) is claiming that a storm larger than the “map of the Philippines” is heading toward the country. This is false.\nPublished by an FB page on Sept. 5, the spurious post read:\n“Hala!! May parating pa raw na MALAKING BAGYO, MAS MALAKI PA RAW SA MAPA NG PILIPINAS, sana di matuloy, IPAGDASAL NATIN ANG KALIGTASAN NG LAHAT, AMEN.\n(Oh, no! There is a huge typhoon coming, bigger than the map of the Philippines. I hope it does not push through. Let us pray for the safety of everyone,...",
+        "found_claim": "A typhoon larger than the entire Philippines is going to hit the country.",
+        "found_verdict": "FALSE",
+        "publish_date": "2024-09-12T08:44:00",
+        "url": "https://verafiles.org/articles/fact-check-no-typhoon-bigger-than-ph-coming-in",
+        "similarity_score": 0.7428,
+        "entity_match_score": 0.0,
+        "combined_relevance_score": 0.4457,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.000 < 0.4)"
+        ],
+        "source": "VERAFILES",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "FB page DREAM B. (created on Jan. 31) published the false post, garnering over 1,900 reactions, 790 comments and 580\n\nA post on Facebook (FB) is claiming that a storm larger than the “map of the Philippines” is heading toward the country. This is false. Published by an FB page on Sept. 5, the spurious post read: “Hala!! May parating pa raw na MALAKING BAGYO, MAS MALAKI PA RAW SA MAPA NG PILIPINAS, sana di matuloy, IPAGDASAL NATIN ANG KALIGTASAN NG LAHAT, AMEN. (Oh, no! There is a huge typhoon coming, bigger than the map of the Philippines. I hope it does not push through. Let us pray for the safety of everyone, Amen.)” It also included a blurry and undated weather map taken from Windy.com, a website that visualizes weather forecasts. It showed a huge depression forming west of the country."
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.198737+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "42af340819f0e3ce0e6cf2063763e3b589a7581d7a79226f4e31cb488614254c",
+        "title": "Super Typhoon 'Uwan' leaves 2 dead, trail of destruction across Luzon, Visayas",
+        "content": "(UPDATED)\nSuper Typhoon “Uwan” battered large parts of Luzon and Visayas, triggering widespread flooding, landslides, and power outages that left at least two people dead and 830,000 individuals affected, the Office of Civil Defense (OCD) reported on Monday, Nov. 10.\nOne fatality was recorded in Viga, Catanduanes due to drowning while another one was in Catbalogan City, Samar due to a collapsed structure, said OCD Assistant Secretary Bernardo Rafaelito Alejandro IV, civil defense deputy administ...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-10T10:58:00",
+        "url": "https://mb.com.ph/2025/11/10/super-typhoon-uwan-leaves-2-dead-trail-of-destruction-across-luzon-visayas",
+        "similarity_score": 0.1217,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.473,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Low semantic similarity (0.122 < 0.3)"
+        ],
+        "source": "MANILA-BULLETIN",
+        "source_type": "news_article",
+        "source_bias": "NEUTRAL",
+        "chunk_texts": "He said relief operations were in full swing with P2.6 billion in standby funds and stockpiles from the Department of Social Welfare and Development (DSWD) and OCD. Around P6.4 million worth of food items have already been distributed, including 4,776 family food packs sent to Regions 4A, 5, NIR, and 13. The Department of Health (DOH) also mobilized P156 million worth of medical logistics, with an additional P10 million distributed to regional offices to support health response efforts. Transport and ports On the other hand, the Philippine Coast Guard (PCG) reported 7,213 passengers and truck drivers, 3,663 rolling cargoes, 171 vessels, and 28 motorbancas stranded across 156 ports. Of this number, more than 2,000 passengers were stuck in Bicol. Another 541 vessels and 185 motorbancas\n\nPart"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.198737+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "eb71fb44afe5b44d9d8e630da2396abb668eabb7ab2a2a8c5fc50a125ef6cb8c",
+        "title": "FACT CHECK: Lumabas na ang bagyong Ineng noong Setyembre 6",
+        "content": "Ang sabi-sabi: Ayon sa September 12 weather update, super typhoon na ang bagong bagyong Ineng.\nMarka: HINDI TOTOO\nBakit kailangang i-fact check: Ang YouTube video na naglalaman ng sabi-sabi ay mayroong 7,900 views sa kasalukuyan. Ini-upload ito ng isang YouTube channel na may 545,000 subscribers.\nPinamagatan ang video na “Bagong bagyong ‘Ineng’ super tyhoon na?! | Latest weather update! September 12, 2023.”\nAng katotohanan: Noong Setyembre 6 pa lumabas sa Philippine Area of Responsibility (PAR) ...",
+        "found_claim": "Ayon sa September 12 weather update, super typhoon na ang bagong bagyong Ineng.",
+        "found_verdict": "FALSE",
+        "publish_date": "2023-09-12T14:55:00",
+        "url": "https://www.rappler.com/newsbreak/fact-check/tropical-depression-ineng-exits-philippines-september-6/",
+        "similarity_score": 0.6247,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.4548,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "RAPPLER",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "Ayon sa ulat ni PAGASA weather specialist Grace Castañeda, nanatiling maliit ang tsansang maging bagyo ang nasabing LPA, subalit magdudulot pa rin ito ng pag-ulan sa ilang bahagi ng northern Luzon. Opisyal na balita: Ilang beses nang naglathala ng artikulo ang Rappler na may kaugnayan sa mga video ng YouTube channel na naglalabas ng maling impormasyon tungkol sa panahon. FACT CHECK: Di totoong may 2 bagyong tatama sa Pilipinas ngayong Setyembre 11 FACT CHECK: Hindi super typhoon ang bagyong Hanna, walang Signal No. 5 FACT CHECK: No tropical cyclone Hanna in PH Area of Responsibility so far in August Para sa mga opisyal na update sa panahon, bisitahin ang mga social media platform ng PAGASA sa X (dating Twitter), Facebook, YouTube, at website nito. Maaari ring i-bookmark ang Philippine\n\nAng"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.198737+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "cbbf10da109a11682467994994c4c6f2f0316dcad7ab94d33e82bab54be5a362",
+        "title": "FACT CHECK: No super typhoon making landfall in PH up until January 8",
+        "content": "Claim: Super typhoon Alakdan is set to make landfall in the Philippines on Monday, January 8, according to a January 7 weather update.\nRating: FALSE\nWhy we fact-checked this: The YouTube video containing the claim has 26,448 views and 601 likes as of writing. The channel that posted the video has 620,000 subscribers and bears a verified badge.\nThe facts: The Philippine Atmospheric, Geophysical, and Astronomical Services Administration (PAGASA) reported in its 4 am update on January 8 that neithe...",
+        "found_claim": "Super typhoon Alakdan is set to make landfall in the Philippines on Monday, January 8, according to a January 7 weather update.",
+        "found_verdict": "FALSE",
+        "publish_date": "2024-01-08T12:36:04",
+        "url": "https://www.rappler.com/newsbreak/fact-check/no-super-typhoon-making-landfall-philippines-up-until-january-8/",
+        "similarity_score": 0.6405,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.4643,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "RAPPLER",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "Previous fact checks: While The YouTube channel that posted the misleading video is verified, this only means that it is the “official channel of a creator, artist, company, or public figure.” The authenticity of a channel’s content is not mentioned in YouTube’s guidelines for a verified badge. For weather updates: For legitimate weather updates, visit PAGASA’s official website, Twitter page, and YouTube channel. Get updates too via Rappler’s Philippine weather page. – Katarina Ruflo/Rappler.com Katarina Ruflo is a graduate of Rappler’s fact-checking mentorship program. This fact check was reviewed by a member of Rappler’s research team and a senior editor. Learn more about Rappler’s fact-checking mentorship program here. Keep us aware of suspicious Facebook pages, groups, accounts,\n\nClaim:"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.199779+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "521db5a32912eb260046230f081157ae57a95b4c4c56662e65afdd2eea464d5e",
+        "title": "FACT CHECK: No Super Typhoon Egay has entered PH Area of Responsibility",
+        "content": "Claim: A new super typhoon named Egay has entered the Philippine Area of Responsibility (PAR) and will directly hit Luzon.\nRating: FALSE\nWhy we fact-checked this: The claim can be found in the title and thumbnail of a YouTube video posted on July 17 by a supposed news channel with 491,000 subscribers. The video itself currently has 19,878 views and 240 likes as of writing.\nA different YouTube channel with 31,000 subscribers made a similar claim on Sunday, July 16, saying that Typhoon Egay is str...",
+        "found_claim": "A new super typhoon named Egay has entered the Philippine Area of Responsibility (PAR) and will directly hit Luzon.",
+        "found_verdict": "FALSE",
+        "publish_date": "2023-07-17T14:30:46",
+        "url": "https://www.rappler.com/newsbreak/fact-check/no-super-typhoon-egay-entered-philippine-area-of-responsibility-july-17-2023/",
+        "similarity_score": 0.6774,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.4864,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "RAPPLER",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "Dodong, the Philippines’ fourth tropical cyclone for 2023 and the first for July, left the PAR on July 15 around two days after it intensified into a tropical storm inside PAR. The Philippines’ most recent super typhoon, and the first for 2023, was Super Typhoon Mawar (local name Betty), which entered the PAR in May after battering the US island territory of Guam with torrential rain and fierce winds. Previous fact-checks: Rappler has previously fact-checked the same YouTube channel multiple times for claims about typhoons and weather disturbances in the Philippines: FACT CHECK: No Super Typhoon Dodong has entered PH Area of Responsibility There is no Tropical Storm Samuel approaching Luzon Maymay is not a Super Typhoon For the latest weather updates, visit PAGASA’s official social media\n\nC"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.199779+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "24cf7f0a0da1fdd72d812c7550268c28bde08c94b7027f0815ff7b9bd6290848",
+        "title": "FACT CHECK: No super typhoon in PH until July 18",
+        "content": "Claim: A super typhoon hit the eastern side of the Philippines on July 18.\nRating: FALSE\nWhy we fact-checked this: The Facebook post containing the claim has 16,000 shares, 1,700 reactions, and 770 comments as of writing.\nThe post says in its caption: “Ang bagyo, na tinaguriang Super Typhoon Lakas, ay tumama sa silangang bahagi ng bansa kaninang madaling araw, at patuloy na nagdudulot ng malakas na ulan at hanging may bilis na umaabot sa 250 kilometro kada oras.”\n(A tropical cyclone called Super...",
+        "found_claim": "A super typhoon hit the eastern side of the Philippines on July 18.",
+        "found_verdict": "FALSE",
+        "publish_date": "2024-07-18T14:05:00",
+        "url": "https://www.rappler.com/newsbreak/fact-check/no-super-typhoon-philippines-july-18-2024/",
+        "similarity_score": 0.7342,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.5205,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "RAPPLER",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "Metro Manila, Bataan, Zamboanga Peninsula, BARMM, Northern Mindanao, and the rest of CALABARZON and MIMAROPA can also experience moderate to heavy rain brought by the southwest monsoon. The rest of the country may experience localized thunderstorms. Typhoon Aghon (Ewiniar) was the latest, and is so far, the only tropical cyclone that the Philippines has had in May this year. According to PAGASA, there could be 10 to 16 tropical cyclones from July to December. For weather updates: For legitimate weather updates, visit PAGASA’s official website, X (formerly Twitter) page, and YouTube channel. Get updates too via Rappler’s Philippine weather page. – Ailla Dela Cruz/Rappler.com Keep us aware of suspicious Facebook pages, groups, accounts, websites, articles, or photos in your network by\n\nClaim:"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.199779+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "ed0fc9d056d6633bfe20218a51b9b178e42608de9eb21b1b796ecc2c83be6fa8",
+        "title": "EPD ready for emergencies amid ST Uwan threat",
+        "content": "The Eastern Police District (EPD) on Sunday, Nov. 9, said it is on full alert and ready to respond to any emergencies in anticipation of the possible effects of Super Typhoon Uwan in Metro East cities.\nEPD District Director Brig. Gen. Aden T. Lagradante said the district’s Search and Rescue Team, along with personnel from the PaMaMariSan CPS, District Mobile Force Battalion (DMFB), and District Headquarters (DHQ), are fully equipped and on standby for possible search and rescue, evacuation, and ...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-09T14:10:00",
+        "url": "https://mb.com.ph/2025/11/09/epd-ready-for-emergencies-amid-st-uwan-threat",
+        "similarity_score": 0.0761,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.4456,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Low semantic similarity (0.076 < 0.3)"
+        ],
+        "source": "MANILA-BULLETIN",
+        "source_type": "news_article",
+        "source_bias": "NEUTRAL",
+        "chunk_texts": "The activity was simultaneously carried out across the four EPD city police stations—Pasig, Mandaluyong, Marikina, and San Juan, as well as the DMFB and DHQ. According to the EPD, the initiative aimed to ensure the full operational readiness of all personnel, vehicles, and disaster response equipment for immediate deployment in case of emergencies. It also sought to strengthen coordination among EPD units, enhance situational awareness, and guarantee that adequate manpower and logistical resources are in place for possible rescue, relief, and recovery operations. Lagradante added that the EPD continues to coordinate closely with local government units (LGUs), barangays, and other concerned agencies to ensure public safety amid the expected inclement weather. “Nanatiling alerto at handa\n\nBy"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.200828+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "95b05b2ed695686ab2243dbd745c5483e187ce837e43cbf73cf68330625819a3",
+        "title": "FACT CHECK: No Super Typhoon Dodong has entered PH Area of Responsibility",
+        "content": "The claim: A video claims that a second super typhoon for 2023 has entered the Philippine Area of Responsibility (PAR). The claim can be found in a video posted on June 15 on a supposed news YouTube channel with 484,000 subscribers. The video\nRating: FALSE\nWhy we fact-checked this: The claim can be found in a video posted on June 15 on a supposed news YouTube channel with 484,000 subscribers. The video has 8,200 views and 179 likes as of writing.\nThe facts: The video’s title and thumbnail image ...",
+        "found_claim": "The claim: A video claims that a second super typhoon for 2023 has entered the Philippine Area of Responsibility (PAR). The claim can be found in a video posted on June 15 on a supposed news YouTube channel with 484,000 subscribers. The video",
+        "found_verdict": "FALSE",
+        "publish_date": "2023-06-15T17:37:44",
+        "url": "https://www.rappler.com/newsbreak/fact-check/fact-check-no-super-typhoon-dodong-entered-philippine-area-of-responsibility-june-15-2023/",
+        "similarity_score": 0.6203,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.4522,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "RAPPLER",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "The claim: A video claims that a second super typhoon for 2023 has entered the Philippine Area of Responsibility (PAR). The claim can be found in a video posted on June 15 on a supposed news YouTube channel with 484,000 subscribers. The video Rating: FALSE Why we fact-checked this: The claim can be found in a video posted on June 15 on a supposed news YouTube channel with 484,000 subscribers. The video has 8,200 views and 179 likes as of writing. The facts: The video’s title and thumbnail image claims that Super Typhoon Dodong has entered the PAR, but there have been no announcements from the Philippine Atmospheric, Geophysical, and Astronomical Services Administration (PAGASA) about any new tropical cyclone following the most recent one, Chedeng (Guchol). In its 4 am forecast on June 15,"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.200828+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "f93d0aa161e2381afcc54c4c61fc59cc96ece002901fb06327d190eccf7e6290",
+        "title": "Super Typhoon Uwan maintains strength; life-threatening conditions persist ahead of landfall",
+        "content": "Super Typhoon Uwan (Fung-wong) maintained its strength on Sunday, Nov. 9, as it battered Luzon and parts of Visayas, bringing life-threatening winds, heavy rainfall, and high risk of coastal flooding, the Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) said on Sunday, Nov. 9.\nAs of 10 a.m., the center of the eye of Uwan was spotted over the coastal waters of Pandan, Catanduanes, moving west-northwestward at 30 kilometers per hour (kph).\nThe super typhoon pac...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-09T11:47:00",
+        "url": "https://mb.com.ph/2025/11/09/super-typhoon-uwan-maintains-strength-life-threatening-conditions-persist",
+        "similarity_score": 0.2751,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.565,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Low semantic similarity (0.275 < 0.3)"
+        ],
+        "source": "MANILA-BULLETIN",
+        "source_type": "news_article",
+        "source_bias": "NEUTRAL",
+        "chunk_texts": "Signal No. 2 is in effect over the rest of Cagayan including Babuyan Islands, the rest of Apayao, Ilocos Norte, Occidental Mindoro including Lubang Islands, Oriental Mindoro, Romblon, the rest of Masbate, Eastern Samar, Samar, Biliran, and the northern and central portions of Leyte (Leyte, Calubian, San Isidro, Tabango, Capoocan, Carigara, Barugo, San Miguel, Babatngon, Tacloban City, Alangalang, Tunga, Palo, Santa Fe, Pastrana, Matag-Ob, Tolosa, Mayorga, Julita, Dagami, Jaro, Villaba, La Paz, Tabontabon, Tanauan, Ormoc City, Dulag). Signal No. 1 is also in effect over Batanes, Calamian Islands, Cuyo Islands, the rest of Leyte, Southern Leyte, Bohol, northern and central portions of Cebu (Medellin, Daanbantayan, City of Bogo, Tabogon, San Remigio, Tabuelan, Borbon, Sogod, Tuburan, Catmon,"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.202837+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "96e271b4611ba290a9d0ff8965548c0527530813b46f3abf0683142566fa6064",
+        "title": "Imagen muestra \"potente terremoto … en medio de una tormenta solar\" en Filipinas.",
+        "content": "No, esta imagen no muestra terremoto en Filipinas, es del 2017\nSI TIENES POCO TIEMPO\nUn terremoto de magnitud 7.6 sacudió el sur de Filipinas el 2 de diciembre.\nLa imagen en Facebook del rayo de luz no es del terremoto en Filipinas. Esta ha sido usada desde el 2017 y reportada durante un terremoto en México.\nUn portavoz del Centro de Predicción del Clima Espacial dijo que no ocurrió una tormenta solar en el momento exacto del terremoto.\nSi ves algo que te hace preguntar: ¿es cierto? Mándanoslo p...",
+        "found_claim": "Imagen muestra \"potente terremoto … en medio de una tormenta solar\" en Filipinas.",
+        "found_verdict": "FALSE",
+        "publish_date": "2023-12-05T08:00:00",
+        "url": "https://www.politifact.com/factchecks/2023/dec/05/facebook-posts/no-esta-imagen-no-muestra-terremoto-en-filipinas-e/",
+        "similarity_score": 0.6403,
+        "entity_match_score": 0.0,
+        "combined_relevance_score": 0.3842,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.000 < 0.4)"
+        ],
+        "source": "POLITIFACT",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "Debido a limitaciones técnicas, partes de nuestra página web aparecen en inglés. Estamos trabajando en mejorar la\n\nTambién encontramos un video en X del 2017 mostrando el cielo iluminado en México. La imagen no se trata de un rayo, sino de \"luces de terremoto\" que pueden ser vistas como bolas de luz o como brillos en el cielo al ocurrir un terremoto, según el Servicio Geológico de Estados Unidos (USGS, por sus siglas en inglés). La imagen ha sido usada repetidas veces por distintos medios de comunicación para explicar el fenómeno de las luces de terremoto, el cual ha ocurrido en varias partes del mundo. La publicación en Facebook también dice que el terremoto se presentó en medio de una tormenta solar. Pero Bryan Brasher, un gerente de proyecto del Centro de Predicción del Clima Espacial\n\nNo"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.203343+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "b6329eb52efb82d22817371efbc627651bbfbd3f4379c31350878cbd5e8d6f45",
+        "title": "FACT CHECK: Tropical Depression Gener not a super typhoon as of September 16",
+        "content": "Claim: According to a September 16 weather update, tropical cyclone Gener is now a super typhoon and Signal No. 4 has been raised over the Philippines.\nRating: FALSE\nWhy we fact-checked this: The YouTube video containing the claim was posted on September 16 and has 28,325 views as of writing. It was posted by a channel with 88,800 subscribers.\nThe thumbnail of the video says, “Super typhoon! Bagong bagyong Gener, matinding danyos ang dadalhin sa Pilipinas!” (Super typhoon! New tropical cyclone G...",
+        "found_claim": "According to a September 16 weather update, tropical cyclone Gener is now a super typhoon and Signal No. 4 has been raised over the Philippines.",
+        "found_verdict": "FALSE",
+        "publish_date": "2024-09-16T21:59:30",
+        "url": "https://www.rappler.com/newsbreak/fact-check/tropical-depression-gener-not-super-typhoon-september-16-2024/",
+        "similarity_score": 0.6635,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.4781,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "RAPPLER",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "In its 5 pm press briefing, PAGASA reported that Gener is expected to make landfall on Monday evening or Tuesday morning, September 17, in the vicinity of Isabela or Aurora. It is expected to leave the Philippine Area of Responsibility between late Tuesday evening and Wednesday morning. The weather bureau also said it is not ruling out the possibility of Gener reaching tropical storm category or slightly weakening before landfall. Gener is the country’s seventh tropical cyclone for 2024, and the third for September. Debunked: The YouTube channel that posted the misleading video has a history of posting false claims, typically weather-related claims with sensationalist titles. Rappler has debunked these claims: FACT CHECK: No super typhoon in PAR, as of August 26 FACT CHECK: No reports of\n\nC"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.203343+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "67dd5c4ac14a4db53a6d32f3d9b5c20b58bbe595c5c939714db6e97ac8ffe912",
+        "title": "Circulating graphic on ‘Super Typhoon Auring’ FAKE",
+        "content": "A Facebook (FB) page uploaded a news graphic about a supposed “Super Typhoon Auring” inside the Philippine Area of Responsibility (PAR) this June. This is fabricated.\nPosted on June 4, a social media card bearing the logos of TV Patrol and ABS-CBN News as well as photos of a supposed super typhoon, had a headline that read:\n“Super Typhoon Auring patuloy na lumalakas habang tinutumbok ang Luzon Area (Super Typhoon Auring continues to strengthen as it lambasts Luzon Area).”\nA VERA Files’ Messenger...",
+        "found_claim": "There is a “Super Typhoon Auring” within the Philippine Area of Responsibility in the first week of June 2025.",
+        "found_verdict": "FALSE",
+        "publish_date": "2025-06-09T23:43:56",
+        "url": "https://verafiles.org/articles/fact-check-circulating-graphic-on-super-typhoon-auring-fake",
+        "similarity_score": 0.7313,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.5188,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "VERAFILES",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "A Facebook (FB) page uploaded a news graphic about a supposed “Super Typhoon Auring” inside the Philippine Area of Responsibility (PAR) this June. This is fabricated. Posted on June 4, a social media card bearing the logos of TV Patrol and ABS-CBN News as well as photos of a supposed super typhoon, had a headline that read: “Super Typhoon Auring patuloy na lumalakas habang tinutumbok ang Luzon Area (Super Typhoon Auring continues to strengthen as it lambasts Luzon Area).” A VERA Files’ Messenger Misinformation Tipline user asked if there is a super typhoon presently in the Philippines. The graphic is fake. ABS-CBN News did not release such a news card and there is no such super typhoon in the Philippines as of writing. As of June 9, the Philippine Atmospheric Geophysical and Astronomical"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.203343+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "a130cb948ab275d5f0706751a6c9c08dbfccc9bcfd67ee610ccda5f120c8c5b4",
+        "title": "Typhoon Uwan disrupts power for 25 million",
+        "content": "THE Department of Energy (DOE) said Tuesday that Typhoon Uwan affected as many as 5 million households, or up to 25 million Filipinos — about 30 percent of the population.\nEnergy Secretary Sharon Garin assured that restoration activities are ongoing and normal operations are expected within a month.\n“This was a massive typhoon. It affected many of our electric cooperatives, several NGCP structures, and even generation companies. But we’re pleased to report there has been massive improvement beca...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-12T10:35:17",
+        "url": "https://manilastandard.net/news/314667177/typhoon-uwan-disrupts-power-for-25-million.html",
+        "similarity_score": 0.0521,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.4312,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Low semantic similarity (0.052 < 0.3)"
+        ],
+        "source": "MANILASTANDARD",
+        "source_type": "news_article",
+        "source_bias": "NEUTRAL",
+        "chunk_texts": "To help customers recover and comply with the Energy Regulatory Commission’s directive, Meralco suspended disconnection activities for bills covering November 4 to December 31, 2025, and offered flexible payment options to qualified customers. “We recognize that many families are focused on recovery and rebuilding. We will implement our no-disconnection policy for the November and December bills to ease their worries,”  Meralco Vice President and Head of Corporate Communications Joe Zaldarriaga said. Meralco also reminded customers to prioritize electrical safety, especially in flood-affected areas. Meanwhile, the Department of Education (DepEd) reported that more than 312 schools, or about 1,800 classrooms, were damaged during the onslaught of Typhoon Uwan in Luzon. In a situation report"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.204551+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "5e03c528108c8d56b7260a8318cf64eac3ae97dd9bf25cf2467a2add62b2a5e1",
+        "title": "NO forecast on ‘powerful typhoon’ Dindo coming to PH this weekend",
+        "content": "Several Facebook (FB) posts claimed that a new, powerful typhoon named “Dindo” could make landfall this weekend. This is false.\nVERA Files Fact Check flagged four such posts uploaded on July 25. These carried a satellite image of Super Typhoon Yolanda which devastated the country in 2013, and misrepresented it as imagery of Dindo, with the text:\n“WARNING! MAY BAGONG MALAKAS NA BAGYO NA PAPANGALANANG ‘DINDO.’ MAARING MAG-DEVELOP ITO AT MAG-LANDFALL NGAYONG WEEKEND!”\n(WARNING! THERE IS A NEW POWER...",
+        "found_claim": "A powerful new typhoon named Dindo is coming to the Philippines the weekend of July 27-28, 2024",
+        "found_verdict": "FALSE",
+        "publish_date": "2024-07-26T21:26:12",
+        "url": "https://verafiles.org/articles/fact-check-no-forecast-on-powerful-typhoon-dindo-coming-to-ph-this-weekend",
+        "similarity_score": 0.6199,
+        "entity_match_score": 0.0,
+        "combined_relevance_score": 0.3719,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.000 < 0.4)"
+        ],
+        "source": "VERAFILES",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "Editor’s Note: The author is a University of the Philippines student writing for VERA Files as part of his\n\nSeveral Facebook (FB) posts claimed that a new, powerful typhoon named “Dindo” could make landfall this weekend. This is false. VERA Files Fact Check flagged four such posts uploaded on July 25. These carried a satellite image of Super Typhoon Yolanda which devastated the country in 2013, and misrepresented it as imagery of Dindo, with the text: “WARNING! MAY BAGONG MALAKAS NA BAGYO NA PAPANGALANANG ‘DINDO.’ MAARING MAG-DEVELOP ITO AT MAG-LANDFALL NGAYONG WEEKEND!” (WARNING! THERE IS A NEW POWERFUL STORM NAMED ‘DINDO.’ IT COULD DEVELOP AND MAKE LANDFALL THIS WEEKEND!) Two of the false FB posts carried clickbait links that claim to list places that will be affected by the typhoon,"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.205162+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "717ef682a2134b89acee5d75b944c13f1bdf64598e7d850f3f6082a5b5f5a484",
+        "title": "‘Super Typhoon Lakas’ NOT real",
+        "content": "Several pages and posts on Facebook (FB) are erroneously claiming that a super typhoon is going to hit the country and cause massive damage. Government authorities have debunked this claim.\nPublished on July 18, one of the fake posts read:\n“???? ??: ??????? ????? ??????????? ?? ???????, ??????? ?? ?? ????? ???? ?? ???-???, ???????????? ??? ?????! … Ang bagyo, na tinaguriang Super Typhoon Lakas, ay tumama sa silangang bahagi ng bansa kaninang madaling araw.\n(Just in: A typhoon, that is as strong ...",
+        "found_claim": "A so-called “super typhoon Lakas” hit the Philippines.",
+        "found_verdict": "FALSE",
+        "publish_date": "2024-07-19T17:46:49",
+        "url": "https://verafiles.org/articles/fact-check-super-typhoon-lakas-not-real",
+        "similarity_score": 0.7838,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.5503,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "VERAFILES",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "The official FB page of DILG IV-A also published a July 18 post denying the claims and warning the public against such “false information.” These false posts surfaced amid a PAGASA weather forecast of a low pressure area that will bring moderate to heavy rains to certain areas of the country. At least three FB pages – Philippine Weather Update (created on July 17), Metro Headlines (Dec. 9, 2023) and Toktik (March 14, 2022) – published the wrong claim, collectively garnering over 2,200 reactions, 650 comments and 14,000\n\nSeveral pages and posts on Facebook (FB) are erroneously claiming that a super typhoon is going to hit the country and cause massive damage. Government authorities have debunked this claim. Published on July 18, one of the fake posts read: “???? ??: ??????? ?????"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.205162+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "f562dff1f46439f1dab94d04676596456f309e60d3e5c35e62fc47d7997ed4d0",
+        "title": "Super typhoon may hit Philippines by Saturday",
+        "content": "MANILA, Philippines — Still reeling from the disaster of Typhoon Kalmaegi (formerly Tino), the Philippines may be hit by a super typhoon during the weekend as Tropical Storm Fung-Wong heads towards Luzon, PAGASA said on Thursday, November 6.\nFung-Wong, which will be named Uwan once it enters the Philippine area of responsibility (PAR), is forecast to intensify into a super typhoon as it nears the country.\nWhile there is a level of uncertainty, PAGASA forecasted that Uwan will likely hit central ...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-06T00:00:00",
+        "url": "https://www.philstar.com/headlines/2025/11/06/2485273/super-typhoon-may-hit-philippines-saturday",
+        "similarity_score": 0.2621,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.5573,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Low semantic similarity (0.262 < 0.3)"
+        ],
+        "source": "PHILSTAR",
+        "source_type": "news_article",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "Rough seas are still expected along the seaboards of the Kalayaan Islands, with waves reaching up to 4 meters. Batanes, as well as the western seaboards of southern mainland Palawan and Balabac Island, may also experience rough waves as high as 3\n\nMANILA, Philippines — Still reeling from the disaster of Typhoon Kalmaegi (formerly Tino), the Philippines may be hit by a super typhoon during the weekend as Tropical Storm Fung-Wong heads towards Luzon, PAGASA said on Thursday, November 6. Fung-Wong, which will be named Uwan once it enters the Philippine area of responsibility (PAR), is forecast to intensify into a super typhoon as it nears the country. While there is a level of uncertainty, PAGASA forecasted that Uwan will likely hit central or northern Luzon. It will also make landfall as a"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.206170+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "2345591fd13e8674f828bb512dfabc16d2aa266f72781a6b398c9fada694ac07",
+        "title": "NO Super Typhoon ‘Alakdan’ is threatening to hit the Philippines",
+        "content": "A YouTube video claims that a Super Typhoon named Alakdan has entered the Philippine Area of Responsibility (PAR) and will make landfall in the country. This is fake. There is no tropical cyclone threatening to hit the country within days, according to the latest forecast of the Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA).\nUploaded on Jan. 4, the video carried a headline that read:\n“SUPER TYPHOON NGAYONG LINGGO! BAGYONG “ALAKDAN” (This week! Typhoon Alak...",
+        "found_claim": "A Super Typhoon named Alakdan has entered the Philippine Area of Responsibility (PAR) and will make landfall in the country.",
+        "found_verdict": "FALSE",
+        "publish_date": "2024-01-09T15:04:02",
+        "url": "https://verafiles.org/articles/vera-files-fact-check-no-super-typhoon-alakdan-is-threatening-to-hit-the-philippines",
+        "similarity_score": 0.64,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.464,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "VERAFILES",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "(Editor’s Note: VERA Files has partnered with Facebook to fight the spread of disinformation. Find out more about this partnership and our\n\nA YouTube video claims that a Super Typhoon named Alakdan has entered the Philippine Area of Responsibility (PAR) and will make landfall in the country. This is fake. There is no tropical cyclone threatening to hit the country within days, according to the latest forecast of the Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA). Uploaded on Jan. 4, the video carried a headline that read: “SUPER TYPHOON NGAYONG LINGGO! BAGYONG “ALAKDAN” (This week! Typhoon Alakdan) LATEST WEATHER UPDATE! JAN 4, 2024.” Its thumbnail also bore a photo of former GMA News resident meteorologist Nathaniel Cruz along with a text saying:"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.206646+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "9f0a5f3bb4d3e590eef234af5fc2a5e2b90ef2740314bbf399d09c9d3999d895",
+        "title": "Super Typhoon Nanmadol is not returning to the Philippines",
+        "content": "Claim: Super Typhoon Nanmadol, known in the Philippines as Typhoon Josie, is returning to the Philippines.\nRating: FALSE\nWhy we fact-checked this: The claim has over 21,601 views on YouTube, as of writing.\nNot in PAR: According to the latest Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) Public Weather Forecast on September 19, 2022, Super Typhoon Nanmadol is currently outside the Philippine Area of Responsibility (PAR) and is in southern Japan.\nThe forecas...",
+        "found_claim": "Super Typhoon Nanmadol, known in the Philippines as Typhoon Josie, is returning to the Philippines.",
+        "found_verdict": "FALSE",
+        "publish_date": "2022-09-19T18:00:00",
+        "url": "https://www.rappler.com/newsbreak/fact-check/super-typhoon-nanmadol-not-returning-philippines/",
+        "similarity_score": 0.6535,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.4721,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "RAPPLER",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "Claim: Super Typhoon Nanmadol, known in the Philippines as Typhoon Josie, is returning to the Philippines. Rating: FALSE Why we fact-checked this: The claim has over 21,601 views on YouTube, as of writing. Not in PAR: According to the latest Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) Public Weather Forecast on September 19, 2022, Super Typhoon Nanmadol is currently outside the Philippine Area of Responsibility (PAR) and is in southern Japan. The forecast did not mention anything about Super Typhoon Nanmadol being expected to return to PAR. Nanmadol entered PAR on September 16, 2022, and stayed in the area for only 4 hours and 20 minutes before heading northwest to Japan. Not returning: According to a Rappler article published on September 18,"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.207016+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "a01c2a3a19a97ca79d6763084d54d9f5f53d8578ec75e4205a1c9e7bd9f6f236",
+        "title": "FALSE: Philippines in path of 2019’s ‘super typhoon’",
+        "content": "Claim: Facebook user Catherine Del Castillo Laudet claimed in a post on May 4 that a super typhoon is about to hit the Philippines.\nThis was posted along with a CNN news clip of anchors discussing a strong storm called “Typhoon Hagupit” that’s supposed to be heading to the Philippines. Laudet’s caption of the clip reads: “#SuperTyphoon2019 coming to the Philippines… let’s pray.”\nLaudet’s post has been spotted via Facebook Claim Check, one of Rappler’s channels for fact checking. As of this writi...",
+        "found_claim": "Facebook user Catherine Del Castillo Laudet claimed in a post on May 4 that a super typhoon is about to hit the Philippines.",
+        "found_verdict": "FALSE",
+        "publish_date": "2019-05-07T14:14:56",
+        "url": "https://www.rappler.com/newsbreak/fact-check/229856-philippines-in-path-super-typhoon-2019/",
+        "similarity_score": 0.7127,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.5076,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "RAPPLER",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "Facebook user Catherine Del Castillo Laudet, meanwhile, describes herself as one who works in a chemical and pharmaceutical company. Her recent posts, aside from the false claim about a super typhoon, have been flagged by some Facebook users as fake. – Addie Pobre/ Rappler.com Keep us aware of suspicious Facebook pages, groups, accounts, websites, articles, or photos in your network by contacting us at factcheck@rappler.com. Let us battle disinformation one Fact Check at a\n\nClaim: Facebook user Catherine Del Castillo Laudet claimed in a post on May 4 that a super typhoon is about to hit the Philippines. This was posted along with a CNN news clip of anchors discussing a strong storm called “Typhoon Hagupit” that’s supposed to be heading to the Philippines. Laudet’s caption of the clip"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.207016+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "4099ed5c3b123fa423deabc2105815df9c544268931a95de7170828e8ddd46d7",
+        "title": "FACT CHECK: No super typhoons in PH Area of Responsibility so far in August",
+        "content": "Claim: Two super typhoons have entered the Philippine Area of Responsibility (PAR) before or on Monday, August 7.\nRating: FALSE\nWhy we fact-checked this: The YouTube video containing the claim has 39,149 views at the time of writing. It was posted on Monday, August 7, 2023, by a supposed news channel with 519,000 subscribers.\nWhat the video said: The title of the YouTube video says: “2 Super Typhoon, nakapasok na sa bansa! Sobrang lakas!” (Two super typhoons have entered the country! They are po...",
+        "found_claim": "Two super typhoons have entered the Philippine Area of Responsibility (PAR) before or on Monday, August 7.",
+        "found_verdict": "FALSE",
+        "publish_date": "2023-08-08T08:00:00",
+        "url": "https://www.rappler.com/newsbreak/fact-check/no-super-typhoons-philippine-area-of-responsibility-august-7-2023/",
+        "similarity_score": 0.6191,
+        "entity_match_score": 0.0,
+        "combined_relevance_score": 0.3715,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.000 < 0.4)"
+        ],
+        "source": "RAPPLER",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "Keep us aware of suspicious Facebook pages, groups, accounts, websites, articles, or photos in your network by contacting us at factcheck@rappler.com. You may also report dubious claims to #FactsFirstPH tipline by messaging Rappler on Facebook or Newsbreak via Twitter direct message. You may also report through our Viber fact check chatbot. Let us battle disinformation one Fact Check at a\n\nClaim: Two super typhoons have entered the Philippine Area of Responsibility (PAR) before or on Monday, August 7. Rating: FALSE Why we fact-checked this: The YouTube video containing the claim has 39,149 views at the time of writing. It was posted on Monday, August 7, 2023, by a supposed news channel with 519,000 subscribers. What the video said: The title of the YouTube video says: “2 Super Typhoon,"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.207016+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "a5cab3a96c45d6a57db8a90d2e476527e61061a20d5f4517e6fb7c5b8bc280b6",
+        "title": "Clips DO NOT show super typhoon to hit PH",
+        "content": "Footage of a supposed Super Typhoon that will devastate the Philippines are circulating on social media. These are false. The clips show animated images of a 2018 hurricane in the United States.\nPosted on TikTok on Sept. 9, the 20-second video bore two satellite footage showing the eye of a massive storm. The video bore the text: “Mata ng Super Typhoon (Eye of the Super Typhoon).”\nIts caption also read:\n“Super typhoon #philippines #GenerPH #supertyphoon #weatherreport #weatherupdatetodayph.”\nSev...",
+        "found_claim": "The clips show a Super Typhoon that will hit the Philippines.",
+        "found_verdict": "FALSE",
+        "publish_date": "2024-09-17T15:54:25",
+        "url": "https://verafiles.org/articles/fact-check-clips-do-not-show-super-typhoon-to-hit-ph",
+        "similarity_score": 0.7868,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.5521,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "VERAFILES",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "According to PAGASA’s latest tropical cyclone bulletin, Gener was estimated in the vicinity of Ambaguio, Nueva Vizcaya with maximum sustained winds of 45 km per hour near the center and gustiness of up to 55 km per hour. Parts of Luzon are still placed under Tropical Cyclone Wind Signal No. 1 as it slightly weakens. The video uploaded by TikTok user @banatbicol garnered 36,900 reactions, 815 comments, 1,845 shares and 1,200,000 views. A copy reposted by a FB user also garnered 213 reactions, 77 comments, 181 shares and 30,000\n\nFootage of a supposed Super Typhoon that will devastate the Philippines are circulating on social media. These are false. The clips show animated images of a 2018 hurricane in the United States. Posted on TikTok on Sept. 9, the 20-second video bore two satellite"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.208112+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "b5c003ebe0d50b66250875648351c309c91aad5a71964141850f8523c650d976",
+        "title": "Destructive winds lash Northern, Central Luzon as 'Uwan' crosses landmass",
+        "content": "Destructive typhoon-force winds continued to batter Northern and Central Luzon late Sunday evening, Nov. 9, as Super Typhoon Uwan (international name: Fung-wong) crossed the Luzon landmass after making landfall over Dinalungan, Aurora earlier in the evening.\nAs of 10 p.m., the center of the eye of Uwan was located in the vicinity of Kasibu, Nueva Vizcaya, the Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) said.\nUwan maintained its maximum sustained winds of...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-09T23:28:00",
+        "url": "https://mb.com.ph/2025/11/09/destructive-winds-lash-northern-central-luzon-as-uwan-crosses-landmass",
+        "similarity_score": 0.2016,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.521,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Low semantic similarity (0.202 < 0.3)"
+        ],
+        "source": "MANILA-BULLETIN",
+        "source_type": "news_article",
+        "source_bias": "NEUTRAL",
+        "chunk_texts": "Southwestern portion of Cagayan (Enrile, Solana, Tuao, Piat, Rizal); Isabela; rest of Quirino; rest of Nueva Vizcaya; southern portion of Apayao (Conner); Abra; Kalinga; Mountain Province; Ifugao; Benguet; southern portion of Ilocos Norte (Nueva Era, Badoc, Pinili, Currimao, Banna, Marcos, City of Batac, Paoay, Dingras, Solsona, Sarrat, San Nicolas, Laoag City); Ilocos Sur; La Union; Pangasinan; rest of Aurora; rest of Nueva Ecija; eastern and central portions of Bulacan (Doña Remedios Trinidad, San Miguel, San Ildefonso, Norzagaray, San Rafael); northern and eastern portions of Tarlac (Camiling, San Clemente, Paniqui, Gerona, Victoria, Pura, Ramos, Moncada, San Manuel, Anao, La Paz, City of Tarlac, Santa Ignacia, Concepcion); eastern portion of Pampanga (Candaba, Arayat, Magalang);\n\nSouthw"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:22.208112+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "778304d354b51240a1a65291e96e9dde48c5f5e99913ec4bfc965b710265cfff",
+        "title": "FACT CHECK: Hindi super typhoon ang bagyong Kristine",
+        "content": "Ang sabi-sabi: Super typhoon ang bagyong Kristine.\nMarka: HINDI TOTOO\nBakit kailangang i-fact-check: Laman ng maraming post sa Facebook ngayong Oktubre 23 ang sabi-sabing ito. Iba’t ibang mga Facebook account, page, at public group ang nagpapakalat ng nasabing impormasyon.\nHalimbawa na lamang ang post na ito sa isang public group na may 49,000 na miyembro. Laman din ng isang Facebook page na may 20,000 likes at 15,000 followers ang kaparehong sabi-sabi.\nAng totoo: Hindi super typhoon ang bagyong...",
+        "found_claim": "Super typhoon ang bagyong Kristine.",
+        "found_verdict": "FALSE",
+        "publish_date": "2024-10-23T14:34:32",
+        "url": "https://www.rappler.com/newsbreak/fact-check/tropical-cyclone-kristine-not-super-typhoon/",
+        "similarity_score": 0.6386,
+        "entity_match_score": 0.2,
+        "combined_relevance_score": 0.4632,
+        "nli_result": null,
+        "verdict": null,
+        "skip_reason": [
+          "Specific name/identifier from claim not found in matched result",
+          "Key entities not found (0.200 < 0.4)"
+        ],
+        "source": "RAPPLER",
+        "source_type": "fact_check",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "Opisyal na balita: Para sa mga opisyal na update sa panahon, bisitahin ang mga social media account ng PAGASA sa X (dating Twitter), Facebook, at YouTube, o ang website nito. Maaari ring i-bookmark ang Philippine weather page ng Rappler. – Ailla dela Cruz/\n\nAng sabi-sabi: Super typhoon ang bagyong Kristine. Marka: HINDI TOTOO Bakit kailangang i-fact-check: Laman ng maraming post sa Facebook ngayong Oktubre 23 ang sabi-sabing ito. Iba’t ibang mga Facebook account, page, at public group ang nagpapakalat ng nasabing impormasyon. Halimbawa na lamang ang post na ito sa isang public group na may 49,000 na miyembro. Laman din ng isang Facebook page na may 20,000 likes at 15,000 followers ang kaparehong sabi-sabi. Ang totoo: Hindi super typhoon ang bagyong Kristine na kasalukuyang nakaaapekto sa"
+      },
+      "skipped": true
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:23.347338+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "b272199f354c97bb53b6d57635f49dad5e67c1fac539ea703cf1b1f8ce3c7364",
+        "title": "Woman dies as millions flee from ‘Uwan’",
+        "content": "Manila, Philippines—More than a million people have been evacuated and at least one person killed as floodwaters rose in the Philippines on Sunday before Super Typhoon Uwan’s (Fung-wong) expected landfall on the east coast.\nThe super typhoon, which comes just days after another storm ravaged the country, will slam into Aurora province between 8:00 pm and 11:00 pm, state weather forecaster Charmagne Varilla told Agence France Presse (AFP).\nWith a radius spanning nearly the whole of the Philippine...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-10T09:01:32",
+        "url": "https://manilastandard.net/news/weather/314665978/woman-dies-as-millions-flee-from-uwan.html",
+        "similarity_score": 0.4021,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.6413,
+        "nli_result": {
+          "relationship": "neutral",
+          "relationship_confidence": 0.9935956597328186,
+          "relationship_avg": 0.33333337982185185,
+          "claim_source": "MANILASTANDARD",
+          "analyzed_text": "“They decided to do our tradition of strapping down the roofs with big ropes and anchoring them on the ground, so they won’t be blown away by the wind,” provincial rescue official Roberto Monterola..."
+        },
+        "verdict": 0.36,
+        "skip_reason": [],
+        "source": "MANILASTANDARD",
+        "source_type": "news_article",
+        "source_bias": "NEUTRAL",
+        "chunk_texts": "“They decided to do our tradition of strapping down the roofs with big ropes and anchoring them on the ground, so they won’t be blown away by the wind,” provincial rescue official Roberto Monterola told AFP. In Sorsogon, a city in southern Luzon, some sought refuge in a church. Only days earlier, Typhoon Kalmaegi sent floodwaters rushing through the towns and cities of Cebu and Negros islands, sweeping away cars, riverside shanties and massive shipping containers. The typhoon, the deadliest of 2025 according to disaster database EM-DAT, killed at least 224 people and left 109 missing, according to government figures updated Sunday morning. Search and rescue efforts in Cebu were suspended on Saturday due to safety concerns over the approaching super typhoon. Editor’s Note: This story has\n\n‘T"
+      },
+      "skipped": false
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:23.347338+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "3cabbf7e3ee5a08647144c64a7f17c00f662aa7c87d837623d3cd08122b73b2e",
+        "title": "‘Uwan’ to affect Metro Manila, Visayas, PAGASA warns",
+        "content": "The state weather bureau yesterday warned that a potential super typhoon headed in the direction of Northern Luzon may also affect Metro Manila and even the Visayas.\nChris Perez, Assistant Weather Services Chief at the Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA), noted the sheer scale of the incoming storm.\n“In our estimation, the extent of this typhoon ‘Uwan’ extends around more than 500 kilometers from its center. So, even if its center hits northern L...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-07T00:58:51",
+        "url": "https://manilastandard.net/news/weather/314665251/uwan-to-affect-metro-manila-visayas-pagasa-warns.html",
+        "similarity_score": 0.6448,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.7869,
+        "nli_result": {
+          "relationship": "neutral",
+          "relationship_confidence": 0.9824085831642151,
+          "relationship_avg": 0.3333333267364651,
+          "claim_source": "MANILASTANDARD",
+          "analyzed_text": "“A (landfall) strike intensity around 100kt (around 185 kph) is entirely feasible at this point,” it added."
+        },
+        "verdict": 0.46,
+        "skip_reason": [],
+        "source": "MANILASTANDARD",
+        "source_type": "news_article",
+        "source_bias": "NEUTRAL",
+        "chunk_texts": "“A (landfall) strike intensity around 100kt (around 185 kph) is entirely feasible at this point,” it added. Meanwhile, the Office of Civil Defense assured that it continues to monitor “Uwan” once it enters the Philippine Area of Responsibility, as it is expected to make landfall in Northern Luzon. In an interview, OCD Deputy Administrator Bernardo Rafaelito Alejandro IV said in Filipino, “It [the typhoon] is expected to hit the Aurora-Tuguegarao, Cagayan, but we are monitoring its rainband because it will bring rain to the entire Luzon.” He emphasized that tight monitoring of the storm’s movements is necessary due to the danger of floods in Southern and Northern Luzon. “We are already issuing warnings… preparatory instructions have been issued to local government units [LGUs] in areas\n\nThe"
+      },
+      "skipped": false
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:24.206674+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "a7a903c8cb5adda0f31c85cf310cae86907e9599451bcaea7b3ad6aba0ff3781",
+        "title": "DOH activates emergency operations center for typhoon response",
+        "content": "The Department of Health (DOH) on Saturday activated its National Public Health Emergency Operations Center (PHEOC) as the Marcos administration declares a one-year state of national calamity following the extensive damage caused by Typhoon Tino ((international name Kalmaegi), and in anticipation of the impact of Typhoon Uwan (international name Fung-wong).\nWith this activation, the DOH said it will serve as the primary emergency operation centers to ensure that coordination for health-related e...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-08T13:38:00",
+        "url": "https://www.pna.gov.ph/articles/1262847",
+        "similarity_score": 0.3957,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.6374,
+        "nli_result": {
+          "relationship": "neutral",
+          "relationship_confidence": 0.8677681684494019,
+          "relationship_avg": 0.3333333544433117,
+          "claim_source": "PHILIPPINE-NEWS-AGENCY",
+          "analyzed_text": "The Department of Health (DOH) on Saturday activated its National Public Health Emergency Operations Center (PHEOC) as the Marcos administration declares a one-year state of national calamity..."
+        },
+        "verdict": 0.26,
+        "skip_reason": [],
+        "source": "PHILIPPINE-NEWS-AGENCY",
+        "source_type": "news_article",
+        "source_bias": "NEUTRAL",
+        "chunk_texts": "The Department of Health (DOH) on Saturday activated its National Public Health Emergency Operations Center (PHEOC) as the Marcos administration declares a one-year state of national calamity following the extensive damage caused by Typhoon Tino ((international name Kalmaegi), and in anticipation of the impact of Typhoon Uwan (international name Fung-wong). With this activation, the DOH said it will serve as the primary emergency operation centers to ensure that coordination for health-related emergencies, including during Uwan's onslaught, is centralized. The DOH said the PHEOC will provide a clear chain of command and ensure harmonized coordination within the DOH and local response partners. “Sa tulong din ng PHEOC, mas paiigtingin ang mekanismo para sa pagresponde mula national\n\nUwan is"
+      },
+      "skipped": false
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:24.251765+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "41ae16813e6a2f1fb0dd3ad0f9d1b6f71ddb16dc002a6df97c673ac6357ee6dc",
+        "title": "Uwan now a super typhoon; Signal No. 5 up in Bicol",
+        "content": "Uwan (international name Fung-wong) has intensified into a super typhoon, threatening to unleash catastrophic winds and flooding as it barrels toward Luzon, the Philippine Atmospheric, Geophysical and Astronomical Services (PAGASA) said Sunday.\nAt 7 a.m., Uwan was spotted 125 kilometers (km) east-northeast of Virac, Catanduanes, with maximum sustained winds of 185 kph and gusts of up to 230 kph. It is moving west-northwest at 25 kph, on track to make landfall over Aurora province by tonight or e...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-09T09:08:00",
+        "url": "https://www.pna.gov.ph/articles/1262873",
+        "similarity_score": 0.3259,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.5955,
+        "nli_result": {
+          "relationship": "neutral",
+          "relationship_confidence": 0.9448325634002686,
+          "relationship_avg": 0.3333333370586236,
+          "claim_source": "PHILIPPINE-NEWS-AGENCY",
+          "analyzed_text": "Signal No."
+        },
+        "verdict": 0.22,
+        "skip_reason": [],
+        "source": "PHILIPPINE-NEWS-AGENCY",
+        "source_type": "news_article",
+        "source_bias": "NEUTRAL",
+        "chunk_texts": "Signal No. 1: Batanes, Calamian and Cuyo Islands, the rest of Leyte, Southern Leyte, Bohol, northern and central Cebu (including Bantayan and Camotes), Negros Occidental and Negros Oriental (north), Guimaras, Iloilo, Capiz, Aklan, Antique, Dinagat Islands, Surigao del Norte, and parts of Agusan del Norte and Surigao del Sur. President Ferdinand R. Marcos Jr. earlier said all government agencies are on full alert, with preemptive evacuations underway and toll fees suspended for emergency convoys. Rescue assets, lifeboats and relief goods have been deployed to high-risk areas across Bicol and Central Luzon, while the Department of Social Welfare and Development and the Philippine Coast Guard stand by for rapid response. PAGASA said Uwan could remain a super typhoon through landfall before\n\nUw"
+      },
+      "skipped": false
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:25.152500+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "5ed11b36d810d4821828c9c3ce549ceb0ba15a320117d73431edddc2293888bd",
+        "title": "NO new super typhoon hitting the country",
+        "content": "Several posts on Facebook are erroneously claiming that a new super typhoon named Verbena is going to hit the Philippines not long after super typhoon Uwan (international name: Fung-wong) devastated various regions in the country. This is not true.\nThe posts spreading the false claim were published on Nov. 10. One of the posts bore the following text:\n“HINDI PA MAN NAKAKALAYO SI “UWAN,” MAY ISA NA NAMANG POSIBLENG SUPER TYPHOON NA PAPARATING! Habang hindi pa tuluyang nakakalabas ng bansa si Supe...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-15T10:47:08",
+        "url": "https://verafiles.org/articles/fact-check-no-new-super-typhoon-hitting-the-country",
+        "similarity_score": 0.5429,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.7258,
+        "nli_result": {
+          "relationship": "neutral",
+          "relationship_confidence": 0.9543430805206299,
+          "relationship_avg": 0.33333333643774193,
+          "claim_source": "VERAFILES",
+          "analyzed_text": "But Estareja added that certain regions in Visayas and Mindanao may experience scattered rains and thunderstorms due to the intertropical convergence zone, the line where winds from the north and..."
+        },
+        "verdict": 0.49,
+        "skip_reason": [],
+        "source": "VERAFILES",
+        "source_type": "news_article",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "But Estareja added that certain regions in Visayas and Mindanao may experience scattered rains and thunderstorms due to the intertropical convergence zone, the line where winds from the north and southern hemisphere meet. Manalo did say that any new typhoon that will form in the area will be named Verbena, which is highly likely where the spurious posts got the name from. These erroneous posts continue to circulate after Uwan weakened into a tropical depression north of Batanes and eventually dissolved, according to PAGASA’s weather reports on Nov. 13 and 14. FB pages DeepScoopp PH (created on Nov. 20, 2020), Angel Vlogs (Sept. 1, 2023) and Bantay Panahon (Aug. 28, 2024) published the same untrue claim, collectively garnering over 20,500 reactions, 3,300 comments and 12,700\n\nSeveral posts"
+      },
+      "skipped": false
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:25.178066+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "47f832ecd70f15bcf9d3d85f9a9c8c7370cec06fac00aad4de23b85bc34bf8a1",
+        "title": "OCD: 'Exposed' PH population to Typhoon Uwan at 30.8 million",
+        "content": "Millions of Filipinos should brace for heavy rains and strong winds due to potential super typhoon Uwan (international name: Fung-wong) once it hits the country.\nAt a news forum on Saturday, Office of Civil Defense (OCD) spokesperson Junie Castillo said the total population of provinces exposed to Uwan is 30.8 million.\n\"Total population in coastal areas exposed to Typhoon Uwan… this is 1.6 million,\" Castillo said.\nState weather bureau PAGASA reported in its 11 a.m. bulletin that Tropical Weather...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-08T18:20:00",
+        "url": "https://www.gmanetwork.com/news/topstories/nation/965374/ocd-exposed-ph-population-to-typhoon-uwan-at-30-8-million/story/",
+        "similarity_score": 0.8042,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.8825,
+        "nli_result": {
+          "relationship": "neutral",
+          "relationship_confidence": 0.9631244540214539,
+          "relationship_avg": 0.3333333144740512,
+          "claim_source": "GMANETWORK",
+          "analyzed_text": "Millions of Filipinos should brace for heavy rains and strong winds due to potential super typhoon Uwan (international name: Fung-wong) once it hits the country."
+        },
+        "verdict": 0.71,
+        "skip_reason": [],
+        "source": "GMANETWORK",
+        "source_type": "news_article",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "Millions of Filipinos should brace for heavy rains and strong winds due to potential super typhoon Uwan (international name: Fung-wong) once it hits the country. At a news forum on Saturday, Office of Civil Defense (OCD) spokesperson Junie Castillo said the total population of provinces exposed to Uwan is 30.8 million. \"Total population in coastal areas exposed to Typhoon Uwan… this is 1.6 million,\" Castillo said. State weather bureau PAGASA reported in its 11 a.m. bulletin that Tropical Weather Cyclone Signal No. 2 was hoisted over eight areas in Luzon and the Visayas as Uwan rapidly intensified. OCD's Castillo said \"exposed population\" means that \"itong exposure na pinag-uusapan natin ay kung sino, saan ang hahagipin ng hangin, at mga dalang pag-ulan ng Bagyong Uwan (the exposure we are"
+      },
+      "skipped": false
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:26.043986+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "f6635c5b2746ac52aaf8a6bed6bd15fa2a352fde24864bcd1940c6b0966b0de1",
+        "title": "Authorities work to reach areas isolated by ‘Uwan’",
+        "content": "Over two million Filipinos are trying to recover from the devastating impact of Super Typhoon ‘Uwan,’ as authorities aim to regain access to dozens of communities that remain isolated after the cyclone either damaged key public infrastructure or caused widespread flooding.\nCombined data from the Office of Civil Defense (OCD) and the National Disaster Risk Reduction and Management Council (NDRRMC) showed that more than 2.3 million individuals, equivalent to over 652,000 families, have been affect...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-11T13:53:04",
+        "url": "https://manilastandard.net/news/314666734/death-toll-from-uwan-rises-to-6-ndrrmc.html",
+        "similarity_score": 0.5113,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.7068,
+        "nli_result": {
+          "relationship": "neutral",
+          "relationship_confidence": 0.9989303946495056,
+          "relationship_avg": 0.3333333537739236,
+          "claim_source": "MANILASTANDARD",
+          "analyzed_text": "President Ferdinand “Bongbong” Marcos Jr. has ordered government agencies to sustain nonstop relief operations and expedite road clearing to reconnect disaster-hit communities."
+        },
+        "verdict": 0.36,
+        "skip_reason": [],
+        "source": "MANILASTANDARD",
+        "source_type": "news_article",
+        "source_bias": "NEUTRAL",
+        "chunk_texts": "President Ferdinand “Bongbong” Marcos Jr. has ordered government agencies to sustain nonstop relief operations and expedite road clearing to reconnect disaster-hit communities. So far, about ₱48.88 million worth of aid has been distributed to affected families. Although Uwan has weakened into a severe tropical storm and exited the Philippine Area of Responsibility (PAR) early Tuesday, authorities warn that its aftermath—marked by widespread flooding, damaged infrastructure, and prolonged displacement—will take weeks, if not months, to recover from. Editor’s Note: This story has been recast and updated. Originally posted with the headline “Death toll from ‘Uwan’ rises to 6 —\n\nOver two million Filipinos are trying to recover from the devastating impact of Super Typhoon ‘Uwan,’ as authorities"
+      },
+      "skipped": false
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:26.259699+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "8849198d460dae8e490234c86911bc02691ee1ce7f0180f4abd476a5540a1d3c",
+        "title": "'Uwan' weakens outside PAR; strong winds still felt in Northern Luzon",
+        "content": "Typhoon Uwan (international name Fung-wong) has weakened into a severe tropical storm while remaining outside the Philippine Area of Responsibility (PAR), but strong winds continue to affect parts of Northern Luzon, the Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) said on Tuesday, Nov. 11.\nAs of 11 a.m., the center of Severe Tropical Storm Uwan was estimated 370 kilometers west-northwest of Calayan, Cagayan, or outside PAR.\nIt was moving north-northwestwa...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-11T13:08:00",
+        "url": "https://mb.com.ph/2025/11/11/uwan-weakens-outside-par-strong-winds-still-felt-in-northern-luzon",
+        "similarity_score": 0.3705,
+        "entity_match_score": 0.8,
+        "combined_relevance_score": 0.5423,
+        "nli_result": {
+          "relationship": "neutral",
+          "relationship_confidence": 0.885945737361908,
+          "relationship_avg": 0.3333333336437742,
+          "claim_source": "MANILA-BULLETIN",
+          "analyzed_text": "Meanwhile, Signal No."
+        },
+        "verdict": 0.24,
+        "skip_reason": [],
+        "source": "MANILA-BULLETIN",
+        "source_type": "news_article",
+        "source_bias": "NEUTRAL",
+        "chunk_texts": "Meanwhile, Signal No. 1 is still raised over the following areas where minimal to minor impacts from strong winds are possible: northern and central portions of Cagayan (Piat, Santo Niño, Camalaniugan, Tuao, Lal-Lo, Pamplona, Gonzaga, Alcala, Amulung, Santa Teresita, Buguey, Solana, Rizal, Santa Ana, Claveria, Gattaran, Iguig, Lasam, Aparri, Ballesteros, Abulug, Allacapan, Sanchez-Mira, Santa Praxedes, and Baggao), including Babuyan Islands, Apayao, Abra, and Kalinga, western portion of Mountain Province (Besao, Tadian, Sagada, Bauko, Sadanga, Bontoc, and Sabangan), northwestern portion of Benguet (Bakun, Kibungan, Kapangan, and Mankayan), the rest of Ilocos Norte, Ilocos Sur, northern and central portions of La Union (Luna, Caba, Santol, Bauang, City of San Fernando, San Juan, Bagulin,\n\nIt"
+      },
+      "skipped": false
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:27.010468+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "f8895a95a294414ef0c99973e8fbf1292792b5ad43fd3fb7b4cb205e9ffa610a",
+        "title": "Uwan weakens into severe tropical storm outside PAR",
+        "content": "Typhoon Uwan (international name Fung-wong) has weakened into a severe tropical storm as it continues to move north-northwest outside the Philippine Area of Responsibility (PAR), the Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) said Tuesday.\nIn its 11 a.m. bulletin, the state weather bureau said Uwan's center was located 370 kilometers west-northwest of Calayan, Cagayan.\nThe storm, moving at 10 kilometers per hour (kph), is packing maximum sustained winds...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-11T11:34:00",
+        "url": "https://www.pna.gov.ph/articles/1263002",
+        "similarity_score": 0.7605,
+        "entity_match_score": 0.8,
+        "combined_relevance_score": 0.7763,
+        "nli_result": {
+          "relationship": "refute",
+          "relationship_confidence": 0.947497546672821,
+          "relationship_avg": 0.33333331455166143,
+          "claim_source": "PHILIPPINE-NEWS-AGENCY",
+          "analyzed_text": "Typhoon Uwan (international name Fung-wong) has weakened into a severe tropical storm as it continues to move north-northwest outside the Philippine Area of Responsibility (PAR), the Philippine..."
+        },
+        "verdict": -0.51,
+        "skip_reason": [],
+        "source": "PHILIPPINE-NEWS-AGENCY",
+        "source_type": "news_article",
+        "source_bias": "NEUTRAL",
+        "chunk_texts": "Typhoon Uwan (international name Fung-wong) has weakened into a severe tropical storm as it continues to move north-northwest outside the Philippine Area of Responsibility (PAR), the Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) said Tuesday. In its 11 a.m. bulletin, the state weather bureau said Uwan's center was located 370 kilometers west-northwest of Calayan, Cagayan. The storm, moving at 10 kilometers per hour (kph), is packing maximum sustained winds of 110 kph near the center and gusts of up to 135 kph. Tropical Cyclone Wind Signal (TCWS) No. 2 remains hoisted over Batanes and the western portion of Ilocos Norte, where gale-force winds may bring minor to moderate impacts to life and property. Meanwhile, TCWS No. 1 is raised over parts of"
+      },
+      "skipped": false
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:27.346309+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "b4dd3627407ea2d75133620b7b42acd5989d998e65b7cdfb9a1e4351f5b71f1c",
+        "title": "More areas under storm signals as Typhoon Uwan nears PH",
+        "content": "Typhoon Uwan has rapidly intensified over the Philippine Sea east of Eastern Visayas, the weather bureau said Saturday.\nIn its 11 a.m. bulletin, the Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) said the center of Typhoon Uwan was located 680 km. east of Borongan, Eastern Visayas or 760 km. east of Catarman, Northern Samar.\nIt is moving westward at 35 kph with maximum sustained winds of 140 kph near the center and gustiness of up to 170 kph.\nTropical Cyclo...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-08T11:50:00",
+        "url": "https://www.pna.gov.ph/articles/1262843",
+        "similarity_score": 0.3391,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.6034,
+        "nli_result": {
+          "relationship": "neutral",
+          "relationship_confidence": 0.8208532333374023,
+          "relationship_avg": 0.3333333010474841,
+          "claim_source": "PHILIPPINE-NEWS-AGENCY",
+          "analyzed_text": "Signal No."
+        },
+        "verdict": 0.22,
+        "skip_reason": [],
+        "source": "PHILIPPINE-NEWS-AGENCY",
+        "source_type": "news_article",
+        "source_bias": "NEUTRAL",
+        "chunk_texts": "Signal No. 1 is also hoisted over the rest of Samar; the rest of Eastern Samar; Biliran; Leyte; Southern Leyte; the northeastern portion of Bohol (Getafe, Talibon, Buenavista, Trinidad, San Miguel, Ubay, Alicia, Mabini, Bien Unido, and Pres. Carlos P. Garcia); the northern and central portions of Cebu (Medellin, Daanbantayan, City of Bogo, Tabogon, San Remigio, Tabuelan, Borbon, Sogod, Tuburan, Catmon, Carmen, Danao City, Compostela, Liloan, Consolacion, Lapu-Lapu City, Mandaue City, Cordova, Asturias, Cebu City, Balamban, City of Talisay, Toledo City, and Minglanilla), including Bantayan and Camotes Islands; the northern portion of Negros Occidental (City of Escalante, Toboso, Sagay City, Cadiz City, Calatrava, Manapla, City of Victorias, Enrique B. Magalona, Silay City, City of Talisay,"
+      },
+      "skipped": false
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:27.714828+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "247ec6f3dca044ef4e922f0f7e3febb095cdb5ceadf62b144c3525a08b89a07c",
+        "title": "Uwan batters Luzon with storm surge, infra damage, power outages",
+        "content": "Storm surge, infrastructure damage, and power outage were reported after Tropical Cyclone Uwan made landfall as a super typhoon over Aurora and crossed several provinces in Luzon, according to reports on",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-10T12:17:00",
+        "url": "https://www.gmanetwork.com/news/topstories/nation/965527/uwan-batters-luzon-with-storm-surge-infra-damage-power-outages/story/",
+        "similarity_score": 0.7446,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.8467,
+        "nli_result": {
+          "relationship": "neutral",
+          "relationship_confidence": 0.9991119503974915,
+          "relationship_avg": 0.3333333359914832,
+          "claim_source": "GMANETWORK",
+          "analyzed_text": "Storm surge, infrastructure damage, and power outage were reported after Tropical Cyclone Uwan made landfall as a super typhoon over Aurora and crossed several provinces in Luzon, according to reports"
+        },
+        "verdict": 0.7,
+        "skip_reason": [],
+        "source": "GMANETWORK",
+        "source_type": "news_article",
+        "source_bias": "LEFT-CENTER",
+        "chunk_texts": "Storm surge, infrastructure damage, and power outage were reported after Tropical Cyclone Uwan made landfall as a super typhoon over Aurora and crossed several provinces in Luzon, according to reports"
+      },
+      "skipped": false
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:27.877641+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "a9db896000362e098a5310dfaa22a9bcd4ccf8267d84ce21fca9c5894071d573",
+        "title": "Marcos orders nonstop relief, road repairs in typhoon-hit areas",
+        "content": "President Ferdinand “Bongbong” Marcos Jr. on Monday directed government agencies to maintain nonstop relief operations and road rehabilitation efforts in areas battered by Super Typhoon Uwan (Fung-wong).\nIn a situation briefing at the PSC Command Operations Center on Monday, President Marcos instructed the Department of Social Welfare and Development (DSWD) to continue delivering aid to evacuees displaced by Uwan.\nThe DSWD reported that around 100,050 families in the Bicol region were affected b...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-11T14:29:19",
+        "url": "https://manilastandard.net/news/314666429/marcos-orders-nonstop-relief-road-repairs-in-typhoon-hit-areas.html",
+        "similarity_score": 0.4351,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.661,
+        "nli_result": {
+          "relationship": "neutral",
+          "relationship_confidence": 0.9863145351409912,
+          "relationship_avg": 0.33333332068286836,
+          "claim_source": "MANILASTANDARD",
+          "analyzed_text": "President Ferdinand “Bongbong” Marcos Jr. on Monday directed government agencies to maintain nonstop relief operations and road rehabilitation efforts in areas battered by Super Typhoon Uwan..."
+        },
+        "verdict": 0.39,
+        "skip_reason": [],
+        "source": "MANILASTANDARD",
+        "source_type": "news_article",
+        "source_bias": "NEUTRAL",
+        "chunk_texts": "President Ferdinand “Bongbong” Marcos Jr. on Monday directed government agencies to maintain nonstop relief operations and road rehabilitation efforts in areas battered by Super Typhoon Uwan (Fung-wong). In a situation briefing at the PSC Command Operations Center on Monday, President Marcos instructed the Department of Social Welfare and Development (DSWD) to continue delivering aid to evacuees displaced by Uwan. The DSWD reported that around 100,050 families in the Bicol region were affected by the typhoon. In Camarines Sur alone, some 44,000 families were displaced, while another 20,000 were affected in Quezon province. Meanwhile, the Office of Civil Defense (OCD) also reported that Pangasinan was the hardest hit by flooding, prompting preemptive evacuations of more than 426,000\n\nSuper"
+      },
+      "skipped": false
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:28.807047+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "result",
+      "data": {
+        "doc_id": "7c140abbb36c664a9bb6dbc9ca0e4dcbdf806bfeaf0d23ac1bd8d55cb553c8fd",
+        "title": "Uwan intensifies into typhoon, now inside PAR",
+        "content": "Severe Tropical Cyclone (Fung-wong) has intensified into a typhoon and is now inside the Philippine Area of Responsibility (PAR), the weather bureau said Friday.\nIn its 11 p.m. bulletin, the Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) said the center of Typhoon Uwan was located at 1,045 kilometers east of Eastern Visayas.\nIt is moving west northwestward at 20 kph with maximum sustained winds of 120 kph near the center and gustiness of up to 150 kph.\nPAGA...",
+        "found_claim": null,
+        "found_verdict": null,
+        "publish_date": "2025-11-07T23:55:00",
+        "url": "https://www.pna.gov.ph/articles/1262826",
+        "similarity_score": 0.3335,
+        "entity_match_score": 1.0,
+        "combined_relevance_score": 0.6001,
+        "nli_result": {
+          "relationship": "neutral",
+          "relationship_confidence": 0.5679364800453186,
+          "relationship_avg": 0.3333333383003871,
+          "claim_source": "PHILIPPINE-NEWS-AGENCY",
+          "analyzed_text": "Northern Samar, Eastern Samar, Samar, Biliran, Leyte, Southern Leyte, the northern and central portions of Cebu Cebu (Medellin, Daanbantayan, City of Bogo, Tabogon, San Remigio, Tabuelan, Borbon,..."
+        },
+        "verdict": 0.18,
+        "skip_reason": [],
+        "source": "PHILIPPINE-NEWS-AGENCY",
+        "source_type": "news_article",
+        "source_bias": "NEUTRAL",
+        "chunk_texts": "Northern Samar, Eastern Samar, Samar, Biliran, Leyte, Southern Leyte, the northern and central portions of Cebu   Cebu (Medellin, Daanbantayan, City of Bogo, Tabogon, San Remigio, Tabuelan, Borbon, Sogod, Tuburan, Catmon, Carmen, Danao City, Compostela, Liloan, Consolacion, Lapu-Lapu City, Mandaue City, Cordova, Asturias, Cebu City, Balamban, City of Talisay, Toledo City, Minglanilla) including Bantayan and Camotes Islands, the northeastern portion of Bohol (Getafe, Talibon, Buenavista, Trinidad, San Miguel, Ubay, Alicia, Mabini, Bien Unido, Pres. Carlos P. Garcia), the northern portion of Negros Occidental  (City of Escalante, Toboso, Sagay City, Cadiz City, Calatrava, Manapla, City of Victorias, Enrique B. Magalona, Silay City, City of Talisay), the northern portion of  Iloilo (Carles,\n\nF"
+      },
+      "skipped": false
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:28.807047+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "stats",
+      "total_results": 39,
+      "stats": {
+        "overall_verdict": 0.3138,
+        "bias_divergence": -0.5135,
+        "truth_confidence_score": 0.8324,
+        "bias_consistency": 0.4923,
+        "total_processed": 39
+      }
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:31.823097+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "remarks",
+      "doc_id": "b272199f354c97bb53b6d57635f49dad5e67c1fac539ea703cf1b1f8ce3c7364",
+      "remarks": "The article reports that They decided to do our tradition of strapping the roofs with big ropes and anchoring them on the ground so that they won’t be blown away by the wind,” Provincial Rescue Official Roberto Monterola told AFP. Based on this evidence, the claim is inconclusive or slightly supported, with a verdict score of 0.36 on a scale from -1 to 1."
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:33.463352+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "remarks",
+      "doc_id": "3cabbf7e3ee5a08647144c64a7f17c00f662aa7c87d837623d3cd08122b73b2e",
+      "remarks": "The article reports that “A (landfall) strike intensity around 100kt (around 185 kph) is at this point entirely feasible,” it added. Based on this evidence, the claim is inconclusive or slightly supported, with a verdict score of 0.46 on a scale from -1 to 1."
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:41.539920+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "remarks",
+      "doc_id": "a7a903c8cb5adda0f31c85cf310cae86907e9599451bcaea7b3ad6aba0ff3781",
+      "remarks": "The article reports that the Department of Health (DOH) activated its National Public Health Emergency Operations Center (PHEOC) as the Marcos administration declares a one-year state of national calamity. The PHEOC will provide a clear chain of command and ensure harmonized coordination within the DO. Based on this evidence, the claim is inconclusive, with a verdict score of 0.26 on a scale from -1 to 1."
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:41.547886+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "remarks",
+      "doc_id": "41ae16813e6a2f1fb0dd3ad0f9d1b6f71ddb16dc002a6df97c673ac6357ee6dc",
+      "remarks": "The article reports that Signal No. Based on this evidence, the claim is inconclusive, with a verdict score of 0.22 on a scale from -1 to 1."
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:41.549895+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "remarks",
+      "doc_id": "5ed11b36d810d4821828c9c3ce549ceb0ba15a320117d73431edddc2293888bd",
+      "remarks": "The article reports that But Estareja added that certain regions in Visayas and Mindanao may experience scattered rains and thunderstorms due to the intertropical convergence zone, the line where winds from the north and southern hemisphere meet. Based on this evidence, the claim is inconclusive or slightly supported, with a verdict score of 0.49 on a scale from -1 to 1."
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:43.457379+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "remarks",
+      "doc_id": "47f832ecd70f15bcf9d3d85f9a9c8c7370cec06fac00aad4de23b85bc34bf8a1",
+      "remarks": "The article reports that Millions of Filipinos should prepare for heavy rains and strong winds due to potential super Typhoon Uwan (international name: Fung-wong) once it hits the country. Based on this evidence, the claim is inconclusive or mostly supported, with a verdict score of 0.71 on a scale from -1 to 1."
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:45.308251+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "remarks",
+      "doc_id": "f6635c5b2746ac52aaf8a6bed6bd15fa2a352fde24864bcd1940c6b0966b0de1",
+      "remarks": "The article reports that President Ferdinand “Bongbong” Marcos Jr. has ordered government agencies to sustain nonstop relief operations and to expedite road clearing to reconnect disaster-hit communities. Based on this evidence, the claim is inconclusive or slightly supported, with a verdict score of 0.36 on a scale from -1 to 1."
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:45.330084+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "remarks",
+      "doc_id": "8849198d460dae8e490234c86911bc02691ee1ce7f0180f4abd476a5540a1d3c",
+      "remarks": "The article reports that Meanwhile, Signal No. Based on this evidence, the claim is inconclusive, with a verdict score of 0.24 on a scale from -1 to 1."
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:45.335747+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "remarks",
+      "doc_id": "f8895a95a294414ef0c99973e8fbf1292792b5ad43fd3fb7b4cb205e9ffa610a",
+      "remarks": "The article reports that Typhoon Uwan (international name Fung-wong) has weakened into a severe tropical storm as it continues to move north-northwest outside the Philippine Area of Responsibility (PAR), the Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) said Tuesday. Based on this evidence, the claim is mostly refuted, with a verdict score of -0.51 on a scale from -1 to 1."
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:45.340089+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "remarks",
+      "doc_id": "b4dd3627407ea2d75133620b7b42acd5989d998e65b7cdfb9a1e4351f5b71f1c",
+      "remarks": "The article reports that Signal No. Based on this evidence, the claim is inconclusive, with a verdict score of 0.22 on a scale from -1 to 1."
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:47.511554+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "remarks",
+      "doc_id": "247ec6f3dca044ef4e922f0f7e3febb095cdb5ceadf62b144c3525a08b89a07c",
+      "remarks": "The article reports that according to reports, storm surges, infrastructure damage and power outage were reported after Tropical Cyclone Uwan made landfall as a super typhoon over Aurora and crossed several provinces in Luzon. Based on this evidence, the claim is inconclusive or mostly supported, with a verdict score of 0.70 on a scale from -1 to 1."
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:47.526369+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "remarks",
+      "doc_id": "a9db896000362e098a5310dfaa22a9bcd4ccf8267d84ce21fca9c5894071d573",
+      "remarks": "The article reports that President Ferdinand “Bongbong” Marcos Jr. on Monday directed government agencies to maintain nonstop relief operations and road rehabilitation efforts in areas battered by Super Typhoon Uwan (Fung-wong). Based on this evidence, the claim is inconclusive or slightly supported, with a verdict score of 0.39 on a scale from -1 to 1."
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:49.458562+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "remarks",
+      "doc_id": "7c140abbb36c664a9bb6dbc9ca0e4dcbdf806bfeaf0d23ac1bd8d55cb553c8fd",
+      "remarks": "The article reports that Samar, northern Samar, eastern Samar, Samar, Biliran, Leyte, southern Leyte, the northern and central Cebu Cebu. Based on this evidence, the claim is inconclusive, with a verdict score of 0.18 on a scale from -1 to 1."
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:49.458562+00:00",
+    "direction": "outbound",
+    "payload": {
+      "type": "complete"
+    }
+  },
+  {
+    "timestamp": "2026-02-23T08:02:49.458562+00:00",
+    "direction": "meta",
+    "payload": "connection_closed"
+  }
+]

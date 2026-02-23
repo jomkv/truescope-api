@@ -5,11 +5,10 @@ from models.article_result_model import ArticleResultModel
 class StatsService:
     """
     Service for calculating core verification metrics:
-    1. Final Verdict - Overall verdict adjusted by confidence
-    2. Overall Verdict - Average truth score across articles
-    3. Truth Confidence Score - Confidence level in the verdict
-    4. Bias Divergence - Ideological spread across sources
-    5. Bias Consistency - Overall consistency of bias patterns with verdicts
+    1. Overall Verdict - Average truth score across articles
+    2. Truth Confidence Score - Confidence level in the verdict
+    3. Bias Divergence - Ideological spread across sources
+    4. Bias Consistency - Overall consistency of bias patterns with verdicts
     """
 
     @staticmethod
@@ -21,12 +20,11 @@ class StatsService:
             results (list[dict]): List of article result dictionaries
 
         Returns:
-            dict: Contains final_verdict, overall_verdict, truth_confidence_score,
+            dict: Contains overall_verdict, truth_confidence_score,
                   bias_divergence, and bias_consistency on a -1 to 1 scale
         """
         if not results:
             return {
-                "final_verdict": 0,
                 "overall_verdict": 0,
                 "bias_divergence": 0,
                 "truth_confidence_score": 0,
@@ -47,13 +45,7 @@ class StatsService:
         # 4. Calculate Bias Consistency
         bias_consistency = StatsService.calculate_bias_consistency(results)
 
-        # 5. Calculate Final Verdict using both overall_verdict and truth_confidence_score
-        final_verdict = StatsService.calculate_final_verdict(
-            overall_verdict, truth_confidence_score
-        )
-
         return {
-            "final_verdict": round(final_verdict, 4),
             "overall_verdict": round(overall_verdict, 4),
             "bias_divergence": round(bias_divergence, 4),
             "truth_confidence_score": round(truth_confidence_score, 4),
@@ -188,63 +180,4 @@ class StatsService:
         )
         return (consistency * 2) - 1
 
-    @staticmethod
-    def calculate_final_verdict(
-        overall_verdict: float, truth_confidence_score: float
-    ) -> float:
-        """
-        Calculate final verdict (-1 to 1) using confidence-moderated formula.
-
-        Logic:
-        - If TCS is low (<0.33 unsigned): Return neutral (0.0) - unclear case
-        - If OV is strongly extreme (abs(OV) > 0.5):
-            - High TCS (>0.66): Trust OV fully (100%)
-            - Mid TCS (0.33-0.66): Lean toward OV (70%)
-        - If OV is moderately strong (0.33 < abs(OV) <= 0.5):
-            - High TCS: Strong confidence (85%)
-            - Mid TCS: Moderate confidence (70%)
-        - If OV is weak (abs(OV) <= 0.33): Pull toward neutral (50%)
-
-        Args:
-            overall_verdict (float): Average verdict score (-1 to 1)
-            truth_confidence_score (float): Confidence in verdict (-1 to 1)
-
-        Returns:
-            float: Final verdict (-1 to 1)
-        """
-        HIGH_THRESHOLD = 0.66
-        LOW_THRESHOLD = 0.33
-        MID_POINT = 0.0
-        OV_EXTREME_THRESHOLD = 0.5  # Raised from 0.33 to require stronger verdicts
-
-        # Map signed confidence (-1..1) to unsigned (0..1) for thresholding
-        truth_confidence_unsigned = (truth_confidence_score + 1) / 2
-
-        # Low confidence → pull to neutral
-        if truth_confidence_unsigned < LOW_THRESHOLD:
-            return MID_POINT
-
-        # Distance from neutral determines if we're at extremes or in middle
-        ov_distance_from_middle = abs(overall_verdict)
-
-        # At extremes (>0.5 from neutral) - truly strong verdicts
-        if ov_distance_from_middle > OV_EXTREME_THRESHOLD:
-            # High TCS at extremes: trust OV fully
-            if truth_confidence_unsigned > HIGH_THRESHOLD:
-                return overall_verdict
-            # Mid TCS at extremes: lean toward OV (70%)
-            return overall_verdict * 0.7
-
-        # Moderate verdicts (0.33 < abs(OV) <= 0.5)
-        elif ov_distance_from_middle > 0.33:
-            # High confidence: lean toward OV (85%)
-            if truth_confidence_unsigned > HIGH_THRESHOLD:
-                return overall_verdict * 0.85
-            # Mid confidence: moderate scaling (70%)
-            return overall_verdict * 0.7
-
-        # In middle range (abs(OV) <= 0.33): pull toward neutral
-        # If confidence is high, soften the pull so results can be more assertive
-        if truth_confidence_unsigned > HIGH_THRESHOLD:
-            return overall_verdict * 0.7
-        return overall_verdict * 0.5
+    # Removed calculate_final_verdict (final verdict logic no longer used)

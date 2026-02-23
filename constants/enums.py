@@ -39,8 +39,7 @@ class StreamEventType(str, Enum):
     ERROR = "error"
 
 
-# Generic descriptor terms that should not dominate partial entity matching
-# These are common modifiers/titles/categories that often appear with specific names
+# Generic entity terms that should not dominate partial entity matching
 ENTITY_GENERIC_TOKENS = {
     # Weather descriptors
     "super",
