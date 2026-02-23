@@ -37,3 +37,56 @@ class StreamEventType(str, Enum):
     REMARKS = "remarks"
     COMPLETE = "complete"
     ERROR = "error"
+
+
+# Generic descriptor terms that should not dominate partial entity matching
+# These are common modifiers/titles/categories that often appear with specific names
+ENTITY_GENERIC_TOKENS = {
+    # Weather descriptors
+    "super",
+    "typhoon",
+    "tropical",
+    "storm",
+    "depression",
+    "bagyo",
+    "bagyong",
+    # Political/titles
+    "president",
+    "vice",
+    "senator",
+    "mayor",
+    "governor",
+    "congressman",
+    "minister",
+    "secretary",
+    "representative",
+    # Business/organization descriptors
+    "company",
+    "corporation",
+    "inc",
+    "corp",
+    "ltd",
+    "llc",
+    "foundation",
+    "organization",
+    # Geographic descriptors
+    "city",
+    "province",
+    "municipality",
+    "region",
+    "district",
+    "barangay",
+    "island",
+    "country",
+    # General descriptors
+    "new",
+    "old",
+    "national",
+    "international",
+    "global",
+    "local",
+    "federal",
+    "state",
+    "central",
+    "general",
+}

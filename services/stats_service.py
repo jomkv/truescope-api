@@ -193,14 +193,17 @@ class StatsService:
         overall_verdict: float, truth_confidence_score: float
     ) -> float:
         """
-                Calculate final verdict (-1 to 1) using simplified formula.
+        Calculate final verdict (-1 to 1) using confidence-moderated formula.
 
         Logic:
-                - If TCS is low (<0.33): Return neutral (0.0) - unclear case
-                - If OV is at extremes (abs(OV) > 0.33):
-                    - High TCS (>0.66): Trust OV fully
-                    - Mid TCS (0.33-0.66): Lean toward OV (scale down)
-                - If OV is in middle (abs(OV) <= 0.33): Pull toward neutral
+        - If TCS is low (<0.33 unsigned): Return neutral (0.0) - unclear case
+        - If OV is strongly extreme (abs(OV) > 0.5):
+            - High TCS (>0.66): Trust OV fully (100%)
+            - Mid TCS (0.33-0.66): Lean toward OV (70%)
+        - If OV is moderately strong (0.33 < abs(OV) <= 0.5):
+            - High TCS: Strong confidence (85%)
+            - Mid TCS: Moderate confidence (70%)
+        - If OV is weak (abs(OV) <= 0.33): Pull toward neutral (50%)
 
         Args:
             overall_verdict (float): Average verdict score (-1 to 1)
@@ -212,7 +215,7 @@ class StatsService:
         HIGH_THRESHOLD = 0.66
         LOW_THRESHOLD = 0.33
         MID_POINT = 0.0
-        OV_EXTREME_THRESHOLD = 0.33
+        OV_EXTREME_THRESHOLD = 0.5  # Raised from 0.33 to require stronger verdicts
 
         # Map signed confidence (-1..1) to unsigned (0..1) for thresholding
         truth_confidence_unsigned = (truth_confidence_score + 1) / 2
@@ -224,13 +227,24 @@ class StatsService:
         # Distance from neutral determines if we're at extremes or in middle
         ov_distance_from_middle = abs(overall_verdict)
 
-        # At extremes (>0.33 from neutral)
+        # At extremes (>0.5 from neutral) - truly strong verdicts
         if ov_distance_from_middle > OV_EXTREME_THRESHOLD:
             # High TCS at extremes: trust OV fully
             if truth_confidence_unsigned > HIGH_THRESHOLD:
                 return overall_verdict
-            # Mid TCS at extremes: lean toward OV
+            # Mid TCS at extremes: lean toward OV (70%)
             return overall_verdict * 0.7
 
-        # In middle range: pull toward neutral
+        # Moderate verdicts (0.33 < abs(OV) <= 0.5)
+        elif ov_distance_from_middle > 0.33:
+            # High confidence: lean toward OV (85%)
+            if truth_confidence_unsigned > HIGH_THRESHOLD:
+                return overall_verdict * 0.85
+            # Mid confidence: moderate scaling (70%)
+            return overall_verdict * 0.7
+
+        # In middle range (abs(OV) <= 0.33): pull toward neutral
+        # If confidence is high, soften the pull so results can be more assertive
+        if truth_confidence_unsigned > HIGH_THRESHOLD:
+            return overall_verdict * 0.7
         return overall_verdict * 0.5

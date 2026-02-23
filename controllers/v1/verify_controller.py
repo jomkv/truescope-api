@@ -7,7 +7,13 @@ from constants.weights import (
     SOURCE_BIAS_WEIGHT_MAP,
     NLI_LABEL_WEIGHT_MAP,
 )
-from constants.enums import Verdict, NLILabel, SourceBias, StreamEventType
+from constants.enums import (
+    Verdict,
+    NLILabel,
+    SourceBias,
+    StreamEventType,
+    ENTITY_GENERIC_TOKENS,
+)
 from dateparser.search import search_dates
 from services import (
     EmbeddingService,
@@ -50,7 +56,7 @@ class VerifyController:
         self.MAX_DEEP_ANALYSIS = 5
 
     @staticmethod
-    def normalize_text(text: str) -> str:
+    def normalize_text(text: str, lowercase: bool = True) -> str:
         """
         Normalize input text for consistent downstream processing.
 
@@ -72,8 +78,9 @@ class VerifyController:
         # Unicode normalization
         text = unicodedata.normalize("NFKC", text)
 
-        # Lowercase
-        text = text.lower()
+        if lowercase:
+            # Lowercase
+            text = text.lower()
 
         # Remove extra whitespace
         text = re.sub(r"\s+", " ", text)
@@ -254,7 +261,28 @@ class VerifyController:
         entities_with_label = self.entity_extraction_service.extract_entities(text)
 
         # Extract entity names only, exclude label
-        return [entity[0] for entity in entities_with_label]
+        entities = [entity[0] for entity in entities_with_label if entity and entity[0]]
+
+        # Fallback: capture storm names from patterns like
+        # "super typhoon uwan", "typhoon uwan", "storm uwan"
+        storm_name_matches = re.findall(
+            r"\b(?:super\s+typhoon|typhoon|tropical\s+storm|storm|bagyo|bagyong)\s+([a-zA-Z][a-zA-Z\-]{1,})\b",
+            text,
+            flags=re.IGNORECASE,
+        )
+        entities.extend(storm_name_matches)
+
+        # De-duplicate while preserving order (case-insensitive)
+        deduped_entities: list[str] = []
+        seen_entities: set[str] = set()
+        for entity in entities:
+            norm_entity = self.normalize_text(entity)
+            if not norm_entity or norm_entity in seen_entities:
+                continue
+            seen_entities.add(norm_entity)
+            deduped_entities.append(entity)
+
+        return deduped_entities
 
     def calculate_entity_match_score(
         self, claim_entities: list[str], text: str, article_title: str = ""
@@ -277,18 +305,99 @@ class VerifyController:
         text_norm = self.normalize_text(text)
         article_title_norm = self.normalize_text(article_title)
 
-        matches = 0
-        total = len(claim_entities)
+        matches = 0.0
+        total_weight = 0.0
+
+        text_tokens = set(re.findall(r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", text_norm))
+        title_tokens = set(
+            re.findall(r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", article_title_norm)
+        )
+        comparison_tokens = text_tokens.union(title_tokens)
 
         for entity in claim_entities:
-            entity_lower = entity.lower()
+            entity_lower = self.normalize_text(entity)
+            entity_tokens_all = re.findall(r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", entity_lower)
+
+            specific_entity_tokens = [
+                token
+                for token in entity_tokens_all
+                if token not in ENTITY_GENERIC_TOKENS and len(token) >= 3
+            ]
+
+            # Generic-only entities like "super typhoon" should have lower influence
+            # than specific names like "uwan" to reduce noisy matches.
+            entity_weight = (
+                0.25 if entity_tokens_all and not specific_entity_tokens else 1.0
+            )
+            total_weight += entity_weight
+
             # Match as whole word in text or title
             if re.search(
                 r"\b" + re.escape(entity_lower) + r"\b", text_norm
             ) or re.search(r"\b" + re.escape(entity_lower) + r"\b", article_title_norm):
-                matches += 1
+                matches += entity_weight
+                continue
 
-        return matches / total if total > 0 else 0.0
+            # Partial token match fallback for incomplete mentions (e.g., "Super Typhoon Uwan" vs "Uwan")
+            if specific_entity_tokens and any(
+                token in comparison_tokens for token in specific_entity_tokens
+            ):
+                matches += 0.7 * entity_weight
+
+        return matches / total_weight if total_weight > 0 else 0.0
+
+    def requires_specific_entity_match(self, claim_entities: list[str]) -> bool:
+        """
+        Returns True when claim entities contain both generic descriptors and specific named tokens.
+        Examples:
+        - "President Marcos" -> True (has generic "president" + specific "marcos")
+        - "Super Typhoon Uwan" -> True (has generic "super"/"typhoon" + specific "uwan")
+        - "Apple Inc" -> True (has generic "inc" + specific "apple")
+        - "John Smith" -> False (no generic descriptors, just specific names)
+        - "The President" -> False (only generic, no specific name)
+        """
+        has_generic_descriptor = False
+        has_specific_token = False
+
+        for entity in claim_entities:
+            entity_tokens = re.findall(
+                r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", self.normalize_text(entity)
+            )
+            for token in entity_tokens:
+                if token in ENTITY_GENERIC_TOKENS:
+                    has_generic_descriptor = True
+                elif len(token) >= 3:
+                    has_specific_token = True
+
+        return has_generic_descriptor and has_specific_token
+
+    def has_specific_entity_token_match(
+        self, claim_entities: list[str], text: str, article_title: str = ""
+    ) -> bool:
+        """
+        Checks whether at least one specific (non-generic) claim entity token appears
+        in the comparison text/title.
+        """
+        text_norm = self.normalize_text(text)
+        article_title_norm = self.normalize_text(article_title)
+        comparison_tokens = set(re.findall(r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", text_norm))
+        comparison_tokens.update(
+            re.findall(r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", article_title_norm)
+        )
+
+        for entity in claim_entities:
+            entity_tokens = re.findall(
+                r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", self.normalize_text(entity)
+            )
+            specific_tokens = [
+                token
+                for token in entity_tokens
+                if token not in ENTITY_GENERIC_TOKENS and len(token) >= 3
+            ]
+            if any(token in comparison_tokens for token in specific_tokens):
+                return True
+
+        return False
 
     @staticmethod
     def build_chunk_text(
@@ -380,6 +489,7 @@ class VerifyController:
         nli_score: float,
         is_factcheck: bool = True,
         similarity_score: float = 0.0,
+        article_content: str = "",
     ) -> float:
         """
         Computes a final score for a claim-article pair based on the verdict, source bias, NLI label, and NLI confidence.
@@ -397,6 +507,7 @@ class VerifyController:
             nli_score (float): The NLI model's confidence score for the label (0.0 to 1.0).
             is_factcheck (bool, optional): Whether the claim is from a fact-checking source. Defaults to True.
             similarity_score (float, optional): Similarity score for news articles. Defaults to 0.0.
+            article_content (str, optional): Full article content for context analysis. Defaults to "".
 
         Returns:
             float: The computed final score (signed and fuzzified, with magnitude reflecting strength).
@@ -408,7 +519,68 @@ class VerifyController:
             elif nli_label == NLILabel.REFUTE:
                 base_score = -0.75
             else:
-                base_score = similarity_score  # some news articles may be neutral but relevant, so instead of relying only on NLI, use similarity score directly
+                # For neutral NLI, check for implicit damage/impact indicators
+                # Articles about relief, evacuation, casualties imply damage occurred
+                implicit_damage_keywords = [
+                    "relief",
+                    "evacuation",
+                    "evacuate",
+                    "displaced",
+                    "affected",
+                    "rehabilitat",
+                    "casualties",
+                    "damage",
+                    "destroy",
+                    "batter",
+                    "devastat",
+                    "victim",
+                    "survivor",
+                    "rescue",
+                    "aid",
+                    "emergency",
+                    "calamity",
+                    "disaster",
+                    "crisis",
+                    "impact",
+                ]
+
+                has_implicit_damage = any(
+                    keyword in article_content.lower()
+                    for keyword in implicit_damage_keywords
+                )
+
+                # Check for high-priority crisis indicators
+                high_priority_keywords = [
+                    "calamity",
+                    "casualties",
+                    "disaster",
+                    "devastat",
+                    "destroy",
+                ]
+                has_high_priority_indicator = any(
+                    keyword in article_content.lower()
+                    for keyword in high_priority_keywords
+                )
+
+                # For neutral NLI, high semantic similarity often indicates implicit support
+                # Apply a lighter boost to reduce neutral inflation
+                if similarity_score >= 0.7:
+                    base_score = min(
+                        0.8, similarity_score * 1.05
+                    )  # 5% boost, capped at 0.8
+                elif similarity_score >= 0.5:
+                    base_score = (
+                        similarity_score * 1.02
+                    )  # 2% boost for moderate similarity
+                elif has_high_priority_indicator and similarity_score >= 0.4:
+                    # Strong boost for articles with calamity/disaster declarations
+                    base_score = min(0.6, similarity_score * 1.3)
+                elif has_implicit_damage and similarity_score >= 0.4:
+                    # Boost articles with damage indicators even if similarity is moderate-low
+                    # Emergency response, calamity declarations imply significant impact
+                    base_score = min(0.55, similarity_score * 1.2)
+                else:
+                    base_score = similarity_score  # Low similarity remains as-is
 
             confidence_multiplier = 0.5 + (nli_score * 0.5)
 
@@ -446,14 +618,19 @@ class VerifyController:
         """
 
         user_claim_norm = self.normalize_text(user_claim)
+        user_claim_for_matching = self.normalize_text(user_claim, lowercase=False)
 
         # Run embedding and entity extraction in parallel
         loop = asyncio.get_event_loop()
         claim_embedding, claim_entities = await asyncio.gather(
             loop.run_in_executor(
-                self.executor, self.embedding_service.embed_text, user_claim_norm
+                self.executor,
+                self.embedding_service.embed_text,
+                user_claim_for_matching,
             ),
-            loop.run_in_executor(self.executor, self.extract_entities, user_claim_norm),
+            loop.run_in_executor(
+                self.executor, self.extract_entities, user_claim_for_matching
+            ),
         )
 
         # Search for both FC and news articles
@@ -604,10 +781,20 @@ class VerifyController:
             "chunk_texts": chunk_texts,
         }
 
-        if (
+        meets_relevance_gate = (
             similarity_score >= self.RELEVANCE_THRESHOLD
             and entity_match_score >= self.ENTITY_THRESHOLD
-        ):
+        )
+
+        requires_specific_match = self.requires_specific_entity_match(claim_entities)
+        has_specific_match = self.has_specific_entity_token_match(
+            claim_entities, entity_comparison_text, entity_comparison_title
+        )
+
+        if requires_specific_match and not has_specific_match:
+            meets_relevance_gate = False
+
+        if meets_relevance_gate:
             # For NLI: use claim for FC, article content for news
             nli_text = (
                 claim_text
@@ -639,9 +826,14 @@ class VerifyController:
                 nli_score=nli_score,
                 is_factcheck=is_factcheck,
                 similarity_score=similarity_score,
+                article_content=article.content or "",
             )
             result["verdict"] = verdict_score
         else:
+            if requires_specific_match and not has_specific_match:
+                result["skip_reason"].append(
+                    "Specific name/identifier from claim not found in matched result"
+                )
             if similarity_score < self.RELEVANCE_THRESHOLD:
                 result["skip_reason"].append(
                     f"Low semantic similarity ({similarity_score:.3f} < {self.RELEVANCE_THRESHOLD})"
@@ -660,14 +852,15 @@ class VerifyController:
         Streams search hits, then result items (filtered/skipped), then remarks updates.
         """
         user_claim_norm = self.normalize_text(user_claim)
+        user_claim_for_matching = self.normalize_text(user_claim, lowercase=False)
         loop = asyncio.get_event_loop()
 
         # Embedding & entity extraction
         claim_embedding = await loop.run_in_executor(
-            self.executor, self.embedding_service.embed_text, user_claim_norm
+            self.executor, self.embedding_service.embed_text, user_claim_for_matching
         )
         claim_entities = await loop.run_in_executor(
-            self.executor, self.extract_entities, user_claim_norm
+            self.executor, self.extract_entities, user_claim_for_matching
         )
 
         # 1. Stream search hits
