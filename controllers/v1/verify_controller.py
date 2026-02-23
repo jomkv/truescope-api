@@ -263,15 +263,6 @@ class VerifyController:
         # Extract entity names only, exclude label
         entities = [entity[0] for entity in entities_with_label if entity and entity[0]]
 
-        # Fallback: capture storm names from patterns like
-        # "super typhoon uwan", "typhoon uwan", "storm uwan"
-        storm_name_matches = re.findall(
-            r"\b(?:super\s+typhoon|typhoon|tropical\s+storm|storm|bagyo|bagyong)\s+([a-zA-Z][a-zA-Z\-]{1,})\b",
-            text,
-            flags=re.IGNORECASE,
-        )
-        entities.extend(storm_name_matches)
-
         # De-duplicate while preserving order (case-insensitive)
         deduped_entities: list[str] = []
         seen_entities: set[str] = set()
