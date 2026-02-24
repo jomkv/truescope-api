@@ -160,7 +160,7 @@ class VerifyController:
         return unique_doc_ids
 
     def find_claims_with_articles(
-        self, embedding: list[float], top_k: int = 20
+        self, embedding: list[float], top_k: int = 20, exclude_doc_ids: list[str] = None
     ) -> list[tuple[Claim, Article, float, str | None]]:
         """
         Retrieves the top_k most similar claims from the database using HNSW vector search,
@@ -169,6 +169,7 @@ class VerifyController:
         Args:
             embedding (list[float]): Embedding vector for the user claim.
             top_k (int, optional): Number of top similar claims to retrieve. Defaults to 20.
+            exclude_doc_ids (list[str], optional): List of document IDs to exclude from the search. Defaults to None.
 
         Returns:
             list[tuple[Claim, Article, float, str | None]]: List of tuples containing the claim, article, similarity score, and relevant chunk text.
@@ -188,6 +189,8 @@ class VerifyController:
 
         for claim, distance in similar_claims:
             article = cast(Article, article_map.get(claim.doc_id))
+            if exclude_doc_ids and claim.doc_id in exclude_doc_ids:
+                continue
             article_relevant_chunks = all_chunks_map[article.doc_id]
 
             if len(article_relevant_chunks) == 0:
@@ -548,7 +551,12 @@ class VerifyController:
 
         return round(nli_score * bias_weight * verdict_weight * nli_label_weight, 2)
 
-    async def verify_claim(self, user_claim: str, use_fallback: bool = True):
+    async def verify_claim(
+        self,
+        user_claim: str,
+        use_fallback: bool = True,
+        exclude_doc_ids: list[str] = None,
+    ):
         """
         Main entry point for verifying a user claim (async version).
 
@@ -561,6 +569,7 @@ class VerifyController:
         Args:
             user_claim (str): The user-provided claim to verify.
             use_fallback (bool, optional): Whether to use fallback logic if no strong matches are found. Defaults to True.
+            exclude_doc_ids (list[str], optional): List of document IDs to exclude from the search. Defaults to None.
 
         Returns:
             dict: Dict containing lists of results, each containing article and claim details, NLI results, scores, and skip reasons.
@@ -584,7 +593,7 @@ class VerifyController:
 
         # Search for both FC and news articles
         factcheck_results = self.find_claims_with_articles(
-            claim_embedding, self.MAX_DEEP_ANALYSIS
+            claim_embedding, self.MAX_DEEP_ANALYSIS, exclude_doc_ids=exclude_doc_ids
         )
         news_results = self.find_news_articles(claim_embedding, self.MAX_DEEP_ANALYSIS)
 
