@@ -2,6 +2,7 @@ from constants.enums import Verdict
 
 
 # Mapping LIAR dataset string labels to internal Verdict enum
+# This is based on the LIAR paper's label definitions and our internal label schema - we may need to adjust based on how our system's output maps to these categories
 LIAR_LABEL_TO_VERDICT = {
     "true": Verdict.TRUE,
     "mostly-true": Verdict.MOSTLY_TRUE,

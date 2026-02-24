@@ -12,8 +12,8 @@ from constants.enums import (
     NLILabel,
     SourceBias,
     StreamEventType,
-    ENTITY_GENERIC_TOKENS,
 )
+from constants.tokens import ENTITY_GENERIC_TOKENS
 from dateparser.search import search_dates
 from services import (
     EmbeddingService,
@@ -279,6 +279,14 @@ class VerifyController:
 
         return deduped_entities
 
+    @staticmethod
+    def tokenize_text(text: str) -> set[str]:
+        """
+        Tokenize input text into a set of words using the standard regex pattern.
+        Words must be at least 2 characters, letters or hyphens.
+        """
+        return set(re.findall(r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", text))
+
     def calculate_entity_match_score(
         self, claim_entities: list[str], text: str, article_title: str = ""
     ) -> float:
@@ -304,10 +312,8 @@ class VerifyController:
         total_weight = 0.0
 
         # Tokenize the normalized article content and title into sets of words
-        text_tokens = set(re.findall(r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", text_norm))
-        title_tokens = set(
-            re.findall(r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", article_title_norm)
-        )
+        text_tokens = self.tokenize_text(text_norm)
+        title_tokens = self.tokenize_text(article_title_norm)
         # Combine tokens from both content and title for comparison
         comparison_tokens = text_tokens.union(title_tokens)
 
@@ -315,7 +321,7 @@ class VerifyController:
             # Normalize the entity string
             entity_lower = self.normalize_text(entity)
             # Tokenize the entity into words
-            entity_tokens_all = re.findall(r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", entity_lower)
+            entity_tokens_all = self.tokenize_text(entity_lower)
 
             # Identify specific (non-generic) tokens in the entity
             specific_entity_tokens = [
@@ -359,9 +365,8 @@ class VerifyController:
         has_specific_token = False
 
         for entity in claim_entities:
-            entity_tokens = re.findall(
-                r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", self.normalize_text(entity)
-            )
+            norm_entity = self.normalize_text(entity)
+            entity_tokens = list(self.tokenize_text(norm_entity))
             for token in entity_tokens:
                 if token in ENTITY_GENERIC_TOKENS:
                     has_generic_descriptor = True
@@ -379,15 +384,11 @@ class VerifyController:
         """
         text_norm = self.normalize_text(text)
         article_title_norm = self.normalize_text(article_title)
-        comparison_tokens = set(re.findall(r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", text_norm))
-        comparison_tokens.update(
-            re.findall(r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", article_title_norm)
-        )
+        comparison_tokens = self.tokenize_text(text_norm)
+        comparison_tokens.update(self.tokenize_text(article_title_norm))
 
         for entity in claim_entities:
-            entity_tokens = re.findall(
-                r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", self.normalize_text(entity)
-            )
+            entity_tokens = self.tokenize_text(self.normalize_text(entity))
             specific_tokens = [
                 token
                 for token in entity_tokens
@@ -752,7 +753,7 @@ class VerifyController:
         # Require direct claim-topic relevance: at least two claim keywords must appear in article content/title
         claim_keywords = [
             kw
-            for kw in re.findall(r"\b[a-zA-Z][a-zA-Z\-]{2,}\b", user_claim_norm)
+            for kw in self.tokenize_text(user_claim_norm)
             if kw not in ENTITY_GENERIC_TOKENS
         ]
         content_title = (entity_comparison_text + " " + entity_comparison_title).lower()
