@@ -56,18 +56,19 @@ class VerifyController:
         self.MAX_DEEP_ANALYSIS = 5
 
     @staticmethod
-    def normalize_text(text: str) -> str:
+    def normalize_text(text: str, lowercase: bool = True) -> str:
         """
         Normalize input text for consistent downstream processing.
 
         Steps:
         - Unicode normalization (NFKC)
-        - Lowercasing
+        - Optional lowercasing
         - Removal of extra whitespace
         - Stripping leading/trailing whitespace
 
         Args:
             text (str): The input text to normalize.
+            lowercase (bool): Whether to lowercase the text (default True).
 
         Returns:
             str: The normalized text.
@@ -78,8 +79,9 @@ class VerifyController:
         # Unicode normalization
         text = unicodedata.normalize("NFKC", text)
 
-        # Lowercase
-        text = text.lower()
+        # Lowercase if requested
+        if lowercase:
+            text = text.lower()
 
         # Remove extra whitespace
         text = re.sub(r"\s+", " ", text)
