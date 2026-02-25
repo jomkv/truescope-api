@@ -1,6 +1,13 @@
 from constants.enums import Verdict, SourceBias, NLILabel
 
 
+def score_to_label(score: float) -> str:
+    # Map score to closest verdict label
+    mapping = {v: k.value for k, v in VERDICT_WEIGHT_MAP.items()}
+    closest = min(mapping.keys(), key=lambda x: abs(score - x))
+    return mapping[closest]
+
+
 VERDICT_WEIGHT_MAP: dict[Verdict, float] = {
     Verdict.TRUE: 1.0,
     Verdict.MOSTLY_TRUE: 0.8,
