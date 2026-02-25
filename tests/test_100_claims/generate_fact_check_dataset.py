@@ -16,24 +16,12 @@ verify_db = VerifyDatabase()
 # Query all claims with a verdict (excluding UNKNOWN)
 def get_fact_checks_with_verdict(limit=100):
     session = verify_db.session
-    valid_verdicts = [
-        "TRUE",
-        "MOSTLY-TRUE",
-        "HALF-TRUE",
-        "UNPROVEN",
-        "MISSING-CONTEXT",
-        "MISLEADING",
-        "MOSTLY-FALSE",
-        "FALSE",
-        "OUTDATED",
-        "SATIRE",
-    ]
     target_sources = ["rappler", "verafiles", "tsek"]
 
     claims = (
         session.query(Claim, Article)
         .join(Article, Claim.doc_id == Article.doc_id)
-        .filter(Claim.verdict.in_(valid_verdicts))
+        .filter(Claim.verdict != "UNKNOWN")
         .filter(func.lower(Article.source).in_([s.lower() for s in target_sources]))
         .all()
     )
