@@ -3,7 +3,6 @@ import os
 import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
-from constants.weights import score_to_label
 from controllers.v1.verify_controller import VerifyController
 
 DATASET_PATH = os.path.join(os.path.dirname(__file__), "test_dataset_generated.json")
