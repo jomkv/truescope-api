@@ -557,6 +557,7 @@ class VerifyController:
         user_claim: str,
         use_fallback: bool = True,
         exclude_doc_ids: list[str] = None,
+        exclude_articles: bool = False,
     ):
         """
         Main entry point for verifying a user claim (async version).
@@ -592,14 +593,13 @@ class VerifyController:
             ),
         )
 
+        # Process all results in parallel
+        tasks = []
+
         # Search for both FC and news articles
         factcheck_results = self.find_claims_with_articles(
             claim_embedding, self.MAX_DEEP_ANALYSIS, exclude_doc_ids=exclude_doc_ids
         )
-        news_results = self.find_news_articles(claim_embedding, self.MAX_DEEP_ANALYSIS)
-
-        # Process all results in parallel
-        tasks = []
 
         # Process FC results
         for claim, article, similarity_score, chunk_texts in factcheck_results:
@@ -617,23 +617,28 @@ class VerifyController:
                 )
             )
 
-        # Process news results
-        for article, similarity_score, chunk_texts in news_results:
-            if (article.type or "").strip().lower() == "fact-check":
-                continue
-            tasks.append(
-                self.process_result_async(
-                    user_claim_norm=user_claim_norm,
-                    claim_entities=claim_entities,
-                    similarity_score=similarity_score,
-                    article=article,
-                    claim_text=None,
-                    claim_verdict=None,
-                    source_bias=article.source_bias,
-                    is_factcheck=False,
-                    chunk_texts=chunk_texts,
-                )
+        if not exclude_articles:
+            news_results = self.find_news_articles(
+                claim_embedding, self.MAX_DEEP_ANALYSIS
             )
+
+            # Process news results
+            for article, similarity_score, chunk_texts in news_results:
+                if (article.type or "").strip().lower() == "fact-check":
+                    continue
+                tasks.append(
+                    self.process_result_async(
+                        user_claim_norm=user_claim_norm,
+                        claim_entities=claim_entities,
+                        similarity_score=similarity_score,
+                        article=article,
+                        claim_text=None,
+                        claim_verdict=None,
+                        source_bias=article.source_bias,
+                        is_factcheck=False,
+                        chunk_texts=chunk_texts,
+                    )
+                )
 
         # Wait for all processing to complete
         results: list[ArticleResultModel] = await asyncio.gather(*tasks)
