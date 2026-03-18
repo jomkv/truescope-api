@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrueScope HITL — Model Training Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        bg: '#0d1117',
+                        surface: '#161b22',
+                        card: '#1c2430',
+                        bdr: '#30363d',
+                        accent: '#58a6ff',
+                        accnhover: '#79b8ff',
+                        green: '#3fb950',
+                        grnhover: '#56d364',
+                        red: '#f85149',
+                        redhover: '#ff7b72',
+                        yellow: '#e3b341',
+                        yelhover: '#f0c040',
+                        purple: '#bc8cff',
+                        text: '#e6edf3',
+                        muted: '#8b949e',
+                    },
+                    boxShadow: {
+                        'main': '0 4px 24px rgba(0, 0, 0, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #30363d;
+            border-radius: 3px;
+        }
+
+        input[type=range] {
+            width: 100%;
+            accent-color: #58a6ff;
+            cursor: pointer;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(88, 166, 255, 0.3);
+            border-top-color: #58a6ff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .training-indicator::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e3b341;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .dropdown-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b949e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1em;
+        }
+    </style>
+</head>
+
+<body class="bg-bg text-text font-sans min-h-screen pb-[60px]">
+
+    <header
+        class="bg-gradient-to-br from-bg to-surface border-b border-bdr px-8 py-5 flex items-center gap-3.5 sticky top-0 z-50 backdrop-blur-[12px]">
+        <div>
+            <div class="text-[22px] font-bold text-accent tracking-tight">TrueScope HITL</div>
+            <div class="text-muted text-[13px]">Human-in-the-Loop Model Training Dashboard</div>
+        </div>
+        <div
+            class="ml-auto bg-accent/10 text-accent border border-accent/30 px-3 py-1 rounded-[20px] text-[11px] font-semibold tracking-wide uppercase">
+            GPU Enabled
+        </div>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6 max-w-[1400px] mx-auto mt-7 px-6">
+
+        <!-- ══════════════ LEFT COLUMN ══════════════ -->
+        <div class="flex flex-col gap-5">
+
+            <!-- Claim Input -->
+            <div class="bg-card border border-bdr rounded-xl p-6 shadow-main">
+                <div
+                    class="text-[13px] font-semibold uppercase tracking-[0.8px] text-muted mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-accent inline-block"></span>Verify a Claim
+                </div>
+                <div class="flex gap-2.5">
+                    <input type="text" id="claimInput"
+                        class="flex-1 bg-surface border border-bdr text-text rounded-lg px-4 py-3 text-sm focus:border-accent focus:outline-none transition-colors placeholder-muted"
+                        placeholder="Enter a claim to verify…" autocomplete="off">
+                    <button id="verifyBtn"
+                        class="bg-accent hover:bg-accnhover text-bg px-5 py-2.5 rounded-lg text-[13px] font-semibold transition-all inline-flex items-center gap-1.5 whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed"
+                        onclick="verifyClaim()">
+                        <span id="verifyBtnTxt">Verify</span>
+                    </button>
+                    <div class="flex flex-col gap-1 min-w-[100px]">
+                        <select id="aggLimit"
+                            class="dropdown-select bg-surface border border-bdr text-text rounded-lg pl-3 pr-8 py-2.5 text-[13px] focus:border-accent focus:outline-none cursor-pointer h-[46px]"
+                            title="How many top articles contribute to the verdict score?">
+                            <option value="">All</option>
+                            <option value="1">Top 1</option>
+                            <option value="3" selected>Top 3</option>
+                            <option value="5">Top 5</option>
+                            <option value="10">Top 10</option>
+                            <option value="15">Top 15</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="verdictBanner"
+                    class="hidden mt-4 px-4.5 py-3.5 rounded-xl text-sm font-semibold items-center gap-2.5"></div>
+                <div id="entityRow" class="hidden flex-wrap gap-1.5 mt-3"></div>
+            </div>
+
+            <!-- Evidence Results -->
+            <div class="bg-card border border-bdr rounded-xl p-6 shadow-main" id="evidenceSection"
+                style="display:none;">
+                <div
+                    class="text-[13px] font-semibold uppercase tracking-[0.8px] text-muted mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green inline-block"></span>Evidence Found
+                    <span id="evidenceCount" class="text-muted text-[11px] font-normal ml-1.5"></span>
+                </div>
+                <div id="evidenceList" class="flex flex-col gap-3.5 mt-4"></div>
+
+                <hr class="border-t border-bdr my-4.5">
+
+                <div class="flex items-center gap-2.5 mt-4">
+                    <label class="text-[13px] text-muted whitespace-nowrap">Your overall verdict:</label>
+                    <select id="userVerdict"
+                        class="dropdown-select flex-1 bg-surface border border-bdr text-text rounded-lg pl-3 pr-8 py-2 text-[13px] focus:border-accent focus:outline-none cursor-pointer">
+                        <option value="">— Select —</option>
+                        <option value="TRUE">TRUE</option>
+                        <option value="FALSE">FALSE</option>
+                        <option value="MISLEADING">MISLEADING</option>
+                        <option value="NEUTRAL">NOT ENOUGH INFO</option>
+                    </select>
+                    <button
+                        class="bg-green hover:bg-grnhover text-bg px-5 py-2.5 rounded-lg text-[13px] font-semibold transition-all inline-flex items-center gap-1.5"
+                        onclick="submitFeedback()">Submit Feedback</button>
+                </div>
+
+                <div id="feedbackMsg" class="mt-2.5 text-xs text-green hidden">
+                    Feedback saved! You can now train the models from the Training Panel
+                </div>
+            </div>
+
+            <!-- Feedback History -->
+            <div class="bg-card border border-bdr rounded-xl p-6 shadow-main">
+                <div
+                    class="text-[13px] font-semibold uppercase tracking-[0.8px] text-muted mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-purple inline-block"></span>Feedback History
+                </div>
+                <div id="historyList">
+                    <div class="text-center text-muted text-[13px] py-8">Loading history…</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ══════════════ RIGHT COLUMN ══════════════ -->
+        <div class="flex flex-col gap-5">
+
+            <!-- Dataset Stats -->
+            <div class="bg-card border border-bdr rounded-xl p-6 shadow-main">
+                <div
+                    class="text-[13px] font-semibold uppercase tracking-[0.8px] text-muted mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-yellow inline-block"></span>Dataset Overview
+                </div>
+                <div class="flex flex-wrap gap-2 mb-4" id="statsRow">
+                    <div class="flex-1 min-w-[70px] text-center bg-surface border border-bdr rounded-lg py-2 px-3">
+                        <div class="text-[18px] font-bold text-accent" id="sSessions">—</div>
+                        <div class="text-[10px] text-muted mt-0.5">Sessions</div>
+                    </div>
+                    <div class="flex-1 min-w-[70px] text-center bg-surface border border-bdr rounded-lg py-2 px-3">
+                        <div class="text-[18px] font-bold text-accent" id="sNLI">—</div>
+                        <div class="text-[10px] text-muted mt-0.5">NLI Pairs</div>
+                    </div>
+                    <div class="flex-1 min-w-[70px] text-center bg-surface border border-bdr rounded-lg py-2 px-3">
+                        <div class="text-[18px] font-bold text-accent" id="sTriplets">—</div>
+                        <div class="text-[10px] text-muted mt-0.5">Triplets</div>
+                    </div>
+                </div>
+                <div class="text-[11px] text-muted">
+                    Label distribution:
+                    <span id="labelDist" class="text-text"></span>
+                </div>
+            </div>
+
+            <!-- NLI Model Training -->
+            <div class="bg-card border border-bdr rounded-xl p-6 shadow-main">
+                <div
+                    class="text-[13px] font-semibold uppercase tracking-[0.8px] text-muted mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-accent inline-block"></span>NLI Model Training
+                </div>
+
+                <div class="bg-surface border border-bdr rounded-lg py-3.5 px-4 mb-3 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 h-[3px] w-full bg-gradient-to-r from-accent to-purple"></div>
+                    <div class="text-[13px] font-bold mb-1" id="nliModelName">Loading…</div>
+                    <div class="text-[11px] text-muted mb-3 leading-[1.7]" id="nliMeta">Loading status…</div>
+                    <div id="nliTrainingIndicator"
+                        class="hidden items-center gap-1 text-[11px] text-yellow training-indicator">
+                        <span class="ml-1.5">Training in progress…</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 mb-2.5">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[10px] text-muted font-medium">Epochs</label>
+                        <input type="number" id="nliEpochs"
+                            class="bg-card border border-bdr text-text rounded-md px-2 py-1.5 text-xs focus:border-accent focus:outline-none w-full"
+                            value="3" min="1" max="20">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[10px] text-muted font-medium">Learning Rate</label>
+                        <input type="text" id="nliLR"
+                            class="bg-card border border-bdr text-text rounded-md px-2 py-1.5 text-xs focus:border-accent focus:outline-none w-full"
+                            value="2e-4">
+                    </div>
+                </div>
+
+                <button id="nliTrainBtn"
+                    class="w-full bg-accent hover:bg-accnhover text-bg px-5 py-2.5 rounded-lg text-[13px] font-semibold transition-all flex items-center justify-center gap-1.5 mb-2.5 disabled:opacity-40 disabled:cursor-not-allowed"
+                    onclick="trainModel('nli')">
+                    Train NLI (LoRA)
+                </button>
+                <button
+                    class="w-full bg-red/15 hover:bg-red/25 text-red border border-red/30 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center justify-center mb-2.5"
+                    onclick="reloadModel('nli')">
+                    Hot-Reload Last Adapter
+                </button>
+
+                <div class="bg-bg border border-bdr rounded-lg p-2.5 font-mono text-[11px] max-h-[140px] overflow-y-auto text-green leading-[1.7]"
+                    id="nliLog">Waiting to train…</div>
+            </div>
+
+            <!-- Embedding Model Training -->
+            <div class="bg-card border border-bdr rounded-xl p-6 shadow-main">
+                <div
+                    class="text-[13px] font-semibold uppercase tracking-[0.8px] text-muted mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green inline-block"></span>Embedding Model Training
+                </div>
+
+                <div class="bg-surface border border-bdr rounded-lg py-3.5 px-4 mb-3 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 h-[3px] w-full bg-gradient-to-r from-green to-yellow"></div>
+                    <div class="text-[13px] font-bold mb-1" id="embModelName">Loading…</div>
+                    <div class="text-[11px] text-muted mb-3 leading-[1.7]" id="embMeta">Loading status…</div>
+                    <div id="embTrainingIndicator"
+                        class="hidden items-center gap-1 text-[11px] text-yellow training-indicator">
+                        <span class="ml-1.5">Training in progress…</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 mb-2.5">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[10px] text-muted font-medium">Epochs</label>
+                        <input type="number" id="embEpochs"
+                            class="bg-card border border-bdr text-text rounded-md px-2 py-1.5 text-xs focus:border-accent focus:outline-none w-full"
+                            value="3" min="1" max="20">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[10px] text-muted font-medium">Learning Rate</label>
+                        <input type="text" id="embLR"
+                            class="bg-card border border-bdr text-text rounded-md px-2 py-1.5 text-xs focus:border-accent focus:outline-none w-full"
+                            value="2e-5">
+                    </div>
+                </div>
+
+                <button id="embTrainBtn"
+                    class="w-full bg-yellow hover:bg-yelhover text-bg px-5 py-2.5 rounded-lg text-[13px] font-semibold transition-all flex items-center justify-center gap-1.5 mb-2.5 disabled:opacity-40 disabled:cursor-not-allowed"
+                    onclick="trainModel('embeddings')">
+                    Train Embeddings (Triplet)
+                </button>
+                <button
+                    class="w-full bg-red/15 hover:bg-red/25 text-red border border-red/30 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center justify-center mb-2.5"
+                    onclick="reloadModel('embeddings')">
+                    Hot-Reload Last Checkpoint
+                </button>
+
+                <div class="bg-bg border border-bdr rounded-lg p-2.5 font-mono text-[11px] max-h-[140px] overflow-y-auto text-green leading-[1.7]"
+                    id="embLog">Waiting to train…</div>
+            </div>
+
+            <!-- Threshold Settings -->
+            <div class="bg-card border border-bdr rounded-xl p-6 shadow-main">
+                <div
+                    class="text-[13px] font-semibold uppercase tracking-[0.8px] text-muted mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-red inline-block"></span>Threshold Settings
+                    <span id="threshSaved" class="ml-auto text-[10px] text-green hidden">Applied</span>
+                </div>
+
+                <div class="text-[11px] text-muted mb-3.5">
+                    Changes apply immediately to the next verification — no restart needed.
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <div class="flex flex-col gap-1">
+                        <label class="flex justify-between text-[11px] text-muted font-medium">
+                            Relevance (cosine sim)
+                            <span id="lbl_relevance" class="text-text font-bold"></span>
+                        </label>
+                        <input type="range" id="thr_relevance" min="0.1" max="0.9" step="0.05"
+                            oninput="document.getElementById('lbl_relevance').textContent=parseFloat(this.value).toFixed(2)">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="flex justify-between text-[11px] text-muted font-medium">
+                            Entity match
+                            <span id="lbl_entity" class="text-text font-bold"></span>
+                        </label>
+                        <input type="range" id="thr_entity" min="0.1" max="0.9" step="0.05"
+                            oninput="document.getElementById('lbl_entity').textContent=parseFloat(this.value).toFixed(2)">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="flex justify-between text-[11px] text-muted font-medium">
+                            Combined score
+                            <span id="lbl_combined" class="text-text font-bold"></span>
+                        </label>
+                        <input type="range" id="thr_combined" min="0.1" max="0.9" step="0.05"
+                            oninput="document.getElementById('lbl_combined').textContent=parseFloat(this.value).toFixed(2)">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="flex justify-between text-[11px] text-muted font-medium">
+                            Max deep analysis
+                            <span id="lbl_maxdeep" class="text-text font-bold"></span>
+                        </label>
+                        <input type="range" id="thr_maxdeep" min="1" max="20" step="1"
+                            oninput="document.getElementById('lbl_maxdeep').textContent=this.value">
+                    </div>
+                </div>
+
+                <button
+                    class="w-full bg-accent hover:bg-accnhover text-bg px-5 py-2.5 rounded-lg text-[13px] font-semibold transition-all flex items-center justify-center mt-3"
+                    onclick="applyThresholds()">
+                    Apply Thresholds
+                </button>
+
+                <div class="mt-2.5 flex gap-2">
+                    <button
+                        class="flex-1 bg-red/15 hover:bg-red/25 text-red border border-red/30 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-center"
+                        onclick="presetThresholds(0.30, 0.30, 0.40, 10)" title="Wide net for HITL data collection">Wide
+                        (Training)</button>
+                    <button
+                        class="flex-1 bg-surface border border-bdr hover:bg-bdr px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-center"
+                        onclick="presetThresholds(0.55, 0.30, 0.62, 15)" title="Balanced defaults">Balanced</button>
+                    <button
+                        class="flex-1 bg-surface border border-bdr hover:bg-bdr px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-center"
+                        onclick="presetThresholds(0.70, 0.40, 0.72, 15)" title="Strict — high precision">Strict</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // ────────────────────────────────────────────────────────
+        // State
+        // ────────────────────────────────────────────────────────
+        let currentEvidences = [];
+        let statusPollTimer = null;
+
+        // ────────────────────────────────────────────────────────
+        // Verify claim
+        // ────────────────────────────────────────────────────────
+        async function verifyClaim() {
+            const claim = document.getElementById('claimInput').value.trim();
+            if (!claim) return;
+
+            const btn = document.getElementById('verifyBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner mr-1.5"></span> Verifying…';
+            document.getElementById('evidenceSection').style.display = 'none';
+            document.getElementById('verdictBanner').style.display = 'none';
+            document.getElementById('entityRow').style.display = 'none';
+            document.getElementById('feedbackMsg').style.display = 'none';
+            currentEvidences = [];
+
+            try {
+                const res = await fetch('/simulation/verify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        claim,
+                        aggregation_limit: document.getElementById('aggLimit').value
+                    })
+                });
+                const data = await res.json();
+                currentEvidences = data.evidences || [];
+
+                // Show verdict banner
+                renderVerdictBanner(data.overall_verdict, data.truth_confidence_score, data.is_negated);
+
+                // Show entities
+                if (currentEvidences.length > 0) {
+                    const entities = currentEvidences[0].entities || [];
+                    const row = document.getElementById('entityRow');
+                    row.innerHTML = entities.map(e =>
+                        `<span class="px-2.5 py-1 rounded-[20px] text-[11px] font-medium border border-bdr bg-surface text-muted">${Array.isArray(e) ? e[0] : e}</span>`
+                    ).join('');
+                    if (data.is_negated) row.innerHTML += '<span class="px-2.5 py-1 rounded-[20px] text-[11px] font-medium border border-purple/40 bg-purple/10 text-purple">Negated Claim</span>';
+                    row.style.display = 'flex';
+                }
+
+                // Render evidence cards
+                renderEvidenceCards(currentEvidences, claim);
+
+            } catch (e) {
+                alert('Verification error: ' + e);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Verify';
+            }
+        }
+
+        function renderVerdictBanner(score, confidence, isNegated) {
+            const banner = document.getElementById('verdictBanner');
+            if (score === null || score === undefined) {
+                banner.style.display = 'none';
+                return;
+            }
+            let cls1, label;
+            if (score > 0.15) { cls1 = 'bg-green/10 border-green/30 text-green'; label = 'TRUE'; }
+            else if (score < -0.15) { cls1 = 'bg-red/10 border-red/30 text-red'; label = 'FALSE'; }
+            else { cls1 = 'bg-yellow/10 border-yellow/30 text-yellow'; label = 'UNVERIFIED'; }
+
+            const conf = confidence != null ? ` · Confidence: ${(confidence * 100).toFixed(0)}%` : '';
+            const neg = isNegated ? ' · <span class="text-purple">Negation detected</span>' : '';
+            banner.className = `mt-4 px-4.5 py-3.5 rounded-xl text-sm font-semibold flex items-center gap-2.5 border ${cls1}`;
+            banner.style.display = 'flex';
+            banner.innerHTML = `System Verdict: <strong>${label}</strong> (score: ${score.toFixed(3)})${conf}${neg}`;
+        }
+
+        function renderEvidenceCards(evidences, claim) {
+            const list = document.getElementById('evidenceList');
+            if (!evidences.length) {
+                list.innerHTML = '<div class="text-center text-muted text-[13px] py-8">No relevant evidence found.</div>';
+                document.getElementById('evidenceSection').style.display = 'block';
+                document.getElementById('evidenceCount').textContent = '';
+                return;
+            }
+
+            document.getElementById('evidenceCount').textContent = `(${evidences.length})`;
+            list.innerHTML = evidences.map((ev, i) => {
+                const nli = ev.nli_result;
+                const nliLabel = nli ? nli.relationship : 'N/A';
+                const nliConf = nli ? (nli.relationship_confidence * 100).toFixed(0) + '%' : 'N/A';
+                const simScore = ev.similarity_score != null ? (ev.similarity_score * 100).toFixed(0) + '%' : 'N/A';
+                const verdict = ev.verdict != null ? ev.verdict.toFixed(2) : 'N/A';
+                const source = ev.source || 'Unknown';
+                const title = ev.found_claim || (ev.text ? ev.text.substring(0, 120) + '…' : 'No content');
+
+                let nliColorCls = 'text-yellow';
+                if (nliLabel === 'support') nliColorCls = 'text-green';
+                else if (nliLabel === 'refute') nliColorCls = 'text-red';
+
+                const isSkipped = ev.skipped === true;
+                const skipReasons = ev.skip_reason || [];
+                const cardOpacity = isSkipped ? 'opacity-55' : 'opacity-100';
+                const cardBorder = isSkipped ? 'border border-yellow/30' : 'border border-bdr';
+                const cardHover = isSkipped ? '' : 'hover:border-accent/30 transition-colors';
+
+                const skipBadge = isSkipped
+                    ? `<div class="mb-2.5 px-2 py-1 bg-yellow/10 border border-yellow/30 rounded-md text-[10px] text-yellow">
+                       FILTERED — ${skipReasons.join(' · ')}
+                     </div>`
+                    : '';
+                const defaultRel = ev.combined_relevance_score != null ? ev.combined_relevance_score.toFixed(2) : '1.00';
+                const defaultGrade = ev.verdict != null ? ev.verdict.toFixed(2) : '0.00';
+
+                return `
+    <div class="bg-surface rounded-xl p-4 ${cardOpacity} ${cardBorder} ${cardHover}" id="evcard_${i}">
+      ${ev.is_aggregated ? `<div class="float-right bg-accent/10 text-accent border border-accent/30 px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-wider mb-2">Included in Verdict</div>` : ''}
+      ${skipBadge}
+      <div class="flex items-start gap-2.5 mb-2.5">
+        <span class="text-[10px] text-muted font-semibold whitespace-nowrap mt-[3px]">Evidence ${i + 1}</span>
+        <span class="bg-accent/10 text-accent border border-accent/25 rounded-[5px] px-2 py-0.5 text-[10px] font-semibold whitespace-nowrap shrink-0 mt-[2px]">${source}</span>
+        <div class="text-[13px] font-medium leading-[1.5]">
+          <a href="${ev.link || '#'}" target="_blank" class="text-accent hover:underline">${title}</a>
+          ${ev.link ? `<div class="text-[10px] text-muted mt-[3px] break-all select-all">${ev.link}</div>` : ''}
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2 my-2">
+        <div class="flex items-center gap-1 bg-card border border-bdr rounded-md px-2 py-1 text-[11px] text-muted">NLI <span class="${nliColorCls} font-semibold">${nliLabel.toUpperCase()}</span> <span class="text-text font-semibold">${nliConf}</span></div>
+        <div class="flex items-center gap-1 bg-card border border-bdr rounded-md px-2 py-1 text-[11px] text-muted">Similarity <span class="text-text font-semibold">${simScore}</span></div>
+        <div class="flex items-center gap-1 bg-card border border-bdr rounded-md px-2 py-1 text-[11px] text-muted">Verdict Score <span class="text-text font-semibold">${verdict}</span></div>
+        ${ev.found_verdict ? `<div class="flex items-center gap-1 bg-card border border-bdr rounded-md px-2 py-1 text-[11px] text-muted">DB Verdict <span class="text-text font-semibold">${ev.found_verdict}</span></div>` : ''}
+      </div>
+      ${ev.text ? `
+        <div class="text-[12px] text-muted leading-[1.6] max-h-[72px] overflow-hidden relative transition-all duration-300" id="evtext_${i}">${ev.text.substring(0, 300)}…</div>
+        <span class="text-[11px] text-accent cursor-pointer mt-1 inline-block" onclick="toggleText(${i}, this)">Show more</span>
+      ` : ''}
+      <div class="flex gap-4 mt-3">
+        <div class="flex-1">
+          <label class="text-[11px] text-muted font-medium flex justify-between mb-1">Relevance <span class="text-text font-bold" id="rel_val_${i}">${defaultRel}</span></label>
+          <input type="range" id="related_${i}" min="0" max="1" step="0.05" value="${defaultRel}"
+            oninput="document.getElementById('rel_val_${i}').textContent=parseFloat(this.value).toFixed(2)">
+        </div>
+        <div class="flex-1">
+          <label class="text-[11px] text-muted font-medium flex justify-between mb-1">Grade (−1 to +1) <span class="text-text font-bold" id="grade_val_${i}">${defaultGrade}</span></label>
+          <input type="range" id="grade_${i}" min="-1" max="1" step="0.05" value="${defaultGrade}"
+            oninput="document.getElementById('grade_val_${i}').textContent=parseFloat(this.value).toFixed(2)">
+        </div>
+      </div>
+    </div>`;
+            }).join('');
+
+            document.getElementById('evidenceSection').style.display = 'block';
+        }
+
+        function toggleText(i, btnEl) {
+            const textEl = document.getElementById(`evtext_${i}`);
+            if (textEl.style.maxHeight === '400px') {
+                textEl.style.maxHeight = '72px';
+                btnEl.textContent = 'Show more';
+            } else {
+                textEl.style.maxHeight = '400px';
+                btnEl.textContent = 'Show less';
+            }
+        }
+
+        // ────────────────────────────────────────────────────────
+        // Submit feedback
+        // ────────────────────────────────────────────────────────
+        async function submitFeedback() {
+            const n = currentEvidences.length;
+            if (!n) return;
+
+            const feedback = [];
+            for (let i = 0; i < n; i++) {
+                feedback.push({
+                    related: document.getElementById(`related_${i}`).value,
+                    grade: document.getElementById(`grade_${i}`).value,
+                });
+            }
+
+            const userVerdict = document.getElementById('userVerdict').value;
+
+            await fetch('/simulation/feedback', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    feedback,
+                    evidences: currentEvidences,
+                    expected_entities: '',
+                    user_verdict: userVerdict,
+                })
+            });
+
+            document.getElementById('feedbackMsg').classList.remove('hidden');
+            document.getElementById('feedbackMsg').classList.add('block');
+            loadStats();
+            loadHistory();
+        }
+
+        // ────────────────────────────────────────────────────────
+        // Training
+        // ────────────────────────────────────────────────────────
+        async function trainModel(modelType) {
+            const isNLI = modelType === 'nli';
+            const epochs = parseInt(document.getElementById(isNLI ? 'nliEpochs' : 'embEpochs').value) || 3;
+            const lr = parseFloat(document.getElementById(isNLI ? 'nliLR' : 'embLR').value) || (isNLI ? 2e-4 : 2e-5);
+
+            const url = modelType === 'nli' ? '/v1/training/nli' : '/v1/training/embeddings';
+            try {
+                const res = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ epochs, learning_rate: lr, batch_size: 4 })
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    appendLog(modelType, `ERROR: ${data.detail}`);
+                    return;
+                }
+                appendLog(modelType, `Training started (${epochs} epochs, lr=${lr})…`);
+                startStatusPoll();
+            } catch (e) {
+                appendLog(modelType, `Request error: ${e}`);
+            }
+        }
+
+        async function reloadModel(modelType) {
+            const url = `/v1/training/reload/${modelType}`;
+            try {
+                const res = await fetch(url, { method: 'POST' });
+                const data = await res.json();
+                if (res.ok) appendLog(modelType, `SUCCESS: ${data.status}: ${modelType} model reloaded.`);
+                else appendLog(modelType, `ERROR: ${data.detail}`);
+            } catch (e) {
+                appendLog(modelType, `ERROR: ${e}`);
+            }
+        }
+
+        function appendLog(modelType, msg) {
+            const el = document.getElementById(modelType === 'nli' ? 'nliLog' : 'embLog');
+            const line = document.createElement('div');
+            const ts = new Date().toLocaleTimeString();
+            line.textContent = `[${ts}] ${msg}`;
+            if (msg.includes('ERROR')) line.classList.add('text-red');
+            el.appendChild(line);
+            el.scrollTop = el.scrollHeight;
+        }
+
+        // ────────────────────────────────────────────────────────
+        // Status polling
+        // ────────────────────────────────────────────────────────
+        function startStatusPoll() {
+            if (statusPollTimer) return;
+            statusPollTimer = setInterval(loadStatus, 2000);
+        }
+
+        async function loadStatus() {
+            try {
+                const res = await fetch('/v1/training/status');
+                const data = await res.json();
+                renderModelStatus('nli', data.nli);
+                renderModelStatus('embeddings', data.embeddings);
+            } catch { }
+        }
+
+        function renderModelStatus(type, status) {
+            const isNLI = type === 'nli';
+            const metaEl = document.getElementById(isNLI ? 'nliMeta' : 'embMeta');
+            const indEl = document.getElementById(isNLI ? 'nliTrainingIndicator' : 'embTrainingIndicator');
+            const trainBtn = document.getElementById(isNLI ? 'nliTrainBtn' : 'embTrainBtn');
+
+            const ver = status.version > 0 ? `v${status.version}` : 'Base (untrained)';
+            const trained = status.last_trained ? new Date(status.last_trained).toLocaleString() : 'Never';
+            const pairs = status.num_pairs || 0;
+            const loss = status.last_loss != null ? status.last_loss.toFixed(4) : 'N/A';
+            const baseModel = status.base_model || 'Unknown';
+
+            document.getElementById(isNLI ? 'nliModelName' : 'embModelName').textContent = baseModel;
+
+            metaEl.innerHTML = `
+    <strong>Version:</strong> <span class="text-text">${ver}</span><br>
+    <strong>Last trained:</strong> <span class="text-text">${trained}</span><br>
+    <strong>Training pairs:</strong> <span class="text-text">${pairs}</span><br>
+    <strong>Last loss:</strong> <span class="text-text">${loss}</span>
+  `;
+
+            // Show/hide training indicator
+            if (status.is_training) {
+                indEl.classList.remove('hidden');
+                indEl.classList.add('flex');
+            } else {
+                indEl.classList.remove('flex');
+                indEl.classList.add('hidden');
+            }
+
+            trainBtn.disabled = status.is_training;
+            trainBtn.innerHTML = status.is_training
+                ? '<span class="spinner mr-1.5"></span> Training…'
+                : (isNLI ? 'Train NLI (LoRA)' : 'Train Embeddings (Triplet)');
+
+            // Flush new log lines
+            const log = status.log || [];
+            if (log.length) {
+                const logEl = document.getElementById(isNLI ? 'nliLog' : 'embLog');
+                const existing = logEl.querySelectorAll('div').length;
+                if (log.length > existing) {
+                    logEl.innerHTML = '';
+                    log.forEach(msg => appendLog(type, msg));
+                }
+            }
+
+            // Stop polling when both done
+            const nliStatus = document.getElementById('nliTrainingIndicator').classList.contains('flex');
+            const embStatus = document.getElementById('embTrainingIndicator').classList.contains('flex');
+            if (!status.is_training && !nliStatus && !embStatus && statusPollTimer) {
+                clearInterval(statusPollTimer);
+                statusPollTimer = null;
+            }
+        }
+
+        // ────────────────────────────────────────────────────────
+        // Stats
+        // ────────────────────────────────────────────────────────
+        async function loadStats() {
+            try {
+                const res = await fetch('/v1/training/feedback/stats');
+                const d = await res.json();
+                document.getElementById('sSessions').textContent = d.total_sessions;
+                document.getElementById('sNLI').textContent = d.nli_training_pairs;
+                document.getElementById('sTriplets').textContent = d.embedding_triplets;
+                const dist = d.label_distribution || {};
+                document.getElementById('labelDist').textContent =
+                    `Support: ${dist.SUPPORT || 0}  |  Refute: ${dist.REFUTE || 0}  |  Neutral: ${dist.NEUTRAL || 0}`;
+            } catch { }
+        }
+
+        // ────────────────────────────────────────────────────────
+        // History
+        // ────────────────────────────────────────────────────────
+        async function loadHistory() {
+            const container = document.getElementById('historyList');
+            try {
+                const res = await fetch('/v1/training/feedback/stats');
+                const stats = await res.json();
+                if (stats.total_sessions === 0) {
+                    container.innerHTML = '<div class="text-center text-muted text-[13px] py-8">No feedback submitted yet.</div>';
+                    return;
+                }
+
+                // Fetch preview to get session details
+                const prevRes = await fetch('/v1/training/feedback/preview?n=3');
+                const prev = await prevRes.json();
+
+                // Just show session count; detailed history requires a dedicated endpoint
+                container.innerHTML = `
+      <div class="text-[12px] text-muted mb-2">
+        ${stats.total_sessions} session(s) recorded · ${stats.total_evidence_items} total evidence items
+      </div>
+      <div class="text-[12px] text-muted mb-1.5"><strong class="text-text">Sample NLI pairs:</strong></div>
+      ${(prev.nli_sample || []).map(p => `
+        <div class="border border-bdr rounded-lg mb-2 overflow-hidden">
+          <div class="px-3.5 py-2.5 cursor-pointer flex justify-between items-center text-xs bg-surface select-none hover:bg-card" onclick="toggleHistory(this)">
+            <span>${p.claim.substring(0, 60)}…</span>
+            <span class="bg-card border border-bdr px-2 py-0.5 rounded-[10px] text-[10px]">${p.label}</span>
+          </div>
+          <div class="hidden px-3.5 py-2.5 text-[11px] text-muted">
+            <strong class="text-text">Evidence:</strong> ${p.evidence}
+          </div>
+        </div>
+      `).join('')}
+    `;
+            } catch (e) {
+                container.innerHTML = `<div class="text-center text-red text-[13px] py-8">Failed to load history.</div>`;
+            }
+        }
+
+        function toggleHistory(header) {
+            const body = header.nextElementSibling;
+            body.classList.toggle('hidden');
+            body.classList.toggle('block');
+        }
+
+        // ────────────────────────────────────────────────────────
+        // Enter key on claim input
+        // ────────────────────────────────────────────────────────
+        document.getElementById('claimInput').addEventListener('keydown', e => {
+            if (e.key === 'Enter') verifyClaim();
+        });
+
+        // ────────────────────────────────────────────────────────
+        // Thresholds
+        // ────────────────────────────────────────────────────────
+        async function loadThresholds() {
+            try {
+                const res = await fetch('/simulation/thresholds');
+                const d = await res.json();
+                setSlider('thr_relevance', 'lbl_relevance', d.relevance_threshold);
+                setSlider('thr_entity', 'lbl_entity', d.entity_threshold);
+                setSlider('thr_combined', 'lbl_combined', d.combined_threshold);
+
+                const md = document.getElementById('thr_maxdeep');
+                md.value = d.max_deep_analysis;
+                document.getElementById('lbl_maxdeep').textContent = d.max_deep_analysis;
+
+                if (d.aggregation_limit !== undefined) {
+                    document.getElementById('aggLimit').value = d.aggregation_limit || "";
+                }
+            } catch (e) { console.warn('Could not load thresholds', e); }
+        }
+
+        function setSlider(sliderId, labelId, value) {
+            const el = document.getElementById(sliderId);
+            el.value = value;
+            document.getElementById(labelId).textContent = parseFloat(value).toFixed(2);
+        }
+
+        async function applyThresholds() {
+            const body = {
+                relevance_threshold: parseFloat(document.getElementById('thr_relevance').value),
+                entity_threshold: parseFloat(document.getElementById('thr_entity').value),
+                combined_threshold: parseFloat(document.getElementById('thr_combined').value),
+                max_deep_analysis: parseInt(document.getElementById('thr_maxdeep').value),
+                aggregation_limit: document.getElementById('aggLimit').value || null,
+            };
+            try {
+                await fetch('/simulation/thresholds', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body),
+                });
+                const saved = document.getElementById('threshSaved');
+                saved.classList.remove('hidden');
+                saved.classList.add('inline');
+                setTimeout(() => {
+                    saved.classList.remove('inline');
+                    saved.classList.add('hidden');
+                }, 2500);
+            } catch (e) { alert('Failed to apply: ' + e); }
+        }
+
+        function presetThresholds(rel, ent, comb, maxDeep) {
+            setSlider('thr_relevance', 'lbl_relevance', rel);
+            setSlider('thr_entity', 'lbl_entity', ent);
+            setSlider('thr_combined', 'lbl_combined', comb);
+            document.getElementById('thr_maxdeep').value = maxDeep;
+            document.getElementById('lbl_maxdeep').textContent = maxDeep;
+            applyThresholds();
+        }
+
+        // ────────────────────────────────────────────────────────
+        // Init
+        // ────────────────────────────────────────────────────────
+        loadStats();
+        loadStatus();
+        loadHistory();
+        loadThresholds();
+    </script>
+</body>
+
+</html>

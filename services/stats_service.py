@@ -31,9 +31,50 @@ class StatsService:
                 "bias_consistency": 0,
             }
 
-        # 1. Calculate Overall Verdict
-        verdicts = [r.verdict for r in results if r.verdict is not None]
-        overall_verdict = sum(verdicts) / len(verdicts) if verdicts else 0
+        # 1. Calculate Overall Verdict using NLI-confidence-weighted average.
+        # This ensures high-confidence NLI results have more influence on the final
+        # verdict than low-confidence ones, preventing weak evidence from distorting outcomes.
+        verdicts = []
+        weights = []
+        for r in results:
+            if r.verdict is not None:
+                verdicts.append(r.verdict)
+                # Use NLI confidence as weight if available, otherwise use 0.5 as default
+                nli_conf = (
+                    r.nli_result.relationship_confidence
+                    if r.nli_result and r.nli_result.relationship_confidence is not None
+                    else 0.5
+                )
+                weights.append(nli_conf)
+
+        if verdicts:
+            total_weight = sum(weights)
+            overall_verdict = (
+                sum(v * w for v, w in zip(verdicts, weights)) / total_weight
+                if total_weight > 0
+                else 0
+            )
+            
+            # --- Neutral Dampening Logic ---
+            # If the weighted average is near-neutral but contains strong signals,
+            # ensure that a high-confidence Support or Refute isn't completely
+            # washed out by a sea of low-signal Neutral evidence.
+            # We calculate an "evidence-only" average (ignoring 0.0s) to see if
+            # there's a clear consensus among non-neutral sources.
+            non_neutral_verdicts = [v for v in verdicts if v != 0]
+            non_neutral_weights = [w for v, w in zip(verdicts, weights) if v != 0]
+            
+            if non_neutral_verdicts:
+                non_neutral_avg = sum(v * w for v, w in zip(non_neutral_verdicts, non_neutral_weights)) / sum(non_neutral_weights)
+                
+                # If there's clear non-neutral evidence, pull the overall verdict
+                # towards it, reducing the "gravity" of the 0.0 Neutral results.
+                # We blend the overall average with the non-neutral average (70/30)
+                # if the non-neutral signal is strong.
+                if abs(non_neutral_avg) > 0.4:
+                    overall_verdict = (overall_verdict * 0.6) + (non_neutral_avg * 0.4)
+        else:
+            overall_verdict = 0
 
         # 2. Calculate Bias Divergence
         bias_divergence = StatsService.calculate_bias_divergence(results)

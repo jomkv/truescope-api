@@ -1,702 +1,1402 @@
 [
   {
-    "docID": "b8c7589f14126feee58fccc147749ca6ac8db7049ef42d4c88a3f3e35ff8b541",
-    "claim": "The Social Security System (SSS) has released the payout schedule for the 13th-month benefits and monthly pensions of eligible members.",
+    "docID": "15643933bdb62c80459a9df31f21e118fa45c05285bccf517b2d741a6539a369",
+    "claim": "“Before and after” photos of Boracay show the condition of the world-renowned beach during the terms of President Benigno Aquino III and President Rodrigo Duterte.",
     "Ground_truth": "FALSE",
-    "id": "815e65b6-5055-48f4-9951-353e489a9c5d",
+    "id": "8c0a2c62-1e9a-433f-b067-2c935baf028f",
     "source": "RAPPLER"
   },
   {
-    "docID": "99648265a6ce10e5530568504146e4c4f114d9af3c37503ac406d0b5dca31356",
-    "claim": "Former US President George W. Bush said that the Philippines was the “wealthiest country in the world” a week after the September 11, 2001, terrorist attack at the World Trade Center.",
+    "docID": "96d424187c6d0f717d90d937ce2ab09c5fe80872c1d6073d546ff6482cf3482a",
+    "claim": "Claim: Chismixphportal.info published an article titled “Secret Loan From (sic) WorldBank: The Reason Why They Don’t Want Duterte To Win!” on June 30, 2019. The blog post wrote two main claims.",
     "Ground_truth": "FALSE",
-    "id": "d5e239ea-a364-4e8e-bc71-e68f2f90536d",
+    "id": "4d06e7f9-8ee9-44c3-8bf8-1e71dfbc16bc",
     "source": "RAPPLER"
   },
   {
-    "docID": "87d4e936df82fd089a2b75d5b106d7ce8bf302ac8ec698753f4e448c2f1227f8",
-    "claim": "A video of Pope Francis shows him talking about the “end time prophecy,” where he urges people not to look up to him anymore.",
+    "docID": "98480bf1bd434a635a0b03ec6286c864fbf02203fd1f29f87170868c7678150d",
+    "claim": "Ang sabi-sabi: May “million tons of gold” (isang milyong tonelada ng ginto) na pagmamay-ari ang pamilyang Marcos.",
     "Ground_truth": "FALSE",
-    "id": "115aafdc-e3e3-403a-8b94-56ebee323a65",
+    "id": "29e7a463-b7cd-4253-bb8a-6b3ef748eac8",
     "source": "RAPPLER"
   },
   {
-    "docID": "3b8b92715e5b1dcd09064099e7250007b66761a6f143796078133cb865bb6c95",
-    "claim": "Kagagaling lang ng Filipinas sa Ikalawang Digmaang Pandaigdig nang maging pangulo si Ferdinand Marcos.",
-    "Ground_truth": "FALSE",
-    "id": "9fad8026-3bb6-4dd3-86ab-5af30e9cdcd7",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "e0ff29c69cff42917437209316e047bae59a87641dd8e557601007f4dcb25412",
-    "claim": "President Ferdinand Marcos Jr. will allegedly open the Fuji Bank account of his father, former president Ferdinand E. Marcos, during his official working visit to Japan. The video shows a clip of Marcos giving his departure statement before heading to Japan.",
-    "Ground_truth": "FALSE",
-    "id": "87ba15ca-5fda-4494-9484-72c73678d01c",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "94ddbe767bff67766db2106952ea662dbc44e6f5ec0698dca8fe4a3aada997a7",
-    "claim": "Philippine opposition Senator Leila de Lima was rushed to the hospital, as shown in what appears to be a screenshot of a live television news report.",
-    "Ground_truth": "FALSE",
-    "id": "e265ce2e-14e8-446e-80a3-4f071f8015d2",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "08550370a2685fa740b43ae91d9e3809edfd0b2767c6a56f73fc368e271fa0b6",
-    "claim": "Sinisisi ng ilan sa 1986 EDSA People Power ang pagpataw ng VAT. Ayon sa mga pag-aaral, ipinataw ng administrasyong Aquino ang VAT dahil sa matinding krisis sa ekonomiya na idinulot ng rehimeng Marcos.",
+    "docID": "100d0c98807d5bfc967047292f5605f9b57400a6db917d4ec8a3ca6b65cd41f5",
+    "claim": "A video claims that defense contractor Santa Barbara Sistemas supposedly presented new tanks for the Philippine Army in their factory in Spain. The video’s thumbnail shows an armored vehicle bearing the Philippine flag.",
     "Ground_truth": "MISLEADING",
-    "id": "587807c4-4985-402d-bc67-83164c1179fe",
-    "source": "TSEK"
-  },
-  {
-    "docID": "4b532309d121536f559eec6d4e6c40029eba65992e98c7c72508d447e61e2592",
-    "claim": "Counting of votes for the national elections will only start after polls close at 7pm today, contrary to a claim showing presidential aspirant Leni Robredo leading the tally of votes.",
-    "Ground_truth": "FALSE",
-    "id": "890bd0db-c513-4f6a-b9a7-42f42a6f4e06",
-    "source": "TSEK"
-  },
-  {
-    "docID": "debcff92db5da8e48a89daaa8dc1c510ee4d887d49efd541122541df87245013",
-    "claim": "The Philippines had a consulate in every country in the world, but the buildings housing them were all sold in 1986 during the administration of then-president Corazon Aquino.",
-    "Ground_truth": "FALSE",
-    "id": "0acb495f-c56a-432d-9cec-4cc3d6952291",
+    "id": "9104a0c3-3797-4ee4-a310-3012204f4d6f",
     "source": "RAPPLER"
   },
   {
-    "docID": "3761e1c7e59b8912f9ac3a7a550dbb835d65ac2502095cd9c3795b2a9285101d",
-    "claim": "Eating one malunggay seed every day is an effective cure for over 300 diseases.",
+    "docID": "6544e55e33ae1295816d9aec00c39845e15983e1da74b156e25ea119b1e7b576",
+    "claim": "A YouTube video said that Manila Electric Company (Meralco) billings for March and April 2020 are now free to help consumers affected by the coronavirus crisis.",
     "Ground_truth": "FALSE",
-    "id": "e2516f1b-9103-4bd4-b5af-047e1c816b6a",
-    "source": "VERAFILES"
-  },
-  {
-    "docID": "82fe785c9b4b75734c95d3c31bb7ecf8fac9129ac1c858daecb60ff8c70554d7",
-    "claim": "CLAIM: Vice President Leni Robredo is not a victim of fake news.\nRATING: FALSE",
-    "Ground_truth": "FALSE",
-    "id": "ed4ad83a-cbd0-474e-838d-67f948b7929d",
-    "source": "TSEK"
-  },
-  {
-    "docID": "a289b632e9693fe766fd6c92816bef477d36a6366eca43fabad8e4876ad30097",
-    "claim": "After ex-Philippine leader Rodrigo Duterte was handed over to the International Criminal Court (ICC) in The Hague, an image was shared in Chinese posts that falsely claimed it showed local troops warning they would “lead an attack on Manila” if the China-friendly former president failed to return. There have been no reports of Philippine soldiers threatening violence in the country in the wake of the former president’s arrest, and the image used in the false posts has circulated since October 2017, when Duterte was still president.",
-    "Ground_truth": "FALSE",
-    "id": "f1b47ff4-36e9-436c-b39d-2f6cef691db0",
-    "source": "TSEK"
-  },
-  {
-    "docID": "f235d4fc23d621e8bceb43462add57f86380eca5105aa59a23b1c24e229057a9",
-    "claim": "Former president Ferdinand E. Marcos became finance secretary during the administration of president Manuel Roxas.",
-    "Ground_truth": "FALSE",
-    "id": "ea79a327-e6d2-4a80-9b31-a8ab8cb9634e",
+    "id": "dcfc2ff7-e1a1-4c87-9aa8-4a31da1c494b",
     "source": "RAPPLER"
   },
   {
-    "docID": "8e4dfc6b925d7a32427959ca279da580fdfbcbfd5014ff6e627956e5bc6d3cb5",
-    "claim": "Administrasyon ni Ferdinand Marcos Sr., at hindi ni Corazon Aquino, ang nagpasimula ng kontraktwalisasyon sa Pilipinas. Nilagdaan ni Marcos noong 1974 ang Presidential Decree No. 442 o Labor Code of the Philippines na nagbigay ng probisyon para sa mga employer na gawing probationary ang kanilang mga manggagawa.",
+    "docID": "127ff0fcccdc95582cb81a479f6f25df701d50719ccd50a8dc1003b66e63340a",
+    "claim": "Presidential Spokesman and Chief Presidential Legal Counsel Salvador Panelo claimed that the Philippines is not yet a signatory to the Basel Convention during a press briefing on Wednesday, May 22, in Malacañang.",
     "Ground_truth": "FALSE",
-    "id": "8eba5ede-2bbb-4312-b839-bd3e8e930e87",
-    "source": "TSEK"
-  },
-  {
-    "docID": "44751f7495f08816b22092b209801cfa63b761bb3222d6c7e275338dce743336",
-    "claim": "The Commission on Audit (COA) has not found deficiencies in the Office of the Vice President (OVP)’s spending in 2023.",
-    "Ground_truth": "FALSE",
-    "id": "379128f0-7291-4008-abfe-35f85c5e5db3",
+    "id": "fe20d1e7-988f-4e92-b20f-9ec03d08f70b",
     "source": "RAPPLER"
   },
   {
-    "docID": "d258b2ed0bbf36165b9ab2ed70f396c56a0f470b1e08dcaddc5081656a8afde1",
+    "docID": "e5dcd31f67db24a3b627e907d30e83c12e03beb9bf08ca61f33a4c9bf3e6e3c7",
+    "claim": "Claim: A photo shows Kabataan Representative Sarah Elago at the mountain of Barangay Puray, Rodriguez, Rizal attending the 51st anniversary of the New People’s Army (NPA).",
+    "Ground_truth": "FALSE",
+    "id": "52f2d2f1-efa3-42e6-97ef-8f2fa3ae5da9",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "c508f0a5ee7d7053b48acc5ced131f776db12a6ee007b3c8922cd6a00a6e5dde",
+    "claim": "The Philippine Navy will buy submarines from France.",
+    "Ground_truth": "FALSE",
+    "id": "2215e7ec-9db0-4be2-8197-ce5dc4c1df7c",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "8826481a1b8ab02bc2040238f4b78c105b77b81ffa0be85312d52daa1532ab40",
+    "claim": "A May 2025 Facebook video says a bill legalizing divorce in the Philippines has been approved.",
+    "Ground_truth": "MISSING-CONTEXT",
+    "id": "50a0475a-9829-46b6-ba73-a573dea7db4b",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "73bf65b7ad9a66e259f4b23dee3f07f5604a95561169b09505aaa6673d822482",
+    "claim": "US President Joe Biden went to the Philippines to speak with President Ferdinand Marcos Jr.",
+    "Ground_truth": "FALSE",
+    "id": "47ac4637-e39b-49cd-994c-61caa0830396",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "3a2da28ef2f912eeac810028ad3ff8d472aa73045a2380f592c331ca94466d63",
+    "claim": "The Commission on Audit (COA) has cleared the Office of the Vice President (OVP) of alleged corruption for its P125-million confidential funds controversy.",
+    "Ground_truth": "FALSE",
+    "id": "a76941f7-9f7c-4b14-9bb1-544789400264",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "dc1ee5cda0156e6d21cea4dbc31272bd1c8010d003347241d51a8b292282a1b4",
+    "claim": "The Philippines has created a North Atlantic Treaty Organization (NATO)-like alliance in response to China’s hostility in the West Philippine Sea.",
+    "Ground_truth": "FALSE",
+    "id": "059affe4-d36e-4f2c-8c5b-e2ffc5c03758",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "2f936f424a84915ef9d466ebfe88aae93af96194dbfa3588d9878f2caccde824",
+    "claim": "Terror group Abu Sayyaf thanked actors and politicians for opposing the anti-terrorism bill passed by Congress in June 2020.",
+    "Ground_truth": "FALSE",
+    "id": "fdca507e-9a41-4bd3-addb-80c5f8d12e92",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "fff6797c4d19d6e323566686f19fd56d4ec180e719374f77e69eacb006af7b03",
+    "claim": "Weed, slang for the cannabis plant, can “kill coronavirus,” according to a screenshot of what looked like a newscast shared by several Facebook pages.",
+    "Ground_truth": "FALSE",
+    "id": "4a4f41a8-97c1-4794-8a5e-3e7299dcbcbc",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "95739a2f6e7fba97bc101e6d5230ab9ae26c1b84f0102169e9e5781770e89534",
+    "claim": "Priest’s homily in support of BBM-Sara campaign.",
+    "Ground_truth": "FALSE",
+    "id": "664d96ec-46d2-4372-910e-78c1df5749f4",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "65eadabaad8b92ffc908f9f3e40b0760de8eda223a279dd8d789a90290d05211",
+    "claim": "The North Atlantic Treaty Organization (NATO) deployed 10,000 troops in Ukraine.",
+    "Ground_truth": "FALSE",
+    "id": "ccb388e6-ed60-4473-a071-4ac17922df5e",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "f08a085735a9e7647b00d720eee59bffec225e3f5e39106f56bc3f1b89d5629b",
+    "claim": "Sinabi diumano ni Senador Bong Go na ang mga tagasuporta ni Bise Presidente Leni Robredo ay mga “elitista” at “mayayaman.”",
+    "Ground_truth": "FALSE",
+    "id": "1ca299e8-1097-4b65-afa7-ff53887541d7",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "06ee727a3171487ac5773882887dfb70c79ece09de007de35bc2803f5c1b6887",
+    "claim": "Website rizal-news-updates.blogspot.com is giving free housing for the poor, as long as they register through its website.",
+    "Ground_truth": "FALSE",
+    "id": "4c87d684-170d-413c-b03b-4035ff47a254",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "06fc8eae6e51a6cd9d4d63032264258f94a72f98aeb5201a8fe568918a40e59c",
+    "claim": "A photo supposedly shows that COVID-19 “vaccine patients” have started eating other patients.",
+    "Ground_truth": "FALSE",
+    "id": "8337f21c-9d24-4d4c-ad8d-33df049c2e05",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "b2ea02f27dc18798e549f36ecf9e9284913bb85c78fbae80f8ace271ad47ade5",
+    "claim": "Japan has delivered nuclear-capable frigates to the Philippines to bolster the Philippine Navy’s capabilities.",
+    "Ground_truth": "FALSE",
+    "id": "b372eee4-0869-45c0-8bfe-5a22fe906e7d",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "047c8b279e972ed5277c42e0e60ab2484c42949a3544324f13d4d40528119a6d",
+    "claim": "The earthquake that hit Colombia on June 9 caused multiple fatalities and the collapse of residential buildings.",
+    "Ground_truth": "FALSE",
+    "id": "08e0994d-da17-41de-9d82-83da13228d7f",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "a99e2ea99712477160403893d0e48aaf258f14993fba433e392388dcfe8b46ba",
+    "claim": "Individuals posing as health workers are infecting people with the human immunodeficiency virus (HIV) through contaminated needles used in blood sugar tests.",
+    "Ground_truth": "FALSE",
+    "id": "e89923b5-ee65-421b-9b41-6efc563f33c0",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "d48489daa4b212d9f5472307d971c0cf82d9958f1567611f9eabd9c5bdefb43d",
+    "claim": "Russian President Vladimir Putin supports calls for an independent Mindanao.",
+    "Ground_truth": "FALSE",
+    "id": "97459136-9c8c-4c1f-9d61-716b153b6b14",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "3819c661e55ea305379aa6da1a4300547035c2ffaa03c94048ca5310a098020c",
+    "claim": "Sonshine Media Network International (SMNI) has been officially invited by US President-elect Donald Trump to attend his inauguration on January 20, 2025.",
+    "Ground_truth": "FALSE",
+    "id": "96cfef6d-70e6-41a1-a0a9-a1c45c3dc4cd",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "48f2ae308c58b4c09bf563935d947349c40cd97077fdf357977426f7cabe75d1",
+    "claim": "Backriding in motorcycles is now allowed, according to a video posted by YouTube channel The Pinoy Rider.",
+    "Ground_truth": "FALSE",
+    "id": "f755bab8-6039-4a9f-9a44-d0b186357bd3",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "d312946fe42d7719d2425eccd43764cadf8d8bc09f6730c2c602037a617488ad",
+    "claim": "The power outages experienced in Ninoy Aquino International Airport (NAIA) Terminal 3 were intended to sabotage President Ferdinand Marcos Jr.’s administration.",
+    "Ground_truth": "FALSE",
+    "id": "833115f1-69f8-42e9-b7a8-e449ccc9fdcb",
+    "source": "RAPPLER"
+  },
+  {
+    "docID": "c218b7d72e1ac4900d28e9abcfb217ab020c06b97fbe84b6f739a3ec92242e46",
+    "claim": "A news card targeting Quezon City congressmen for allegedly misusing infrastructure funds uses an old photo of the MRT-7 construction to falsely depict an unfinished project in one of the city’s congressional districts.",
+    "Ground_truth": "FALSE",
+    "id": "7a25819e-f8f3-4e4b-b155-6ced47b6cbde",
+    "source": "TSEK"
+  },
+  {
+    "docID": "8d715102d8bc304f6e56096894a9a2fa9118cb076ecfdb45685882754ba5b94a",
+    "claim": "A TikTok user posted a video claiming that President Ferdinand Marcos Jr. received an honorary award from the United States (U.S.) Army. This is false.",
+    "Ground_truth": "FALSE",
+    "id": "adbe15ea-57e8-4438-811f-091517d4fa4e",
+    "source": "TSEK"
+  },
+  {
+    "docID": "3efc6ea9da9aa6cc445849802dd5a5f9e2aaa365b07df4a50c6bb66c26b67011",
     "claim": "Founded in 2017, Fact Check Philippines is a coalition of independent groups and individuals with one common goal — to aid in combating fake news and misinformation. It is the country's first established citizen fact checking organization.",
     "Ground_truth": "FALSE",
-    "id": "3312d375-9c0d-4f66-b126-681f7fca310c",
+    "id": "cd77e581-2e84-4424-a82c-084c4ea96480",
     "source": "TSEK"
   },
   {
-    "docID": "9ffacb87883f92593d2666d98a36fb1bc9f32a677ff4ab0a2b43c9fed74bbfe5",
-    "claim": "Medyo malaki na raw ang gastos ni Sen. Imee Marcos ‘di pa man naguumpisa ang campaign period para sa 2025 local and national elections.",
-    "Ground_truth": "FALSE",
-    "id": "598190f1-2328-49da-80c1-0241d3707f04",
+    "docID": "a47d6a0c9b213cb092e88c2436924e63d522a776be3a4e37797fd156734888df",
+    "claim": "CLAIM: A wave of Facebook comments claimed that a 2022 presidential candidate was being praised and worshipped by the faithful after pictures of Filipinos staging the annual “Kalbaryo ng Maralita” from Katipunan went viral.",
+    "Ground_truth": "MISLEADING",
+    "id": "048dc38e-f8b3-4348-a6b5-f10d7f64d122",
     "source": "TSEK"
   },
   {
-    "docID": "c154ba48e0e9c1b56960acaed02a1ae0d275ca26c315ce07111d41f1984ecd98",
-    "claim": "Sen. Imee Marcos was sentenced to life imprisonment after she was sued by President Ferdinand Marcos.",
+    "docID": "806e9d92889da031f5a5dd6e98023a806f5525fbe10e487cb5466c9a0b3914d0",
+    "claim": "Walang katotohanan ang pinapakalat na balitang magsasara na ang University of the Philippines sa pangunguna ni outgoing President Duterte at nina incoming President Marcos Jr. at Vice President Sara Duterte.",
     "Ground_truth": "FALSE",
-    "id": "fd24e431-db7a-4b39-a4e9-7bd5a84c73f5",
-    "source": "VERAFILES"
-  },
-  {
-    "docID": "2584627833365c3a29e3d07831c8d5eb27722171ca5afb7fda4ba62d4734e8f8",
-    "claim": "Ipinahayag na ni Senador Imee Marcos ang presidential-vice presidential tandem nina dating senador Bongbong Marcos and Davao City Mayor Sara Duterte para sa halalan sa 2022.",
-    "Ground_truth": "FALSE",
-    "id": "cf017d35-9b4f-4315-8dd9-8ec6fd80f946",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "f5fcb2f6b39e83bbd0591eecc66eb863c48d4f14de7d85c0bc1fcd10074f5a05",
-    "claim": "A video claims that Indonesia is preparing to defend itself against attacks by China, with a column of tanks seen driving down a street.",
-    "Ground_truth": "FALSE",
-    "id": "fef3fcef-4495-4232-acc6-1df04502da04",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "19880e2c7a2c703cce19517125680b1a82ee8beb3f74217d64396fd816d3e00b",
-    "claim": "Ang Kontra Daya ay isang malawakang kampanya ng iba’t ibang organisasyon at mga indibidwal na sinisiyasat ang mga kaganapan tuwing eleksyon upang ireport ang anumang anomalya, abuso, at pandaraya. Nabuo ito noong 2007 nang pumutok ang ‘Hello Garci’ controversy ni dating pangulong Gloria Macapagal-Arroyo.\n\nSa kabilang banda, si Assoc. Prof. Danilo Arao naman ay senior staff ng IBON Foundation noong 1999 na naging Editor-in-Chief at Research Head pa sa mga sumunod na taon habang siya ay nagtuturo sa De La Salle University at University of the Philippines.",
-    "Ground_truth": "FALSE",
-    "id": "143bef8b-3c69-4b4e-a3bf-8edb1c33d3e1",
+    "id": "96d86fe8-f924-45a6-b5ab-e5311934209a",
     "source": "TSEK"
   },
   {
-    "docID": "f7941a98d4dfe91694261d0e0b2ee1fef20a962e7650d5db704f559964b737f6",
-    "claim": "Nabuksan ang PGH nuong 1910, samantalang nakumpleto ang Manila International Airport nuong 1961, bago pa man maupo sa pwesto si FM Sr.",
-    "Ground_truth": "FALSE",
-    "id": "eec07e6f-d7d2-4caf-9bc9-d1ce210c8925",
+    "docID": "df431199ae8beb2b04f2d00598ec9ca36653b7530991957bf5ce9edec1509f6b",
+    "claim": "Supporters of President Ferdinand Marcos have misrepresented a photo of a congested road in Vietnam as depicting gridlock in the Philippines during his predecessor Rodrigo Duterte’s term. The posts misleadingly compare the picture with one of a busy Manila highway taken in May 2025.",
+    "Ground_truth": "MISLEADING",
+    "id": "a4dd89bf-8b46-469b-acd9-827205d71468",
     "source": "TSEK"
   },
   {
-    "docID": "2246372b939f5b49a852c6d6d852ec7fa3a6af9bc69d0aa5e1e7c01e378d8a9b",
-    "claim": "Susubukan umanong guluhin ng mga makakaliwang grupo ang inagurasyon ni Ferdinand Marcos Jr. ngayong Huwebes, Hunyo 30.",
+    "docID": "2053458d92d02aafc1a7b31186d028c3605b8d040d5843a84ecf213b5c034cec",
+    "claim": "A video supposedly of the arrival of former president Rodrigo Duterte at the Manila International Airport (MIA) is circulating online. This is false. Clips from two unrelated events were spliced to create the footage.",
     "Ground_truth": "FALSE",
-    "id": "7c1ef889-d2aa-4cba-8dea-4a00649408b5",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "71c0413036ab424cf86b0b91ae9d940cc159519531f31b6365c55e37f06e231f",
-    "claim": "Another erroneous online article claimed President-elect Ferdinand “Bongbong” Marcos Jr. wants returning senator Alan Peter Cayetano replaced, this time by Rep. Rodante Marcoleta. It is a false claim.",
-    "Ground_truth": "FALSE",
-    "id": "77a75b51-8bac-4806-8fff-703ffa90b2a3",
+    "id": "47e3580b-e9ba-496b-b772-04ff5944b6de",
     "source": "TSEK"
   },
   {
-    "docID": "421c4a604b8c5fd024c9e64bfc43dc85f3003a316a3db9cec3da360465a2c29c",
+    "docID": "35a6109b1e2bfc499032c40071a9ba2de7bde228f5af008901ce024c7358f0ac",
+    "claim": "Ang ABKD ay isang malawak na network ng mga guro, edukador at institusyong akademiko na naglalayong gumanap ng aktibong papel para labanan ang disimpormasyon at dayaan sa halalang 2022.",
+    "Ground_truth": "FALSE",
+    "id": "57639cc3-5452-48bf-8309-ff64e6208177",
+    "source": "TSEK"
+  },
+  {
+    "docID": "acb483feec522a820d11f6d4d624d61392103dc9a9a09253bbddfa5a666c00b0",
+    "claim": "Several Facebook groups and pages are spreading an erroneous screenshot of a news update by radio station Bombo Radyo Bacolod, which supposedly reported that over 70 million individuals attended Vice President Leni Robredo’s grand rally in Bacolod, Negros Occidental.",
+    "Ground_truth": "FALSE",
+    "id": "fb0e7c0e-f8a5-45cd-9f28-7d730e2ca7a1",
+    "source": "TSEK"
+  },
+  {
+    "docID": "f6cd84dc1c5df5a86c3b8643ccdfdbc81143fa26d3f1b4d4774e3cd03e1e0198",
+    "claim": "Ayon sa Bangko Sentral ng Pilipinas, walang katotohanan ang kumakalat na dokumento na nagpapahintulot kina Aquino at Roxas na magdeposito ng tone-toneladang ginto sa Thailand.",
+    "Ground_truth": "FALSE",
+    "id": "cac7df97-d2f4-4016-8685-813fae71d28b",
+    "source": "TSEK"
+  },
+  {
+    "docID": "7d1a9d95e5524a77d66d7999eecf80b91723b2f4ed79d190d4272a7595996477",
+    "claim": "Leni Robredo, walang solusyon sa problema sa droga?",
+    "Ground_truth": "FALSE",
+    "id": "ba9a645d-5cf1-460c-80a6-18def9dc16c3",
+    "source": "TSEK"
+  },
+  {
+    "docID": "91b7291bcf39879edef0c4527c4bd50dfff0e777361f58fcffc599c0945e3b9a",
+    "claim": "Ayon sa mga ipinapakalat na balita at video ng Eagle News sa kanilang news report, umamin daw bilang adviser ni Leni Robredo si CPP Founder Joma Sison. Ipinakalat din ito ni Presidential Candidate Senador Ping Lacson. Ito ay fake news! Itinanggi na ito ng parehong partido at wala umanong basehan ang nasabing paratang.",
+    "Ground_truth": "FALSE",
+    "id": "7b9da41e-b704-41f7-9cc1-8b8d414e88df",
+    "source": "TSEK"
+  },
+  {
+    "docID": "a6c1eaf03213422699c2070f661991f073c35c45d577fc922ca557e5a736c53b",
+    "claim": "Founded in 2017, Fact Check Philippines is a coalition of independent groups and individuals with one common goal — to aid in combating fake news and misinformation. It is the country's first established citizen fact checking organization.",
+    "Ground_truth": "FALSE",
+    "id": "5bde357d-a997-40b6-986d-3cb1ef9c32a2",
+    "source": "TSEK"
+  },
+  {
+    "docID": "9333d992b23c7422b64bd21368c6ba44fcff866aea64be10cc320fa2dbded4a5",
+    "claim": "A video with hundreds of thousands of views is circulating in the Philippines alongside the claim it shows communist rebels surrendering to the government of incoming leader Ferdinand Marcos Jr, who won the presidential election in May. In fact, the footage shows a scene from a Filipino film released in 1986 about the country’s communist insurgency.",
+    "Ground_truth": "FALSE",
+    "id": "25f60c75-8156-4192-86ec-5ae358c7a431",
+    "source": "TSEK"
+  },
+  {
+    "docID": "822d8774045cf7544eedf492a9b795e914457e998c3be802b6c0ec506e96fc70",
+    "claim": "Walang katotohanan ang pahayag ni Democratic Party of the Philippines standard bearer Dr. Jose Montemayor Jr. na ang pagbabakuna ay maaaring maging sanghi ng pagkahawa sa COVID-19.",
+    "Ground_truth": "FALSE",
+    "id": "e7f8bfe0-9dad-4698-bcfe-46bcc9761e58",
+    "source": "TSEK"
+  },
+  {
+    "docID": "c93e5b63f7728fd0048e1c4837d5c648fdb85d6aa6a8ae0a2941e0a5479903bd",
+    "claim": "Veronica “Kitty” Duterte, daughter of former president Rodrigo Duterte, claimed in a recent campaign rally that young people “could go outside and come home safely” under his father’s presidency, implying the streets were safer during those years. This is false.",
+    "Ground_truth": "FALSE",
+    "id": "c837f383-dc83-4ab9-8bba-ea20f29fa459",
+    "source": "TSEK"
+  },
+  {
+    "docID": "0df9016af9dc9b60b37107c22b14b63e0ccabd262f5bbca792714058dca911fa",
+    "claim": "Kasinungalingan ang sinasabi ni Ferdinand \"Bongbong\" Marcos Jr. na nakakuha siya ng degree mula sa Oxford.",
+    "Ground_truth": "FALSE",
+    "id": "4d96cbf7-12de-4259-aa22-ae2bfb2c4e41",
+    "source": "TSEK"
+  },
+  {
+    "docID": "f3cfc5d5ec007344b2d881b8fa7e9c1e59f102dfaba8eb1674446a5148cf4d23",
+    "claim": "A photo collage showing presidential aspirant Ferdinand “Bongbong” Marcos Jr. in different relief operations for typhoon victims through the years contains two pictures of events that have nothing to do with such operations.",
+    "Ground_truth": "MISLEADING",
+    "id": "192a69ee-ac20-4d03-94c4-0b49d7a93078",
+    "source": "TSEK"
+  },
+  {
+    "docID": "e136e7cdf4ade3f3dfafae1d560366f759ae802721cba1a1ccb711f5b22b4621",
+    "claim": "#ABSCBNFactCheck Rating: MISLEADING\n\nMali ang alegasyon ng isang Twitter post ng posibleng dayaan di umano sa Pasay dahil walang Vote Counting Machine (VCM) sa “special allocated voting area” para sa “seniors/pwd.” @ABSCBNNews #TsekPH #FactsFirstPH #Halalan2022 pic.twitter.com/D3epd71nvC",
+    "Ground_truth": "MISLEADING",
+    "id": "c4ed3de2-36fc-4a24-85d0-4a5056af588d",
+    "source": "TSEK"
+  },
+  {
+    "docID": "097b928da39cba0a743a4513b318981014bd33a9614f3bf0d976df8909e5b06b",
+    "claim": "Founded in 2017, Fact Check Philippines is a coalition of independent groups and individuals with one common goal — to aid in combating fake news and misinformation. It is the country's first established citizen fact checking organization.",
+    "Ground_truth": "FALSE",
+    "id": "4985eb4e-8fe8-42e0-93f0-494a61c80f3e",
+    "source": "TSEK"
+  },
+  {
+    "docID": "f7b7ed4a516275305f12e8b5b03f29529944f96803e8f797696bb9cedc7a8886",
+    "claim": "There is no official result yet of the Counting for Overseas Absentee Voting (OAV), contrary to a claim that presidential aspirant Leni Robredo and her running mate Kiko Pangilinan attained landslide victory abroad.",
+    "Ground_truth": "FALSE",
+    "id": "0d723dca-af18-4a6a-a77e-ed1a1343ccc8",
+    "source": "TSEK"
+  },
+  {
+    "docID": "ab0aa964a4ae9dc3df2f5ac7f3981fd54f6bc2f3f73292f62a9fa0e8ccd0db0c",
+    "claim": "A video circulating online shows supporters of opposing candidates in a brawl supposedly ahead of the May 12 midterm elections. This is false. The clip was taken in 2023 during the Barangay and Sangguniang Kabataan elections.",
+    "Ground_truth": "FALSE",
+    "id": "a6935cf3-e81e-4dae-8319-196a4978cae9",
+    "source": "TSEK"
+  },
+  {
+    "docID": "1ff3d340b74b8c9b9022a05127f4492e03456eda94c715bdac54002e6b392e6a",
+    "claim": "Senatorial aspirant and former presidential spokesperson Harry Roque has falsely claimed that President Rodrigo Duterte is throwing his support to former senator Ferdinand “Bongbong” Marcos, Jr., who is running for president in the May 9, 2022 elections.",
+    "Ground_truth": "FALSE",
+    "id": "4befc580-f7f1-4b0f-aef8-56ed2b82350e",
+    "source": "TSEK"
+  },
+  {
+    "docID": "bfc30537a30c65394a0731f5d8ed1d750301042bdc2b363f5b58a4ced8555d3b",
+    "claim": "Ranggo: SAAN A PUDNO",
+    "Ground_truth": "FALSE",
+    "id": "84e5405f-7f1d-4193-8fed-2e2a18f59227",
+    "source": "TSEK"
+  },
+  {
+    "docID": "64a5278cae975ab701bafd906ccd0124a4d2a35c26ea82d9671f12f2a722f37a",
+    "claim": "Ipinapakalat sa social ang diumano'y maseselang videos nina Aika at Tricia Robredo, mga anak ni Vice President Leni Robredo.",
+    "Ground_truth": "FALSE",
+    "id": "f4d53847-d8a8-4502-8669-1d70c2b72068",
+    "source": "TSEK"
+  },
+  {
+    "docID": "40b2e72009ed602e2c463e0fb8c47894c6f1af447bdf350f1d0cf5c5c1976574",
+    "claim": "Walang sariling Facebook page ang longest-running English newscast na “The World Tonight” na mapapanood sa ABS-CBN News Channel (ANC).",
+    "Ground_truth": "FALSE",
+    "id": "2c142bc2-e4ee-4b8c-8c6d-994e37358989",
+    "source": "TSEK"
+  },
+  {
+    "docID": "ad60f3f3cb6ee819ae4b87f8530e1b9e3213e3f06ca56784df2903751ff116f7",
+    "claim": "CLAIM: Bayan Muna party-list group was disqualified by Comelec for communist ties.",
+    "Ground_truth": "FALSE",
+    "id": "294fb0ec-7898-47cf-ba09-ccb47395b248",
+    "source": "TSEK"
+  },
+  {
+    "docID": "66466d1b40013bdcb12576da0e9188743555504c7b78432f749c4d59f4231706",
+    "claim": "Walang ebidensiya na ang mga nominado ng mga nabanggit na partylists, Colmenares, Labog at Leody De Guzman ay miyembro ng CPP-NPA-NDF.",
+    "Ground_truth": "FALSE",
+    "id": "345950f2-a97e-4ed1-ae5b-0840cb7d5e1e",
+    "source": "TSEK"
+  },
+  {
+    "docID": "ace44fe3d82213d22af0492b5eb00cede14a27d2d011f40e7a62e63da558015e",
+    "claim": "A screenshot of a tweet that shows Reuters news agency calling out Vice President Leni Robredo for lying is making the rounds on Facebook. This two-year-old tweet is fabricated.",
+    "Ground_truth": "FALSE",
+    "id": "88b6143c-6e0a-4249-9cce-44d0147067bb",
+    "source": "TSEK"
+  },
+  {
+    "docID": "b5d9a409ee2868f24d59bcdbf0254005afccf4ba343109e12c9a665a286b0899",
+    "claim": "CLAIM: Vice President Leni Robredo did not accomplish anything as a public servant.\nRATING: FALSE",
+    "Ground_truth": "FALSE",
+    "id": "9c9655d5-3707-4768-ab1a-efb3f6d7c2db",
+    "source": "TSEK"
+  },
+  {
+    "docID": "72e51a103b9f79ab59476ccf48f9308f99b7160f34a465b7924206328f53f026",
+    "claim": "As the Philippines headed into the final week of campaigning for the May 9 presidential election, social media posts shared thousands of times claimed the government pledged to give cash handouts to all voters. However, the rumour originated from a Facebook page impersonating the country’s social welfare agency. A representative for the agency said it was not doling out cash to voters.",
+    "Ground_truth": "FALSE",
+    "id": "02b23696-e315-4fb6-b3e9-5b8eed7a14f3",
+    "source": "TSEK"
+  },
+  {
+    "docID": "0e5f0b1ef856bc3cddf89e92f39d68e2ea566f4a89408452c7c8b99d388d4eff",
+    "claim": "‘ANG TUNAY NA KATAUHAN NI MARY GRACE PIATTOS’",
+    "Ground_truth": "MISLEADING",
+    "id": "83abe363-fbf3-49bb-b5c0-b8d65faff4a3",
+    "source": "TSEK"
+  },
+  {
+    "docID": "d46404eae2798475b9611dfb82d0aff7de8ea3f58afb530c4aafff62fe7ae0ae",
+    "claim": "Two versions of a quote card supposedly showing Judge Tomoko Akane, president of the International Criminal Court (ICC), ordering the release of former president Rodrigo Duterte and dismissing the charges against him a few days before his 80th birthday are circulating online. These are fake.",
+    "Ground_truth": "FALSE",
+    "id": "abaa3bb4-ecea-443e-ba2a-ee5bb89f153f",
+    "source": "TSEK"
+  },
+  {
+    "docID": "2257e6ca01fc4ab8653a2306331d3e76f467a14138577f7d9dbc13929923f0a3",
+    "claim": "Walang kinalaman ang kumakalat na video sa isyu ng estate tax ng mga Marcos. Ayon sa BIR at DOF, hindi pa binabayaran ng mga Marcos ang kanilang bilyon-bilyong estate tax.",
+    "Ground_truth": "FALSE",
+    "id": "1782b731-61e0-4cea-92e3-425c4b314327",
+    "source": "TSEK"
+  },
+  {
+    "docID": "ab531d27079c688000e496f012b9e1e10e99f30c25bdd5de2f72da2bc2e168be",
+    "claim": "Fact-Check Patrol is a nationwide network of journalism and communication students and educators fighting disinformation and misinformation. It was initiated by the UP Fact-Checking Lab, an extension project of the UP Department of Journalism.",
+    "Ground_truth": "FALSE",
+    "id": "f9b8352e-3083-4915-a8ed-b78401ac9145",
+    "source": "TSEK"
+  },
+  {
+    "docID": "d16e95ecd869d902fb15ba5bd1f2cd4fa2ddde46be817a7e3865c7ac1cc89e21",
+    "claim": "In a Facebook (FB) post, veteran actress Vivian Velez misquoted Vice President Leni Robredo and made her look like she contradicted herself while addressing a question on whether or not the Philippines is a narco country.",
+    "Ground_truth": "MISLEADING",
+    "id": "a0cb8517-bc6d-4c7c-ade4-a445267bd16d",
+    "source": "TSEK"
+  },
+  {
+    "docID": "a7e6f014c1d49f528a17905da3d8635b974f13c491f8d96a2de223561ff0bbb4",
+    "claim": "A Facebook reel showed three women supporters of former president Rodrigo Duterte rejoicing over his supposed release, making it appear he has been released from detention. This is not true.",
+    "Ground_truth": "FALSE",
+    "id": "d625afcc-fa27-482f-90a7-41c09d467caf",
+    "source": "TSEK"
+  },
+  {
+    "docID": "44d840b093e4ba50cda43013f5d3d72cdec9edb6f390d7a97aae9d00c9af27df",
+    "claim": "Former broadcaster Jay Sonza misled people by using a different photo in a Facebook (FB) “congratulatory” post on the number of attendees in the April 23 #ArawNa10To! rally held in Pasay City for Vice President Leni Robredo.",
+    "Ground_truth": "MISLEADING",
+    "id": "fede1e65-216c-4bdc-ae65-c41a87afaa07",
+    "source": "TSEK"
+  },
+  {
+    "docID": "97694dc1adf910790de8fb81beddc771e2cffb7fbeb024df85137754ab15cfe3",
+    "claim": "Ti imahe nga maiwarwaras iti social media ket nagtaud kano iti Comission on Elections weno Comelec a mangdisdiskuwalipika kenni Neri Colmenares iti panagkandidato na iti pagkasenador, dagiti partylist a Bayan Muna, Anakpawis, Kabataan, ACT Teachers, ken Gabriela iti eleksiyon. Ti imahe ket awan ti makita a pirma a kas pammaneknek nga lehitimo ken kapapati.\n\nNayun na, awan ti opisyal a pablaak ti Comelec iti anya man a panagdiskuwalipika. Imbaga pay ti opisina ti komisyoner ti Comelec a saan a nagtaud iti opisina da ti maiwarwaras a dokumento, tinalmegan na pay daytoy nga ulbod ken peke.",
+    "Ground_truth": "FALSE",
+    "id": "8455a5d2-fd77-48d9-b397-2df01192c840",
+    "source": "TSEK"
+  },
+  {
+    "docID": "ec8cbef476ff8b1661848564f2f9f3df4a97a83e834c4d726e0ed139d50ad4d2",
+    "claim": "COMELEC at Liberal Party, dadayain ang 2022 Elections?",
+    "Ground_truth": "FALSE",
+    "id": "6a43bb52-5fbd-4d07-9f10-f6561be1fb8a",
+    "source": "TSEK"
+  },
+  {
+    "docID": "db889b6bb1f919afcac1f59cbda880b0d9ab2a317e3fbc9c728e94668d81564c",
+    "claim": "Several YouTube videos and Facebook (FB) posts are claiming that former president Rodrigo Duterte bid farewell to his daughter, Vice President Sara Duterte, following her supposed death. These are false.",
+    "Ground_truth": "FALSE",
+    "id": "7a1e9003-f391-4771-9922-fa7fcdb52218",
+    "source": "TSEK"
+  },
+  {
+    "docID": "ebb34f096b01f4943538f799dc2dce9e29f6e6a275c6fa168c334e12f964bf32",
+    "claim": "A viral Facebook reel is showing Vice President Sara Duterte supposedly announcing that her father, former president Rodrigo Duterte, is returning home soon from The Hague, Netherlands. This is false.",
+    "Ground_truth": "FALSE",
+    "id": "f046c94e-d42b-47de-bf8e-5d54df91b3e5",
+    "source": "TSEK"
+  },
+  {
+    "docID": "e2424a5b6321ded54e1ae0594cb59d10f3bd8e20edb297c9b9623e67ebb88ee0",
+    "claim": "Kontra sa pahayag ng isang FB user, \"Sick Man of Asia\" ang turing sa Pilipinas mula 1965 hanggang 1986. Hindi kabilang ang Pilipinas sa mga tinaguriang \"Asian Tiger\" noong panahon ni Ferdinand Marcos Sr.",
+    "Ground_truth": "FALSE",
+    "id": "91ca41aa-c306-4c24-84a6-3a035c0a04c5",
+    "source": "TSEK"
+  },
+  {
+    "docID": "6ec70583a1ca9e349e04999eeac273d650f43e24324f2f6e73c003b2495d6002",
     "claim": "Noon pang 1948 lumipat ang maraming akademikong yunit ng Unibersidad ng Pilipinas sa Diliman, Quezon City. Samantalang, 1965 lang naging pangulo si Marcos Sr.",
     "Ground_truth": "FALSE",
-    "id": "23083daa-5061-45e3-a23c-bcff923bb9fe",
+    "id": "13f8d887-922e-42ec-8db4-49a483818c79",
     "source": "TSEK"
   },
   {
-    "docID": "c6e9bc49fc007c2a8735cb34d7cfd5cc6366b68496ac7d6ed43aa08a7b4b3d48",
-    "claim": "Claim: The International Criminal Court (ICC) will release former president Rodrigo Duterte from detention in The Hague, Netherlands, because the ICC has lost jurisdiction over the case.",
+    "docID": "9c0b36bb790045fc734184681d89d1c9764b139e00b0d3355595ff185a638a34",
+    "claim": "Kung miyembro si VP Leni Robredo ng CPP-NPA-NDF dahil sa pagkiling niya sa karapatan ng mga magsasaka ng Tinang, maituturing din kayang miyembro ang Department of Agrarian Reform?",
     "Ground_truth": "FALSE",
-    "id": "8f7d56d7-866d-4a3c-8e9c-2ba20b9a0a2e",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "3bb8193b26ff00bc8aff693b89e713665614078021bf16ec54eada4075c1b5bb",
-    "claim": "Kumalat ang graphic na nagsasabing nangunguna na sa bilangan si Bongbong Marcos habang bukas pa ang mga polling precinct at bumuboto pa ang mga tao.",
-    "Ground_truth": "FALSE",
-    "id": "b5e30675-f09b-4d77-89da-186218b3a102",
+    "id": "7d815d13-2fc5-41e6-acc5-57f3b48929f1",
     "source": "TSEK"
   },
   {
-    "docID": "50502211ce859edbaa30d4a94438ed12c0c2f868ccc97d707d889466de1a6172",
-    "claim": "On February 28, President Rodrigo Duterte ordered that Smartmatic be replaced as the country’s vote-counting machine (VCM) provider.",
+    "docID": "072c5d6b223985bccb83d44fca445f507e12441bd81b85e3574389ad7b214e1d",
+    "claim": "Walay lig-on nga ebidensya nga makapamatuod nga lehitimo ang gipakatap na “last will and testament” ni Ferdinand Marcos Sr.",
     "Ground_truth": "FALSE",
-    "id": "f88a550f-51fd-441a-8167-56fe3059a63f",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "55cde3f25b5a2508d1fc32bca688203e0c400d360d2755339f9ccc951370927d",
-    "claim": "Kumakalat pa rin ang pekeng kuwento na nagpuslit umano ng tone-toneladang ginto patungong Thailand ang administrasyon ni dating Pangulong Noynoy Aquino. Peke ang dokumentong galing umano sa Bangko Sentral ng Pilipinas.",
-    "Ground_truth": "FALSE",
-    "id": "551489d2-c390-473c-a21c-60b09f05def7",
+    "id": "f4f265be-233e-4496-9ebb-e076ee2af375",
     "source": "TSEK"
   },
   {
-    "docID": "f33af1486afd0209ca3cf7650b229349866ebfc791b217e01e048b72bb3b1f19",
-    "claim": "The ICC dismissed drug war charges against Duterte",
+    "docID": "eca0ad9e3f4e52269e87876a59f0b29a03b71f8c15eec02b925df7cba9580351",
+    "claim": "Harry Roque has been ordered imprisoned by the Senate",
     "Ground_truth": "FALSE",
-    "id": "56bda5b8-2f9e-4948-b52f-6f78f32c941e",
+    "id": "9dfc3515-2ee9-43b7-b595-ef2658ff0d51",
     "source": "VERAFILES"
   },
   {
-    "docID": "a8434a747cac86f2b419d1cef6eb216ecb0fca6f447a718225178c4778ce1709",
-    "claim": "The International Criminal Court has dismissed the crimes against humanity case against former president Rodrigo Duterte.",
+    "docID": "44c419dc06597cc2817e1b65657ba58afd4d5965fd9cf8a624e8d069c134addd",
+    "claim": "Photos show huge crowd supporting ‘Duterte senators,’ referring to the candidates for senator in the May polls under the PDP Laban party of former president Rodrigo Duterte.",
     "Ground_truth": "FALSE",
-    "id": "30238c50-72bb-456c-9b06-884595f4df3f",
+    "id": "5360f69b-b5b7-4c66-9d06-74c50a350a62",
     "source": "VERAFILES"
   },
   {
-    "docID": "f4b73d90cd3d88ae3d39fc6d476b16e6bfe70f21081b4316559b4bfb425ece24",
-    "claim": "Dual degree raw ang certificate na ibinigay ng Oxford University kay Bongbong Marcos",
+    "docID": "750aa22ad9a03db3f259c109995475b00c3dfc0cda73568443d32d8447c5e9ee",
+    "claim": "The viral video of strong winds and rain cutting down a tree was taken during the onslaught of Typhoon Pepito.",
     "Ground_truth": "FALSE",
-    "id": "42c4adf6-47d4-4abd-9db9-207182c5c3c1",
-    "source": "TSEK"
-  },
-  {
-    "docID": "6d28a0e498ff7ffa31412765fa1337cc86929ab71c9440e3088c4d9e750ea7e2",
-    "claim": "Leni Robredo defended Sara Duterte over her office’s alleged misuse of confidential funds.",
-    "Ground_truth": "FALSE",
-    "id": "d9d96cec-2a7c-4265-8511-13f471803519",
+    "id": "35b02cb1-f017-4a3a-8ab3-04c2d1759af3",
     "source": "VERAFILES"
   },
   {
-    "docID": "a6b5c5eaa979f5f5acbef6a75b0a0c43ac62811e9b6b5ac33eac59a21751ef63",
-    "claim": "President Ferdinand Marcos Jr. has completely recovered his family’s wealth following a court verdict dismissing an ill-gotten wealth case against his parents, former president Ferdinand E. Marcos and former first lady Imelda R. Marcos.",
+    "docID": "d75ddeb7d9b73cca0705370f448d97861b0729beec59e4ada2871936b5a5b79f",
+    "claim": "A video shows footage of recent flooding in Quezon City.",
     "Ground_truth": "FALSE",
-    "id": "5931d7a2-3b3a-43f1-a1a1-f1b007003d51",
-    "source": "RAPPLER"
+    "id": "a0a0b870-3030-4a04-b728-de7eb4db1e34",
+    "source": "VERAFILES"
   },
   {
-    "docID": "d7035a7d5d39ea284648aee1ca4376bb624f9cca514d35a4337b4b05e056d12d",
-    "claim": "Miss Universe Organization (MOU) president Paula Shugart says Miss Mexico is undeserving to be 69th Miss Universe.",
+    "docID": "116b4d6845384ff754c56766e3df661b3252c5c4cc426d8ba58da6248f26a60b",
+    "claim": "The House of Representatives can no longer appeal the Supreme Court’s unanimous decision declaring the Articles of Impeachment against VP Sara Duterte unconstitutional.",
     "Ground_truth": "FALSE",
-    "id": "00c4116b-b78e-474d-9305-b1bc95d5be38",
-    "source": "RAPPLER"
+    "id": "9ab703b3-caa5-4976-b306-cdd7569d0f2c",
+    "source": "VERAFILES"
   },
   {
-    "docID": "f12bee49c83f99a66a202e7949b7c31124f684876e8f37b7d9261f5d2ac99ca8",
-    "claim": "Tatlong mayors na sa Camarines Sur ang itinangging sinusuportahan nila si Bongbong Marcos, taliwas sa ipinakalat ng Partido Federal ng Pilipinas.",
+    "docID": "0339cd1c415590c3647bedbedbf3610332c455fd081efbf5cbfa0cbb134882be",
+    "claim": "Congress had passed an anti-dynasty provision for the Bangsamoro Autonomous Region in Muslim Mindanao.",
     "Ground_truth": "FALSE",
-    "id": "42a67669-d125-474d-975e-a04aee5bf40e",
-    "source": "TSEK"
+    "id": "dd431d4f-634f-46bb-981c-063825f79d0c",
+    "source": "VERAFILES"
   },
   {
-    "docID": "94870b469bab38a0590575cf80b61b6987f3a5330ae26cd69abea0d9b1150db2",
-    "claim": "Base sa ilang desisyon ng Korte Suprema, hindi napatunayan ng mga Marcos na mula sa mga lehitimong source at hindi nakaw ang kanilang yaman.",
+    "docID": "808393061175dc91de6d1873932bfc7a94deab17a48843390ab0f5966e5d20ea",
+    "claim": "Bongbong Marcos has kicked out Speaker Martin Romualdez from his post",
     "Ground_truth": "FALSE",
-    "id": "d9840566-3c10-4c93-ae5c-ac6462c43d7c",
-    "source": "TSEK"
+    "id": "db8f5a8e-65b3-4d93-92dc-bf6515513a77",
+    "source": "VERAFILES"
   },
   {
-    "docID": "639e02e4857312e4d1c83196a533fc7574d25f0a2476a9617ded670327883ff6",
-    "claim": "CLAIM: 2016 vice presidential election was stolen from Marcos\nRATING: FALSE",
+    "docID": "c5829e648da9e24368baf74c873032ada89aa5a2cf694ba1767bea12613adf5c",
+    "claim": "Bird’s eye chili is proven to be very effective against dengue.",
     "Ground_truth": "FALSE",
-    "id": "3826c6f4-617d-4084-86d9-b64674a0be1b",
-    "source": "TSEK"
+    "id": "091223e0-e1f7-492e-b5f3-9c10e88aaca2",
+    "source": "VERAFILES"
   },
   {
-    "docID": "18533fffa6740090a42467eb495699b224737309fac1f8e53d367d630f8633ed",
-    "claim": "Ayon sa isang facebook post, binabalewala diumano ni presidential candidate VP Leni Robredo ang mga pagsisikap ng Maritime Industry Authority (MARINA) sa pagsasanay sa mga marino. Ito ay tinanggal sa konteksto mula sa orihinal na pahayag ni Robredo hinggil sa disconnect ng curriculum at industry sa bansa.",
+    "docID": "5aff390364b6483c558d3ab54083a86f57d015eea630ca9c1dbd91804913a682",
+    "claim": "The Philippines has established a military alliance with the U.S., Japan and Australia similar to the North Atlantic Treaty Organization or NATO",
+    "Ground_truth": "FALSE",
+    "id": "c24210a1-1f1c-4c01-be98-d9d50ebb6b4d",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "a6ce2515f4d47f62368bb540319795577e0f52e2893099fb2392693285dfd703",
+    "claim": "Supporters of former president Rodrigo Duterte are rejoicing after he has been released from detention in The Hague",
+    "Ground_truth": "FALSE",
+    "id": "a845f8ad-e6b9-424f-8aab-3aaf54e239a7",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "957917ceec06d46b2006f8dd854f6f5ed8319084b2950b5a65fe6c49f6ae2339",
+    "claim": "The International Criminal Court has allowed former president Rodrigo Duterte to return to the Philippines.",
+    "Ground_truth": "FALSE",
+    "id": "7bbcf274-82e5-42b7-b009-49dcaa86a23c",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "2150d57362a7377d53567910f0c126762829c5f2fe2255c9043ac60c6c2b4f22",
+    "claim": "China declared a state of emergency following a surge of respiratory illnesses",
+    "Ground_truth": "FALSE",
+    "id": "a5f84729-b1ed-4983-ba7c-a1f2b87d2dd1",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "6c2a2d5eab7c473c06d30f704737ff11ad57cd2a8550b8264826ab9f1e023d82",
+    "claim": "Photo shows an unburnt red-roofed house that survived the Los Angeles wildfires in January 2025.",
+    "Ground_truth": "FALSE",
+    "id": "d4729ee6-665d-4689-9679-bc2f8b6e20cf",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "d59b0951a873928a57cd85e4d194eb93e0a91d6224948e17ec7e6f9ca1db11cb",
+    "claim": "Videos show parts of Los Angeles, including the famous Hollywood sign, was burned down by the California wildfires in January 2025.",
+    "Ground_truth": "FALSE",
+    "id": "d3c73bb2-0f0c-4c35-9010-4304e9159d6c",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "0edb9b1095be9a051225e156fae209f2789bdf4a53f97afef5277a6cf5466635",
+    "claim": "Ferdinand Marcos Jr. has ordered the arrest of Sara Duterte after she threatened to kill him",
+    "Ground_truth": "FALSE",
+    "id": "3871ef9e-2135-441a-8beb-09826f1f36aa",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "45a9b33466568694ec77740248afa68b2bb2350beb9555dbea60e0e49774f8f4",
+    "claim": "Fitgum apple cider gum can remove bad cholesterol, clean the liver and promote weight loss. It is endorsed by Dr. Willie Ong.",
+    "Ground_truth": "FALSE",
+    "id": "b99eba6e-903d-460e-9804-23882d201c11",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "50fa21e995c1d8d291b6e638492e13bff413dff39e1ba9a42e691cd150b53bef",
+    "claim": "The government is stopping the Pantawid Pamilyang Pilipino Program or 4Ps",
+    "Ground_truth": "FALSE",
+    "id": "932b25a8-0fc1-408e-af5f-13984381e4cb",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "20992757df4f52304697621d42620c3bd37ba1c358b879b0184cb935a132efcc",
+    "claim": "The Metro Rail Transit Line 3 (MRT-3) is offering commuters a transportation card with a year’s worth of train rides",
+    "Ground_truth": "FALSE",
+    "id": "f3ead09e-28c3-4340-8a88-7a0932817b15",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "4f5ee6a163ed1fa406f0e1cb2f5f0420d55fcc62a1d39f7eb7d6f2aa3cdf76c2",
+    "claim": "VP Sara Duterte blocked the evidence supporting the impeachment complaints filed against her",
     "Ground_truth": "MISLEADING",
-    "id": "746a49e3-4f7c-40b8-b6cf-ec2659f86268",
-    "source": "TSEK"
+    "id": "447362e5-b3d4-4b2f-8783-bfc858407034",
+    "source": "VERAFILES"
   },
   {
-    "docID": "f8107dfd0d13c4c1874887388760746db6456df03d4cfb93fd2e6cb5bd8fe7c5",
-    "claim": "An anonymous Facebook user has falsely claimed that Pasig City mayoral candidate Sarah Discaya leads the race against incumbent Mayor Vico Sotto by 349 votes, before the vote counting even begins.",
+    "docID": "5a96b708200914fcf33f70e03f871c60687857e3df1792567523e9678b9d70e2",
+    "claim": "Video shows the devastation of the 6.5 magnitude quake in Cebu on Sept. 30, 2025.",
     "Ground_truth": "FALSE",
-    "id": "63735f40-00f2-4683-8d94-d84e34f2814e",
-    "source": "TSEK"
+    "id": "811188d2-5419-466e-bcb2-0ab50ac528c0",
+    "source": "VERAFILES"
   },
   {
-    "docID": "34dcca9a3afe0d434e370ee831eb20ec014bc48ce8e13e0d94fa49205e9efe96",
-    "claim": "All public school students, including those in college, who will graduate in 2024 are eligible for P8,000 cash assistance from the Department of Education (DepEd).",
+    "docID": "e2664f25344071af8c6415e37e27cdf5e0472e4747ece59d21a8e94633050d51",
+    "claim": "Video shows various footage taken after an earthquake allegedly struck California while wildfires are burning parts of the state.",
     "Ground_truth": "FALSE",
-    "id": "6134c161-8c13-400e-9d88-6c36dee38807",
-    "source": "RAPPLER"
+    "id": "9a9ca562-a05b-40e3-86bb-edf525ddf8f6",
+    "source": "VERAFILES"
   },
   {
-    "docID": "97b9ad7fd4fc8fa837205829290c4a0da172b7b5edcf6849b1bffc8926b1453f",
-    "claim": "A clip of President Ferdinand Marcos posted on social media supposedly ordering the teaching of masturbation to four-year-olds was taken out of context. The president was actually opposing such inclusions in sex education in his full statement.",
+    "docID": "e30a34145a07af8e6f5d2cca1e2fc92dec0f39695e8a6f497c248ed43d726dcc",
+    "claim": "Sen. Jinggoy Estrada called former Department of Public Works and Highways assistant district engineer Brice Hernandez “a boy in a man’s world.”",
+    "Ground_truth": "FALSE",
+    "id": "dc52658a-09a6-41d8-bd50-31905cf00e52",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "ecd4880a9771fdfb0748bbe73e0ecd6ac8a396e75fee37975c6f90415a8f620b",
+    "claim": "A Facebook page advertises a medicine that can allegedly cure joint pain",
+    "Ground_truth": "FALSE",
+    "id": "4c9aa6d8-82eb-4c8c-bed0-90796e525c4a",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "5f5c627ad8dc209ad6c11170507fa9748f52e1cf096a71b18effd29c169a79d3",
+    "claim": "Video shows the International Criminal Court has dismissed with finality the crimes against humanity case against former president Rodrigo Duterte",
+    "Ground_truth": "FALSE",
+    "id": "63fdce73-45e6-4001-9f32-64e2080b053e",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "c06732d0d9838b4e5dc650218d4d2d1ea6faeca758943788566ef5af8ef2baf0",
+    "claim": "National scientist Dr. Emil Javier endorsed Super Seed Organic Fertilizer.",
+    "Ground_truth": "FALSE",
+    "id": "39d79a33-008e-459e-8dea-2938b0f6ac55",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "34580c590fc78641930cb122788f103b5dbc189c88b32477f2e33c42df7cb4f2",
+    "claim": "An FB reel showing the United States bombing Iran’s nuclear facilities.",
+    "Ground_truth": "FALSE",
+    "id": "9c98e9e6-38b5-4ab3-9d77-14d961d8003e",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "4a3465faa040045cfaf03b783f5d4d162011ff11555fcdf066c85db555109d6b",
+    "claim": "Sen. Robin Padilla called President Ferdinand Marcos Jr. stupid and useless",
+    "Ground_truth": "FALSE",
+    "id": "8f3cda42-b06b-4bef-a454-cbcd67b60a6b",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "0b910fe924f0bfd910733e2ca870d0f7cc3461fc2f90c24b8323cb9d733e17f6",
+    "claim": "France sent 49 warships to the Philippines to counter China in the West Philippine Sea",
+    "Ground_truth": "FALSE",
+    "id": "21f988a0-ec1e-4f07-964d-eced8dd9bb58",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "3cca2051be12f31e8a66bed360dbff3edbf98e07395cc2cddbc5baccb56132cb",
+    "claim": "Claire Castro has been dismissed as Palace press officer after an old clip of hers throwing a fit in a police station had resurfaced.",
     "Ground_truth": "MISLEADING",
-    "id": "a4360cda-6ddb-4949-891c-05d7ccc9418a",
-    "source": "TSEK"
+    "id": "ed479191-9260-4885-9035-e48f2ed7c031",
+    "source": "VERAFILES"
   },
   {
-    "docID": "9edde6b6b8eadb3dd2876b6087bb59cd03f41f7656aa08b21e0919a57e916967",
-    "claim": "The International Criminal Court (ICC) has already released former president Rodrigo Duterte from detention. He is now back in the Philippines.",
-    "Ground_truth": "FALSE",
-    "id": "bcddf4f1-c401-4c4e-89b2-b0bf1327455b",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "99706fffbf334ea907a15c3611978af2592cef60b4b7dd25f3c196623a98838e",
-    "claim": "A video showing police beating some passengers inside a train in Hong Kong is being shared online, claiming that is the situation in that country due to the coronavirus.",
-    "Ground_truth": "FALSE",
-    "id": "1b55ea76-ac51-4057-88f2-a85d9fae7b15",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "5001327f150c5725b38184e6f2fd7061ca45976939ab2d01acb9a3dd533ad4fa",
-    "claim": "Vice President Leni Robredo suggests “inhaling cough back” to prevent the spread of the 2019 novel coronavirus.",
-    "Ground_truth": "FALSE",
-    "id": "c914bd0a-b443-4c75-8457-27849760410a",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "cb19f8609afcea8ee45d7f332abec314d1a50d03b723bafbad78641333afcc50",
-    "claim": "Billionaires from Southeast Asia and Europe have allied themselves with President Ferdinand Marcos Jr. because of the family’s hidden wealth.",
-    "Ground_truth": "FALSE",
-    "id": "a67734c6-faf1-4088-ba2d-d286ec4872da",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "7e6ccb54455d1cbc606019232a6334a9e81d7a6487d1fcff79eb2060d9c02ef8",
-    "claim": "A video showing a packed arena circulated in TikTok and Facebook posts claiming it showed a rally for Ferdinand Marcos Jr. In reality, the video shows a corporate event in 2019. The company told AFP it was unrelated to Marcos Jr's campaign.",
-    "Ground_truth": "FALSE",
-    "id": "587bc2f6-daf3-49ce-b96d-bd139aafd367",
-    "source": "TSEK"
-  },
-  {
-    "docID": "30f0a2e58819fc829d2b71fabda1cb35d0a44a581ca9898e5e6f35785e6389e8",
-    "claim": "The Philippines’ economic growth rates were 3.7%, 3.2%, and 4.2% from 2010 to 2016.",
-    "Ground_truth": "FALSE",
-    "id": "77ce2267-291c-4f4f-a523-a7ab21679173",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "af7bc199ed1195bddcc4be1f90d0a513eff670f286be05296b0a14f9875bb0a1",
-    "claim": "Sandro Marcos, son of presidential aspirant Ferdinand “Bongbong” Marcos Jr., says all the Marcoses who are running in the 2022 elections will win without campaigning.",
-    "Ground_truth": "SATIRE",
-    "id": "3e409bd6-a34a-4b28-b0a6-c49cfaf72f4b",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "8657328e7c59e0178f234efa8440b2b8ec4d584d4242b622bbb4c3e8f06f5617",
-    "claim": "E-commerce company Shopee Philippines is giving away 100,000 pieces of iPhone 12 Pro Max.",
-    "Ground_truth": "FALSE",
-    "id": "045bce28-309b-4150-b211-89b11bfa8cda",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "ac3d19975fbcd4629ab48daad30b450ed1622af8e2ecfbf5db36eeb5626d3cd9",
-    "claim": "Tech billionaire Elon Musk has officially bought the media network Fox News.",
-    "Ground_truth": "FALSE",
-    "id": "c5b7dd7c-fbec-4c51-bf17-737198f0ce3d",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "4dba803d89d5034ccc19ac07f2671b769f803f0c63b3561fc058d2a31d8a3190",
-    "claim": "A Filipino living in America cured himself of COVID-19 after drinking a glass of water with a teaspoon of salt.",
-    "Ground_truth": "FALSE",
-    "id": "4b5fda93-8a72-4d5a-9f51-e7771a97d463",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "130acaf3fd2bc81c7efeaba321a84d1e520fe27b792eb1bf4aee29eb7fa8213d",
-    "claim": "A YouTube video posted by “Viral TV” falsely claimed that Sen. Ronald “Bato” Dela Rosa has been apprehended by officials from the International Criminal Court and brought to the Netherlands.",
+    "docID": "51a3697f54818a0a2f624a682dda487907ce1925691cbbab6e28dcf2c954c03d",
+    "claim": "A TikTok video shows the crowd at a recent nationwide “rally for peace” organized by the Iglesia ni Cristo.",
     "Ground_truth": "MISLEADING",
-    "id": "c3e76cc8-acc4-4f83-9c66-1021126a6ca0",
-    "source": "TSEK"
-  },
-  {
-    "docID": "23941af3d5c4265371b6b7c3fecb48b3dc0d093365a5733134f1dfb5d3a89054",
-    "claim": "Vice President Leni Robredo and reelectionist Quezon City Mayor Joy Belmonte have not joined forces, contrary to a claim made by AnaKalusugan party-list Rep. Mike Defensor.",
-    "Ground_truth": "FALSE",
-    "id": "edeedece-4734-413a-8c36-3a1e91165183",
-    "source": "TSEK"
-  },
-  {
-    "docID": "5bb50b2c6696ff77652bc6eb97f03c727dcda3a170e124970d20e87107dddf31",
-    "claim": "A video shows Antarctica is an “ice wall” surrounding a flat Earth.",
-    "Ground_truth": "FALSE",
-    "id": "82d911ec-1f13-4988-bb0d-8bb528dad801",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "d853579cbedce990d8aedded7d71f9ab09093eca8397aae647769e135707405e",
-    "claim": "Itinanggi ng Team Leni Robredo na namigay ng pera ang volunteer groups nina VP Leni Robredo at Senador Kiko Pangilinan.",
-    "Ground_truth": "FALSE",
-    "id": "a8100685-0fd1-49bd-96f7-d05b45e47066",
-    "source": "TSEK"
-  },
-  {
-    "docID": "b1264d603a4a454a5b4487250cfc2c5b7ee6be3b58dc2c3b65e5143fe8b9b4c5",
-    "claim": "The British Royal Navy handed over its warship HMS Dauntless to the Philippine Navy.",
-    "Ground_truth": "FALSE",
-    "id": "a13c0884-2ba0-426f-82b2-759f183e96b6",
+    "id": "eb9cdcb3-9a86-43dc-b53b-f98f3d71f59e",
     "source": "VERAFILES"
   },
   {
-    "docID": "c970c9009774570c4f5424ef1fd46b1c8d7a3613a84e6a79ee3c675456f424b8",
-    "claim": "Cardiologist and online health personality Dr. Willie Ong, popularly known as Doc Willie, endorses ZB Gout Ointment Cream, a product claimed to cure gout, arthritis, rheumatism, and other body pains.",
-    "Ground_truth": "FALSE",
-    "id": "48e1e11b-3c7c-4f9d-8cd9-cbe72f848eb8",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "a39431a2e40a6a673aa59f94adb49bf499004f8e7bf958996b5558f3959c97a4",
-    "claim": "A graphic card circulating online claims that the International Criminal Court (ICC) has allowed former president Rodrigo Duterte to return to the Philippines after being detained for three months in The Hague, Netherlands. This is fake.",
-    "Ground_truth": "FALSE",
-    "id": "53bdcdcf-fc11-4cb8-aa95-9d3ca550946f",
-    "source": "TSEK"
-  },
-  {
-    "docID": "5dedd5d95a3ff6768938a9ebff3336589a803a43513fb2f4d0f5234ba92d3084",
-    "claim": "The report on 166 overseas Filipino workers testing positive for human immunodeficiency virus is recent.",
+    "docID": "8e052be29594fb5c4e658e722f3dcc904e209fd64dcc4de8769dcf43799843dd",
+    "claim": "New footage taken during the April 3 earthquake in Taiwan.",
     "Ground_truth": "MISLEADING",
-    "id": "afd714c0-ee1a-4e5a-842f-730bac583ad1",
+    "id": "c265477d-ded8-4ff0-b3b1-4bd0730c6fce",
     "source": "VERAFILES"
   },
   {
-    "docID": "815382291c4c723a2104b0dcb2ac36681405db683b50b48e939f73eae272f616",
-    "claim": "Former US President Donald Trump’s suspected assassin was Chinese.",
+    "docID": "bd4a7766eac8a81ca4136b8fc7cd46ad09c98e0f25f2ae8787948c00cee68474",
+    "claim": "ABS-CBN has banned Vice Ganda after she made a joke involving former president Rodrigo Duterte.",
     "Ground_truth": "FALSE",
-    "id": "0fcbd135-0fc0-4726-803b-20c5b0d40026",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "8f5217f9d8167f3371f7e63d09c116d0abdaff259aec9480ed9d688b175cc4e1",
-    "claim": "Video shows Ferdinand Marcos Sr. criticizing his son, Ferdinand Marcos Jr., for his supposed inability to understand the suffering of poor people.",
-    "Ground_truth": "FALSE",
-    "id": "e9cbbfe4-a5f1-4793-b255-e2197937f10e",
+    "id": "21902843-3402-4b96-9676-e70cb3c70680",
     "source": "VERAFILES"
   },
   {
-    "docID": "4757d2a8627fa6f3aed1fefb3e773bca93003572c0b40a776bd9046dfbc5bbe1",
-    "claim": "An article preview image shows an image of a teacher who was supposedly raped and killed by 3 of her students who were under the influence of drugs.",
-    "Ground_truth": "FALSE",
-    "id": "f7935e04-f230-4428-a8af-36d723fa22dd",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "22a5698882ab1b5907a4a9fc40f61d376c579bb0190aab9141a4b498b28cb202",
-    "claim": "Several posts are circulating on Facebook alleging that members of the House of Representatives were pressured to sign the impeachment complaints against Vice President Sara Duterte. This is not true.",
-    "Ground_truth": "FALSE",
-    "id": "5bd8695b-a4bb-43f1-96c0-b0c06c45f017",
-    "source": "TSEK"
-  },
-  {
-    "docID": "53ef16b6d429d0fa872db6e2510ddd1547247616f0afd6d033c12e694258f823",
-    "claim": "A Facebook (FB) page misleadingly claims the modernization of the Dr. Jose Fabella Memorial Hospital (DJFMH) was an initiative of the administration of outgoing President Rodrigo Duterte.",
+    "docID": "624606563e152a3c207f90264612133bb611e0756bafdc41e125cf2e7df31eee",
+    "claim": "Four photos show the aftermath of an Aug. 8, 2024 earthquake in Miyazaki Prefecture, Japan.",
     "Ground_truth": "MISLEADING",
-    "id": "6454a930-de58-41e5-bea0-2b1566575dc4",
-    "source": "TSEK"
+    "id": "014c411a-a69a-43b2-8d0b-4ece14e3a4d4",
+    "source": "VERAFILES"
   },
   {
-    "docID": "22a2d2df816528ba5a7c56b3ed0286240ffc8a4bea7b46f13c1bc47d7c1f804a",
-    "claim": "SM malls were owned by the late president Ferdinand E. Marcos.",
+    "docID": "5d93cd183cb2fb64b5d7d8369019ed5e33440bc4db241246092e94bfc4b661f7",
+    "claim": "The world will be dark for three days straight starting April 8",
     "Ground_truth": "FALSE",
-    "id": "24ae454d-d29b-4c73-a75a-e27f82d380f6",
-    "source": "RAPPLER"
+    "id": "61d1c270-dba5-419e-9c39-e0e0db812e04",
+    "source": "VERAFILES"
   },
   {
-    "docID": "e6af8131b93b1e0416cfd1971737bad7da1641509e56c8ff34142f24c7559dc7",
-    "claim": "International Criminal Court (ICC) Prosecutor Karim Khan said in a video statement that former president Rodrigo Duterte is innocent of the crimes against humanity charge.",
+    "docID": "43bb7c402f12ab12492d56a293d69071f640cf79fde11e1b6a8f84c89ad2aa79",
+    "claim": "Palace press officer Claire Castro said that former Rep. Zaldy Co’s first video statement may have been generated using artificial intelligence.",
     "Ground_truth": "FALSE",
-    "id": "b8a5988f-00cd-4d49-bf05-70fd7e7e2722",
-    "source": "RAPPLER"
+    "id": "9fe83100-e967-4f73-ada4-3245d52adff8",
+    "source": "VERAFILES"
   },
   {
-    "docID": "344bc2c1764d93a2de74897ef283c01c7b4ff5584291d040076ba77dde78dee9",
-    "claim": "An old election campaign video of Vice President and presidential aspirant Leni Robredo was altered with the use of unrelated images to present misleading information about her.",
+    "docID": "1c803e3053cc64c6d4f408902610df1c7cf493ebe9abebc888a55022b4cc09e8",
+    "claim": "DSWD is offering unemployment assistance to Filipinos in exchange for answering a survey",
+    "Ground_truth": "FALSE",
+    "id": "b2f0e7c5-b01f-46ea-909e-422eb30e1af1",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "c8802cb02be03629aa059d9a068ed3a4f531313e0ff4eb9f7e9314a32c0316b4",
+    "claim": "South Korea is giving a corvette and a submarine to the Philippines",
     "Ground_truth": "MISLEADING",
-    "id": "19b6ab65-ebeb-4715-8d3d-7bb0f342a0c1",
-    "source": "TSEK"
-  },
-  {
-    "docID": "f56d59b55ae742dbceefe75da878f12fa6d34d31c53b04d2b10ebd02348364ae",
-    "claim": "Active members of the Philippine National Police (PNP) and Armed Forces of the Philippines (AFP) are no longer required to undergo drug tests, psychological tests, and psychiatric evaluations.",
-    "Ground_truth": "FALSE",
-    "id": "71cb7173-cfa4-4350-a323-2379287e8d0f",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "52130697fa8d605afbbc92d2dd73feee6a3906dc8c6c04c9985285e38074e5aa",
-    "claim": "Hindi totoo ang sinabi sa isang post na most wanted ng PDEA ang bayaw ni Leni Robredo na si Butch Robredo dahil umano sa pagkakasangot nito sa ilegal na droga.",
-    "Ground_truth": "FALSE",
-    "id": "cc3d85fc-9e50-44d6-875d-e21f3feb4fe2",
-    "source": "TSEK"
-  },
-  {
-    "docID": "2331301ec71cec992e33ba40667a67a030611fd637ca6c355c53717017e70c80",
-    "claim": "A false rumor that reelected Pasig City Mayor Vico Sotto got actress Atasha Muhlach pregnant–first circulated in 2024–has gone viral again on social media shortly after the May 12 midterm elections.",
-    "Ground_truth": "FALSE",
-    "id": "245d2da0-8be1-4484-b5ee-b0af8fe8fd7f",
-    "source": "TSEK"
-  },
-  {
-    "docID": "9b23421cb0073eb079e6aa6fca186c1edabc3afcd828f64eca43c7bdd19e2b70",
-    "claim": "Sabi-sabi: Sa oras na mabawi ng kanyang panig mula sa Presidential Commission on Good Government (PCGG) ang yaman niya at mga gintong ipinahiram umano niya sa iba’t ibang mga bansa, makikinabang daw ang Pilipinas, ayon sa huling habilin at testamento ni dating pangulong Ferdinand E. Marcos.",
-    "Ground_truth": "FALSE",
-    "id": "43368914-bb56-40c6-9082-3e3d7f4bcfb9",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "9232ecd344431fb2cc4b5efc054fa58a3cf0c2a5294eb24f221031c55adcdc54",
-    "claim": "Founded in 2017, Fact Check Philippines is a coalition of independent groups and individuals with one common goal — to aid in combating fake news and misinformation. It is the country's first established citizen fact checking organization.",
-    "Ground_truth": "FALSE",
-    "id": "5a74dcd3-4776-4723-8baa-56b14eccd7ad",
-    "source": "TSEK"
-  },
-  {
-    "docID": "24bf2919168843e29dea362320d0fdd568f46f23d77d3977775cacaf04911176",
-    "claim": "A tsunami may hit several provinces in Mindanao after a 7.2. magnitude earthquake shook Davao Oriental",
-    "Ground_truth": "FALSE",
-    "id": "f110886e-f284-49b7-a14b-a3080c34fe84",
+    "id": "952048b2-c354-439e-8ec0-b6a1b3159625",
     "source": "VERAFILES"
   },
   {
-    "docID": "a53cc7b0eda62502d62f68a12a3ddde92137f752f9e11adb3977a82fbe9ab620",
-    "claim": "Misleading ang post hinggil sa patong-patong na kaso raw ni dating Vice President Leni Robredo dahil sa pagtatangkang patalsikin si Rodrigo Duterte.",
+    "docID": "16ee312b86f82875c29e041027a9888edce9c4ad28be26bcafa876453553f71d",
+    "claim": "Video shows footage of a tsunami hitting the coast of Japan after the July 30, 2025 earthquake off the eastern coast of Russia.",
+    "Ground_truth": "FALSE",
+    "id": "d71c5609-378f-4bbd-9175-9e5e6c27a587",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "8a0db27127bcb1080c8df9a4b0938ff1fb408d97a2b7db9113e3eae41f20272e",
+    "claim": "New Zealand gifted the Philippines its HMNZS Aotearoa warship.",
+    "Ground_truth": "FALSE",
+    "id": "0c14797f-30e1-4852-a745-90fc1c1a65bc",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "a12a9c0ff4edd7f33e389efcf752836415b8b076bc299b61e004c4b1f591ce77",
+    "claim": "Vice Ganda bid goodbye to her “It’s Showtime” co-hosts due to the controversial joke about former president Rodrigo Duterte in her concert.",
+    "Ground_truth": "FALSE",
+    "id": "ce7f7435-d260-46bb-abb8-40dcdaa432c3",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "b030a5e4fb3e0a070982cdcc1e7b634b18aa8bc5039ddaa74dcc18f0ed726d60",
+    "claim": "Philippine and Malaysian navy ships had a standoff near Sabah on Aug. 11, 2025.",
+    "Ground_truth": "FALSE",
+    "id": "6faea303-7d5e-44fa-92ea-d25bdb51b7fe",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "ca63b5f0b6202b41ad2735d33d371762fa466804dab8aa85deda32fa7a5defde",
+    "claim": "On June 22, a website published a story that bore an untrue headline: “NAKARMA na! HONTIVEROS TULOYAN (sic) ng KINASOHAN (sic) ng OMBUDSMAN TRYDOR (sic) at HUDAS sa SENADO NAGULANTANG IYAK! (Bad karma! Hontiveros charged by the Ombudsman; traitors in Senate shocked, wept!)”",
+    "Ground_truth": "FALSE",
+    "id": "348093a3-aa3c-403a-aaf9-42a6cd747649",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "19171c77506d81a15d2754a16ef6116201d4973751c6a6284d91520749ce888b",
+    "claim": "Dismissed mayor Alice Guo challenged Sen. Risa Hontiveros to investigate the alleged blank items in the bicameral report of the 2025 national budget.",
+    "Ground_truth": "FALSE",
+    "id": "165b8cbd-467f-4daa-af39-40b91141062f",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "eb0c97bdf336a8daf930e672e820fa0d92cad4c4bd665fae9cad05ae137bacee",
+    "claim": "Video claims Sen. Risa Hontiveros was jailed because of alleged bribery of a witness against Apollo Quiboloy.",
+    "Ground_truth": "FALSE",
+    "id": "4bea5228-e0bb-4bb6-ab1f-788fc9e77163",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "140d573efab881a71016ce0cbff139e846effb1a2c606dcd5a6519c83dc34243",
+    "claim": "The Commission on Elections (Comelec) purposely misprinted the ballot number of three senatorial bets from the PDP-Laban slate.",
+    "Ground_truth": "FALSE",
+    "id": "5c779c69-6563-4d47-8644-a9c39327fccb",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "96885fdacb4162de0abdd6b55f2b92bad2919c576104a17fcf168ae23d91c477",
+    "claim": "The Office of the Ombudsman has filed a case against Marikina Rep. Stella Quimbo.",
+    "Ground_truth": "FALSE",
+    "id": "8975fe6f-1755-48c3-ae7d-59cf8739ba82",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "100a78a7034d72f98a1532b4424e242c2249ae894a8477be7cd6519a0da33831",
+    "claim": "Lucas Bersamin has allowed the International Criminal Court (ICC) to come to the Philippines",
     "Ground_truth": "MISLEADING",
-    "id": "0f73ce95-fe3e-4ee5-a303-746376052148",
-    "source": "TSEK"
+    "id": "6295e1f7-9037-42ac-9e84-2a88b112c666",
+    "source": "VERAFILES"
   },
   {
-    "docID": "33edccbea7fe7531dfa9619fc52a6cf187345d97bfec3ec87bdc1aa09d7aa5d2",
-    "claim": "A delivery rider was victimized by an unknown customer who booked for the delivery of a severed head.",
+    "docID": "0e614fbba3e640fdc4155851bef5a9b3be619ddcd0ca6b039b661ef6c80b35cc",
+    "claim": "Rowena Guanzon has been arrested and imprisoned.",
     "Ground_truth": "FALSE",
-    "id": "990e913c-a944-4b2a-b507-09db037cd0a4",
-    "source": "RAPPLER"
+    "id": "268f380e-113a-49cb-8562-0c291992d223",
+    "source": "VERAFILES"
   },
   {
-    "docID": "794b0c6a5f5aac1a77f0fc55500dcc70e1d02a68064e4020857618128c92c33c",
-    "claim": "The US and Australia sent troops and arms to the Philippines in January 2024.",
+    "docID": "c56dfe50ad305f7f138613a00fe691ec5c2a1f50019372841d3172969d4cbe59",
+    "claim": "Bamban, Tarlac Mayor Alice Guo has been removed from her post",
+    "Ground_truth": "FALSE",
+    "id": "80c9bf6b-b272-48c5-aab4-371de230b724",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "6d270d25724c956c450be1c32f8a4d8ec36cde000f90bb17d479ff6400c751f5",
+    "claim": "There will be a strong earthquake in the Philippines on April 22, 2025.",
+    "Ground_truth": "FALSE",
+    "id": "43e1e948-6826-49da-9fb5-29ff95c324ad",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "0664a99662d3f95ee13e361a796f06c37b20aa8501d82d002b6f8ea2a808b979",
+    "claim": "The International Criminal Court has granted former president Rodrigo Duterte interim release.",
+    "Ground_truth": "FALSE",
+    "id": "ca82fb3c-775f-438e-936f-afc6c9bc4bc8",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "c8b881909a99d4010b8871279befd04afef5fca3cd2a3602c1f03f054b15bdfe",
+    "claim": "FloraWell FemHerb feminine wash can heal uterine fibroids.",
+    "Ground_truth": "FALSE",
+    "id": "0fc7377e-83bf-4198-a486-38d9e70a5a4b",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "8d247b50b68232b1926d37d6c06c03808c4613cd23ac10d250bd276d9b5edfc8",
+    "claim": "Vehicle dealer Motortrade is currently giving away 150 motorcycles in celebration of its anniversary.",
+    "Ground_truth": "FALSE",
+    "id": "ed57c43b-e48e-4686-9e85-b9aa33693e00",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "fc6d94f66418ab9377ddf82c1e25964be46bb25813a7bd150812c8d88e324eba",
+    "claim": "Police generals filed a fifth impeachment case against Vice President Sara Duterte",
+    "Ground_truth": "FALSE",
+    "id": "90529e8b-6c4f-409b-b49a-e975afef3904",
+    "source": "VERAFILES"
+  },
+  {
+    "docID": "5bcc36c7796bab058e20ce30e0b3751165f6eb5b85cea7ea24cf2acd2ea14cf1",
+    "claim": "Covid-19 vaccines can change your DNA.",
+    "Ground_truth": "FALSE",
+    "id": "340da074-091d-4671-aff3-f2a69e457085",
+    "source": "FULLFACT"
+  },
+  {
+    "docID": "a12360c0b3a58fa6ad4403b363ae001b947a7fa717cf8a03266edf9dd14fb6f1",
+    "claim": "A video shows a pair of trainers customised by Nike to include an Israeli flag design.",
+    "Ground_truth": "FALSE",
+    "id": "439e1c40-f07a-43dd-a8f8-820c0a972f1c",
+    "source": "FULLFACT"
+  },
+  {
+    "docID": "bbf267b74d024b96422ab1b27d08176b9394882d543834858c74ee49f5288803",
+    "claim": "Instagram blocks your posts to all but 7% of your followers.",
+    "Ground_truth": "FALSE",
+    "id": "7ee4c2cf-ff8f-4095-bfdc-2d9873e7c190",
+    "source": "FULLFACT"
+  },
+  {
+    "docID": "b12cf20c7cd243111fc2d39a75964948d3ac4618cb64f568d4c7c09eb6e477f5",
+    "claim": "Illegal immigrants and refugees living in Britain get a weekly spouse allowance of £225.",
+    "Ground_truth": "FALSE",
+    "id": "4eebfbce-88c9-4de2-8c45-fd99aa06243a",
+    "source": "FULLFACT"
+  },
+  {
+    "docID": "6aeda2f7231db0bec15f001e8a2e59827932ae6382598fd9b2a9e2f72137f982",
+    "claim": "The Guardian said “Lib Dems winning and on the up after by-election victory” in August 2019.",
     "Ground_truth": "MISLEADING",
-    "id": "bf36c492-2548-4ee7-bd6b-deac9efbd9a0",
-    "source": "VERAFILES"
+    "id": "b517a673-53f2-450f-921c-4e066bfff64d",
+    "source": "FULLFACT"
   },
   {
-    "docID": "1f042a137eb5e87ec270fd9e93993f2fce0763a94e2d45f156fb6ebdfe54901e",
-    "claim": "A TikTok video spliced together two different clips to make it appear that presidential candidate and senator Manny Pacquiao’s solution to the slow internet speed in the Philippines is to believe in God. The circulating clip is fake.",
-    "Ground_truth": "FALSE",
-    "id": "c6c4355a-02bf-4181-945e-13b1f3da53d0",
-    "source": "TSEK"
-  },
-  {
-    "docID": "59137a363e6c6c6c8c974581febf6d5a4e22f15ecb8417bbd1d1a89b8adfcc05",
-    "claim": "Various Facebook posts warning of a looming earthquake “stronger than magnitude 8” contain links to a list of places susceptible to the quake.",
-    "Ground_truth": "FALSE",
-    "id": "e639836f-5788-4ac0-b6a5-8deadc15d8aa",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "d90b8ae20e3e41a7c7f2f15a08e668d1ef033e3b11740d86e0aaff45c23d1fba",
-    "claim": "Bongbong Marcos removed party-list lawmakers France Castro and Raoul Manuel from Congress",
-    "Ground_truth": "FALSE",
-    "id": "db0252bc-45d2-4461-a110-5d2c00ac5867",
-    "source": "VERAFILES"
-  },
-  {
-    "docID": "5234b445450763a34b9fa34ed293242e21a31098e46b5d98b81eba209413a887",
-    "claim": "The Supreme Court, sitting as the Presidential Electoral Tribunal, did not junk the entire electoral protest filed by former senator Bongbong Marcos against Vice President Leni Robredo.",
-    "Ground_truth": "FALSE",
-    "id": "9d02fc8f-dfed-400d-be1d-5a9117d2c10b",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "8f795382c76f5228f8c1175dfa3ee6798bbfe642cd691fb8538f91c272ca0ac4",
-    "claim": "The face of Vice President Sara Duterte is not in the children’s book that she wrote titled, “Isang Kaibigan“.",
-    "Ground_truth": "FALSE",
-    "id": "a8d29cd1-f423-4f58-b444-4c74b18e7e7b",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "78147099e98aa80993baf5efc8c3b836959240a7e7bfe4257ee0831a01924e56",
-    "claim": "The COVID-19 vaccines, specifically the ones that use mRNA, cause infertility.",
-    "Ground_truth": "FALSE",
-    "id": "14380921-ebd7-42ee-8c58-19207d7968d1",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "4063a588e67a548e326750599a259a9b75f0b92550ca72235328e286b8a34f00",
-    "claim": "News anchor Noli De Castro expressed support for former president Rodrigo Duterte, who was arrested and transferred to the International Criminal Court (ICC) over crimes against humanity charges.",
-    "Ground_truth": "FALSE",
-    "id": "11f923be-bc7c-4ad9-bf7b-24b387465446",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "a0c40aa1b5fe454fe7c25ba30b61d38b22656a00f53b141e9e441de9aadb0ff9",
-    "claim": "Cardinal Luis Antonio Tagle was elected as the new pope.",
-    "Ground_truth": "FALSE",
-    "id": "432dab99-0b37-4dfb-84bc-797b7c08e0d4",
-    "source": "VERAFILES"
-  },
-  {
-    "docID": "1bd85aab19c8473c2edf5bdb4ce05c8bc96d42ca184d6cf364842d6d56cb41ce",
-    "claim": "Claim: Australian child Quaden Bayles “committed suicide” after bullying worsened in school.",
-    "Ground_truth": "FALSE",
-    "id": "5b086244-ac5f-4d96-a08f-426907591e5b",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "aaaf99fade9113e5b648838b693baadb666bb75363a63ea964937fd36f489087",
-    "claim": "GMA news anchor Jessica Soho vouches for the legitimacy of the weight loss supplement EcoFit.",
-    "Ground_truth": "FALSE",
-    "id": "53de0fd7-e561-44bb-a5b0-894e91035a1b",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "0ab9edeadd7864aedff6f72a6c95bfc28ac60aa11ddb9cf9a2c44ea9be7768a2",
-    "claim": "All poll watchers have the right to take pictures of voter receipts, according to Comelec Resolution No. 11076.",
-    "Ground_truth": "FALSE",
-    "id": "f018f2fc-89b2-409f-864d-a040b676eeed",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "7b296b3b2ef826e33891a6502412a4692abb075f03f86bc4a25c5cb819fe0cfd",
-    "claim": "TV5 broadcaster Raffy Tulfo’s license is to be revoked.",
-    "Ground_truth": "FALSE",
-    "id": "612b3499-7898-4177-86f8-83c790546e42",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "a1d2335a4107fdd8c203ad07a70b2139f0b354a2fec7e31e7fc59cad83a3a18d",
-    "claim": "73 degrees Celsius (ºC) temperatures were recorded in Kuwait.",
-    "Ground_truth": "FALSE",
-    "id": "7c89b20e-4ba1-4a69-a028-992f6eeb849b",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "0746c1ee62f006b5d618d789911c7ba8b8286443ac58d561212b58d7ad037a46",
-    "claim": "CLAIM: Vicky Belo supports the presidential bid of former senator Ferdinand Marcos Jr.\nRATING: FALSE",
-    "Ground_truth": "FALSE",
-    "id": "8790bfbe-d56b-4ad1-8b44-af1c016f3f65",
-    "source": "TSEK"
-  },
-  {
-    "docID": "0312555ec13b140269a384ae2e333ab04fe88aa16cb07b5309b3e4700ab848a5",
-    "claim": "The SIDC Connector Bridge was conceptualized and funded by the administration of former president Ferdinand Marcos Sr.",
-    "Ground_truth": "FALSE",
-    "id": "5a759e43-0c10-4ceb-9ce3-55e0f96ed971",
-    "source": "VERAFILES"
-  },
-  {
-    "docID": "349a4c1fcaec12d09ec7262b1c012ee999e02c056e9e2659f0ffce4a02a0a76b",
-    "claim": "A video shows millions of bilih fish emerging from Lake Singkarak in West Sumatra, Indonesia, allowing people to catch them by hand.",
-    "Ground_truth": "FALSE",
-    "id": "24713834-9ced-49bc-abc3-822b2c5d4956",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "b0f27497c1b74dc137850e7fac30e147a6e32cf3808e6797cd762355453296c2",
-    "claim": "Celebrity Amy Perez promoted a brand of bakuchiol retinol.",
-    "Ground_truth": "FALSE",
-    "id": "b479e3d8-048d-4ad4-acdb-5d56fef1899c",
-    "source": "VERAFILES"
-  },
-  {
-    "docID": "0b68fc07e0346f0634ad0873c6c31c30aadc6abd5087a3b58c0f37692523a306",
-    "claim": "Several hours after polling precincts closed on May 9, a fabricated screenshot of an alleged report from GMA News went viral and showed Vice President Leni Robredo in a head-to-head race with Ferdinand “Bongbong” Marcos Jr. for the presidential seat.",
-    "Ground_truth": "FALSE",
-    "id": "527137ed-dbf7-4daf-af8e-da14a21e8d64",
-    "source": "TSEK"
-  },
-  {
-    "docID": "6577de6179ea927c74538e7f492add06a212a173a67eaaaeb635a3fd5f74e526",
-    "claim": "Founded in 2017, Fact Check Philippines is a coalition of independent groups and individuals with one common goal — to aid in combating fake news and misinformation. It is the country's first established citizen fact checking organization.",
-    "Ground_truth": "FALSE",
-    "id": "57ed434c-a348-48e9-9f49-1069f5b08b18",
-    "source": "TSEK"
-  },
-  {
-    "docID": "11b604a7490cb59898f6ab3822722e1a97f7953cba98eeef0b2a843298128bef",
-    "claim": "Tropical cyclone Hanna entered the Philippine Area of Responsibility (PAR) on August 12, and the weather bureau has already raised Signal No. 3.",
-    "Ground_truth": "FALSE",
-    "id": "49a9a041-f5e8-4f4b-9f4a-1c67a89ca772",
-    "source": "RAPPLER"
-  },
-  {
-    "docID": "b8aa8db5164a283dc4c7dd9c28258c3d04166ccd5c9ae112db201d49879a88e4",
-    "claim": "Robredo not violating Comelec ban on campaigning",
-    "Ground_truth": "FALSE",
-    "id": "388bd142-0c58-4ea9-bbf2-077f92e577bb",
-    "source": "TSEK"
-  },
-  {
-    "docID": "590fff8d62f6d528b5af7c183c1f552603a10e88854a07522e2f96a95006d4eb",
-    "claim": "Several Facebook pages and groups have revived photos in 2016 of a tribute performance for a former spokesperson of the Communist Party of the Philippines-New People’s Army at the University of the Philippines Diliman to falsely imply the presence of the underground army on campus.",
+    "docID": "e570203f0d47c1ede91a637039072d7b82f03cc38d18e4e581ebbcbc72f63764",
+    "claim": "Various multinational food and drink companies use artificial flavourings made by Senomyx which are made from aborted foetal cells.",
     "Ground_truth": "MISLEADING",
-    "id": "cab75d7a-7825-4998-9078-ffaa5e152705",
-    "source": "TSEK"
+    "id": "ab320e87-6fd5-4e1e-b6c0-bafe79f99287",
+    "source": "FULLFACT"
   },
   {
-    "docID": "ea8de6ff37fb77e63a654f05eb908d5a8c04a7d2191d6807d8d48b5b8fc0a286",
-    "claim": "A message on Facebook Messenger warned Facebook users against receiving vaccinations from health centers.",
+    "docID": "ceb1d015d81fe1dd37c72265cd794a5b1aa466f333a4757c5b1973ac1ce91f47",
+    "claim": "Young people are in record levels of debt.",
+    "Ground_truth": "UNPROVEN",
+    "id": "38c4c3e5-6dce-4a07-9c60-76bd496507ae",
+    "source": "FULLFACT"
+  },
+  {
+    "docID": "235122d78ffac3b58237c141ba09067c6c1d24c2dc06d2ea185409c5ced1477b",
+    "claim": "50% of mental health problems develop by the age of 14 and 75% by the age of 18.",
+    "Ground_truth": "MOSTLY-FALSE",
+    "id": "1e98990a-5e3c-40f2-8f73-f153440f1660",
+    "source": "FULLFACT"
+  },
+  {
+    "docID": "b619910907215a8847aa7d4837c89f62129482eef3f26b3fa7abbfa6c0c2072f",
+    "claim": "A boy with autism named Brayden and his dog are missing in Derbyshire.",
+    "Ground_truth": "MISLEADING",
+    "id": "53226e7a-37e4-49b6-8e7c-99e8962e16de",
+    "source": "FULLFACT"
+  },
+  {
+    "docID": "f2ec1087ba4b123c9676e4fee9859c9ca0878a681bf0a9a740a24197f6afb9b6",
+    "claim": "The government’s Social Mobility Commission said the number of children in poverty is expected to increase to 5.2 million by 2022.",
+    "Ground_truth": "UNPROVEN",
+    "id": "fe2874bc-f032-4619-926b-8bc82f57db68",
+    "source": "FULLFACT"
+  },
+  {
+    "docID": "57242bc92946952e4f7820beb19272a141401ff7c6115414dd2356e1ab78e22d",
+    "claim": "A photo shows a girl who has gone missing in Southport or Worcester and is being sought by her family.",
     "Ground_truth": "FALSE",
-    "id": "1b6019c3-f8dc-41dd-ad42-e40c47068d99",
-    "source": "RAPPLER"
+    "id": "e546f3fc-bae9-484e-97d5-9b2a623b6ab3",
+    "source": "FULLFACT"
+  },
+  {
+    "docID": "e5275ab97bfbc8c928b928e0d6241c09f4e7e39d2b4a789f0413651d33c19ca3",
+    "claim": "The number of people dying today is the same as it would be in any other year.",
+    "Ground_truth": "UNPROVEN",
+    "id": "5a3fae6c-d517-4524-aad7-0bb97798a250",
+    "source": "FULLFACT"
+  },
+  {
+    "docID": "44b2aa6ff611a8e3540b639e156b05b1508276abcacdd46825e84ea5d24a4de9",
+    "claim": "Covid-19 vaccines are not approved for use.",
+    "Ground_truth": "UNPROVEN",
+    "id": "0cf3c5fb-354b-488d-a463-c52bc23ecaa3",
+    "source": "FULLFACT"
+  },
+  {
+    "docID": "3c3609786057ececdd07fb404aeaf38584ed1f4a096856692a4d90444a35c280",
+    "claim": "The EU army will call up all 16 to 25 year olds to serve in an army for the European Union.",
+    "Ground_truth": "FALSE",
+    "id": "294a64a0-de54-42d1-a76c-75f631b4d4bd",
+    "source": "FULLFACT"
+  },
+  {
+    "docID": "927b004ef43779df1d2340796d62d3e62b638dc112dfb3d4fc27867bb42f84cd",
+    "claim": "This year Britain overtook France to become the 8th largest manufacturing nation.",
+    "Ground_truth": "MISLEADING",
+    "id": "084c0bd7-5eec-4277-9c81-164f406197cc",
+    "source": "FULLFACT"
+  },
+  {
+    "docID": "19689dad420004c129dbf55b554dd1694b6d54a568a65b7cf3230630bf9032f5",
+    "claim": "The Conservatives increased the amount of time MPs can be paid after losing their jobs from three months to six months.",
+    "Ground_truth": "FALSE",
+    "id": "f97cc7ac-5f2e-4322-84e3-4f088f4a49e7",
+    "source": "FULLFACT"
+  },
+  {
+    "docID": "33a86e2ea4c2a098ef04a7ea19b8013d6f2b957d158d5a814b4559b17ef733db",
+    "claim": "The UK unemployment rate is about half the Eurozone average.",
+    "Ground_truth": "TRUE",
+    "id": "15f4b971-7657-4e25-9a87-8964e2c8e329",
+    "source": "FULLFACT"
+  },
+  {
+    "docID": "0291e7dd675391b271961c8c69202104cd1e134d5f567540d2792e3d05c3eaa3",
+    "claim": "Says Hillary Clinton's \"been very clear where she stands on trade.\"",
+    "Ground_truth": "MOSTLY-FALSE",
+    "id": "a90a322a-f801-4f05-bc4c-6fd4e8a28602",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "e3382a5a1297407626e9a253a4cccdb9076769ea11ce18918f574dc53b222d19",
+    "claim": "Warren Buffett recently said \"Scrap Obamacare and Start All Over.\"",
+    "Ground_truth": "FALSE",
+    "id": "233929d0-a765-40f2-80f0-9c05078de353",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "8f654a77c4d727606f9ea2056be9b4a098c946bc9742de2008cd95b4f49d2f25",
+    "claim": "Singer Tina Turner: \"This Thanksgiving Is The First Time in 8 Years That I am Thankful For Our President, God Bless Him And His Supporters.\"",
+    "Ground_truth": "FALSE",
+    "id": "60925c71-f1ae-49be-a44e-154833f305e6",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "a6c4f220f6236f3654e2b052723959e2d29661e496fc353fc5bae3ff1ab0f47a",
+    "claim": "\"Evidence surfaces of Vatican funding caravans targeting America with cash.\"",
+    "Ground_truth": "FALSE",
+    "id": "30a46194-20f7-4fa9-96de-9f73648d37d6",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "d7ce1c0cef5324150a5cf7409d5ccca809477e10537542102fb9b2220c8c0ae8",
+    "claim": "Video shows Russia was attacked with direct energy weapons after Tucker Carlson’s interview with Vladimir Putin was released.",
+    "Ground_truth": "FALSE",
+    "id": "9eb80f28-8a94-401d-97d6-1c47f6edb6fb",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "ebf37c44f466d1a49cf54dd03938ac6bf4aa593078c478d52f9eeb19de7c011a",
+    "claim": "‘The White House is now trying to protect Joe Biden by changing the definition of the word recession.'",
+    "Ground_truth": "FALSE",
+    "id": "b7697a4c-a52f-4dab-b62c-e80f9b0c57da",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "ca45181054de3bdd8cf0bb3d1b312ead7a2a193e3e93735a60a236144ceb41e6",
+    "claim": "\"Oregon school districts are directing 24 percent of their food budgets to purchase local foods. That’s the highest percentage in the country.\"",
+    "Ground_truth": "HALF-TRUE",
+    "id": "b648d023-4009-4738-80f7-26d8a23da535",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "dafdd24ce2af340ea507eee9b14fc7f432eb6a3d3f1dddf677d57e362f9b9ca9",
+    "claim": "\"Wendy Davis’ legal work is currently under FBI investigation.\"",
+    "Ground_truth": "MOSTLY-FALSE",
+    "id": "b1c8a601-b9e2-4aeb-9888-f0b6d12bb32a",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "d6e9d3239efac5c266686032c8e8f67e47b64bd294da1d9e5bb56f0aa4ebdb96",
+    "claim": "New school testing standards \"will consume approximately twenty days of testing for elementary, middle and high school students.\"",
+    "Ground_truth": "MOSTLY-TRUE",
+    "id": "5b69b22f-a388-45b6-9359-6f01d400f86f",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "65026f874ec40027eacf9b40aade9c66ce0f53553a590a3c59b63ce37cbee526",
+    "claim": "\"Under Pat McCrory, (North Carolina) has fallen to 41st in teacher pay.\"",
+    "Ground_truth": "MOSTLY-FALSE",
+    "id": "ea8d223f-4b4b-420f-b83d-cf2d40bfcb6d",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "af26d26870d79280cac7341de29e21a951b23b9ba6daa7e5e871bd003689af01",
+    "claim": "Greg Abbott \"heads up a party whose platform calls for the repeal of the Voting Rights Act.\"",
+    "Ground_truth": "MOSTLY-TRUE",
+    "id": "bab36f8b-ba45-4039-bf5e-4671cb6ff8fb",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "3f01b389783f0e7168561873cd70d63a940a1ac261a3706ec930e06f65976def",
+    "claim": "\"A single parent with a couple kids can easily get $35,000 a year\" in public assistance in Wisconsin.",
+    "Ground_truth": "MOSTLY-FALSE",
+    "id": "5850ce83-81f9-4f15-89d1-ab788661ff3e",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "7c3fa1042c3c8055d4ba657c97e1e6698a1b76a309b3fc749256eb7b65dee767",
+    "claim": "\"Russia has hypersonic missile capabilities ahead of that of the U.S.”",
+    "Ground_truth": "HALF-TRUE",
+    "id": "3441c135-d4a0-4ed8-b7f5-7ff7d5e6bd07",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "989998c7f150656baa5d6f49018f5c337e1192c988a1043f1129f84ae3a1d691",
+    "claim": "\"Even Roger Williams National Memorial in my home state of Rhode Island attracted nearly 51,000 visitors in 2011, with non local visitors adding more than $3.2 million to the local economy.\"",
+    "Ground_truth": "HALF-TRUE",
+    "id": "e748a8d3-00fc-4789-bad7-e80b6484e79f",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "02112cbc05c7acb0e93b40ddb95310abcc447f5ab58b63b40632b1b9b5e65231",
+    "claim": "The Senate proposal to restore emergency unemployment benefits for five months was \"fully paid for.\"",
+    "Ground_truth": "MOSTLY-FALSE",
+    "id": "8d9c2180-36e7-46a0-95cd-5a148f606edb",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "950f9eb7bd5648da30636ada3578402e5b5eb9e2034df7fe75fbe515016e348a",
+    "claim": "“Greg Casar passed paid sick leave.\"",
+    "Ground_truth": "HALF-TRUE",
+    "id": "f52e67e4-d018-46de-83b7-cbdad521a8b1",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "bdabd784a9af83ece8bb70be9df644ab7c299905c10de152db9711b59b87ce31",
+    "claim": "When asked if he’s defended former U.S. ambassador to Ukraine Marie Yovanovitch, \"I've defended every single person on this team.\"",
+    "Ground_truth": "FALSE",
+    "id": "4b233d95-3768-4858-9552-6402ec898caa",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "6dfd22d6daed407660820a2f16baa1d144ce3023713bc59c5a6521dbb6008e30",
+    "claim": "A March 7 U.S. security alert … means the U.S. was “behind this gruesome terror attack on Russian civilians.”",
+    "Ground_truth": "FALSE",
+    "id": "db915d86-8540-425b-941e-2f414ff9e6b6",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "718153d8e523c80144d2d93a43b6fd92a5f5dd74fb854f1c44c947ac4e0563cc",
+    "claim": "Blinken, Austin trip to Kyiv may have been staged",
+    "Ground_truth": "FALSE",
+    "id": "a968ffa0-a692-445e-aaab-b6545d24f75a",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "564f9a96c07b4794fe64f46a676648b390f4b1442848ee7c2f2e7687814696ef",
+    "claim": "“Cities in notoriously ‘tough on crime’ states like Texas and Florida saw a more significant increase in violent crime than cities in NYS.”",
+    "Ground_truth": "HALF-TRUE",
+    "id": "4349e7b1-260a-4935-9b5b-d13c66988f93",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "4c261b67d7df6c3e3b776a67b954f3e949693ed8d5d3ab96127eeb3b61b2dda8",
+    "claim": "“Norway readies its military to counter Biden.”",
+    "Ground_truth": "FALSE",
+    "id": "60cb354a-f0d7-4b8f-bdba-277e497137f5",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "0550e667be55bb2466cac4e45e54903ea532c1e1a93f73acfbe5bd6bc491aceb",
+    "claim": "A photo shows two Italian nurses in a hospital a few days before they got COVID-19 and died.",
+    "Ground_truth": "FALSE",
+    "id": "8fc0844a-dc03-4b34-914e-1f6a4268677e",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "bcf79fc8672d5cb10f6fbc0db6f40e313483bc0a7f0b0e086dc852a861c6f229",
+    "claim": "Actor Sydney Sweeney “says she voted for Donald Trump.”",
+    "Ground_truth": "FALSE",
+    "id": "130bb028-22ec-4b52-ad3c-968d3d8f0972",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "c828f0aa607298ffadca8c9f56032e69a15afe9e261c00a755386feb454c3b71",
+    "claim": "\"March For Our Lives is backed by radicals with a history of violent threats, language and actions.\"",
+    "Ground_truth": "FALSE",
+    "id": "d71f5578-e5fb-4e75-88c7-ac7c2e2c8303",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "fc31a2ee4c1bbfa6580f2a3cb0e3db4cbe3dbde7105e79e7f12035382a4b4fbb",
+    "claim": "Quotes Andy Borowitz as saying \"stopping Hillary is a short-term solution. The long-term solution — and it will be more difficult — is fixing the educational system that has created so many people ignorant enough to vote for Hillary.\"",
+    "Ground_truth": "FALSE",
+    "id": "a3004e8e-f394-4f5a-9a45-7e59acf8a75e",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "b11eabe1314817f4925cd76e651b45355f30587a3c66d3e6946971c8b895cb81",
+    "claim": "\"On our current trajectory, we’ll be 2,000 prison beds short by 2021... We’ll need two new prisons soon, at the cost of $485 million over the next five years.\"",
+    "Ground_truth": "HALF-TRUE",
+    "id": "bd743712-5d18-4646-bae8-e2300f2b6d71",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "acf37581f7ffeeb57c55e5892bb2c6ee173d4e706e34b9ab36954a0f38d421d2",
+    "claim": "Since 2008, Gwinnett County’s population has grown 15 percent, while the county government staff has increased only 1 percent.",
+    "Ground_truth": "TRUE",
+    "id": "75111d38-ead4-446c-8fa8-a637a2c512fd",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "c7efc36c07503a2b6458439fafc080f2d3d6052c7d9b2d947eade998f0dc358d",
+    "claim": "Tim Ryan said “I do love” Nancy Pelosi and votes with Joe Biden and Pelosi 100%.",
+    "Ground_truth": "HALF-TRUE",
+    "id": "1cacb598-58ab-4308-900f-dc389f20e226",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "f09d5bf1eab7c369e750ec24fa41622996325027956358786071c5b7ea1428d3",
+    "claim": "\"Adjusting for inflation, West Virginia’s median household income has not grown in a decade.\"",
+    "Ground_truth": "TRUE",
+    "id": "46a3e6cd-faa8-4fb1-a115-29e190b26b42",
+    "source": "POLITIFACT"
+  },
+  {
+    "docID": "0a7090e76d6c3f85ea75b67925225e1e7ccf7d442dc807790a9123478359c43e",
+    "claim": "Robert F. Kennedy Jr. was a heroin addict from his teenage years into adulthood.",
+    "Ground_truth": "TRUE",
+    "id": "fc799aaf-9478-43e9-9e13-731fa16ad354",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "89ae9753f6dee41f201126c0724a2f1cc6e71d7bae26463617c52c78bab91c4e",
+    "claim": "Video recorded on Oct. 11, 2023, shows at least two people holding Taliban flags during a pro-Palestine demonstration on the campus of Florida Atlantic University.",
+    "Ground_truth": "TRUE",
+    "id": "28f42635-1087-43b9-ae1d-3637155c9f97",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "348c87ffed5f3b6d4f90158b332364d4a8672f262bd45aed139c19c4757413a2",
+    "claim": "A photograph genuinely shows a tourist boat struck with 800 pounds of human feces after the Dave Matthews Band's bus driver illegally dumped the waste in the Chicago River.",
+    "Ground_truth": "FALSE",
+    "id": "69d09ed9-ee41-4429-b561-d192b22d3a63",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "a31482e436d0c82490b3ceaa612b89fd8bb1f76fabd8ab79cc6fd360b2cfa3a8",
+    "claim": "A Minnesota man who removed his ailing wife from a nursing home and threw her a \"death party\" was arrested and sentenced to three years in prison.",
+    "Ground_truth": "TRUE",
+    "id": "1e024d7b-9e77-43a4-8a56-b6cd37dd2c33",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "7f8ba977da0913e1e0cb567edf59527f44dfe80385ac31f037b36f1e10d069a3",
+    "claim": "A video that circulated in March 2024 showed Israelis filling a water well used by Palestinians with concrete.",
+    "Ground_truth": "TRUE",
+    "id": "cc1a1fd1-4a2e-45c1-9ddd-e4da8f98e94c",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "7a441e0214fe8723ad003d5fc612f58f7d3f74f61d37bf7927dace8c2f35d568",
+    "claim": "An old episode of \"The Simpsons\" featured a plot line about a run on a bank called the Silicon Valley Bank.",
+    "Ground_truth": "FALSE",
+    "id": "9c539054-192f-4031-bb92-a21741214f8a",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "c2092ca3a034c034f96466d0e9f01cc511910ef8c70657a554a4b59e1203fb16",
+    "claim": "On June 10, 2023, a Pride flag was hung between two American flags at the White House.",
+    "Ground_truth": "TRUE",
+    "id": "54bdee80-ac8d-4a65-87aa-50458bc9a486",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "b871bf463c29b5f88b4a743c76823bec3145bbf56da0bf85021661fae759998e",
+    "claim": "A new high school textbook describes U.S. President Donald Trump as \"mentally ill\" and his supporters as racist.",
+    "Ground_truth": "MOSTLY-FALSE",
+    "id": "f66187ac-7ed9-4485-91df-b7ff5c2d1c6c",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "ba3815ad3cc96831a27e0f02fffa6865d877d5190d99e314cb6a3b9810f9198c",
+    "claim": "HB 2044, a bill before the Missouri state House of Representatives, could lead to the imprisonment of librarians for failing to comply with its provisions.",
+    "Ground_truth": "TRUE",
+    "id": "bd9505e8-204f-4126-bcc5-eb55e5636d9c",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "b4b28e3feaed9751265e9f71f1cba18c4eabe496b04125bb32e89a8e239506a4",
+    "claim": "U.S. Rep. Ilhan Omar proposed a nationwide ban on \"unhealthy and immoral\" bacon.",
+    "Ground_truth": "FALSE",
+    "id": "94e9d075-b027-4435-86d2-47b860fce8ec",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "40d0db3ea9f287ca3c0dafa697f9d42888131d9bdea4e4cbdb3c0364a38140e2",
+    "claim": "In May 2023, George Soros died.",
+    "Ground_truth": "FALSE",
+    "id": "f4424fe1-e75e-4601-ad82-ab0ee4df95c3",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "44a107d5f3d8466d06f76998fe2ad09d4ad88d4ca5e413fda668098c01dd1b34",
+    "claim": "The Centers for Disease Control and Prevention (CDC) offers “Zombie Preparedness” education materials.",
+    "Ground_truth": "OUTDATED",
+    "id": "417ed252-5ec4-492d-96c2-ba63a1247a77",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "fe0b3032cf313f167fc9ce5324ba4e6b602a4635f46faa6af701f774e9fbf75a",
+    "claim": "Ford shut down U.S. production in May 2025 due to President Donald Trump's tariffs and relocated manufacturing operations overseas.",
+    "Ground_truth": "FALSE",
+    "id": "dcfb522b-cce0-4991-a04b-d70293013c2d",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "fa328858785f1bdd6ee8b90f81cf290511c24d45da4dadc9ff34382be99cc42b",
+    "claim": "Photos of a store built into the side of a cliff in China show a genuine business establishment.",
+    "Ground_truth": "TRUE",
+    "id": "fedce6fa-11f8-4fa8-a2c3-df95a553f845",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "206874307fca7484165aa0003ad8e0f49d15bcd048da36aa629a1fd4b38c9813",
+    "claim": "U.S. House Speaker Nancy Pelosi held up a coronavirus funding package so that Democrats could run negative ads about Republicans that made the latter look bad.",
+    "Ground_truth": "FALSE",
+    "id": "d6b0b13a-6f33-43b5-aecd-afef021683b5",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "714cc86c1ca6fcace06ec7eac86373631374890d73acbe61657e881241e05fc0",
+    "claim": "A video from a live interview on June 29, 2023, authentically showed U.S. President Joe Biden walking off the MSNBC set of \"Deadline: White House\" before host Nicole Wallace was finished introducing a commercial break.",
+    "Ground_truth": "TRUE",
+    "id": "529f2be4-3184-4902-8f9d-cfcd41d8879b",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "8f69e62a8bdaaca9c7957da166084ce0a3030692ac81b0bc0e9e393ba05aa397",
+    "claim": "In 2015, then-President Barack Obama wanted to issue an executive order changing the name of Thanksgiving to \"Celebrate Immigrants Day.\"",
+    "Ground_truth": "FALSE",
+    "id": "10837c92-b045-48e8-b672-d1b57ea88a47",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "cd29bcc0869e16a10b78b1ca7d489809d932f97d2d84db1458ea27a6ecae2ad7",
+    "claim": "The Chicago Code Blue Facebook page shared a meme mocking Jacob Blake, who was paralyzed after being shot in the back by a police officer in Wisconsin in August 2020.",
+    "Ground_truth": "TRUE",
+    "id": "9da728a8-1f7b-4484-a08b-e02d4feba119",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "7bcc7fd52ad466d7594e55a053cfe59876d9eddaab866ea385d8ba23bade2b5d",
+    "claim": "Geppetto, the woodcarver in \"The Adventures of Pinocchio\" who created a walking, talking puppet out of wood, was actually a slave owner who built Pinocchio out of slaves' body parts.",
+    "Ground_truth": "FALSE",
+    "id": "4d6b85f4-c1c9-4c20-b0cb-1401dae7e8b7",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "70b657625709c575a8417731997c9a94b3aa4ace58d60fc7136e122d67f6e4dc",
+    "claim": "U.S. President Donald Trump's October 2025 ceasefire deal between Israel and Hamas to end the war in Gaza was the \"exact deal\" brokered by former President Joe Biden.",
+    "Ground_truth": "FALSE",
+    "id": "b0097e76-5938-46e9-9ae5-4c9d9cb86279",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "086814611ba1d0bb5c8c77ddb08380af05547fdb7e884abe7273018850bcbea8",
+    "claim": "A photo from May 2024 authentically depicts an Israeli soldier posing in front of burning books at a university library in Gaza.",
+    "Ground_truth": "TRUE",
+    "id": "9791e6b4-e72d-43f7-8844-9c9d583bc9b0",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "c2439b668af62ea1001f91929026dcc6448fd6a6866e0cb8b7650b21397bc069",
+    "claim": "The U.S. president will send a “letter of congratulations” or birthday greeting card to Americans who turn 100 years old.",
+    "Ground_truth": "MOSTLY-TRUE",
+    "id": "9acf5e66-2759-4fc8-8e8e-b03aed7de77d",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "532febe788a21c4070edcc13b65f49d125f562a212a6974e204500918e82be41",
+    "claim": "Image authentically shows a microscopic view of caffeine crystals.",
+    "Ground_truth": "TRUE",
+    "id": "692c992d-8e10-4791-b24b-eec04bef917b",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "13c1df14edd72f8e2fed964694e185dba8b8a13cc586984a1fd398a70682124f",
+    "claim": "At a news conference, U.S. President Joe Biden forgot that he had already shaken Sen. Chuck Schumer’s hand a few seconds earlier and tried to shake it again.",
+    "Ground_truth": "UNPROVEN",
+    "id": "16a1f8bb-eea4-42be-8444-a50b9d12b0e6",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "43845382c57bb92743bddf844870ab822666c4c5f249f4d4de93437f9e58874e",
+    "claim": "Kentucky Attorney General Daniel Cameron is married to U.S. Sen. Mitch McConnell's granddaughter.",
+    "Ground_truth": "FALSE",
+    "id": "e254d303-d98d-48b4-9d0b-4e04f03fa9a3",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "6f2a81c0c82a605105cfc5661730a42b58abbe400316cc68a2d0889150301a62",
+    "claim": "A photo shared online in November 2025 authentically showed a man wearing a T-shirt reading: \"I don't care if Trump is a pedophile.\"",
+    "Ground_truth": "FALSE",
+    "id": "d7fc0521-d911-40fb-8d52-caad662b8e9f",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "3e9d520614de4e57146b394d26d8cb98ed0b94d90bf64639b3c04db89b56a8d8",
+    "claim": "Millions of mail-in ballots were improperly sent to people who did not request them in the 2020 election.",
+    "Ground_truth": "MOSTLY-FALSE",
+    "id": "9cc0c874-6de1-426d-bf61-582a2855effd",
+    "source": "SNOPES"
+  },
+  {
+    "docID": "b9e5544fc54d70c4933a360ff39f2389e285ad7a62ab9e4ffe71da34d15aa5be",
+    "claim": "A photograph circulating online in January 2023 depicted a real airship nicknamed \"the flying bum.\"",
+    "Ground_truth": "TRUE",
+    "id": "a0ecf452-f950-414f-a27f-27a483a2f004",
+    "source": "SNOPES"
   }
 ]

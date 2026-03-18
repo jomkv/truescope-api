@@ -1,0 +1,31 @@
+[
+  {
+    "model": "nli",
+    "version": 1,
+    "num_pairs": 1869,
+    "timestamp": "2026-03-11T14:29:45.176419+00:00",
+    "last_loss": null
+  },
+  {
+    "model": "embeddings",
+    "version": 1,
+    "num_pairs": 25257,
+    "timestamp": "2026-03-11T12:29:50.796548+00:00",
+    "last_loss": 0.004483662352220706
+  },
+
+  {
+    "model": "embeddings",
+    "version": 1,
+    "num_pairs": 26976,
+    "timestamp": "2026-03-15T22:18:57.342044+00:00",
+    "last_loss": 0.005392143898339741
+  },
+  {
+    "model": "embeddings",
+    "version": 2,
+    "num_pairs": 26976,
+    "timestamp": "2026-03-16T01:10:50.736916+00:00",
+    "last_loss": 0.003912695229477729
+  }
+]
