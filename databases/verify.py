@@ -3,6 +3,7 @@ from schemas.article_schema import Article
 from schemas.article_chunk_schema import ArticleChunk
 from core.db import Session
 import logging
+from sqlalchemy import text
 from sqlalchemy.orm import Session as SessionType
 
 logger = logging.getLogger(__name__)
@@ -35,6 +36,7 @@ class VerifyDatabase:
             list[tuple[Claim, float]]: List of tuples containing the claim and its distance to the input embedding.
         """
         try:
+            self.session.execute(text("SET hnsw.ef_search = 150;"))
             distance_col = self.claim_distance_col(embedding)
 
             return (
