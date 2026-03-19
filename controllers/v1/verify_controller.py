@@ -17,6 +17,7 @@ from constants.fuzzy import (
     DEMONYM_GROUPS,
     COMMON_PLURAL_SUFFIXES,
     ANTONYM_PAIRS,
+    MIN_STEM_MATCH_LENGTH,
 )
 from constants.tokens import ENTITY_GENERIC_TOKENS, COMMON_STOPWORDS, EVENT_MARKERS, STOP_TITLES, DAMP_KEYWORDS
 from constants.negations import NEGATION_PHRASES, NEGATION_WORD_PATTERNS
@@ -64,8 +65,6 @@ class VerifyController:
         self.MAX_DEEP_ANALYSIS = 25
         self.AGGREGATION_LIMIT = 3
 
-        # Minimum length for stem matching (e.g. "aggress" -> "aggressive")
-        self.MIN_STEM_MATCH_LENGTH = 5
 
     @staticmethod
     def normalize_text(text: str, lowercase: bool = True, strip_punctuation: bool = False) -> str:

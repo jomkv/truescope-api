@@ -1,3 +1,6 @@
+# Minimum length for stem matching (e.g. "aggress" -> "aggressive")
+MIN_STEM_MATCH_LENGTH = 5
+
 # Demonym groups and related terms for fuzzy matching
 # Each set contains terms that should be treated as equivalent
 DEMONYM_GROUPS = [
@@ -25,9 +28,6 @@ DEMONYM_GROUPS = [
 
 # Common suffixes for plural/variant matching
 COMMON_PLURAL_SUFFIXES = ["s", "es", "ies"]
-
-# Minimum length for stem matching (e.g. "aggress" -> "aggressive")
-MIN_STEM_MATCH_LENGTH = 5
 
 # Antonym pairs for detecting polarity mismatches in quantitative/directional claims
 ANTONYM_PAIRS = [
