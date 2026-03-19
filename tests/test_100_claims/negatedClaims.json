@@ -1,0 +1,802 @@
+[
+    {
+        "index": 1,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2016/aug/15/sean-patrick-maloney/donald-trump-against-same-sex-marriage/",
+        "expected_verdict": "FALSE",
+        "claim": "Donald Trump supports marriage equality.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 2,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2016/may/16/mamie-locke/mamie-locke-says-us-has-low-voter-turnout-rate/",
+        "expected_verdict": "FALSE",
+        "claim": "The United States has a high voter turnout rate.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 3,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/daughter-trans-musk/",
+        "expected_verdict": "FALSE",
+        "claim": "Tech billionaire Elon Musk does not have a transgender daughter.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 4,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/kamala-harris-gun-owner/",
+        "expected_verdict": "FALSE",
+        "claim": "Democratic presidential candidate Kamala Harris is not a gun owner.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 5,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/kamala-harris-biological-children/",
+        "expected_verdict": "FALSE",
+        "claim": "Vice President Kamala Harris has biological children.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 6,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/trump-donation-kamala-harris/",
+        "expected_verdict": "FALSE",
+        "claim": "Former U.S. President Donald Trump never donated to Kamala Harris' campaign.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 7,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/elon-musk-immigrant/",
+        "expected_verdict": "FALSE",
+        "claim": "Elon Musk is not an immigrant to the United States.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 8,
+        "source": "TSEK",
+        "url": "https://www.tsek.ph/vp-robredo-said-in-a-2016-radio-quiz-bee-that-ph-has-1700-islands/",
+        "expected_verdict": "FALSE",
+        "claim": "Vice President Leni Robredo never said that the Philippines has 1,700 islands.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 9,
+        "source": "TSEK",
+        "url": "https://www.tsek.ph/robredo-says-she-has-repeatedly-beaten-marcos-jr-in-election-related-contests/",
+        "expected_verdict": "FALSE",
+        "claim": "Vice President Leni Robredo has not repeatedly beaten Ferdinand Marcos Jr. in election-related contests.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 10,
+        "source": "TSEK",
+        "url": "https://www.tsek.ph/fact-check-the-philippines-used-to-have-a-local-tv-and-radio-brand-until-the-martial-law-of-marcos-destroyed-it/",
+        "expected_verdict": "FALSE",
+        "claim": "The Philippines did not have a promising local electronic and automotive industry that was cut short by the declaration of Martial Law.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 11,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2016/may/12/gwen-moore/arm-world-bank-tied-8-fold-rise-water-rates-manila/",
+        "expected_verdict": "FALSE",
+        "claim": "Water rates in Manila, Philippines, were not raised up to 845 percent when a subsidiary of the World Bank became a partial owner.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 12,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/new-jersey-rhode-island-incest/",
+        "expected_verdict": "FALSE",
+        "claim": "Incest is not legal in New Jersey and Rhode Island.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 13,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/lifeguards-paris-olympics-swimming/",
+        "expected_verdict": "FALSE",
+        "claim": "Lifeguards are not present at Olympic swimming competitions.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 14,
+        "source": "FULLFACT",
+        "url": "https://fullfact.org/online/flawed-list-conservative-costs/",
+        "expected_verdict": "FALSE",
+        "claim": "The EU ‘divorce bill’ will not cost £42 billion.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2020/jan/24/facebook-posts/yes-iran-does-ban-twitter/",
+        "expected_verdict": "FALSE",
+        "claim": "Twitter is not banned in Iran.",
+        "type": "INTERNATIONAL",
+        "index": 15
+    },
+    {
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2018/apr/12/marcus-molinaro/do-ny-residents-have-among-highest-tax-burdens-mol/",
+        "expected_verdict": "FALSE",
+        "claim": "New York does not have among the highest tax burdens of any state in the nation",
+        "type": "INTERNATIONAL",
+        "index": 16
+    },
+    {
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2016/aug/17/gary-johnson/gary-johnson-correct-most-americans-support-legali/",
+        "expected_verdict": "FALSE",
+        "claim": "Most Americans do not support the legalization of marijuana.",
+        "type": "INTERNATIONAL",
+        "index": 17
+    },
+    {
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2021/aug/31/mitt-romney/mitt-romney-accurately-says-trump-administration-w/",
+        "expected_verdict": "FALSE",
+        "claim": "The Trump administration did not work to free 5,000 Taliban prisoners.",
+        "type": "INTERNATIONAL",
+        "index": 18
+    },
+    {
+        "source": "FULLFACT",
+        "url": "https://fullfact.org/crime/knife-crime-october-2019/",
+        "expected_verdict": "FALSE",
+        "claim": "Knife crime has not soared to a record high.",
+        "type": "INTERNATIONAL",
+        "index": 19
+    },
+    {
+        "source": "FULLFACT",
+        "url": "https://fullfact.org/economy/uk-us-trading-and-investment/",
+        "expected_verdict": "FALSE",
+        "claim": "The USA is not the largest investor in the UK economy.",
+        "type": "INTERNATIONAL",
+        "index": 20
+    },
+    {
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/rfk-jr-heroin-addict/",
+        "expected_verdict": "FALSE",
+        "claim": "Robert F. Kennedy Jr. was not a heroin addict from his teenage years into adulthood.",
+        "type": "INTERNATIONAL",
+        "index": 21
+    },
+    {
+        "index": 22,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/trump-ross-ulbricht-silk-road-marketplace/",
+        "expected_verdict": "FALSE",
+        "claim": "U.S. President Donald Trump did not pardon Ross Ulbricht, the creator of dark web marketplace Silk Road.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 23,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/hersheys-chocolate-founder-school/",
+        "expected_verdict": "FALSE",
+        "claim": "The founder of The Hershey Chocolate Company, Milton Hershey, did not found a boarding school for orphaned boys.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 24,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/spotify-ice-recruitment-ads/",
+        "expected_verdict": "FALSE",
+        "claim": "In 2025, streaming service Spotify did not run recruitment advertisements for U.S. Immigration and Customs Enforcement.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 25,
+        "source": "FULLFACT",
+        "url": "https://fullfact.org/election-2024/bbc-debate-sunak-starmer/",
+        "expected_verdict": "FALSE",
+        "claim": "Labour will not introduce a “retirement tax”.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 26,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/diddy-ye-prince-harry-pic/",
+        "expected_verdict": "FALSE",
+        "claim": "The image does not authentically depict Sean \"Diddy\" Combs with Prince Harry and Kanye \"Ye\" West.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 27,
+        "source": "FULLFACT",
+        "url": "https://fullfact.org/news/anneliese-dodds-women-mps/",
+        "expected_verdict": "FALSE",
+        "claim": "Labour is not the first political party to reach parity in terms of men and women MPs.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 28,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2024/sep/06/kamala-harris/project-2025-would-phase-out-federal-funds-for-pub/",
+        "expected_verdict": "FALSE",
+        "claim": "Project 2025 would not defund K-12 schools.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 29,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2024/jun/03/joe-biden/does-trump-want-to-repeal-the-aca-as-biden-says-tr/",
+        "expected_verdict": "FALSE",
+        "claim": "Donald Trump does not want to terminate the Affordable Care Act.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 30,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2023/nov/14/ted-cruz/does-texas-really-outproduce-california-in-wind-en/",
+        "expected_verdict": "FALSE",
+        "claim": "Texas does not produce a lot more wind energy than California.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 31,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2024/jul/23/kamala-harris/kamala-harris-correct-that-project-2025-would-end/",
+        "expected_verdict": "FALSE",
+        "claim": "Project 2025 would not “end Head Start.”",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 32,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2023/apr/18/kamala-harris/kamala-harris-said-1-in-5-americans-have-lost-a-fa/",
+        "expected_verdict": "FALSE",
+        "claim": "“One in 5 Americans has not lost a family member to gun violence.”",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 33,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2022/jul/14/val-demings/val-demings-ad-criticizes-rubios-attendance-record/",
+        "expected_verdict": "FALSE",
+        "claim": "Sen. Marco Rubio does not have \"one of the worst attendance records in the Senate.\"",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 34,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2021/nov/09/david-gura/west-virginia-home-zero-billionaires/",
+        "expected_verdict": "FALSE",
+        "claim": "West Virginia is not home to zero billionaires.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 35,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2022/feb/21/john-cornyn/cornyn-right-drug-overdose-deaths-topped100000-nat/",
+        "expected_verdict": "FALSE",
+        "claim": "100,000 Americans did not die of an overdose in a single year.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 36,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2020/jun/11/planned-parenthood/yes-if-federal-abortion-law-were-overturned-wiscon/",
+        "expected_verdict": "FALSE",
+        "claim": "If Roe is overturned, Wisconsin does not have a law on the books that would immediately make abortion a crime.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 37,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2020/mar/25/facebook-posts/bill-gates-warned-2015-we-were-unprepared-infectio/",
+        "expected_verdict": "FALSE",
+        "claim": "Bill Gates did not tell us about the coronavirus in 2015.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 38,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2020/jun/25/dan-forest/how-many-states-have-reopened-gyms/",
+        "expected_verdict": "FALSE",
+        "claim": "North Carolina is not one of four states that hasn't opened gyms.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 39,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2020/jul/24/donald-trump/fact-checking-trump-rising-murders-philly/",
+        "expected_verdict": "FALSE",
+        "claim": "Murders this year have not spiked 27% in Philadelphia.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 40,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2020/sep/09/nick-freitas/spanberger-has-voted-pelosi-relatively-low-92-time/",
+        "expected_verdict": "FALSE",
+        "claim": "Abigail Spanberger has not voted with Nancy Pelosi over 90% of the time.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 41,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2020/dec/22/christi-craddick/examining-texas-oil-and-gas-industry-amid-pandemic/",
+        "expected_verdict": "FALSE",
+        "claim": "The oil and gas industry does not comprise 35% of the Texas economy.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 42,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2020/jul/08/ron-mcmullen/fact-checking-history-iowa-countys-namesake/",
+        "expected_verdict": "FALSE",
+        "claim": "Former U.S. Vice President Richard Mentor Johnson was not a slave owner married to one of his slaves and father of two children with her.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 43,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2020/aug/12/state-democratic-party-wisconsin/yes-high-percentage-wisconsin-renters-are-risk-evi/",
+        "expected_verdict": "FALSE",
+        "claim": "“34% of Wisconsin renters are not at risk of eviction.”",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 44,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2020/sep/08/ron-johnson/johnson-mostly-track-claim-flu-harder-kids-covid-1/",
+        "expected_verdict": "FALSE",
+        "claim": "For younger people, seasonal flu is not “in many cases” a deadlier virus than COVID-19",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 45,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2020/sep/25/michael-burgess/how-many-adults-get-flu-shots-each-year/",
+        "expected_verdict": "FALSE",
+        "claim": "In the last 10 years, more than half of adults in the U.S. received a flu shot.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 46,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2020/dec/04/mandy-cohen/nc-covid-19-deaths-surpass-10-years-flu-deaths/",
+        "expected_verdict": "FALSE",
+        "claim": "COVID-19 has not killed more North Carolinians in a year than the flu has in 10 years.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 47,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2021/jan/20/kirk-cox/virginia-among-slowest-states-vaccine-rollout-cox-/",
+        "expected_verdict": "FALSE",
+        "claim": "Virginia does not rank “in the bottom third of states” in administering the COVID-19 vaccine.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 48,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2021/feb/18/facebook-posts/yes-aversion-federal-regulation-drove-texas-isolat/",
+        "expected_verdict": "FALSE",
+        "claim": "The Texas power grid is part of the US power grid because they wanted to avoid federal regulation.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 49,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2021/jan/28/jennifer-boysko/us-only-industrialized-nation-no-paid-family-leave/",
+        "expected_verdict": "FALSE",
+        "claim": "The United States is not the only industrialized, modernized country that does not already have a paid family medical leave program in place.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 50,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2021/apr/12/nicholas-langworthy/does-new-york-state-have-highest-taxes-united-stat/",
+        "expected_verdict": "FALSE",
+        "claim": "Residents of New York state do not pay the highest taxes in the nation.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 1,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2025/jul/29/benjamin-netanyahu/benjamin-netanyahus-pants-on-fire-statement-that-t/",
+        "expected_verdict": "TRUE",
+        "claim": "There is starvation in Gaza.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 2,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2025/apr/02/jd-vance/jd-vance-falsely-says-maryland-man-deported-to/",
+        "expected_verdict": "TRUE",
+        "claim": "Kilmar Armando Abrego Garcia “was not a convicted MS-13 gang member.”",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 3,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2025/feb/25/instagram-posts/no-former-first-daughter-malia-obama-didnt-get-22/",
+        "expected_verdict": "TRUE",
+        "claim": "Malia Obama did not receive $2.2 million in funds from USAID.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 4,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2025/jan/07/facebook-posts/did-elon-musk-acquire-boeing-no-thats-a-baseless-c/",
+        "expected_verdict": "TRUE",
+        "claim": "Elon Musk has not just acquired Boeing.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 5,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2025/jan/10/viral-image/no-actor-tom-hanks-didnt-die-in-a-fatal-new-year-c/",
+        "expected_verdict": "TRUE",
+        "claim": "Actor Tom Hanks did not die in a fatal car accident.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 6,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2024/dec/05/threads-posts/elon-musk-has-been-a-us-citizen-since-2002/",
+        "expected_verdict": "TRUE",
+        "claim": "Elon Musk is a citizen of the United States.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 7,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2024/oct/12/winsenate/democratic-ad-overstates-dave-mccormicks-abortion/",
+        "expected_verdict": "TRUE",
+        "claim": "Dave McCormick is not fully against abortion.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 8,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2024/sep/24/threads-posts/no-travis-kelce-didnt-endorse-kamala-harris-for-pr/",
+        "expected_verdict": "TRUE",
+        "claim": "Travis Kelce did not endorse Kamala Harris.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 9,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/nasa-announces-life-on-mars/",
+        "expected_verdict": "TRUE",
+        "claim": "NASA did not announce in September 2025 that it had found life on Mars.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 10,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/valentines-day-history/",
+        "expected_verdict": "TRUE",
+        "claim": "Greeting card companies did not invent Valentine's Day.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 11,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/who-you-vote-for-is-not-public-record/",
+        "expected_verdict": "TRUE",
+        "claim": "In Indiana, who you voted for is not public record.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 12,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/biden-worst-inflation-in-us-history/",
+        "expected_verdict": "TRUE",
+        "claim": "Inflation was not the highest in U.S. history under President Joe Biden.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 13,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/george-washingtons-wooden-teeth/",
+        "expected_verdict": "TRUE",
+        "claim": "U.S. President George Washington did not have wooden teeth.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 14,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/nasa-us-timeline-conspiracy/",
+        "expected_verdict": "TRUE",
+        "claim": "NASA was not established before the U.S.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 15,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2025/apr/22/tiktok-posts/simpsons-didnt-predict-pope-francis-would-die-2025/",
+        "expected_verdict": "TRUE",
+        "claim": "The Simpsons did not predict Pope Francis’ 2025 death.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/elon-musk-bought-google/",
+        "expected_verdict": "TRUE",
+        "claim": "Elon Musk did not buy Google.",
+        "type": "INTERNATIONAL",
+        "index": 16
+    },
+    {
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2024/dec/30/instagram-posts/no-bill-gates-isnt-implanting-digital-ids-in-newbo/",
+        "expected_verdict": "TRUE",
+        "claim": "Bill Gates will not be implanting digital IDs in newborns in Kenya.",
+        "type": "INTERNATIONAL",
+        "index": 17
+    },
+    {
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2024/jul/30/donald-trump/fact-checking-trumps-false-statement-that-kamala-h/",
+        "expected_verdict": "TRUE",
+        "claim": "Kamala Harris does not want to defund the police.",
+        "type": "INTERNATIONAL",
+        "index": 18
+    },
+    {
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2024/jul/16/instagram-posts/no-switzerland-didnt-ban-mammograms/",
+        "expected_verdict": "TRUE",
+        "claim": "Switzerland did not ban mammograms.",
+        "type": "INTERNATIONAL",
+        "index": 19
+    },
+    {
+        "index": 20,
+        "source": "RAPPLER",
+        "url": "https://www.rappler.com/newsbreak/fact-check/covid-19-vaccines-kill-elderly-people/",
+        "expected_verdict": "TRUE",
+        "claim": "COVID-19 vaccines cannot kill elderly people.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 21,
+        "source": "RAPPLER",
+        "url": "https://www.rappler.com/newsbreak/fact-check/ferdinand-marcos-richest-person-world/",
+        "expected_verdict": "TRUE",
+        "claim": "Si Ferdinand Marcos Sr. ay hindi ang pinakamayamang tao sa mundo.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 22,
+        "source": "RAPPLER",
+        "url": "https://www.rappler.com/newsbreak/fact-check/death-penalty-not-yet-approved-senate/",
+        "expected_verdict": "TRUE",
+        "claim": "The death penalty in the Philippines has not been approved in the Senate.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 23,
+        "source": "RAPPLER",
+        "url": "https://www.rappler.com/newsbreak/fact-check/yellowstone-supervolcano-not-due-erupt-anytime-soon/",
+        "expected_verdict": "TRUE",
+        "claim": "The Yellowstone supervolcano is not due for an eruption any time soon.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 24,
+        "source": "RAPPLER",
+        "url": "https://www.rappler.com/newsbreak/fact-check/philippines-no-chinook-helicopter-factory/",
+        "expected_verdict": "TRUE",
+        "claim": "The Philippines does not have a Chinook helicopter factory.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 25,
+        "source": "RAPPLER",
+        "url": "https://www.rappler.com/newsbreak/fact-check/russia-did-not-declare-war-united-states/",
+        "expected_verdict": "TRUE",
+        "claim": "Russian President Vladimir Putin has not declared war on the United States.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 26,
+        "source": "RAPPLER",
+        "url": "https://www.rappler.com/newsbreak/fact-check/billy-crawford-alive/",
+        "expected_verdict": "TRUE",
+        "claim": "Filipino actor and singer Billy Crawford has not died.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 27,
+        "source": "RAPPLER",
+        "url": "https://www.rappler.com/newsbreak/fact-check/philippines-yet-to-receive-corvettes-south-korea/",
+        "expected_verdict": "TRUE",
+        "claim": "The Philippine Navy has not yet received two new warships from South Korea.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 28,
+        "source": "RAPPLER",
+        "url": "https://www.rappler.com/newsbreak/fact-check/china-did-not-attack-taiwan-may-28-2024/",
+        "expected_verdict": "TRUE",
+        "claim": "China has not launched an attack against Taiwan.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 29,
+        "source": "VERAFILES",
+        "url": "https://verafiles.org/articles/fact-check-old-video-of-manny-pacquiao-edited-using-ai-to-promote-online-gambling-app",
+        "expected_verdict": "TRUE",
+        "claim": "Former senator and international boxing champ Manny Pacquiao is not promoting an online gambling app.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 30,
+        "source": "VERAFILES",
+        "url": "https://verafiles.org/articles/fact-check-villanueva-did-not-resign-as-senator",
+        "expected_verdict": "TRUE",
+        "claim": "Joel Villanueva has not resigned from the Philippine Senate",
+        "type": "LOCAL"
+    },
+    {
+        "index": 31,
+        "source": "VERAFILES",
+        "url": "https://verafiles.org/articles/fact-check-kris-aquino-death-bewitched-rumors-fake",
+        "expected_verdict": "TRUE",
+        "claim": "Kris Aquino has not been bewitched and has not passed away.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 32,
+        "source": "VERAFILES",
+        "url": "https://verafiles.org/articles/fact-check-marcoleta-falsely-claims-no-such-thing-as-wps-cites-wrong-data",
+        "expected_verdict": "TRUE",
+        "claim": "The West Philippine Sea does appear in any maps.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 33,
+        "source": "VERAFILES",
+        "url": "https://verafiles.org/articles/fact-check-claim-that-pfizer-hasnt-cured-any-disease-not-true",
+        "expected_verdict": "TRUE",
+        "claim": "Pfizer has cured any type of disease",
+        "type": "LOCAL"
+    },
+    {
+        "index": 34,
+        "source": "VERAFILES",
+        "url": "https://verafiles.org/articles/fact-check-ph-did-not-bomb-chinese-monster-ship-in-wps",
+        "expected_verdict": "TRUE",
+        "claim": "The Philippines did not bomb China’s monster ship in the West Philippine Sea",
+        "type": "LOCAL"
+    },
+    {
+        "index": 35,
+        "source": "VERAFILES",
+        "url": "https://verafiles.org/articles/fact-check-marcos-stealing-ph-gold-reserves-has-no-basis",
+        "expected_verdict": "TRUE",
+        "claim": "President Ferdinand Marcos Jr. did not steal the country’s gold reserves",
+        "type": "LOCAL"
+    },
+    {
+        "index": 36,
+        "source": "VERAFILES",
+        "url": "https://verafiles.org/articles/fact-check-no-senate-order-to-detain-harry-roque",
+        "expected_verdict": "TRUE",
+        "claim": "Harry Roque has not been ordered imprisoned by the Senate",
+        "type": "LOCAL"
+    },
+    {
+        "index": 37,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/rachel-maddow-baby-surrogate/",
+        "expected_verdict": "TRUE",
+        "claim": "Rachel Maddow did not announce in July 2025 that she is having a baby via surrogacy.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 38,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/orca-jessica-radcliffe-death/",
+        "expected_verdict": "TRUE",
+        "claim": "Marine animal trainer Jessica Radcliffe was not attacked and killed by an orca in front of a large crowd.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 39,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/trump-convicted-felonies/",
+        "expected_verdict": "TRUE",
+        "claim": "U.S. President-elect Donald Trump has been convicted of felonies.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 40,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/bluetooth-earbuds-brain-cancer/",
+        "expected_verdict": "TRUE",
+        "claim": "The radiation from Bluetooth earbuds, such as AirPods, does not cause brain cancer.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 41,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2024/oct/29/facebook-posts/claims-elon-musk-is-developing-a-surrogate-robot-a/",
+        "expected_verdict": "TRUE",
+        "claim": "Elon Musk did not launch a new pregnancy robot.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 42,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2024/nov/01/kamala-harris/kamala-harris-wrong-that-donald-trump-would-force/",
+        "expected_verdict": "TRUE",
+        "claim": "Former President Donald Trump would not force states to monitor women's pregnancies.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 43,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2024/oct/22/facebook-posts/no-october-surprise-claims-melania-trump-said-she/",
+        "expected_verdict": "TRUE",
+        "claim": "Melania Trump did not declare that she wants a divorce.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 44,
+        "source": "RAPPLER",
+        "url": "https://www.rappler.com/newsbreak/fact-check/chiz-escudero-still-senate-president-august-2025/",
+        "expected_verdict": "TRUE",
+        "claim": "Senate President Chiz Escudero was not removed from his post due to corruption.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 45,
+        "source": "POLITIFACT",
+        "url": "https://www.politifact.com/factchecks/2024/oct/17/jd-vance/fact-check-here-is-how-we-know-vances-statement-th/",
+        "expected_verdict": "TRUE",
+        "claim": "Former President Donald Trump did lose the 2020 election.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 46,
+        "source": "RAPPLER",
+        "url": "https://www.rappler.com/newsbreak/fact-check/no-iran-philippine-alliance-vs-china/",
+        "expected_verdict": "TRUE",
+        "claim": "Iran and the Philippines are not forming an alliance against China.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 47,
+        "source": "RAPPLER",
+        "url": "https://www.rappler.com/newsbreak/fact-check/russia-did-not-declare-war-united-states/",
+        "expected_verdict": "TRUE",
+        "claim": "Russian President Vladimir Putin has not declared war on the United States.",
+        "type": "LOCAL"
+    },
+    {
+        "index": 48,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/trump-deal-to-buy-greenland/",
+        "expected_verdict": "TRUE",
+        "claim": "Reports show U.S. President-elect Donald Trump has no deal ready to buy Greenland.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 49,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/biden-worst-inflation-us-history/",
+        "expected_verdict": "TRUE",
+        "claim": "Inflation was not the highest in U.S. history under President Joe Biden.",
+        "type": "INTERNATIONAL"
+    },
+    {
+        "index": 50,
+        "source": "SNOPES",
+        "url": "https://www.snopes.com/fact-check/harris-teleprompter-univision/",
+        "expected_verdict": "TRUE",
+        "claim": "Kamala Harris did not use a teleprompter during her town hall appearance on Univision.",
+        "type": "INTERNATIONAL"
+    }
+]
