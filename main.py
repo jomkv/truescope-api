@@ -163,7 +163,6 @@ async def get_thresholds():
         "relevance_threshold": verify_controller.RELEVANCE_THRESHOLD,
         "entity_threshold": verify_controller.ENTITY_THRESHOLD,
         "combined_threshold": verify_controller.COMBINED_THRESHOLD,
-        "max_deep_analysis": verify_controller.MAX_DEEP_ANALYSIS,
         "aggregation_limit": verify_controller.AGGREGATION_LIMIT,
     })
 
@@ -184,9 +183,6 @@ async def set_thresholds(data: dict):
     if "combined_threshold" in data:
         verify_controller.COMBINED_THRESHOLD = float(data["combined_threshold"])
         updated["combined_threshold"] = verify_controller.COMBINED_THRESHOLD
-    if "max_deep_analysis" in data:
-        verify_controller.MAX_DEEP_ANALYSIS = int(data["max_deep_analysis"])
-        updated["max_deep_analysis"] = verify_controller.MAX_DEEP_ANALYSIS
     if "aggregation_limit" in data:
         val = data["aggregation_limit"]
         verify_controller.AGGREGATION_LIMIT = int(val) if val else None

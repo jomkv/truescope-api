@@ -366,14 +366,6 @@
                         <input type="range" id="thr_combined" min="0.1" max="0.9" step="0.05"
                             oninput="document.getElementById('lbl_combined').textContent=parseFloat(this.value).toFixed(2)">
                     </div>
-                    <div class="flex flex-col gap-1">
-                        <label class="flex justify-between text-[11px] text-muted font-medium">
-                            Max deep analysis
-                            <span id="lbl_maxdeep" class="text-text font-bold"></span>
-                        </label>
-                        <input type="range" id="thr_maxdeep" min="1" max="20" step="1"
-                            oninput="document.getElementById('lbl_maxdeep').textContent=this.value">
-                    </div>
                 </div>
 
                 <button
@@ -385,14 +377,14 @@
                 <div class="mt-2.5 flex gap-2">
                     <button
                         class="flex-1 bg-red/15 hover:bg-red/25 text-red border border-red/30 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-center"
-                        onclick="presetThresholds(0.30, 0.30, 0.40, 10)" title="Wide net for HITL data collection">Wide
+                        onclick="presetThresholds(0.30, 0.30, 0.40)" title="Wide net for HITL data collection">Wide
                         (Training)</button>
                     <button
                         class="flex-1 bg-surface border border-bdr hover:bg-bdr px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-center"
-                        onclick="presetThresholds(0.55, 0.30, 0.62, 15)" title="Balanced defaults">Balanced</button>
+                        onclick="presetThresholds(0.55, 0.30, 0.62)" title="Balanced defaults">Balanced</button>
                     <button
                         class="flex-1 bg-surface border border-bdr hover:bg-bdr px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-center"
-                        onclick="presetThresholds(0.70, 0.40, 0.72, 15)" title="Strict — high precision">Strict</button>
+                        onclick="presetThresholds(0.70, 0.40, 0.72)" title="Strict — high precision">Strict</button>
                 </div>
             </div>
 
@@ -800,9 +792,6 @@
                 setSlider('thr_entity', 'lbl_entity', d.entity_threshold);
                 setSlider('thr_combined', 'lbl_combined', d.combined_threshold);
 
-                const md = document.getElementById('thr_maxdeep');
-                md.value = d.max_deep_analysis;
-                document.getElementById('lbl_maxdeep').textContent = d.max_deep_analysis;
 
                 if (d.aggregation_limit !== undefined) {
                     document.getElementById('aggLimit').value = d.aggregation_limit || "";
@@ -821,7 +810,6 @@
                 relevance_threshold: parseFloat(document.getElementById('thr_relevance').value),
                 entity_threshold: parseFloat(document.getElementById('thr_entity').value),
                 combined_threshold: parseFloat(document.getElementById('thr_combined').value),
-                max_deep_analysis: parseInt(document.getElementById('thr_maxdeep').value),
                 aggregation_limit: document.getElementById('aggLimit').value || null,
             };
             try {
@@ -840,12 +828,10 @@
             } catch (e) { alert('Failed to apply: ' + e); }
         }
 
-        function presetThresholds(rel, ent, comb, maxDeep) {
+        function presetThresholds(rel, ent, comb) {
             setSlider('thr_relevance', 'lbl_relevance', rel);
             setSlider('thr_entity', 'lbl_entity', ent);
             setSlider('thr_combined', 'lbl_combined', comb);
-            document.getElementById('thr_maxdeep').value = maxDeep;
-            document.getElementById('lbl_maxdeep').textContent = maxDeep;
             applyThresholds();
         }
 

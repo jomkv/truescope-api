@@ -62,9 +62,10 @@ class VerifyController:
         self.executor = ThreadPoolExecutor(max_workers=2)
 
         # Scale analysis limits to provide more comprehensive results (Territorial/Complex claims)
-        self.MAX_DEEP_ANALYSIS = 25
         self.AGGREGATION_LIMIT = 3
-
+        self.DB_RETRIEVE_LIMIT = 20
+        self.NLI_CONFIDENCE_GATE = 0.60
+        self.UNCERTAINTY_THRESHOLD = 0.80
 
     @staticmethod
     def normalize_text(text: str, lowercase: bool = True, strip_punctuation: bool = False) -> str:
@@ -787,11 +788,9 @@ class VerifyController:
         processed_doc_ids = set()
         tasks = []
 
-        # Search DB: always retrieve top 20 candidates regardless of MAX_DEEP_ANALYSIS.
-        # MAX_DEEP_ANALYSIS only limits how many get full NLI/remarks processing.
-        DB_RETRIEVE_LIMIT = 20
+
         factcheck_results = self.find_claims_with_articles(
-            claim_embedding, DB_RETRIEVE_LIMIT, exclude_doc_ids=exclude_doc_ids
+            claim_embedding, self.DB_RETRIEVE_LIMIT, exclude_doc_ids=exclude_doc_ids
         )
 
         # Process FC results
@@ -814,7 +813,7 @@ class VerifyController:
 
         if not exclude_articles:
             news_results = self.find_news_articles(
-                claim_embedding, DB_RETRIEVE_LIMIT
+                claim_embedding, self.DB_RETRIEVE_LIMIT
             )
 
             for article, similarity_score, chunk_texts in news_results:
@@ -1154,13 +1153,12 @@ class VerifyController:
             
             # Entropy threshold: 0.80 normalized for typical XNLI distributions.
             # If the model is confused (flat logits), the result is unreliable noise.
-            UNCERTAINTY_THRESHOLD = 0.80
             
             if nli_label == NLILabel.NEUTRAL and not is_strong_context:
                  result["skip_reason"].append("Article is neutrally related (different event/topic)")
                  meets_relevance_gate = False
-            elif nli_uncertainty > UNCERTAINTY_THRESHOLD and not is_strong_context:
-                 result["skip_reason"].append(f"NLI uncertainty too high (entropy {nli_uncertainty:.2f} > {UNCERTAINTY_THRESHOLD})")
+            elif nli_uncertainty > self.UNCERTAINTY_THRESHOLD and not is_strong_context:
+                 result["skip_reason"].append(f"NLI uncertainty too high (entropy {nli_uncertainty:.2f} > {self.UNCERTAINTY_THRESHOLD})")
                  meets_relevance_gate = False
 
             # --- Topical Precision Guard ---
@@ -1185,10 +1183,9 @@ class VerifyController:
             # confident in its classification, don't score this article at all.
             # A low-confidence NLI result is worse than no result — it introduces
             # noise that can swing the final verdict incorrectly in either direction.
-            NLI_CONFIDENCE_GATE = 0.60
-            if nli_score < NLI_CONFIDENCE_GATE and meets_relevance_gate and not is_strong_context:
+            if nli_score < self.NLI_CONFIDENCE_GATE and meets_relevance_gate and not is_strong_context:
                 result["skip_reason"].append(
-                    f"NLI confidence too low ({nli_score:.2f} < {NLI_CONFIDENCE_GATE}) — unreliable signal"
+                    f"NLI confidence too low ({nli_score:.2f} < {self.NLI_CONFIDENCE_GATE}) — unreliable signal"
                 )
                 meets_relevance_gate = False
             elif meets_relevance_gate:
@@ -1254,8 +1251,8 @@ class VerifyController:
         claim_embedding = await loop.run_in_executor(
             self.executor, self.embedding_service.embed_text, core_claim_for_stream
         )
-        factcheck_results = self.find_claims_with_articles(claim_embedding, 20)
-        news_results = self.find_news_articles(claim_embedding, 20)
+        factcheck_results = self.find_claims_with_articles(claim_embedding, self.DB_RETRIEVE_LIMIT)
+        news_results = self.find_news_articles(claim_embedding, self.DB_RETRIEVE_LIMIT)
 
         search_hits = []
         for claim, article, _, chunk_texts in factcheck_results:

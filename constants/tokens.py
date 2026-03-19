@@ -1,3 +1,4 @@
+import spacy
 # Generic entity terms that should not dominate partial entity matching
 ENTITY_GENERIC_TOKENS = {
     # Weather descriptors
@@ -81,18 +82,18 @@ ENTITY_GENERIC_TOKENS = {
     "year", "years", "data", "report", "claims", "claim",
 }
 
+# Initialize a blank English model to access default stopwords
+# This is fast as it doesn't load any model weights
+nlp = spacy.blank("en")
+
 # Common English stopwords/noise words to exclude from topical relevance points
-COMMON_STOPWORDS = {
-    "is", "are", "was", "were", "be", "been", "being",
-    "has", "have", "had", "do", "does", "did",
-    "the", "a", "an", "this", "that", "these", "those",
-    "and", "but", "or", "not", "for", "with", "from", "at", "by", "of", "to", "in", "on",
-    "it", "he", "she", "they", "we", "you", "i", "my", "his", "her", "their", "our",
-    "who", "which", "what", "can", "will", "would", "should", "all", "any", "some", "most",
-    "percent", "percentage", "rate", "rates",
-    "against", "under", "over", "after", "before", "around", "between", "through",
-    "say", "says", "said", "claiming", "claim", "claims", "report", "reported",
-}
+# We combine spaCy's defaults with domain-specific terms (metrics, reporting verbs)
+COMMON_STOPWORDS = nlp.Defaults.stop_words.union({
+    "percent", "percentage", "rate", "rates", "level", "levels",
+    "amount", "value", "total", "average", "number", "numbers",
+    "claiming", "claim", "claims", "report", "reported",
+    "say", "says", "said"
+})
 
 EVENT_MARKERS = {
     "super", "typhoon", "tropical", "storm", "depression", "bagyo", "bagyong",
