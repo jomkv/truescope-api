@@ -1,0 +1,1908 @@
+[
+  {
+    "id": 1,
+    "claim": "The National Bureau of Investigation (NBI) confirmed in June 2024 that the fingerprints of suspended Bamban Mayor Alice Guo match those of Chinese national Guo Hua Ping.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "Rappler",
+      "PNA",
+      "GMA News",
+      "Philstar",
+      "Manila Bulletin"
+    ],
+    "note": "Verified by multiple state and independent sources in June 2024. This claim provides specific entities that prevent the retrieval of irrelevant international conflict data."
+  },
+  {
+    "id": 2,
+    "claim": "The BRP Sierra Madre was intentionally grounded at Ayungin Shoal in 1999 to assert Philippine sovereignty.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "Manila Bulletin"
+    ]
+  },
+  {
+    "id": 3,
+    "claim": "Donald Trump claimed that 90% of all Christmas goods sold in the U.S. are manufactured in China.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PolitiFact",
+      "FactCheck.org"
+    ]
+  },
+  {
+    "id": 4,
+    "claim": "A claim states that the Philippines is ranked as the most disaster-prone country in the world for 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 5,
+    "claim": "The Philippine government implemented a mandatory SIM card registration act in 2023-2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 6,
+    "claim": "The US Supreme Court ruled that presidents have immunity from prosecution for official acts.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "Snopes",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 7,
+    "claim": "The US officially re-joined the Paris Agreement on climate change under the Biden administration.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "Snopes",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 8,
+    "claim": "President Marcos Jr. stated that the Philippines will not give up an 'inch' of its territory to any foreign power.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "Manila Standard"
+    ]
+  },
+  {
+    "id": 9,
+    "claim": "The Philippine Bureau of Internal Revenue implemented a 1% withholding tax on online platform sellers starting in 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "GMA News",
+      "Manila Bulletin"
+    ]
+  },
+  {
+    "id": 10,
+    "claim": "Haitian migrants in Springfield, Ohio, were reportedly eating the pets of local residents in 2024.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PolitiFact",
+      "Snopes",
+      "FactCheck.org"
+    ]
+  },
+  {
+    "id": 11,
+    "claim": "President Ferdinand Marcos Jr. was caught on video using illegal substances in a leaked 'polvoron' packet.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Rappler FC",
+      "VERA Files FC",
+      "Tsek.ph"
+    ]
+  },
+  {
+    "id": 12,
+    "claim": "Senator Risa Hontiveros was imprisoned in June 2025 for bribing witnesses against Apollo Quiboloy.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "VERA Files",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 13,
+    "claim": "Vice President Sara Duterte claimed she never utilized Confidential and Intelligence Funds during her first year in office.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Rappler FC",
+      "Philstar FC"
+    ]
+  },
+  {
+    "id": 14,
+    "claim": "Senator Rodante Marcoleta claimed that 'there was no West Philippine Sea' during a House inquiry on disinformation.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "Rappler FC"
+    ]
+  },
+  {
+    "id": 15,
+    "claim": "Donald Trump claimed that crime in Venezuela has dropped by 72% because they sent their criminals to the US.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PolitiFact",
+      "FactCheck.org"
+    ]
+  },
+  {
+    "id": 16,
+    "claim": "A video claims that electricity prices in the Philippines will be free starting January 2026.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Rappler FC",
+      "Tsek.ph"
+    ]
+  },
+  {
+    "id": 17,
+    "claim": "JD Vance claimed that Kamala Harris 'wants to ban gas stoves' in US homes.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PolitiFact",
+      "FactCheck.org"
+    ]
+  },
+  {
+    "id": 18,
+    "claim": "A claim states that the Philippine national debt was completely wiped out by the end of 2024.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Philstar FC",
+      "Rappler FC"
+    ]
+  },
+  {
+    "id": 19,
+    "claim": "The Philippine Bureau of Internal Revenue clarified that no new 'internet transaction tax' exists.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "GMA News",
+      "Manila Bulletin"
+    ]
+  },
+  {
+    "id": 20,
+    "claim": "Donald Trump claimed that the Biden administration 'stole' FEMA money for hurricane recovery to spend on housing migrants.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 21,
+    "claim": "A viral graphic claims that the K-12 program will be replaced by a mandatory 2-year military service in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Rappler FC",
+      "Tsek.ph"
+    ]
+  },
+  {
+    "id": 22,
+    "claim": "A social media post alleges that the Philippines is building a secret nuclear weapon facility.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "VERA Files FC",
+      "Rappler FC"
+    ]
+  },
+  {
+    "id": 23,
+    "claim": "A video shows a Chinese vessel firing a missile at a Philippine resupply boat in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "VERA Files FC",
+      "Tsek.ph"
+    ]
+  },
+  {
+    "id": 24,
+    "claim": "The International Criminal Court (ICC) issued an arrest warrant specifically for Vice President Sara Duterte regarding the Philippine drug war investigation.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Rappler FC",
+      "VERA Files FC",
+      "GMA News"
+    ],
+    "note": "While legal proceedings against Rodrigo Duterte progressed in 2025, sources confirm no such warrant existed for the Vice President as of late 2025. The DOJ officially denied receiving any such notice."
+  },
+  {
+    "id": 25,
+    "claim": "A photo from 2024 shows Senator Risa Hontiveros and dismissed Mayor Alice Guo taking a friendly selfie, proving they are personal friends.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Rappler FC",
+      "VERA Files FC",
+      "GMA News"
+    ],
+    "note": "Verified as a digitally manipulated image. The original 2022 photo featured a different individual who was not Alice Guo."
+  },
+  {
+    "id": 26,
+    "claim": "The Philippines officially inaugurated the Panguil Bay Bridge, the longest sea-crossing bridge in Mindanao, in September 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "Manila Bulletin",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 27,
+    "claim": "The first delivery of the BrahMos supersonic cruise missile system arrived in the Philippines in April 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 28,
+    "claim": "The US Federal Reserve implemented a 50-basis point interest rate cut in September 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes"
+    ]
+  },
+  {
+    "id": 29,
+    "claim": "Apollo Quiboloy was taken into custody in September 2024 following a police operation at the KOJC compound in Davao City.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Rappler"
+    ]
+  },
+  {
+    "id": 30,
+    "claim": "The Philippines and Japan signed a Reciprocal Access Agreement (RAA) in July 2024 to strengthen defense cooperation.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "Philstar",
+      "Manila Standard"
+    ]
+  },
+  {
+    "id": 31,
+    "claim": "Former Senator Leila de Lima was acquitted of her final drug-related charge in June 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "Rappler",
+      "Philstar",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 32,
+    "claim": "The Maharlika Investment Fund (MIF) was signed into law by President Ferdinand Marcos Jr. in July 2023.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "Official Gazette",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 33,
+    "claim": "The Philippines recorded a GDP growth rate of 5.6% for the full year of 2023.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "PSA",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 34,
+    "claim": "Joe Biden officially withdrew from the 2024 US Presidential race in July 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes"
+    ]
+  },
+  {
+    "id": 35,
+    "claim": "The World Risk Report 2024 ranked the Philippines as the country with the highest disaster risk globally.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "Philstar",
+      "Manila Bulletin"
+    ]
+  },
+  {
+    "id": 36,
+    "claim": "The Philippine government officially banned POGOs during the 2024 State of the Nation Address.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Manila Standard"
+    ]
+  },
+  {
+    "id": 37,
+    "claim": "A viral video shows President Marcos Jr. ordering the military to declare war on China in October 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "VERA Files FC",
+      "Rappler FC",
+      "PNA"
+    ],
+    "note": "Verified as an AI-manipulated 'deepfake' audio clip using the President's voice."
+  },
+  {
+    "id": 38,
+    "claim": "Project 2025 mandates that the US government will terminate the National Weather Service in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact",
+      "Snopes"
+    ],
+    "note": "The document suggests commercializing some functions but does not mandate the termination of the agency."
+  },
+  {
+    "id": 39,
+    "claim": "The Bureau of Labor Statistics (BLS) admitted to 'rigging' the 2024 jobs data to favor the Biden administration.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact"
+    ],
+    "note": "A downward revision of 818,000 jobs was a routine benchmark adjustment based on tax records, not an admission of fraud."
+  },
+  {
+    "id": 40,
+    "claim": "A viral graphic claims that the 1934 Murillo Velarde map has been declared 'invalid' by the Philippine government in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "VERA Files FC",
+      "PNA",
+      "GMA News"
+    ],
+    "note": "The map remains a cornerstone of the Philippines' historical claim in the West Philippine Sea."
+  },
+  {
+    "id": 41,
+    "claim": "Vice President Sara Duterte was officially disqualified from the 2028 presidential race in August 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Rappler FC",
+      "GMA News",
+      "Philstar"
+    ],
+    "note": "As of late 2025, no such disqualification order has been issued by the COMELEC."
+  },
+  {
+    "id": 42,
+    "claim": "The Hollywood sign in Los Angeles was burned down during the 2025 California wildfires.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Snopes",
+      "FactCheck.org"
+    ],
+    "note": "Images showing the sign on fire were confirmed to be AI-generated."
+  },
+  {
+    "id": 43,
+    "claim": "Official reports from the DBM show that the 2025 National Budget contains 'blank check' pages for discretionary spending.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "Manila Bulletin",
+      "VERA Files FC"
+    ],
+    "note": "The DBM confirmed every page of the budget is audited and accounted for; the claim stems from a misinterpretation of document formatting."
+  },
+  {
+    "id": 44,
+    "claim": "A video shows Elon Musk announcing a partnership with Ramon Ang for a new cryptocurrency investment for Filipinos.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "VERA Files FC",
+      "GMA News"
+    ],
+    "note": "Verified as a deepfake scam using AI-generated audio and video."
+  },
+  {
+    "id": 45,
+    "claim": "The US government approved a law in 2024 to pay reparations of $50,000 to every immigrant residing in the country.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 46,
+    "claim": "The Philippines has officially withdrawn from the Enhanced Defense Cooperation Agreement (EDCA) in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "Manila Standard",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 47,
+    "claim": "The Department of Education (DepEd) confirmed that Grade 11 and 12 will be abolished starting school year 2025-2026.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "Rappler FC",
+      "GMA News"
+    ],
+    "note": "DepEd has officially denied this, stating the K-12 program remains in place."
+  },
+  {
+    "id": 48,
+    "claim": "A viral post claims that the BOC started charging a ₱5,000 tax for every Balikbayan box regardless of its content value.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "Manila Bulletin",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 50,
+    "claim": "A claim states that the Philippine national debt was completely wiped out by the end of 2024.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Philstar FC",
+      "Rappler FC"
+    ]
+  },
+  {
+    "id": 51,
+    "claim": "The Philippine Supreme Court unanimously declared the Articles of Impeachment against Vice President Sara Duterte unconstitutional in July 2025.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "GMA News",
+      "PNA",
+      "Philstar"
+    ],
+    "note": "The SC ruled that the articles violated the 'one-year rule' and the right to due process."
+  },
+  {
+    "id": 52,
+    "claim": "President Ferdinand Marcos Jr. reported in his 2024 SONA that the government had completed over 5,500 flood control projects.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "Official Gazette",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 53,
+    "claim": "Donald Trump claimed that 100% of the price of his newly imposed reciprocal tariffs is paid by the exporting foreign countries.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact"
+    ],
+    "note": "Economists and trade data show that tariffs are largely paid by domestic importers and consumers through higher prices."
+  },
+  {
+    "id": 54,
+    "claim": "The Philippine Senate issued an arrest warrant for Apollo Quiboloy in March 2024 for refusing to attend hearings on alleged human rights abuses.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "Rappler",
+      "PNA",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 55,
+    "claim": "A viral claim states that the US government found 145,000 'lost' migrant children in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PolitiFact",
+      "FactCheck.org"
+    ],
+    "note": "Fact-checkers found this to be a misinterpretation of HHS data regarding 'unaccompanied minors' who could not be reached via follow-up calls, not that they are 'missing' or 'lost'."
+  },
+  {
+    "id": 56,
+    "claim": "The Philippine Bureau of Internal Revenue (BIR) mandated that all online sellers must register their businesses regardless of income level to implement the withholding tax.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "GMA News",
+      "PNA",
+      "Manila Bulletin"
+    ],
+    "note": "While those earning below 500k are exempt from the tax itself, registration is a requirement for all commercial online activities."
+  },
+  {
+    "id": 57,
+    "claim": "Donald Trump claimed that Tylenol usage during pregnancy is scientifically proven to be a primary cause of autism.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact"
+    ],
+    "note": "The FDA and major medical associations have stated that studies do not show a causal link between acetaminophen and autism."
+  },
+  {
+    "id": 58,
+    "claim": "The 2025 Philippine midterm elections were rescheduled to November 2026 by a new law signed in early 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Philstar"
+    ],
+    "note": "Only the Barangay and SK Elections were rescheduled; the National and Local Midterm elections proceeded in May 2025."
+  },
+  {
+    "id": 59,
+    "claim": "The US national debt reached a level equivalent to over $110,000 per person in the United States by 2025.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes",
+      "USAFacts"
+    ]
+  },
+  {
+    "id": 60,
+    "claim": "A claim states that Sen. Risa Hontiveros was jailed for bribing witnesses in the Quiboloy case in June 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "VERA Files FC",
+      "Tsek.ph",
+      "Rappler FC"
+    ],
+    "note": "This was a fabricated YouTube narrative; Hontiveros was never arrested or charged with bribery."
+  },
+  {
+    "id": 61,
+    "claim": "The US Bureau of Labor Statistics (BLS) report for October 2024 showed a gain of only 12,000 jobs.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact",
+      "Bureau of Labor Statistics"
+    ]
+  },
+  {
+    "id": 62,
+    "claim": "Vice President Sara Duterte claimed that her father, Rodrigo Duterte, never threatened victims during his presidency.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Philstar FC",
+      "Rappler FC"
+    ],
+    "note": "Public records and televised speeches contain numerous instances of the former president issuing threats against drug suspects and critics."
+  },
+  {
+    "id": 63,
+    "claim": "The Philippine Supreme Court ruled in 2024 that 'red-tagging' threatens the right to life, liberty, and security.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Philstar"
+    ],
+    "note": "This was the first time the court officially defined and ruled on the dangers of red-tagging in a dedicated case."
+  },
+  {
+    "id": 64,
+    "claim": "Donald Trump claimed that US real GDP growth in 2025 was the highest in American history.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact"
+    ],
+    "note": "Federal estimates showed real GDP growth at 2.2% in 2025, which is lower than many previous years and recent growth rates under the prior administration."
+  },
+  {
+    "id": 65,
+    "claim": "A video alleges that the Philippine government has officially rejoined the International Criminal Court (ICC) in June 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "VERA Files FC",
+      "GMA News"
+    ],
+    "note": "As of late 2025, the Philippines has not rejoined the ICC, and no executive order for re-entry has been signed."
+  },
+  {
+    "id": 67,
+    "claim": "A claim states that the US government officially began paying 'arrest bonuses' to ICE agents in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes"
+    ],
+    "note": "The program was briefly proposed but was officially scrapped before implementation."
+  },
+  {
+    "id": 68,
+    "claim": "The Philippine Department of Public Works and Highways (DPWH) Secretary Manuel Bonoan resigned in August 2024 amid a flood control scandal.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Manila Bulletin"
+    ]
+  },
+  {
+    "id": 69,
+    "claim": "A viral post claims that President Marcos Jr. issued an order to seize all private properties in Davao City in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "VERA Files FC",
+      "Tsek.ph"
+    ],
+    "note": "No such order exists; the claim was part of a disinformation campaign during political tensions with the Duterte family."
+  },
+  {
+    "id": 70,
+    "claim": "The US Federal Government shutdown of late 2025 lasted for 43 days.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact",
+      "Washington Post"
+    ]
+  },
+  {
+    "id": 71,
+    "claim": "A claim states that the Philippine government is giving ₱50,000 to every citizen who registers for a 'Maharlika Card' in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "Rappler FC",
+      "Tsek.ph"
+    ],
+    "note": "This is a phishing scam; there is no such card or cash distribution linked to the Maharlika Investment Fund."
+  },
+  {
+    "id": 73,
+    "claim": "A video shows Vice President Sara Duterte being arrested by ICC agents at a Davao airport in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Rappler FC",
+      "VERA Files FC",
+      "GMA News"
+    ],
+    "note": "The video was digitally altered; the ICC has no enforcement power to arrest individuals on Philippine soil directly, and no such event occurred."
+  },
+  {
+    "id": 74,
+    "claim": "The Philippine government directed PhilHealth to return ₱60 billion in excess funds to the national treasury in 2024-2025.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Philstar"
+    ],
+    "note": "This was a highly debated move that resulted in a Supreme Court ruling to halt further transfers."
+  },
+  {
+    "id": 75,
+    "claim": "A claim suggests that the 2024-2025 anti-corruption protests in the Philippines were funded by the CIA.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Rappler FC",
+      "VERA Files FC"
+    ],
+    "note": "No evidence was ever produced to support this; the protests were largely organized by local civil society and student groups."
+  },
+  {
+    "id": 76,
+    "claim": "The Philippines signed a trilateral maritime agreement with the US and Japan in 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Rappler"
+    ]
+  },
+  {
+    "id": 77,
+    "claim": "A viral graphic claims that the US government has banned all TikTok use for citizens starting November 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Snopes",
+      "PolitiFact"
+    ],
+    "note": "While there are federal bans on government devices and ongoing legal battles regarding a divestiture law, no blanket ban for all citizens took effect in Nov 2025."
+  },
+  {
+    "id": 78,
+    "claim": "The Philippine government officially launched a program to replace all traditional jeepneys with electric vehicles by 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "DOTr"
+    ],
+    "note": "This refers to the Public Utility Vehicle Modernization Program (PUVMP) which had multiple deadlines through 2024 and 2025."
+  },
+  {
+    "id": 79,
+    "claim": "A claim states that Donald Trump abolished all federal taxes on social security benefits in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact"
+    ],
+    "note": "While this was a campaign promise, no such legislation had been passed or implemented by November 2025."
+  },
+  {
+    "id": 80,
+    "claim": "The Philippine Department of Justice (DOJ) recommended the filing of qualified human trafficking charges against Alice Guo in 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Rappler"
+    ]
+  },
+  {
+    "id": 81,
+    "claim": "A video shows a 'secret meeting' between Leni Robredo and President Marcos Jr. in Naga City in 2025.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Philstar"
+    ],
+    "note": "The two met publicly in Naga on February 21, 2025, during an event; it was not a 'secret' meeting as portrayed in some viral posts."
+  },
+  {
+    "id": 82,
+    "claim": "The US poverty rate saw a significant increase in 2024 following the expiration of the expanded child tax credit.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "Census Bureau"
+    ]
+  },
+  {
+    "id": 83,
+    "claim": "A claim states that the Philippine government has officially renamed the 'South China Sea' to 'Marcos Sea' in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "VERA Files FC"
+    ],
+    "note": "The official name remains 'West Philippine Sea' for the areas within the EEZ; no such renaming occurred."
+  },
+  {
+    "id": 84,
+    "claim": "The Philippines and Vietnam signed a maritime cooperation agreement in January 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Manila Bulletin"
+    ]
+  },
+  {
+    "id": 85,
+    "claim": "A viral post claims that the US government is now requiring 'Digital Health IDs' for all domestic travel as of 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 86,
+    "claim": "The Philippine 2025 National Budget was officially signed into law in December 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "DBM"
+    ]
+  },
+  {
+    "id": 87,
+    "claim": "A claim suggests that the US Supreme Court has ruled that individual states can legally secede from the Union in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Snopes",
+      "PolitiFact"
+    ],
+    "note": "The court has long held that the Union is indissoluble, and no new ruling has changed this."
+  },
+  {
+    "id": 88,
+    "claim": "The Philippines recorded an inflation rate of 3.3% in November 2024.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PSA",
+      "PNA",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 89,
+    "claim": "A video claims that the Chinese military has successfully landed troops on Pag-asa Island in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "VERA Files FC"
+    ],
+    "note": "The AFP has repeatedly denied such claims; the island remains under Philippine control with no such invasion occurring."
+  },
+  {
+    "id": 90,
+    "claim": "The US unemployment rate reached 4.3% in January 2026.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "Bureau of Labor Statistics"
+    ]
+  },
+  {
+    "id": 91,
+    "claim": "A claim states that the Philippine government has officially legalized the use of medical marijuana in October 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Philstar"
+    ],
+    "note": "While bills have progressed through the House, it had not been signed into law or legalized by October 2025."
+  },
+  {
+    "id": 92,
+    "claim": "The Philippines became the first Asian country to establish a dedicated 'Department of Migrant Workers' in 2022-2023.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Official Gazette"
+    ]
+  },
+  {
+    "id": 93,
+    "claim": "A viral graphic alleges that the US government is seizing all Bitcoin holdings of private citizens in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes"
+    ]
+  },
+  {
+    "id": 94,
+    "claim": "The Philippine government officially reopened the Bataan Nuclear Power Plant for testing in early 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Department of Energy"
+    ],
+    "note": "The government has expressed interest in nuclear power and conducted studies, but the plant remains inactive and was not reopened for testing."
+  },
+  {
+    "id": 95,
+    "claim": "The US and India announced a historic trade deal in early 2025.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "WhiteHouse.gov",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 96,
+    "claim": "A claim states that the Philippine government has abolished the 'Freedom of Information' (FOI) program in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "PCO"
+    ]
+  },
+  {
+    "id": 97,
+    "claim": "The Philippines officially withdrew from the United Nations in 2025 over disagreements regarding human rights reports.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "VERA Files FC"
+    ],
+    "note": "The Philippines remains a member of the UN and has not initiated a withdrawal process."
+  },
+  {
+    "id": 98,
+    "claim": "Donald Trump claimed that crime in the US dropped by record numbers in his first year of the second term.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact"
+    ],
+    "note": "Official data showed that crime rates remained relatively stable or saw only marginal changes, and were not at record lows during that specific period."
+  },
+  {
+    "id": 99,
+    "claim": "The Philippine Bureau of Customs (BOC) exceeded its revenue collection goal for the year 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 100,
+    "claim": "A viral post claims that the 'Big One' earthquake has been officially scheduled by PHIVOLCS for December 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "PHIVOLCS"
+    ],
+    "note": "Earthquakes cannot be predicted or scheduled; PHIVOLCS has repeatedly warned against such hoaxes."
+  },
+  {
+    "id": 101,
+    "claim": "The Philippine Statistics Authority confirmed that the country's headline inflation slowed to 2.3 percent in September 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "PSA",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 102,
+    "claim": "The United States Bureau of Labor Statistics reported that the economy added only 12,000 jobs in October 2024, the lowest growth since late 2020.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact",
+      "Bureau of Labor Statistics"
+    ]
+  },
+  {
+    "id": 103,
+    "claim": "The Department of Justice (DOJ) confirmed that dismissed Mayor Alice Guo is facing multiple counts of money laundering involving billions of pesos in POGO-linked funds.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Rappler"
+    ]
+  },
+  {
+    "id": 104,
+    "claim": "The U.S. Federal Reserve implemented a second interest rate cut of 25 basis points in November 2024 following its larger September cut.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes",
+      "Wall Street Journal"
+    ]
+  },
+  {
+    "id": 105,
+    "claim": "The Philippine government officially launched the 'eGov PH' super app to centralize government services and digital IDs.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DICT",
+      "Manila Bulletin"
+    ]
+  },
+  {
+    "id": 106,
+    "claim": "The Bangko Sentral ng Pilipinas (BSP) reduced the Reserve Requirement Ratio (RRR) for major banks to 7 percent in late 2024 to boost liquidity.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "BSP",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 108,
+    "claim": "The Department of Migrant Workers (DMW) successfully repatriated over 500 Filipinos from Lebanon in 2024 due to rising regional tensions.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DMW",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 109,
+    "claim": "The 'Public Utility Vehicle Modernization Program' (PUVMP) reached an 80 percent consolidation rate for jeepneys and UV Express units in 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DOTr",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 110,
+    "claim": "The Philippines and the European Union officially resumed negotiations for a free trade agreement in 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DTI",
+      "Manila Standard"
+    ]
+  },
+  {
+    "id": 111,
+    "claim": "The Philippine National Police (PNP) reported a 10 percent decrease in 'focus crimes' (index crimes) nationwide for the first half of 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 112,
+    "claim": "President Biden officially pardoned his son Hunter Biden for federal tax and gun-related crimes in December 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes"
+    ]
+  },
+  {
+    "id": 113,
+    "claim": "The Department of Agriculture implemented a 'Rice-for-All' program selling subsidized rice at ₱45 per kilo in select markets.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Manila Bulletin"
+    ]
+  },
+  {
+    "id": 114,
+    "claim": "The United States and China conducted a significant prisoner swap in late 2024 involving Mark Swidan, Kai Li, and John Leung.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "U.S. State Department"
+    ]
+  },
+  {
+    "id": 115,
+    "claim": "The Philippine government signed the 'Self-Reliant Defense Posture (SRDP) Revitalization Act' to prioritize local defense manufacturing.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DND",
+      "Official Gazette"
+    ]
+  },
+  {
+    "id": 116,
+    "claim": "A 2024 audit of the Department of Public Works and Highways (DPWH) confirmed that thousands of flood control projects were completed during the current administration.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DPWH",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 117,
+    "claim": "The Bureau of Internal Revenue (BIR) removed the ₱500 annual registration fee (ARF) requirement for all businesses starting in 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "BIR",
+      "PNA",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 118,
+    "claim": "The U.S. Census Bureau reported that real median household income rose for the first time since 2019 in its 2024 data release.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "Census Bureau"
+    ]
+  },
+  {
+    "id": 119,
+    "claim": "The Philippines secured a 'Blue Flag' certification for several beaches in 2024, recognizing high environmental and safety standards.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DOT",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 120,
+    "claim": "The 2025 General Appropriations Act (GAA) was signed into law by President Marcos Jr. on December 30, 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DBM",
+      "Official Gazette"
+    ]
+  },
+  {
+    "id": 121,
+    "claim": "The Philippine government implemented a 12 percent Value-Added Tax (VAT) on foreign digital service providers in late 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "BIR",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 122,
+    "claim": "The U.S. government announced a formal ban on the use of Kaspersky Lab software in all critical infrastructure sectors in 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "Department of Commerce"
+    ]
+  },
+  {
+    "id": 123,
+    "claim": "The Bangko Sentral ng Pilipinas launched the 'Coin Deposit Machine' (CoDM) project to encourage the recirculation of idle coins.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "BSP",
+      "PNA",
+      "Manila Bulletin"
+    ]
+  },
+  {
+    "id": 124,
+    "claim": "The Department of Science and Technology (DOST) successfully launched the MULA (Multispectral Unit for Land Assessment) satellite project.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DOST",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 125,
+    "claim": "The Philippines officially established the 'Cybersecurity Command' under the Armed Forces of the Philippines (AFP) in 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "AFP",
+      "DND"
+    ]
+  },
+  {
+    "id": 126,
+    "claim": "The U.S. Department of Justice filed a historic antitrust lawsuit against Google regarding its dominance in search and advertising in 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 127,
+    "claim": "The Philippine government officially integrated the 'Bawal Bastos' Law into the orientation for all public transport drivers.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "LTFRB",
+      "PCW"
+    ]
+  },
+  {
+    "id": 128,
+    "claim": "The World Bank approved a $500 million loan to the Philippines in 2024 to support climate change resilience and disaster risk management.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "World Bank",
+      "PNA",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 129,
+    "claim": "The Philippine Bureau of Customs (BOC) successfully implemented the 'Automated Inventory Management System' for all bonded warehouses.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "BOC",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 130,
+    "claim": "The U.S. government officially designated MS-13 as a foreign terrorist organization in a series of 2024-2025 legal rulings.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "Department of Justice"
+    ]
+  },
+  {
+    "id": 131,
+    "claim": "The Philippine Department of Health (DOH) declared a nationwide dengue outbreak in 2024 following a significant spike in cases.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DOH",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 132,
+    "claim": "The 'Kadiwa sa Pasko' program was expanded in 2024 to provide cheaper agricultural products across all regions.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "Official Gazette"
+    ]
+  },
+  {
+    "id": 133,
+    "claim": "The U.S. Federal Trade Commission (FTC) issued a final rule banning most non-compete clauses in employment contracts in 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "FTC"
+    ]
+  },
+  {
+    "id": 134,
+    "claim": "The Philippines and South Korea officially elevated their bilateral relations to a 'Strategic Partnership' in 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DFA",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 135,
+    "claim": "The Philippine government launched the 'Luzon Economic Corridor' project in partnership with the U.S. and Japan.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Manila Standard"
+    ]
+  },
+  {
+    "id": 136,
+    "claim": "The U.S. Supreme Court ruled in 2024 that the government cannot ban ghost gun kits under the current Gun Control Act.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes"
+    ]
+  },
+  {
+    "id": 137,
+    "claim": "The Philippine Bureau of Fisheries and Aquatic Resources (BFAR) implemented a seasonal three-month ban on sardine fishing in the Visayan Sea.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "BFAR",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 138,
+    "claim": "The 'Regional Comprehensive Economic Partnership' (RCEP) was officially ratified and implemented by the Philippines in 2023-2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DTI",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 139,
+    "claim": "The U.S. government announced a formal probe into foreign-made connected vehicles for national security risks in 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 140,
+    "claim": "The Philippine Department of Energy (DOE) issued a 'Notice to Proceed' for the first floating solar farm project in Laguna Lake.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DOE",
+      "Manila Bulletin"
+    ]
+  },
+  {
+    "id": 141,
+    "claim": "The Philippine Senate passed the 'Anti-Financial Account Scamming Act' (AFASA) to combat money mules and phishing.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Official Gazette"
+    ]
+  },
+  {
+    "id": 142,
+    "claim": "The U.S. officially reached its target of producing 20 million barrels of crude oil per day in 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "EIA"
+    ]
+  },
+  {
+    "id": 143,
+    "claim": "The Philippine government officially integrated 'Financial Literacy' into the Grade 1 to 10 curriculum in 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DepEd",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 144,
+    "claim": "The Philippines secured a historic $1 billion investment from the U.S. Presidential Trade and Investment Mission in March 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "DTI"
+    ]
+  },
+  {
+    "id": 145,
+    "claim": "The U.S. Centers for Disease Control and Prevention (CDC) simplified its COVID-19 isolation guidance in 2024 to match other respiratory viruses.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "CDC"
+    ]
+  },
+  {
+    "id": 146,
+    "claim": "The Philippine National Bank (PNB) celebrated its 108th anniversary in 2024 as one of the oldest private banks in the country.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "Manila Bulletin"
+    ]
+  },
+  {
+    "id": 147,
+    "claim": "The Philippines-Japan 'Reciprocal Access Agreement' (RAA) allows for the deployment of troops for joint training on each other's soil.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DND",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 148,
+    "claim": "The U.S. National Highway Traffic Safety Administration (NHTSA) mandated automatic emergency braking for all new passenger cars by 2029.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "FactCheck.org",
+      "NHTSA"
+    ]
+  },
+  {
+    "id": 149,
+    "claim": "The Philippine government officially launched the 'National Fiber Backbone' Phase 1 connecting Laoag and Quezon City in 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "DICT",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 150,
+    "claim": "The Philippine Amusement and Gaming Corporation (PAGCOR) announced the total wind-down of all POGOs by the end of 2024.",
+    "ground_truth": "TRUE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Manila Standard"
+    ]
+  },
+  {
+    "id": 155,
+    "claim": "A viral graphic claims that Donald Trump's children will lose their U.S. citizenship under his plan to end birthright citizenship.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes"
+    ],
+    "note": "Trump's plan targets future children of non-citizens; it does not retroactively strip citizenship from those already born in the U.S."
+  },
+  {
+    "id": 156,
+    "claim": "The Philippine Bureau of Customs confirmed that a 'special luxury tax' of 50 percent was added to all Balikbayan boxes in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "Manila Bulletin",
+      "GMA News"
+    ],
+    "note": "The BOC denied any such new tax, stating existing exemption rules for OFWs still apply."
+  },
+  {
+    "id": 157,
+    "claim": "The US government officially abolished the Social Security Administration and transferred all funds to the national defense budget in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 158,
+    "claim": "A video shows President Marcos Jr. confirming that the Philippines will become a state of the United States in 2026.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "VERA Files FC",
+      "Rappler FC",
+      "Tsek.ph"
+    ],
+    "note": "Verified as an AI-generated 'deepfake' video."
+  },
+  {
+    "id": 159,
+    "claim": "The International Criminal Court issued an arrest warrant for Risa Hontiveros in 2025 for her investigation into the KOJC.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "VERA Files FC",
+      "Rappler FC"
+    ],
+    "note": "The ICC has no jurisdiction or basis for such a warrant; the claim is a social media fabrication."
+  },
+  {
+    "id": 161,
+    "claim": "The Philippine Department of Education officially replaced the teaching of Philippine History with 'Global Citizenship' in the MATATAG curriculum.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "Rappler FC",
+      "GMA News"
+    ],
+    "note": "DepEd clarified that Philippine History remains integrated across multiple grade levels in the new curriculum."
+  },
+  {
+    "id": 162,
+    "claim": "Donald Trump claimed that the New Orleans attacker in 2024 was an illegal immigrant released by the Biden administration.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact"
+    ],
+    "note": "The suspect in the specific New Orleans case cited was confirmed to be a U.S. citizen."
+  },
+  {
+    "id": 163,
+    "claim": "The Philippine government officially legalized medical marijuana for all ages in October 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Philstar"
+    ],
+    "note": "Legislation has moved through the House, but it has not been signed into law as of the cutoff."
+  },
+  {
+    "id": 165,
+    "claim": "The Philippine government confirmed that the 'Big One' earthquake will happen on December 15, 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PHIVOLCS",
+      "PNA",
+      "GMA News"
+    ],
+    "note": "PHIVOLCS has repeatedly stated that earthquakes cannot be predicted for specific dates."
+  },
+  {
+    "id": 166,
+    "claim": "President Biden pardoned Jimmy Carter and George H.W. Bush for 'unspecified crimes' in late 2024.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes"
+    ],
+    "note": "No such pardons occurred; Biden only pardoned his son, Hunter."
+  },
+  {
+    "id": 167,
+    "claim": "The Department of Information and Communications Technology officially shut down TikTok in the Philippines in October 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "Philstar"
+    ],
+    "note": "DICT denied any such ban, stating no legal basis exists for a total shutdown."
+  },
+  {
+    "id": 168,
+    "claim": "A viral post claims that the Maharlika Investment Fund was used to pay for the private wedding of a Malacañang official.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "VERA Files FC",
+      "Tsek.ph"
+    ],
+    "note": "The MIC and Palace denied this, stating funds are subject to strict auditing and have not been used for private expenses."
+  },
+  {
+    "id": 169,
+    "claim": "Donald Trump claimed that Oregon fire trucks fighting California blazes were delayed for days due to 'mandatory emissions testing'.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes"
+    ],
+    "note": "Fire agencies confirmed no such delays or testing mandates occurred for emergency vehicles."
+  },
+  {
+    "id": 170,
+    "claim": "The Philippines officially withdrew from the United Nations in 2025 to protest human rights reports.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "DFA"
+    ],
+    "note": "The Philippines remains an active member of the UN; no such withdrawal process has been initiated."
+  },
+  {
+    "id": 171,
+    "claim": "A video shows Vice President Sara Duterte and Senator Imee Marcos announcing their 2028 presidential tandem in November 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Rappler FC",
+      "VERA Files FC"
+    ],
+    "note": "Verified as a manipulated video using old footage from unrelated press conferences."
+  },
+  {
+    "id": 172,
+    "claim": "Project 2025 proposes that the U.S. government will cease all social security payments to citizens over 70 starting in 2026.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 173,
+    "claim": "The Philippine Bureau of Internal Revenue implemented a 50 percent tax on all digital subscriptions like Netflix and Spotify.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "BIR",
+      "GMA News"
+    ],
+    "note": "The Digital Service Tax is a standard 12 percent VAT, not 50 percent."
+  },
+  {
+    "id": 174,
+    "claim": "Donald Trump claimed that the U.S. government 'stole' $770 payments meant for fire victims to spend on housing migrants.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact"
+    ],
+    "note": "The $770 payments were one specific form of federal aid (SDA), and no funding was 'stolen' or diverted as claimed."
+  },
+  {
+    "id": 175,
+    "claim": "The Philippine government officially renamed the Philippines to 'Maharlika' in October 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "Official Gazette",
+      "GMA News"
+    ],
+    "note": "While the idea has been discussed by some politicians, no such law has been passed or signed."
+  },
+  {
+    "id": 176,
+    "claim": "The U.S. government confirmed that all gas-powered cars will be illegal to drive starting January 1, 2026.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 177,
+    "claim": "A viral graphic claims that the 1934 Murillo Velarde map has been 'retired' and replaced by a new map favoring China.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "NAMRIA",
+      "VERA Files FC",
+      "PNA"
+    ],
+    "note": "The map remains a vital historical document for the Philippines' maritime claims."
+  },
+  {
+    "id": 178,
+    "claim": "The International Criminal Court issued an arrest warrant specifically for VP Sara Duterte on November 15, 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Rappler FC",
+      "VERA Files FC",
+      "GMA News"
+    ],
+    "note": "No such warrant has been issued; the claim is a social media fabrication."
+  },
+  {
+    "id": 179,
+    "claim": "The Philippine government officially abolished the 'Sangguniang Kabataan' (SK) program in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "DILG",
+      "GMA News"
+    ],
+    "note": "The SK remains an active part of the local government structure; no such abolition occurred."
+  },
+  {
+    "id": 180,
+    "claim": "A video shows a Chinese aircraft carrier docked at Manila Bay in November 2025 as part of a 'surrender agreement'.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "AFP",
+      "PNA",
+      "VERA Files FC"
+    ],
+    "note": "The video was confirmed to be a CGI-manipulated clip."
+  },
+  {
+    "id": 181,
+    "claim": "Project 2025 mandates that all public school teachers in the U.S. must be armed with guns in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 182,
+    "claim": "The Philippine Bureau of Internal Revenue confirmed that all GCash and Maya transactions are now taxed at 20 percent.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "BIR",
+      "PNA",
+      "GMA News"
+    ],
+    "note": "Digital wallet transactions are not subject to a specific 20 percent tax; standard VAT and merchant rules apply."
+  },
+  {
+    "id": 183,
+    "claim": "Donald Trump claimed that the Biden administration 'deleted' 5 million social security numbers in 2024 to hide migrant data.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes"
+    ],
+    "note": "A misinterpretation of SSA administrative data regarding inactive or duplicate accounts."
+  },
+  {
+    "id": 184,
+    "claim": "The Philippine government officially legalized 'vigilante justice' for drug crimes in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "DOJ",
+      "Philstar"
+    ]
+  },
+  {
+    "id": 185,
+    "claim": "The U.S. government officially declared that Bitcoin is now the national currency in November 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 186,
+    "claim": "A viral post claims that the LRT-1 and LRT-2 lines were permanently closed in 2025 due to 'mass structural failure'.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "LRTA",
+      "PNA",
+      "GMA News"
+    ],
+    "note": "Both lines remain operational; maintenance is ongoing but no 'mass failure' occurred."
+  },
+  {
+    "id": 187,
+    "claim": "The Philippine government officially abolished the 'Pantawid Pamilyang Pilipino Program' (4Ps) in October 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "DSWD",
+      "PNA",
+      "GMA News"
+    ],
+    "note": "The 4Ps remains a flagship social welfare program; no such abolition was signed."
+  },
+  {
+    "id": 188,
+    "claim": "Donald Trump claimed that the U.S. government spent $1 trillion on 'climate reparations' in 2024.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact"
+    ],
+    "note": "U.S. international climate finance is a small fraction of the claimed amount and is not categorized as 'reparations'."
+  },
+  {
+    "id": 189,
+    "claim": "A video shows Vice President Sara Duterte and her family fleeing the Philippines for Russia in November 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Rappler FC",
+      "VERA Files FC"
+    ],
+    "note": "Verified as a manipulated video using old travel footage; the VP remained in the country for public events."
+  },
+  {
+    "id": 190,
+    "claim": "Project 2025 proposes that all U.S. children must work in factories for 2 years before attending high school.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 191,
+    "claim": "The Philippine government officially renamed the West Philippine Sea to the 'South China Sea' in 2025 to appease China.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "DFA",
+      "GMA News"
+    ],
+    "note": "The official name remains West Philippine Sea as per A.O. No. 29."
+  },
+  {
+    "id": 192,
+    "claim": "The U.S. government officially banned all forms of meat consumption starting in 2026.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 193,
+    "claim": "A viral graphic claims that the Philippine national debt was completely settled in late 2024 using the 'Tallano Gold'.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "Philstar FC",
+      "Rappler FC",
+      "VERA Files FC"
+    ],
+    "note": "Treasury records confirm the debt still exists; the 'Tallano Gold' story remains a myth with no legal or financial proof."
+  },
+  {
+    "id": 194,
+    "claim": "Donald Trump claimed that crime in the U.S. dropped by 90 percent in 2025 due to his new policies.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "PolitiFact"
+    ],
+    "note": "Official crime data showed no such drastic 90 percent decline."
+  },
+  {
+    "id": 195,
+    "claim": "The Philippine Department of Health officially confirmed that COVID-19 vaccines cause permanent magnetic properties in the skin.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "DOH",
+      "Rappler FC",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 196,
+    "claim": "The U.S. government officially abolished the First Amendment in 2025 to 'protect national security'.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes",
+      "PolitiFact"
+    ]
+  },
+  {
+    "id": 197,
+    "claim": "A viral post claims that the Philippines is building a secret tunnel to Taiwan for 'covert military operations' in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "AFP",
+      "VERA Files FC"
+    ]
+  },
+  {
+    "id": 198,
+    "claim": "The Philippine government officially legalized the ownership of military-grade tanks for private citizens in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNP",
+      "PNA",
+      "GMA News"
+    ]
+  },
+  {
+    "id": 199,
+    "claim": "Donald Trump claimed that the U.S. government 'deleted' the history of the 2020 election from all library archives in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "FactCheck.org",
+      "Snopes"
+    ]
+  },
+  {
+    "id": 200,
+    "claim": "The Philippine government officially abolished the 'Freedom of Information' (FOI) program in 2025.",
+    "ground_truth": "FALSE",
+    "sources": [
+      "PNA",
+      "GMA News",
+      "PCO"
+    ]
+  }
+]

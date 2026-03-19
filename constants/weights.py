@@ -37,6 +37,6 @@ SOURCE_BIAS_SPECTRUM_MAP: dict[SourceBias, int] = {
 
 NLI_LABEL_WEIGHT_MAP: dict[NLILabel, float] = {
     NLILabel.SUPPORT: 1.0,
-    NLILabel.NEUTRAL: 0.5,
+    NLILabel.NEUTRAL: 0.0,
     NLILabel.REFUTE: -1.0,
 }

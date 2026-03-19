@@ -20,4 +20,5 @@ class ArticleResultModel(BaseModel):
     source: str
     source_type: str
     source_bias: SourceBias
-    chunk_texts: str
+    chunk_texts: str | None
+    is_aggregated: bool = False
