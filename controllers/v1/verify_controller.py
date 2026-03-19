@@ -43,7 +43,7 @@ class VerifyController:
 
         # Stricter thresholds for article filtering
         self.RELEVANCE_THRESHOLD = 0.3
-        self.ENTITY_THRESHOLD = 0.4
+        self.ENTITY_THRESHOLD = 0.6
 
         # Weights for combined relevance score (60% semantic, 40% entity)
         self.SEMANTIC_WEIGHT = 0.6
@@ -285,7 +285,7 @@ class VerifyController:
         Tokenize input text into a set of words using the standard regex pattern.
         Words must be at least 2 characters, letters or hyphens.
         """
-        return set(re.findall(r"\b[a-zA-Z][a-zA-Z\-]{1,}\b", text))
+        return set(re.findall(r"(?:[a-zA-Z]\.){2,}|[\w']+", text))
 
     def calculate_entity_match_score(
         self, claim_entities: list[str], text: str, article_title: str = ""
@@ -319,9 +319,9 @@ class VerifyController:
 
         for entity in claim_entities:
             # Normalize the entity string
-            entity_lower = self.normalize_text(entity)
+            entity_norm = self.normalize_text(entity)
             # Tokenize the entity into words
-            entity_tokens_all = self.tokenize_text(entity_lower)
+            entity_tokens_all = self.tokenize_text(entity_norm)
 
             # Identify specific (non-generic) tokens in the entity
             specific_entity_tokens = [
@@ -338,8 +338,8 @@ class VerifyController:
 
             # Match as whole word in text or title
             if re.search(
-                r"\b" + re.escape(entity_lower) + r"\b", text_norm
-            ) or re.search(r"\b" + re.escape(entity_lower) + r"\b", article_title_norm):
+                r"\b" + re.escape(entity_norm) + r"\b", text_norm
+            ) or re.search(r"\b" + re.escape(entity_norm) + r"\b", article_title_norm):
                 matches += entity_weight
                 continue
 
@@ -550,6 +550,10 @@ class VerifyController:
         bias_weight = SOURCE_BIAS_WEIGHT_MAP.get(source_bias, 0.7)
         nli_label_weight = NLI_LABEL_WEIGHT_MAP.get(nli_label, 0.5)
 
+        # NEUTRAL-specific handling: dampen verdict impact if NLI is neutral
+        if nli_label == NLILabel.NEUTRAL:
+            verdict_weight = verdict_weight * 0.4  # Reduce impact
+
         return round(nli_score * bias_weight * verdict_weight * nli_label_weight, 2)
 
     async def verify_claim(
@@ -598,7 +602,7 @@ class VerifyController:
 
         # Search for both FC and news articles
         factcheck_results = self.find_claims_with_articles(
-            claim_embedding, self.MAX_DEEP_ANALYSIS, exclude_doc_ids=exclude_doc_ids
+            claim_embedding, 6, exclude_doc_ids=exclude_doc_ids
         )
 
         # Process FC results
@@ -664,8 +668,9 @@ class VerifyController:
         stats = self.stats_service.calculate_stats(filtered_results)
 
         return {
-            "skipped": skipped,
-            "results": filtered_results,
+            "skipped": [skip.model_dump() for skip in skipped],
+            "entities": claim_entities,
+            "results": [result.model_dump() for result in filtered_results],
             "overall_verdict": stats["overall_verdict"],
             "bias_divergence": stats["bias_divergence"],
             "truth_confidence_score": stats["truth_confidence_score"],
