@@ -34,3 +34,6 @@ NEGATION_WORD_PATTERNS = [
     # "no [noun]" used at start — e.g. "No proof Marcos..."
     (r"^no\s+(proof|evidence|sign|indication|record|footage|video|photo)\s+", True),
 ]
+
+# Individual negation tokens for keyword-based polarity checking
+NEGATION_TOKENS = {"not", "no", "never", "none", "cannot", "isnt", "hasnt", "didnt", "wasnt"}
