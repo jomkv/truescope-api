@@ -113,6 +113,34 @@ class FeedbackTrainer:
                 if not claim or not text:
                     continue
 
+                # NEW: Strip negations before building NLI pairs. 
+                # This ensures the model learns the relationship between the CORE assertion 
+                # and the evidence, preventing "double negative" corruption from your feedback.
+                core_claim = claim
+                import re
+                from constants.negations import NEGATION_PHRASES, NEGATION_WORD_PATTERNS
+
+                # 1. Lead Phrases
+                for phrase in NEGATION_PHRASES:
+                    if core_claim.lower().strip().startswith(phrase):
+                        core_claim = core_claim[len(phrase):].strip()
+                        if core_claim:
+                            core_claim = core_claim[0].upper() + core_claim[1:]
+                        break
+                
+                # 2. Inline Words
+                for pattern, _ in NEGATION_WORD_PATTERNS:
+                    m = re.search(pattern, core_claim, flags=re.IGNORECASE)
+                    if m:
+                        if m.groups():
+                            core_claim = re.sub(pattern, r"\1", core_claim, flags=re.IGNORECASE)
+                        else:
+                            core_claim = re.sub(pattern, "", core_claim, flags=re.IGNORECASE)
+                        core_claim = re.sub(r"\s+", " ", core_claim).strip()
+                        if core_claim:
+                            core_claim = core_claim[0].upper() + core_claim[1:]
+                        break
+
                 related = float(fb.get("related", 0.5))
                 grade = float(fb.get("grade", 0.0))
 
@@ -125,7 +153,7 @@ class FeedbackTrainer:
 
                 # Use the full text as hypothesis (truncate to first 300 chars for NLI)
                 hypothesis = text[:300].strip()
-                pairs.append((claim, hypothesis, label))
+                pairs.append((core_claim, hypothesis, label))
 
         # Balance classes to prevent severe overfitting, but allow a soft ratio (e.g. 3:1)
         # to utilize more of the available data.

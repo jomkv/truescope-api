@@ -1,0 +1,920 @@
+{
+  "accuracy": 0.82,
+  "correct": 82,
+  "total": 100,
+  "skipped": 0,
+  "results": [
+    {
+      "claim": "Donald Trump supports marriage equality.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1746,
+      "id": 1,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "The United States has a high voter turnout rate.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2199,
+      "id": 2,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Tech billionaire Elon Musk does not have a transgender daughter.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.565,
+      "id": 3,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Democratic presidential candidate Kamala Harris is not a gun owner.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5282,
+      "id": 4,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Vice President Kamala Harris has biological children.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4726,
+      "id": 5,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Former U.S. President Donald Trump never donated to Kamala Harris' campaign.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5327,
+      "id": 6,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Elon Musk is not an immigrant to the United States.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7128,
+      "id": 7,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Vice President Leni Robredo never said that the Philippines has 1,700 islands.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5363,
+      "id": 8,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Vice President Leni Robredo has not repeatedly beaten Ferdinand Marcos Jr. in election-related contests.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1823,
+      "id": 9,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "The Philippines did not have a promising local electronic and automotive industry that was cut short by the declaration of Martial Law.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5568,
+      "id": 10,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Water rates in Manila, Philippines, were not raised up to 845 percent when a subsidiary of the World Bank became a partial owner.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2253,
+      "id": 11,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Incest is not legal in New Jersey and Rhode Island.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1102,
+      "id": 12,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Lifeguards are not present at Olympic swimming competitions.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4416,
+      "id": 13,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "The EU ‘divorce bill’ will not cost £42 billion.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3756,
+      "id": 14,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Twitter is not banned in Iran.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4506,
+      "id": 15,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "New York does not have among the highest tax burdens of any state in the nation",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1798,
+      "id": 16,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Most Americans do not support the legalization of marijuana.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5809,
+      "id": 17,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "The Trump administration did not work to free 5,000 Taliban prisoners.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.6237,
+      "id": 18,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "Knife crime has not soared to a record high.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6323,
+      "id": 19,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "The USA is not the largest investor in the UK economy.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.8167,
+      "id": 20,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Robert F. Kennedy Jr. was not a heroin addict from his teenage years into adulthood.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7384,
+      "id": 21,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "U.S. President Donald Trump did not pardon Ross Ulbricht, the creator of dark web marketplace Silk Road.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7659,
+      "id": 22,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "The founder of The Hershey Chocolate Company, Milton Hershey, did not found a boarding school for orphaned boys.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3831,
+      "id": 23,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "In 2025, streaming service Spotify did not run recruitment advertisements for U.S. Immigration and Customs Enforcement.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2058,
+      "id": 24,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Labour will not introduce a “retirement tax”.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.3809,
+      "id": 25,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "The image does not authentically depict Sean \"Diddy\" Combs with Prince Harry and Kanye \"Ye\" West.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.3848,
+      "id": 26,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "Labour is not the first political party to reach parity in terms of men and women MPs.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5824,
+      "id": 27,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Project 2025 would not defund K-12 schools.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4908,
+      "id": 28,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Donald Trump does not want to terminate the Affordable Care Act.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.2265,
+      "id": 29,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "Texas does not produce a lot more wind energy than California.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5522,
+      "id": 30,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Project 2025 would not “end Head Start.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2461,
+      "id": 31,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "“One in 5 Americans has not lost a family member to gun violence.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4513,
+      "id": 32,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Sen. Marco Rubio does not have \"one of the worst attendance records in the Senate.\"",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6228,
+      "id": 33,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "West Virginia is not home to zero billionaires.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1751,
+      "id": 34,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "100,000 Americans did not die of an overdose in a single year.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.642,
+      "id": 35,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "If Roe is overturned, Wisconsin does not have a law on the books that would immediately make abortion a crime.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1822,
+      "id": 36,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Bill Gates did not tell us about the coronavirus in 2015.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3584,
+      "id": 37,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "North Carolina is not one of four states that hasn't opened gyms.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3237,
+      "id": 38,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Murders this year have not spiked 27% in Philadelphia.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1407,
+      "id": 39,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "Abigail Spanberger has not voted with Nancy Pelosi over 90% of the time.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5868,
+      "id": 40,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "The oil and gas industry does not comprise 35% of the Texas economy.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6158,
+      "id": 41,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Former U.S. Vice President Richard Mentor Johnson was not a slave owner married to one of his slaves and father of two children with her.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1457,
+      "id": 42,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "“34% of Wisconsin renters are not at risk of eviction.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5101,
+      "id": 43,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "For younger people, seasonal flu is not “in many cases” a deadlier virus than COVID-19",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0868,
+      "id": 44,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "In the last 10 years, more than half of adults in the U.S. received a flu shot.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.72,
+      "id": 45,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "COVID-19 has not killed more North Carolinians in a year than the flu has in 10 years.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1143,
+      "id": 46,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "Virginia does not rank “in the bottom third of states” in administering the COVID-19 vaccine.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1531,
+      "id": 47,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "The Texas power grid is part of the US power grid because they wanted to avoid federal regulation.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5835,
+      "id": 48,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "The United States is not the only industrialized, modernized country that does not already have a paid family medical leave program in place.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.504,
+      "id": 49,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "Residents of New York state do not pay the highest taxes in the nation.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6689,
+      "id": 50,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "There is starvation in Gaza.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3677,
+      "id": 1,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "Kilmar Armando Abrego Garcia “was not a convicted MS-13 gang member.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.8867,
+      "id": 2,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Malia Obama did not receive $2.2 million in funds from USAID.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.8273,
+      "id": 3,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Elon Musk has not just acquired Boeing.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.2926,
+      "id": 4,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Actor Tom Hanks did not die in a fatal car accident.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.8013,
+      "id": 5,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Elon Musk is a citizen of the United States.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1568,
+      "id": 6,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Dave McCormick is not fully against abortion.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.445,
+      "id": 7,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Travis Kelce did not endorse Kamala Harris.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.6933,
+      "id": 8,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "NASA did not announce in September 2025 that it had found life on Mars.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1373,
+      "id": 9,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "Greeting card companies did not invent Valentine's Day.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.6757,
+      "id": 10,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "In Indiana, who you voted for is not public record.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1819,
+      "id": 11,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Inflation was not the highest in U.S. history under President Joe Biden.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.855,
+      "id": 12,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "U.S. President George Washington did not have wooden teeth.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.5528,
+      "id": 13,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "NASA was not established before the U.S.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.5964,
+      "id": 14,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "The Simpsons did not predict Pope Francis’ 2025 death.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.8408,
+      "id": 15,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Elon Musk did not buy Google.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.3747,
+      "id": 16,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Bill Gates will not be implanting digital IDs in newborns in Kenya.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.524,
+      "id": 17,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Kamala Harris does not want to defund the police.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.7497,
+      "id": 18,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Switzerland did not ban mammograms.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.6539,
+      "id": 19,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "COVID-19 vaccines cannot kill elderly people.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5545,
+      "id": 20,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "Si Ferdinand Marcos Sr. ay hindi ang pinakamayamang tao sa mundo.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6796,
+      "id": 21,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "The death penalty in the Philippines has not been approved in the Senate.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.6868,
+      "id": 22,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "The Yellowstone supervolcano is not due for an eruption any time soon.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.8374,
+      "id": 23,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "The Philippines does not have a Chinook helicopter factory.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.7993,
+      "id": 24,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Russian President Vladimir Putin has not declared war on the United States.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.5285,
+      "id": 25,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Filipino actor and singer Billy Crawford has not died.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.7991,
+      "id": 26,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "The Philippine Navy has not yet received two new warships from South Korea.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.473,
+      "id": 27,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "China has not launched an attack against Taiwan.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.3007,
+      "id": 28,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Former senator and international boxing champ Manny Pacquiao is not promoting an online gambling app.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.8058,
+      "id": 29,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Joel Villanueva has not resigned from the Philippine Senate",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.7264,
+      "id": 30,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Kris Aquino has not been bewitched and has not passed away.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.5008,
+      "id": 31,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "The West Philippine Sea does appear in any maps.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4867,
+      "id": 32,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "Pfizer has cured any type of disease",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6636,
+      "id": 33,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "The Philippines did not bomb China’s monster ship in the West Philippine Sea",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.3075,
+      "id": 34,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "President Ferdinand Marcos Jr. did not steal the country’s gold reserves",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.7908,
+      "id": 35,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Harry Roque has not been ordered imprisoned by the Senate",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.742,
+      "id": 36,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Rachel Maddow did not announce in July 2025 that she is having a baby via surrogacy.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.7004,
+      "id": 37,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Marine animal trainer Jessica Radcliffe was not attacked and killed by an orca in front of a large crowd.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.7416,
+      "id": 38,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "U.S. President-elect Donald Trump has been convicted of felonies.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2687,
+      "id": 39,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "The radiation from Bluetooth earbuds, such as AirPods, does not cause brain cancer.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.8451,
+      "id": 40,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Elon Musk did not launch a new pregnancy robot.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.8605,
+      "id": 41,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Former President Donald Trump would not force states to monitor women's pregnancies.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.5958,
+      "id": 42,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Melania Trump did not declare that she wants a divorce.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.7002,
+      "id": 43,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Senate President Chiz Escudero was not removed from his post due to corruption.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.761,
+      "id": 44,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Former President Donald Trump did lose the 2020 election.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6054,
+      "id": 45,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "Iran and the Philippines are not forming an alliance against China.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.5129,
+      "id": 46,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Russian President Vladimir Putin has not declared war on the United States.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.5285,
+      "id": 47,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Reports show U.S. President-elect Donald Trump has no deal ready to buy Greenland.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.8646,
+      "id": 48,
+      "is_correct": false,
+      "skipped": false
+    },
+    {
+      "claim": "Inflation was not the highest in U.S. history under President Joe Biden.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.855,
+      "id": 49,
+      "is_correct": true,
+      "skipped": false
+    },
+    {
+      "claim": "Kamala Harris did not use a teleprompter during her town hall appearance on Univision.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.7534,
+      "id": 50,
+      "is_correct": true,
+      "skipped": false
+    }
+  ],
+  "metrics": {
+    "Support": {
+      "precision": 0.82,
+      "recall": 0.82,
+      "f1-score": 0.82
+    },
+    "Refute": {
+      "precision": 0.82,
+      "recall": 0.82,
+      "f1-score": 0.82
+    }
+  }
+}

@@ -32,6 +32,11 @@ COMMON_PLURAL_SUFFIXES = ["s", "es", "ies"]
 # Antonym pairs for detecting polarity mismatches in quantitative/directional claims
 ANTONYM_PAIRS = [
     ("high", "low"),
+    ("highest", "lowest"),
+    ("higher", "lower"),
+    ("top", "bottom"),
+    ("high", "bottom"),
+    ("low", "top"),
     ("increase", "decrease"),
     ("increased", "decreased"),
     ("increasing", "decreasing"),

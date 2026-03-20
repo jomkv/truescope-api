@@ -20,7 +20,7 @@ from constants.fuzzy import (
     MIN_STEM_MATCH_LENGTH,
 )
 from constants.tokens import ENTITY_GENERIC_TOKENS, COMMON_STOPWORDS, EVENT_MARKERS, STOP_TITLES, DAMP_KEYWORDS
-from constants.negations import NEGATION_PHRASES, NEGATION_WORD_PATTERNS
+from constants.negations import NEGATION_PHRASES, NEGATION_WORD_PATTERNS, NEGATION_TOKENS
 from dateparser.search import search_dates
 from services import (
     EmbeddingService,
@@ -601,13 +601,24 @@ class VerifyController:
 
         # 2. Check for inline negation WORDS/PATTERNS
         for pattern, _ in NEGATION_WORD_PATTERNS:
-            if re.search(pattern, claim_lower):
-                # We return is_negated=False here because we are NOT stripping the word.
-                # If we don't strip it, the NLI model will see the "not" and correctly
-                # return REFUTE when compared to a positive fact-check.
-                # The compute_final_score logic already handles REFUTE correctly.
-                # Flipping the sign again at the end would cause a double-negative error.
-                return claim, False
+            match = re.search(pattern, claim, flags=re.IGNORECASE)
+            if match:
+                # We strip the negation using regex substitution.
+                # If the pattern has an auxiliary verb group (e.g. "was not" -> "was"), 
+                # we use \1 to keep the verb. Otherwise we just strip the whole pattern.
+                if match.groups():
+                    core = re.sub(pattern, r"\1", claim, flags=re.IGNORECASE)
+                else:
+                    core = re.sub(pattern, "", claim, flags=re.IGNORECASE)
+                
+                # Cleanup: remove double spaces and trim
+                core = re.sub(r"\s+", " ", core).strip()
+                
+                # Capitalize first letter
+                if core:
+                    core = core[0].upper() + core[1:]
+                
+                return core, True
 
         # No negation found
         return claim, False
@@ -625,10 +636,11 @@ class VerifyController:
             if (a in t1_low and b in t2_low) or (b in t1_low and a in t2_low):
                 return True
 
-        # 2. Negation Mismatch (one has 'not'/'no', the other doesn't)
-        negations = {"not", "no", "never", "none"}
-        has_neg1 = any(n in t1_low for n in negations)
-        has_neg2 = any(n in t2_low for n in negations)
+        # 2. Negation Mismatch (focused on title/claim to avoid content noise)
+        # We check if one side has a negation and the other doesn't.
+        # This is a fallback for when NLI vocab-overlap causes false support.
+        has_neg1 = any(n in t1_low for n in NEGATION_TOKENS)
+        has_neg2 = any(n in t2_low for n in NEGATION_TOKENS)
         if has_neg1 != has_neg2:
             return True
 
@@ -699,20 +711,26 @@ class VerifyController:
             confidence_factor = nli_score * 0.5  # halve the impact of uncertain NLI
 
         if nli_label == NLILabel.REFUTE:
-            # For REFUTE, the direction is usually opposite the verdict.
-            # TRUE article + REFUTE = user claim is false (-1)
-            # FALSE article + REFUTE = user claim is true (1) -- Double Negative logic.
+            # For REFUTE, the direction is usually opposite the truth.
+            # TRUE article + REFUTE = User is wrong (-1)
+            # FALSE article + REFUTE = User is usually wrong (+1 ? No, tricky)
             
-            # --- WPS False Positive Guard ---
-            # If there is NO topical match (e.g. claim is "China invading" but article is 
-            # about "Philippines attacked China"), then REFUTE * FALSE should NOT flip to positive.
-            # It should stay negative because it's still a debunk of a non-supporting event.
             nli_label_weight = NLI_LABEL_WEIGHT_MAP.get(nli_label, -1.0)
             
-            if verdict_weight < 0 and not has_topical_match:
-                # If negative verdict (FALSE) but no topical match, we force the weight to 
-                # be positive so that POSITIVE * NEGATIVE = NEGATIVE (no flip).
-                nli_label_weight = 1.0 
+            if verdict_weight < 0:
+                # --- Double Negative Guard ---
+                # A FALSE article is a debunking. If the user claim has a TOPICAL match 
+                # (e.g. User: "Marcos coke", Article: "Marcos coke is FALSE"), then NLI REFUTE 
+                # is usually the model noticing the debunking words ("FALSE", "Fake", etc).
+                # To prevent this from flipping the sign to positive (TRUE), we force it 
+                # to stay negative if the topics match.
+                if has_topical_match:
+                    # Force positive nli_label_weight such that (-1) * (+1) = (-1) [STAYS FALSE]
+                    nli_label_weight = 1.0
+                else:
+                    # NO topical match: User is refuting an unrelated lie. 
+                    # This is a legitimate sign flip to positive. [FLIPS TO TRUE]
+                    nli_label_weight = -1.0
 
             return round(confidence_factor * bias_weight * verdict_weight * nli_label_weight, 2)
 
@@ -761,15 +779,16 @@ class VerifyController:
             dict: Dict containing lists of results, each containing article and claim details, NLI results, scores, and skip reasons.
         """
 
-        user_claim_norm = self.normalize_text(user_claim)
         user_claim_for_matching = self.normalize_text(user_claim, lowercase=False)
 
         # --- Stance Detection ---
         # Detect negation in the user claim and extract the core assertion.
         # The core claim is used for embedding/matching so the DB finds related articles
         # (e.g., the debunked FALSE article about the same topic).
-        # If the claim was negated, we flip the final verdict sign at the end.
-        core_claim_for_embedding, is_negated = self.detect_claim_stance(user_claim_for_matching)
+        # We also use the CORE claim for NLI evaluation to ensure logical consistency
+        # when we flip the final sign if is_negated is True.
+        core_claim_text, is_negated = self.detect_claim_stance(user_claim_for_matching)
+        user_claim_core_norm = self.normalize_text(core_claim_text)
 
         # Run embedding and entity extraction in parallel
         loop = asyncio.get_event_loop()
@@ -777,7 +796,7 @@ class VerifyController:
             loop.run_in_executor(
                 self.executor,
                 self.embedding_service.embed_text,
-                core_claim_for_embedding,  # Use core claim (negation stripped) for embedding
+                core_claim_text,  # Use core claim (negation stripped) for embedding
             ),
             loop.run_in_executor(
                 self.executor, self.extract_entities, user_claim_for_matching
@@ -787,7 +806,6 @@ class VerifyController:
         # Process all results
         processed_doc_ids = set()
         tasks = []
-
 
         factcheck_results = self.find_claims_with_articles(
             claim_embedding, self.DB_RETRIEVE_LIMIT, exclude_doc_ids=exclude_doc_ids
@@ -799,7 +817,7 @@ class VerifyController:
                 processed_doc_ids.add(article.doc_id)
                 tasks.append(
                     self.process_result_async(
-                        user_claim_norm=user_claim_norm,
+                        user_claim_norm=user_claim_core_norm,  # Use CORE claim for NLI/Scoring
                         claim_entities=claim_entities,
                         similarity_score=similarity_score,
                         article=article,
@@ -807,6 +825,7 @@ class VerifyController:
                         claim_verdict=claim.verdict,
                         source_bias=article.source_bias,
                         is_factcheck=True,
+                        is_negated=is_negated,  # Pass negation state
                         chunk_texts=chunk_texts,
                     )
                 )
@@ -823,7 +842,7 @@ class VerifyController:
                         continue
                     tasks.append(
                         self.process_result_async(
-                            user_claim_norm=user_claim_norm,
+                            user_claim_norm=user_claim_core_norm,  # Use CORE claim for NLI/Scoring
                             claim_entities=claim_entities,
                             similarity_score=similarity_score,
                             article=article,
@@ -831,6 +850,7 @@ class VerifyController:
                             claim_verdict=None,
                             source_bias=article.source_bias,
                             is_factcheck=False,
+                            is_negated=is_negated,  # Pass negation state
                             chunk_texts=chunk_texts,
                         )
                     )
@@ -888,14 +908,9 @@ class VerifyController:
 
         overall_verdict = stats["overall_verdict"]
 
-        # --- Stance Sign Flip ---
-        # If the user's original claim was negated (e.g., "Marcos was NOT on video..."),
-        # flip the final verdict sign. This implements double-negative logic:
-        #   negated user claim + FALSE-verdict article + NLI SUPPORT
-        #   = raw score: NEGATIVE
-        #   → flip → POSITIVE → correctly classified as TRUE
-        if is_negated and overall_verdict != 0:
-            overall_verdict = -overall_verdict
+        # NOTE: Overall sign-flip for is_negated is now handled at the individual result level 
+        # inside process_result_async to ensure UI consistency (Evidence shows SUPPORT for negated intent).
+        overall_verdict = stats["overall_verdict"]
 
         return {
             "skipped": skipped,
@@ -914,10 +929,11 @@ class VerifyController:
         similarity_score: float,
         article: Article,
         claim_text: str | None,
-        claim_verdict: str | None,
-        source_bias: str,
+        claim_verdict: Verdict | None,
+        source_bias: SourceBias,
         is_factcheck: bool,
-        chunk_texts: str | None,
+        is_negated: bool = False,
+        chunk_texts: str | None = None,
     ) -> ArticleResultModel:
         """
         Asynchronously processes a single claim-article or article result, computing entity match, relevance, NLI, verdict, and remarks.
@@ -1123,16 +1139,28 @@ class VerifyController:
             )
 
             # --- Polarity Guard ---
-            # Overrule NLI if a directional contradiction (High/Low, Win/Loss) is detected.
-            # This prevents common NLI "vocabulary overlap" false positives.
+            # Overrule NLI if a directional contradiction (High/Loss, Support/Against) is detected.
+            # We focus this check on the article title (assertion) vs user claim 
+            # to avoid the "content noise" problem where unrelated negations in the article body 
+            # trigger false refutations.
             if nli_label != NLILabel.REFUTE:
-                if self.is_polarity_mismatch(claim_tokens, article_tokens):
+                if self.is_polarity_mismatch(claim_tokens, title_tokens):
                     nli_label = NLILabel.REFUTE
                     nli_score = 0.8
                     nli_uncertainty = 0.0  # Reset uncertainty to ensure it passes the gate
 
+            # --- Negated UX Refinement ---
+            # If the user's intent was negated (e.g. "not..."), we flip the label 
+            # for display so it reflects support/refutation of their specific query.
+            nli_label_display = nli_label
+            if is_negated:
+                if nli_label == NLILabel.SUPPORT:
+                    nli_label_display = NLILabel.REFUTE
+                elif nli_label == NLILabel.REFUTE:
+                    nli_label_display = NLILabel.SUPPORT
+
             result["nli_result"] = {
-                "relationship": nli_label,
+                "relationship": nli_label_display,
                 "relationship_confidence": nli_score,
                 "relationship_uncertainty": nli_uncertainty,
                 "claim_source": article.source,
@@ -1199,6 +1227,11 @@ class VerifyController:
                     article_content=article.content or "",
                     has_topical_match=bool(topical_matches),
                 )
+                
+                # --- Negated UX Refinement (Score Flip) ---
+                if is_negated and verdict_score != 0:
+                    verdict_score = -verdict_score
+
                 result["verdict"] = verdict_score
         
         # FINAL GATE CHECK: Ensure UI consistency.

@@ -7,7 +7,7 @@ from collections import defaultdict
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 from controllers.v1.verify_controller import VerifyController
 
-DATASET_PATH = os.path.join(os.path.dirname(__file__), "negatedClaims.json")
+DATASET_PATH = os.path.join(os.path.dirname(__file__), "jomTestCases.json")
 # Add timestamp to results to avoid overwriting previous runs
 _timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 RESULTS_PATH = os.path.join(os.path.dirname(__file__), f"test_accuracy_results_{_timestamp}.json")
