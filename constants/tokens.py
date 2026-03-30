@@ -19,6 +19,8 @@ ENTITY_GENERIC_TOKENS = {
     "minister",
     "secretary",
     "representative",
+    "democratic",
+    "senate",
     # Business/organization descriptors
     "company",
     "corporation",
@@ -66,7 +68,7 @@ ENTITY_GENERIC_TOKENS = {
     "air",
     "base",
     # General descriptors
-    "new",
+    "york",
     "old",
     "national",
     "international",
@@ -79,7 +81,8 @@ ENTITY_GENERIC_TOKENS = {
     # Topical/Numerical descriptors
     "percent", "percentage", "rate", "rates", "level", "levels",
     "amount", "value", "total", "average", "number", "numbers",
-    "year", "years", "data", "report", "claims", "claim",
+    "year", "years", "data", "report", "claims", "claim", "car",
+    "trade"
 }
 
 # Initialize a blank English model to access default stopwords
@@ -105,4 +108,4 @@ EVENT_MARKERS = {
 STOP_TITLES = {"president", "vice", "senator", "inc", "corp"}
 
 # Keywords for dampening scores of video/social media debunks
-DAMP_KEYWORDS = {"video", "post", "social media", "tiktok", "facebook", "ai-generated", "manipulated"}
+DAMP_KEYWORDS = {"video", "post", "social media", "tiktok", "facebook", "ai-generated", "manipulated"}

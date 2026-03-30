@@ -17,16 +17,16 @@ def _get_controller():
     return main.verify_controller
 
 
-@router.post("/", response_model=VerifyResultModel)
+@router.post("/")
 async def verify_claim(verify: VerifyClaimModel):
     """
     Verify a claim by finding similar articles and checking if they support or refute it.
     """
     controller = _get_controller()
-    results = await controller.verify_claim(verify.claim)
+    exclude_doc_ids = [verify.exclude_id] if verify.exclude_id is not None else []
+    results = await controller.verify_claim(verify.claim, exclude_doc_ids=exclude_doc_ids)
     entities = controller.extract_entities(verify.claim)
-    timeframe = controller.extract_claim_timeframe(verify.claim)
-    return {"entities": entities, "timeframe": timeframe, **results}
+    return results
 
 
 @router.websocket("/ws")

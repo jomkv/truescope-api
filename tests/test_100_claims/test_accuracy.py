@@ -10,7 +10,9 @@ from controllers.v1.verify_controller import VerifyController
 DATASET_PATH = os.path.join(os.path.dirname(__file__), "jomTestCases.json")
 # Add timestamp to results to avoid overwriting previous runs
 _timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-RESULTS_PATH = os.path.join(os.path.dirname(__file__), f"test_accuracy_results_{_timestamp}.json")
+RESULTS_PATH = os.path.join(
+    os.path.dirname(__file__), f"test_accuracy_results_{_timestamp}.json"
+)
 
 
 def get_score_label(score: float) -> str:
@@ -56,12 +58,16 @@ async def main():
                 if os.path.exists(nli_path):
                     print(f"Loading NLI adapter v{v} for testing...")
                     vc.nli_service.load_adapter(nli_path)
-            
+
             # Load Embedding model
-            emb_log = next((l for l in reversed(logs) if l["model"] == "embeddings"), None)
+            emb_log = next(
+                (l for l in reversed(logs) if l["model"] == "embeddings"), None
+            )
             if emb_log and emb_log["version"] > 0:
                 v = emb_log["version"]
-                emb_path = os.path.join(project_root, f"data/model_adapters/embeddings/v{v}")
+                emb_path = os.path.join(
+                    project_root, f"data/model_adapters/embeddings/v{v}"
+                )
                 if os.path.exists(emb_path):
                     print(f"Loading Embedding model v{v} for testing...")
                     vc.embedding_service.reload_model(emb_path)
@@ -79,11 +85,13 @@ async def main():
     for entry in claims:
         claim_text = entry["claim"]
         # Handle various field names for ground truth in different test versions
-        ground_truth = entry.get("expected_verdict", entry.get("ground_truth", entry.get("Ground_truth")))
+        ground_truth = entry.get(
+            "expected_verdict", entry.get("ground_truth", entry.get("Ground_truth"))
+        )
         claim_id = entry["index"]
         # If the test case specifies a doc_id to exclude, pass it to the search
         exclude_docs = [entry["doc_id"]] if "doc_id" in entry else []
-        
+
         # Perform a full search identical to the live /simulation/verify endpoint
         result = await vc.verify_claim(claim_text, exclude_doc_ids=exclude_docs)
         # Handle skipped evidence
@@ -94,7 +102,6 @@ async def main():
         else:
             system_score = result["overall_verdict"]
             score_label = get_score_label(system_score)
-
 
         ground_truth_norm = normalize_verdict_label(ground_truth)
         is_correct = score_label == ground_truth_norm
@@ -108,6 +115,7 @@ async def main():
                 "claim": claim_text,
                 "ground_truth": ground_truth_norm,
                 "predicted_label": score_label,
+                "result": result,
                 "system_score": system_score,
                 "id": claim_id,
                 "is_correct": is_correct,

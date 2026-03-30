@@ -19,8 +19,18 @@ from constants.fuzzy import (
     ANTONYM_PAIRS,
     MIN_STEM_MATCH_LENGTH,
 )
-from constants.tokens import ENTITY_GENERIC_TOKENS, COMMON_STOPWORDS, EVENT_MARKERS, STOP_TITLES, DAMP_KEYWORDS
-from constants.negations import NEGATION_PHRASES, NEGATION_WORD_PATTERNS, NEGATION_TOKENS
+from constants.tokens import (
+    ENTITY_GENERIC_TOKENS,
+    COMMON_STOPWORDS,
+    EVENT_MARKERS,
+    STOP_TITLES,
+    DAMP_KEYWORDS,
+)
+from constants.negations import (
+    NEGATION_PHRASES,
+    NEGATION_WORD_PATTERNS,
+    NEGATION_TOKENS,
+)
 from dateparser.search import search_dates
 from services import (
     EmbeddingService,
@@ -51,8 +61,8 @@ class VerifyController:
         # Balanced thresholds — fine-tuned embeddings via HITL improve precision,
         # but we keep gates slightly relaxed to catch all genuinely related evidence.
         self.RELEVANCE_THRESHOLD = 0.3
-        self.ENTITY_THRESHOLD = 0.3
-        self.COMBINED_THRESHOLD = 0.4    
+        self.ENTITY_THRESHOLD = 0.6
+        self.COMBINED_THRESHOLD = 0.4
 
         # Weights for combined relevance score (70% semantic, 30% entity)
         self.SEMANTIC_WEIGHT = 0.7
@@ -67,8 +77,16 @@ class VerifyController:
         self.NLI_CONFIDENCE_GATE = 0.60
         self.UNCERTAINTY_THRESHOLD = 0.80
 
+        self.USE_NEGATION_LOGIC = True
+
     @staticmethod
-    def normalize_text(text: str, lowercase: bool = True, strip_punctuation: bool = False) -> str:
+    def strip_punctuation(text: str) -> str:
+        # Punctuation stripping replace with space to preserve token boundaries
+        return re.sub(r"[^\w\s-]", " ", text)
+
+    def normalize_text(
+        self, text: str, lowercase: bool = True, strip_punctuation: bool = False
+    ) -> str:
         """
         Normalize input text for consistent downstream processing.
 
@@ -95,7 +113,7 @@ class VerifyController:
 
         # Optional punctuation stripping replace with space to preserve token boundaries
         if strip_punctuation:
-            text = re.sub(r"[^\w\s-]", " ", text)
+            text = self.strip_punctuation(text)
 
         # Lowercase if requested
         if lowercase:
@@ -156,6 +174,110 @@ class VerifyController:
         }
 
         return article_map
+
+    @staticmethod
+    def extract_non_generic_tokens(
+        tokens: set[str], return_as_set: bool = False
+    ) -> list[str] | set[str]:
+        non_generic_tokens = []
+
+        for t in tokens:
+            tl = t.lower()
+            if (
+                tl not in ENTITY_GENERIC_TOKENS
+                and tl not in COMMON_STOPWORDS
+                and tl not in STOP_TITLES
+                and len(tl) >= 3
+            ):
+                non_generic_tokens.append(t)
+
+        if return_as_set:
+            return set(non_generic_tokens)
+        else:
+            return non_generic_tokens
+
+    def get_categorized_token_matches(
+        self,
+        meaningful_tokens: set[str],
+        combined_tokens: set[str],
+        entity_parts: set[str],
+        token_to_entity_map: dict,
+    ):
+        # Calculate matching tokens with fuzzy/stem support
+        meaningful_matches = set()
+        for ct in meaningful_tokens:
+            if ct in combined_tokens:
+                meaningful_matches.add(ct)
+            else:
+                # Check for stem matches (e.g. Philippine/Philippines)
+                for at in combined_tokens:
+                    if self.is_fuzzy_match(ct, at):
+                        meaningful_matches.add(ct)
+                        break
+
+        # Categorize matches for statistics
+        topical_matches = {
+            t
+            for t in meaningful_matches
+            if t not in entity_parts and t not in ENTITY_GENERIC_TOKENS
+        }
+        descriptor_matches = {
+            t for t in meaningful_matches if t in ENTITY_GENERIC_TOKENS
+        }
+        entity_token_matches = {
+            t
+            for t in meaningful_matches
+            if t in entity_parts and t not in ENTITY_GENERIC_TOKENS
+        }
+
+        # Statistics for the UI
+        full_entity_matches = set()
+        for t in entity_token_matches:
+            if t in token_to_entity_map:
+                full_entity_matches.update(token_to_entity_map[t])
+
+        return (
+            meaningful_matches,
+            topical_matches,
+            descriptor_matches,
+            full_entity_matches,
+        )
+
+    @staticmethod
+    def calculate_persona_noise(
+        topical_assertions,
+        descriptor_matches: set[str],
+        topical_matches: set[str],
+        full_entity_matches: set[str],
+        relevance_points: int,
+        has_specific_entity_token_match: bool,
+    ):
+        # PERSONA PRECISION GUARD:
+        # If the claim has topical assertions (e.g. "biological children"),
+        # an article matching ONLY a persona name (e.g. "Kamala Harris") is considered noise
+        # unless it also matches at least one topical keyword.
+        # However, we exempt "Unique Event" or "Location" entities (Typhoon, Sea, Island)
+        # to ensure 100% coverage for disaster and geopolitical reports.
+        has_topical_assertion = len(topical_assertions) > 0
+        has_event_marker = any(t in EVENT_MARKERS for t in descriptor_matches)
+        distinct_entities_matched = len(full_entity_matches)
+
+        is_persona_noise = (
+            has_topical_assertion
+            and not topical_matches
+            and distinct_entities_matched <= 1
+            and (relevance_points < 3 or not has_specific_entity_token_match)
+            and not has_event_marker
+        )
+
+        # EXCEPTION: If we matched a multi-word entity (e.g. "Sara Duterte"),
+        # it's unlikely to be noise even if topical assertions don't match exactly.
+        if is_persona_noise and distinct_entities_matched == 1:
+            matched_ent = list(full_entity_matches)[0] if full_entity_matches else ""
+            if len(matched_ent.split()) >= 2:
+                is_persona_noise = False
+
+        return is_persona_noise
 
     @staticmethod
     def extract_unique_doc_ids(article_chunks: list[ArticleChunk | Claim]) -> set[str]:
@@ -270,7 +392,7 @@ class VerifyController:
 
         return results[:top_k]
 
-    def extract_entities(self, text: str) -> list[str]:
+    def extract_entities(self, text: str):
         """
         Extracts named entities from the given text using the entity extraction service.
 
@@ -284,18 +406,27 @@ class VerifyController:
 
         # Extract entity names only, exclude label
         entities = [entity[0] for entity in entities_with_label if entity and entity[0]]
+        entity_parts = set()
+        token_to_entity_map = {}
 
         # De-duplicate while preserving order (case-insensitive)
         deduped_entities: list[str] = []
         seen_entities: set[str] = set()
         for entity in entities:
-            norm_entity = self.normalize_text(entity)
-            if not norm_entity or norm_entity in seen_entities:
-                continue
-            seen_entities.add(norm_entity)
-            deduped_entities.append(entity)
+            norm_entity = self.normalize_text(entity, strip_punctuation=True)
+            entity_tokens = self.tokenize_text(norm_entity)
 
-        return deduped_entities
+            for t in entity_tokens:
+                entity_parts.add(t)
+                if t not in token_to_entity_map:
+                    token_to_entity_map[t] = set()
+                token_to_entity_map[t].add(entity)
+
+            if norm_entity and norm_entity not in seen_entities:
+                seen_entities.add(norm_entity)
+                deduped_entities.append(entity)
+
+        return (deduped_entities, entity_parts, token_to_entity_map)
 
     @staticmethod
     def tokenize_text(text: str) -> set[str]:
@@ -330,11 +461,12 @@ class VerifyController:
         for suffix in COMMON_PLURAL_SUFFIXES:
             if t1 + suffix == t2 or t2 + suffix == t1:
                 return True
-            
+
             # Handle -y to -ies (e.g. city -> cities)
             if suffix == "ies":
-                if (t1.endswith("y") and t1[:-1] + "ies" == t2) or \
-                   (t2.endswith("y") and t2[:-1] + "ies" == t1):
+                if (t1.endswith("y") and t1[:-1] + "ies" == t2) or (
+                    t2.endswith("y") and t2[:-1] + "ies" == t1
+                ):
                     return True
 
         # 4. Stem variants (e.g. impeached/impeachment)
@@ -342,16 +474,20 @@ class VerifyController:
         s, l = (t1_l, t2_l) if len(t1_l) < len(t2_l) else (t2_l, t1_l)
         if len(s) >= 4 and l.startswith(s):
             return True
-        
+
         # Check for shared prefix (e.g. "impeach" matches "impeached" and "impeachment")
-        if len(t1_l) >= MIN_STEM_MATCH_LENGTH and len(t2_l) >= MIN_STEM_MATCH_LENGTH and t1_l[:MIN_STEM_MATCH_LENGTH] == t2_l[:MIN_STEM_MATCH_LENGTH]:
+        if (
+            len(t1_l) >= MIN_STEM_MATCH_LENGTH
+            and len(t2_l) >= MIN_STEM_MATCH_LENGTH
+            and t1_l[:MIN_STEM_MATCH_LENGTH] == t2_l[:MIN_STEM_MATCH_LENGTH]
+        ):
             return True
 
         return False
 
     def calculate_entity_match_score(
         self, claim_entities: list[str], text: str, article_title: str = ""
-    ) -> float:
+    ):
         """
         Calculates the entity match score between a list of claim entities and the provided text/article title.
         The score represents the proportion of claim entities found as whole words in the text or title.
@@ -364,9 +500,6 @@ class VerifyController:
         Returns:
             float: Entity match score between 0.0 and 1.0.
         """
-        if not claim_entities:
-            return 0.0
-
         text_norm = self.normalize_text(text, strip_punctuation=True)
         article_title_norm = self.normalize_text(article_title, strip_punctuation=True)
 
@@ -379,18 +512,19 @@ class VerifyController:
         # Combine tokens from both content and title for comparison
         comparison_tokens = text_tokens.union(title_tokens)
 
+        has_specific_entity_token_match = False
+        entity_parts = set()
+
+        if not claim_entities:
+            return (comparison_tokens, has_specific_entity_token_match, 0.0)
+
         for entity in claim_entities:
-            # Normalize the entity string with stripping to match article boundaries
             entity_lower = self.normalize_text(entity, strip_punctuation=True)
-            # Tokenize the entity into words
             entity_tokens_all = self.tokenize_text(entity_lower)
+            entity_parts.update(entity_tokens_all)
 
             # Identify specific (non-generic) tokens in the entity
-            specific_entity_tokens = [
-                token
-                for token in entity_tokens_all
-                if token not in ENTITY_GENERIC_TOKENS and len(token) >= 3
-            ]
+            specific_entity_tokens = self.extract_non_generic_tokens(entity_tokens_all)
 
             # Assign lower weight to generic-only entities, full weight to those with specifics
             entity_weight = (
@@ -399,32 +533,44 @@ class VerifyController:
             total_weight += entity_weight
 
             # Match as whole word in text or title
-            if re.search(
+            matched_whole_text = re.search(
                 r"\b" + re.escape(entity_lower) + r"\b", text_norm
-            ) or re.search(r"\b" + re.escape(entity_lower) + r"\b", article_title_norm):
+            ) or re.search(r"\b" + re.escape(entity_lower) + r"\b", article_title_norm)
+            if matched_whole_text:
                 matches += entity_weight
+                matched_tokens = self.tokenize_text(matched_whole_text.group(0))
+
+                if not has_specific_entity_token_match and any(
+                    token in specific_entity_tokens for token in matched_tokens
+                ):
+                    has_specific_entity_token_match = True
+
                 continue
 
             # Partial token match fallback for incomplete mentions (e.g., "Super Typhoon Uwan" vs "Uwan")
-            if specific_entity_tokens:
-                found_partial = False
-                for set_token in specific_entity_tokens:
-                    # check exact
-                    if set_token in comparison_tokens:
+            if len(specific_entity_tokens) == 0:
+                continue
+
+            found_partial = False
+            for set_token in specific_entity_tokens:
+                # check exact
+                if set_token in comparison_tokens:
+                    found_partial = True
+                    break
+
+                # check fuzzy
+                for comp_token in comparison_tokens:
+                    if self.is_fuzzy_match(set_token, comp_token):
                         found_partial = True
                         break
-                    # check fuzzy
-                    for comp_token in comparison_tokens:
-                        if self.is_fuzzy_match(set_token, comp_token):
-                            found_partial = True
-                            break
-                    if found_partial:
-                        break
-                
-                if found_partial:
-                    matches += 0.7 * entity_weight
 
-        return matches / total_weight if total_weight > 0 else 0.0
+            if found_partial:
+                has_specific_entity_token_match = True
+                matches += 0.7 * entity_weight
+
+        entity_match_score = matches / total_weight if total_weight > 0 else 0.0
+
+        return (comparison_tokens, has_specific_entity_token_match, entity_match_score)
 
     def requires_specific_entity_match(self, claim_entities: list[str]) -> bool:
         """
@@ -449,34 +595,6 @@ class VerifyController:
                     has_specific_token = True
 
         return has_generic_descriptor and has_specific_token
-
-    def has_specific_entity_token_match(
-        self, claim_entities: list[str], text: str, article_title: str = ""
-    ) -> bool:
-        """
-        Checks whether at least one specific (non-generic) claim entity token appears
-        in the comparison text/title.
-        """
-        # Always use robust stripping for matching tokens
-        text_norm = self.normalize_text(text, strip_punctuation=True)
-        article_title_norm = self.normalize_text(article_title, strip_punctuation=True)
-        comparison_tokens = self.tokenize_text(text_norm)
-        comparison_tokens.update(self.tokenize_text(article_title_norm))
-
-        for entity in claim_entities:
-            entity_tokens = self.tokenize_text(self.normalize_text(entity, strip_punctuation=True))
-            specific_tokens = [
-                token
-                for token in entity_tokens
-                if token not in ENTITY_GENERIC_TOKENS and len(token) >= 3
-            ]
-            if any(
-                any(self.is_fuzzy_match(st, ct) for ct in comparison_tokens)
-                for st in specific_tokens
-            ):
-                return True
-
-        return False
 
     @staticmethod
     def build_chunk_text(
@@ -545,21 +663,6 @@ class VerifyController:
 
         return truncated.rsplit(" ", 1)[0].rstrip() + "..."
 
-    def extract_claim_timeframe(self, user_claim: str) -> list[tuple[str, datetime]]:
-        """
-        Extracts temporal references (e.g., dates, periods) from a claim using dateparser.
-
-        Args:
-            claim (str): The user-provided claim to analyze for time expressions.
-
-        Returns:
-            list[tuple[str, datetime]]: List of tuples containing the matched time string and its parsed datetime.
-        """
-
-        # TODO: Still unsure on how to use extracted timeframe on the current logic
-
-        return search_dates(user_claim, settings={"RETURN_TIME_SPAN": True})
-
     def detect_claim_stance(self, claim: str) -> tuple[str, bool]:
         """
         Detects whether a user claim contains an explicit negation/false-stance marker,
@@ -586,14 +689,12 @@ class VerifyController:
                 - core_claim: The claim with negation markers stripped (or original if none).
                 - is_negated: True if a negation pattern was found and stripped.
         """
-        # Negation patterns moved to constants/negations.py
-
         claim_lower = claim.lower().strip()
 
         # 1. Check for leading negation PHRASES first (strip and return)
         for phrase in NEGATION_PHRASES:
             if claim_lower.startswith(phrase):
-                core = claim[len(phrase):].strip()
+                core = claim[len(phrase) :].strip()
                 # Capitalize first letter
                 if core:
                     core = core[0].upper() + core[1:]
@@ -604,20 +705,20 @@ class VerifyController:
             match = re.search(pattern, claim, flags=re.IGNORECASE)
             if match:
                 # We strip the negation using regex substitution.
-                # If the pattern has an auxiliary verb group (e.g. "was not" -> "was"), 
+                # If the pattern has an auxiliary verb group (e.g. "was not" -> "was"),
                 # we use \1 to keep the verb. Otherwise we just strip the whole pattern.
                 if match.groups():
                     core = re.sub(pattern, r"\1", claim, flags=re.IGNORECASE)
                 else:
                     core = re.sub(pattern, "", claim, flags=re.IGNORECASE)
-                
+
                 # Cleanup: remove double spaces and trim
                 core = re.sub(r"\s+", " ", core).strip()
-                
+
                 # Capitalize first letter
                 if core:
                     core = core[0].upper() + core[1:]
-                
+
                 return core, True
 
         # No negation found
@@ -704,49 +805,48 @@ class VerifyController:
         verdict_weight = VERDICT_WEIGHT_MAP.get(verdict, 0.5)
         bias_weight = SOURCE_BIAS_WEIGHT_MAP.get(source_bias, 0.7)
 
+        # NEUTRAL-specific handling: dampen verdict impact if NLI is neutral
+        if nli_label == NLILabel.NEUTRAL:
+            verdict_weight *= 0.4  # Reduce impact
+
         # Dampen impact when NLI confidence is low (< 0.55) to avoid
         # weak NLI signals causing large incorrect swings
         confidence_factor = nli_score
         if nli_score < 0.55:
             confidence_factor = nli_score * 0.5  # halve the impact of uncertain NLI
 
-        if nli_label == NLILabel.REFUTE:
-            # For REFUTE, the direction is usually opposite the truth.
-            # TRUE article + REFUTE = User is wrong (-1)
-            # FALSE article + REFUTE = User is usually wrong (+1 ? No, tricky)
-            
-            nli_label_weight = NLI_LABEL_WEIGHT_MAP.get(nli_label, -1.0)
-            
-            if verdict_weight < 0:
-                # --- Double Negative Guard ---
-                # A FALSE article is a debunking. If the user claim has a TOPICAL match 
-                # (e.g. User: "Marcos coke", Article: "Marcos coke is FALSE"), then NLI REFUTE 
-                # is usually the model noticing the debunking words ("FALSE", "Fake", etc).
-                # To prevent this from flipping the sign to positive (TRUE), we force it 
-                # to stay negative if the topics match.
-                if has_topical_match:
-                    # Force positive nli_label_weight such that (-1) * (+1) = (-1) [STAYS FALSE]
-                    nli_label_weight = 1.0
-                else:
-                    # NO topical match: User is refuting an unrelated lie. 
-                    # This is a legitimate sign flip to positive. [FLIPS TO TRUE]
-                    nli_label_weight = -1.0
+        if self.USE_NEGATION_LOGIC == True:
+            if nli_label == NLILabel.REFUTE:
+                # For REFUTE, the direction is usually opposite the truth.
+                # TRUE article + REFUTE = User is wrong (-1)
+                # FALSE article + REFUTE = User is usually wrong (+1 ? No, tricky)
 
-            return round(confidence_factor * bias_weight * verdict_weight * nli_label_weight, 2)
+                nli_label_weight = NLI_LABEL_WEIGHT_MAP.get(nli_label, -1.0)
 
-        # For SUPPORT and NEUTRAL the signed verdict_weight gives the correct direction:
-        #   SUPPORT + TRUE  → positive (user claim is true)
-        #   SUPPORT + FALSE → negative (user claim matches a debunked claim → false)
-        #   NEUTRAL + TRUE  → weakly positive
-        #   NEUTRAL + FALSE → weakly negative
+                if verdict_weight < 0:
+                    # --- Double Negative Guard ---
+                    # A FALSE article is a debunking. If the user claim has a TOPICAL match
+                    # (e.g. User: "Marcos coke", Article: "Marcos coke is FALSE"), then NLI REFUTE
+                    # is usually the model noticing the debunking words ("FALSE", "Fake", etc).
+                    # To prevent this from flipping the sign to positive (TRUE), we force it
+                    # to stay negative if the topics match.
+                    if has_topical_match:
+                        # Force positive nli_label_weight such that (-1) * (+1) = (-1) [STAYS FALSE]
+                        nli_label_weight = 1.0
+                    else:
+                        # NO topical match: User is refuting an unrelated lie.
+                        # This is a legitimate sign flip to positive. [FLIPS TO TRUE]
+                        nli_label_weight = -1.0
+
+                return round(
+                    confidence_factor * bias_weight * verdict_weight * nli_label_weight,
+                    2,
+                )
+
         nli_label_weight = NLI_LABEL_WEIGHT_MAP.get(nli_label, 0.5)
         raw_score = confidence_factor * bias_weight * verdict_weight * nli_label_weight
 
-        # --- AI/Video/Social Media Dampening ---
-        # Fact-checks that specifically debunk "videos", "posts", or "AI" content 
-        # should be dampened if NLI confidence isn't absolute (>= 0.95). 
-        # This prevents specific video debunks from drowning out broader news reporting.
-        if is_factcheck and nli_score < 0.95:
+        if 0.55 <= nli_score < 0.95:
             content_lower = article_content.lower()
             if any(k in content_lower for k in DAMP_KEYWORDS):
                 raw_score *= 0.7  # reduce impact by 30%
@@ -780,6 +880,9 @@ class VerifyController:
         """
 
         user_claim_for_matching = self.normalize_text(user_claim, lowercase=False)
+        user_claim_for_embedding = self.normalize_text(
+            user_claim, lowercase=False, strip_punctuation=True
+        )
 
         # --- Stance Detection ---
         # Detect negation in the user claim and extract the core assertion.
@@ -787,20 +890,21 @@ class VerifyController:
         # (e.g., the debunked FALSE article about the same topic).
         # We also use the CORE claim for NLI evaluation to ensure logical consistency
         # when we flip the final sign if is_negated is True.
-        core_claim_text, is_negated = self.detect_claim_stance(user_claim_for_matching)
-        user_claim_core_norm = self.normalize_text(core_claim_text)
+        core_claim_text, is_negated = self.detect_claim_stance(user_claim_for_embedding)
 
         # Run embedding and entity extraction in parallel
         loop = asyncio.get_event_loop()
-        claim_embedding, claim_entities = await asyncio.gather(
-            loop.run_in_executor(
-                self.executor,
-                self.embedding_service.embed_text,
-                core_claim_text,  # Use core claim (negation stripped) for embedding
-            ),
-            loop.run_in_executor(
-                self.executor, self.extract_entities, user_claim_for_matching
-            ),
+        claim_embedding, (claim_entities, entity_parts, token_to_entity_map) = (
+            await asyncio.gather(
+                loop.run_in_executor(
+                    self.executor,
+                    self.embedding_service.embed_text,
+                    core_claim_text,  # Use core claim (negation stripped) for embedding
+                ),
+                loop.run_in_executor(
+                    self.executor, self.extract_entities, user_claim_for_matching
+                ),
+            )
         )
 
         # Process all results
@@ -817,7 +921,7 @@ class VerifyController:
                 processed_doc_ids.add(article.doc_id)
                 tasks.append(
                     self.process_result_async(
-                        user_claim_norm=user_claim_core_norm,  # Use CORE claim for NLI/Scoring
+                        user_claim_norm=core_claim_text.lower(),  # Use CORE claim for NLI/Scoring
                         claim_entities=claim_entities,
                         similarity_score=similarity_score,
                         article=article,
@@ -827,6 +931,8 @@ class VerifyController:
                         is_factcheck=True,
                         is_negated=is_negated,  # Pass negation state
                         chunk_texts=chunk_texts,
+                        entity_parts=entity_parts,
+                        token_to_entity_map=token_to_entity_map,
                     )
                 )
 
@@ -842,7 +948,7 @@ class VerifyController:
                         continue
                     tasks.append(
                         self.process_result_async(
-                            user_claim_norm=user_claim_core_norm,  # Use CORE claim for NLI/Scoring
+                            user_claim_norm=core_claim_text.lower(),  # Use CORE claim for NLI/Scoring
                             claim_entities=claim_entities,
                             similarity_score=similarity_score,
                             article=article,
@@ -852,6 +958,8 @@ class VerifyController:
                             is_factcheck=False,
                             is_negated=is_negated,  # Pass negation state
                             chunk_texts=chunk_texts,
+                            entity_parts=entity_parts,
+                            token_to_entity_map=token_to_entity_map,
                         )
                     )
 
@@ -884,38 +992,36 @@ class VerifyController:
         # This prevents low-relevance results from skewing the final verdict
         # while still allowing the UI to display everything for manual review.
         results_for_scoring = filtered_results
-        
-        limit = aggregation_limit if aggregation_limit is not None else self.AGGREGATION_LIMIT
-        
-        # Defensive cast to ensure we have an int or None
-        if limit is not None and limit != "":
-            try:
-                limit = int(limit)
-            except (ValueError, TypeError):
-                limit = None
 
-        if limit is not None and limit > 0:
-            results_for_scoring = filtered_results[:limit]
-            
-            # Mark which ones were used for scoring (for UI highlighting)
-            for i, res in enumerate(filtered_results):
-                res.is_aggregated = i < limit
-        else:
+        limit = (
+            aggregation_limit
+            if aggregation_limit is not None
+            else self.AGGREGATION_LIMIT
+        )
+
+        if limit <= 0:
             for res in filtered_results:
                 res.is_aggregated = True
+
+        results_for_scoring = filtered_results[:limit]
+
+        # Mark which ones were used for scoring (for UI highlighting)
+        for i, res in enumerate(filtered_results):
+            res.is_aggregated = i < limit
 
         stats = self.stats_service.calculate_stats(results_for_scoring)
 
         overall_verdict = stats["overall_verdict"]
 
-        # NOTE: Overall sign-flip for is_negated is now handled at the individual result level 
+        # NOTE: Overall sign-flip for is_negated is now handled at the individual result level
         # inside process_result_async to ensure UI consistency (Evidence shows SUPPORT for negated intent).
         overall_verdict = stats["overall_verdict"]
 
         return {
-            "skipped": skipped,
-            "results": filtered_results,
             "overall_verdict": overall_verdict,
+            "entities": claim_entities,
+            "results": [f.model_dump() for f in filtered_results],
+            "skipped": [s.model_dump() for s in skipped],
             "bias_divergence": stats["bias_divergence"],
             "truth_confidence_score": stats["truth_confidence_score"],
             "bias_consistency": stats["bias_consistency"],
@@ -932,6 +1038,8 @@ class VerifyController:
         claim_verdict: Verdict | None,
         source_bias: SourceBias,
         is_factcheck: bool,
+        entity_parts: set[str],
+        token_to_entity_map: dict,
         is_negated: bool = False,
         chunk_texts: str | None = None,
     ) -> ArticleResultModel:
@@ -954,7 +1062,7 @@ class VerifyController:
         """
 
         # For entity matching: use claim text for FC, or article content+title for news
-        # We always include chunk_texts as a fallback/addition because some scrapers 
+        # We always include chunk_texts as a fallback/addition because some scrapers
         # only populate chunks and leave the main content field sparse or empty.
         if is_factcheck and claim_text:
             # Fact-Checks: Match entities against the debunked claim text AND the article title
@@ -965,8 +1073,10 @@ class VerifyController:
             entity_comparison_text = (article.content or "") + " " + (chunk_texts or "")
             entity_comparison_title = article.title
 
-        entity_match_score = self.calculate_entity_match_score(
-            claim_entities, entity_comparison_text, entity_comparison_title
+        (combined_tokens, has_specific_entity_token_match, entity_match_score) = (
+            self.calculate_entity_match_score(
+                claim_entities, entity_comparison_text, entity_comparison_title
+            )
         )
         combined_relevance_score = (similarity_score * self.SEMANTIC_WEIGHT) + (
             entity_match_score * self.ENTITY_WEIGHT
@@ -1000,16 +1110,13 @@ class VerifyController:
         }
 
         requires_specific_match = self.requires_specific_entity_match(claim_entities)
-        has_specific_match = self.has_specific_entity_token_match(
-            claim_entities, entity_comparison_text, entity_comparison_title
-        )
 
-        # EXCEPTION: If we have a confirmed specific entity match (e.g. "Uwan"), 
+        # EXCEPTION: If we have a confirmed specific entity match (e.g. "Uwan"),
         # we relax the gates to ensure we don't miss relevant news reports
         # that might vary significantly in phrasing (e.g. disaster reporting).
-        effective_similarity_threshold = self.RELEVANCE_THRESHOLD # 0.3
-        effective_combined_threshold = self.COMBINED_THRESHOLD    # 0.4
-        if has_specific_match and entity_match_score >= 0.3:
+        effective_similarity_threshold = self.RELEVANCE_THRESHOLD  # 0.3
+        effective_combined_threshold = self.COMBINED_THRESHOLD  # 0.4
+        if has_specific_entity_token_match and entity_match_score >= 0.3:
             effective_similarity_threshold = -0.5
             effective_combined_threshold = 0.10
 
@@ -1022,100 +1129,49 @@ class VerifyController:
         # --- Point-Based Keyword Gate ---
         # Require direct claim-topic relevance via a weighted match of claim tokens.
         # Use aggressive normalization (strip punctuation) for better cross-doc token matching.
-        article_text_norm = self.normalize_text(entity_comparison_text, strip_punctuation=True)
-        article_title_norm = self.normalize_text(entity_comparison_title, strip_punctuation=True)
-        
-        content_tokens = self.tokenize_text(article_text_norm)
-        title_tokens = self.tokenize_text(article_title_norm)
-        article_tokens = content_tokens.union(title_tokens)
-        
-        # Consistent stripping for claim tokens
-        claim_tokens = set(t.lower() for t in self.tokenize_text(self.normalize_text(user_claim_norm, strip_punctuation=True)))
-        
-        # Build set of all entity part tokens and map them back to original entities
-        entity_parts = set()
-        token_to_entity_map = {}
-        for ent in claim_entities:
-            ent_norm = self.normalize_text(ent, strip_punctuation=True)
-            ent_tokens = self.tokenize_text(ent_norm)
-            for t in ent_tokens:
-                t_low = t.lower()
-                entity_parts.add(t_low)
-                if t_low not in token_to_entity_map:
-                    token_to_entity_map[t_low] = set()
-                token_to_entity_map[t_low].add(ent)
-
-        # Categorize matches
-        matched_tokens = claim_tokens.intersection(article_tokens)
-        
-        # Define meaningful tokens (exclude stopwords and generic titles)
-        meaningful_claim_tokens = {t for t in claim_tokens if t not in COMMON_STOPWORDS and t not in STOP_TITLES}
-        
-        # Calculate matching tokens with fuzzy/stem support
-        matched_meaningful = set()
-        for ct in meaningful_claim_tokens:
-            if ct in article_tokens:
-                matched_meaningful.add(ct)
-            else:
-                # Check for stem matches (e.g. Philippine/Philippines)
-                for at in article_tokens:
-                    if self.is_fuzzy_match(ct, at):
-                        matched_meaningful.add(ct)
-                        break
-                        
-        # Exclude generic tokens (Super, Typhoon, etc) from points to ensure 
-        # strong context requires ACTUAL topical overlap or specific entities.
-        relevance_points = len([t for t in matched_meaningful if t not in ENTITY_GENERIC_TOKENS])
-
-        # Categorize matches for statistics
-        topical_matches = {t for t in matched_meaningful if t not in entity_parts and t not in ENTITY_GENERIC_TOKENS}
-        descriptor_matches = {t for t in matched_meaningful if t in ENTITY_GENERIC_TOKENS}
-        entity_token_matches = {t for t in matched_meaningful if t in entity_parts and t not in ENTITY_GENERIC_TOKENS}
-        
-        # Statistics for the UI
-        matched_full_entities = set()
-        for t in entity_token_matches:
-            if t in token_to_entity_map:
-                matched_full_entities.update(token_to_entity_map[t])
-        distinct_entities_matched = len(matched_full_entities)
-        
-        # Gate thresholding: 
-        # Requirement: At least 2 meaningful matches for specific claims, or 1 for extremely short ones.
-        specific_tokens_in_claim = {t for t in meaningful_claim_tokens if t not in ENTITY_GENERIC_TOKENS}
-        gate_threshold = min(2, len(specific_tokens_in_claim)) if specific_tokens_in_claim else 1
-        
-        # PERSONA PRECISION GUARD:
-        # If the claim has topical assertions (e.g. "biological children"), 
-        # an article matching ONLY a persona name (e.g. "Kamala Harris") is considered noise 
-        # unless it also matches at least one topical keyword.
-        # However, we exempt "Unique Event" or "Location" entities (Typhoon, Sea, Island)
-        # to ensure 100% coverage for disaster and geopolitical reports.
-        has_topical_assertion = len(specific_tokens_in_claim.difference(entity_parts)) > 0
-        has_event_marker = any(t in EVENT_MARKERS for t in descriptor_matches)
-
-        is_persona_noise = (
-            has_topical_assertion 
-            and not topical_matches 
-            and distinct_entities_matched <= 1
-            and (relevance_points < 3 or not has_specific_match)
-            and not has_event_marker
+        user_claim_tokens = self.tokenize_text(user_claim_norm)
+        meaningful_claim_tokens = self.extract_non_generic_tokens(
+            user_claim_tokens, return_as_set=True
         )
 
-        # EXCEPTION: If we matched a multi-word entity (e.g. "Sara Duterte"), 
-        # it's unlikely to be noise even if topical assertions don't match exactly.
-        if is_persona_noise and distinct_entities_matched == 1:
-            matched_ent = list(matched_full_entities)[0] if matched_full_entities else ""
-            if len(matched_ent.split()) >= 2:
-                is_persona_noise = False
+        (
+            meaningful_matches,
+            topical_matches,
+            descriptor_matches,
+            full_entity_matches,
+        ) = self.get_categorized_token_matches(
+            meaningful_claim_tokens, combined_tokens, entity_parts, token_to_entity_map
+        )
 
-        # Coverage Bypass: If we have a confirmed specific entity match (e.g. "Uwan"), 
+        # Exclude generic tokens from points to ensure
+        # strong context requires ACTUAL topical overlap or specific entities.
+        relevance_points = len(self.extract_non_generic_tokens(meaningful_matches))
+        distinct_entities_matched = len(full_entity_matches)
+
+        # Gate thresholding:
+        # Requirement: At least 2 meaningful matches for specific claims, or 1 for extremely short ones.
+        gate_threshold = (
+            min(2, len(meaningful_claim_tokens)) if meaningful_claim_tokens else 1
+        )
+
+        topical_assertions = meaningful_claim_tokens.difference(entity_parts)
+        is_persona_noise = self.calculate_persona_noise(
+            topical_assertions,
+            descriptor_matches,
+            topical_matches,
+            full_entity_matches,
+            relevance_points,
+            has_specific_entity_token_match,
+        )
+
+        # Coverage Bypass: If we have a confirmed specific entity match (e.g. "Uwan"),
         # we allow 1-point matches to pass the keyword gate for NLI analysis (unless is_persona_noise).
-        keyword_match = (relevance_points >= gate_threshold) or (has_specific_match and relevance_points >= 1)
-        
-        if is_persona_noise:
-            keyword_match = False
+        keyword_match = not is_persona_noise and (
+            (relevance_points >= gate_threshold)
+            or (has_specific_entity_token_match and relevance_points >= 1)
+        )
 
-        if requires_specific_match and not has_specific_match:
+        if requires_specific_match and not has_specific_entity_token_match:
             meets_relevance_gate = False
         if not keyword_match:
             meets_relevance_gate = False
@@ -1123,9 +1179,7 @@ class VerifyController:
         if meets_relevance_gate:
             # For NLI: use claim for FC + relevant chunks for better context, or just chunks for news
             if is_factcheck and claim_text:
-                nli_text = f"{claim_text}"
-                if chunk_texts:
-                    nli_text += f" {chunk_texts}"
+                nli_text = claim_text
             else:
                 nli_text = chunk_texts or article.content
 
@@ -1134,30 +1188,48 @@ class VerifyController:
             nli_label, nli_score, nli_uncertainty = await loop.run_in_executor(
                 self.executor,
                 self.nli_service.classify_nli,
-                nli_text,         # PREMISE (detailed context)
+                nli_text,  # PREMISE (detailed context)
                 user_claim_norm,  # HYPOTHESIS (short claim)
             )
 
-            # --- Polarity Guard ---
-            # Overrule NLI if a directional contradiction (High/Loss, Support/Against) is detected.
-            # We focus this check on the article title (assertion) vs user claim 
-            # to avoid the "content noise" problem where unrelated negations in the article body 
-            # trigger false refutations.
-            if nli_label != NLILabel.REFUTE:
-                if self.is_polarity_mismatch(claim_tokens, title_tokens):
+            nli_label_display = nli_label
+
+            if self.USE_NEGATION_LOGIC:
+                # --- Polarity Guard ---
+                # Overrule NLI if a directional contradiction (High/Loss, Support/Against) is detected.
+                # We focus this check on the article title (assertion) vs user claim
+                # to avoid the "content noise" problem where unrelated negations in the article body
+                # trigger false refutations.
+
+                evidence_tokens = (
+                    self.tokenize_text(
+                        self.normalize_text(claim_text, strip_punctuation=True)
+                    )
+                    if claim_text
+                    else self.tokenize_text(
+                        self.normalize_text(
+                            entity_comparison_title, strip_punctuation=True
+                        )
+                    )
+                )
+
+                if nli_label != NLILabel.REFUTE and self.is_polarity_mismatch(
+                    user_claim_tokens, evidence_tokens
+                ):
                     nli_label = NLILabel.REFUTE
                     nli_score = 0.8
-                    nli_uncertainty = 0.0  # Reset uncertainty to ensure it passes the gate
+                    nli_uncertainty = (
+                        0.0  # Reset uncertainty to ensure it passes the gate
+                    )
 
-            # --- Negated UX Refinement ---
-            # If the user's intent was negated (e.g. "not..."), we flip the label 
-            # for display so it reflects support/refutation of their specific query.
-            nli_label_display = nli_label
-            if is_negated:
-                if nli_label == NLILabel.SUPPORT:
-                    nli_label_display = NLILabel.REFUTE
-                elif nli_label == NLILabel.REFUTE:
-                    nli_label_display = NLILabel.SUPPORT
+                # --- Negated UX Refinement ---
+                # If the user's intent was negated (e.g. "not..."), we flip the label
+                # for display so it reflects support/refutation of their specific query.
+                if is_negated:
+                    if nli_label == NLILabel.SUPPORT:
+                        nli_label_display = NLILabel.REFUTE
+                    elif nli_label == NLILabel.REFUTE:
+                        nli_label_display = NLILabel.SUPPORT
 
             result["nli_result"] = {
                 "relationship": nli_label_display,
@@ -1170,37 +1242,47 @@ class VerifyController:
             # --- NLI Uncertainty Gate ---
             # Use Shannon Entropy to detect flat probability distributions.
             # For 3 classes, 0.8+ indicates significant uncertainty.
-            
+
             # EXCEPTION: For Fact-Checks with high similarity, or news with high topical overlap,
             # we allow higher uncertainty through as they often provide critical context.
             is_strong_context = (
-                (is_factcheck and similarity_score >= 0.55) or 
-                (relevance_points >= 3) or
-                (relevance_points >= 2 and (distinct_entities_matched >= 2 or topical_matches))
+                (is_factcheck and similarity_score >= 0.55)
+                or (relevance_points >= 3)
+                or (
+                    relevance_points >= 2
+                    and (distinct_entities_matched >= 2 or topical_matches)
+                )
             )
-            
+
             # Entropy threshold: 0.80 normalized for typical XNLI distributions.
             # If the model is confused (flat logits), the result is unreliable noise.
-            
+
             if nli_label == NLILabel.NEUTRAL and not is_strong_context:
-                 result["skip_reason"].append("Article is neutrally related (different event/topic)")
-                 meets_relevance_gate = False
+                result["skip_reason"].append(
+                    "Article is neutrally related (different event/topic)"
+                )
+                meets_relevance_gate = False
             elif nli_uncertainty > self.UNCERTAINTY_THRESHOLD and not is_strong_context:
-                 result["skip_reason"].append(f"NLI uncertainty too high (entropy {nli_uncertainty:.2f} > {self.UNCERTAINTY_THRESHOLD})")
-                 meets_relevance_gate = False
+                result["skip_reason"].append(
+                    f"NLI uncertainty too high (entropy {nli_uncertainty:.2f} > {self.UNCERTAINTY_THRESHOLD})"
+                )
+                meets_relevance_gate = False
 
             # --- Topical Precision Guard ---
-            # If the claim asserts specific topical outcomes or identifiers (e.g. damage, 
-            # marriage, inequality) that are NOT reflected in the matched topical keywords, 
+            # If the claim asserts specific topical outcomes or identifiers (e.g. damage,
+            # marriage, inequality) that are NOT reflected in the matched topical keywords,
             # NLI SUPPORT is likely a false positive driven by entity overlap.
             # We identify "assertions" as meaningful claim tokens that are NOT part of entities.
-            claim_assertions = specific_tokens_in_claim.difference(entity_parts)
-            matched_assertions = topical_matches
-            
-            if nli_label == NLILabel.SUPPORT and claim_assertions and not matched_assertions:
+            if (
+                nli_label == NLILabel.SUPPORT
+                and topical_assertions
+                and not topical_matches
+            ):
                 # Evidence lacks critical topical assertions mentioned in claim.
                 if not is_strong_context:
-                    result["skip_reason"].append(f"NLI Support rejected: Evidence lacks topical assertions ({', '.join(list(claim_assertions)[:3])}...) mentioned in claim")
+                    result["skip_reason"].append(
+                        f"NLI Support rejected: Evidence lacks topical assertions ({', '.join(list(topical_assertions)[:3])}...) mentioned in claim"
+                    )
                     meets_relevance_gate = False
                 else:
                     # If strong context (high similarity), we just dampen the score significantly
@@ -1211,7 +1293,11 @@ class VerifyController:
             # confident in its classification, don't score this article at all.
             # A low-confidence NLI result is worse than no result — it introduces
             # noise that can swing the final verdict incorrectly in either direction.
-            if nli_score < self.NLI_CONFIDENCE_GATE and meets_relevance_gate and not is_strong_context:
+            if (
+                nli_score < self.NLI_CONFIDENCE_GATE
+                and meets_relevance_gate
+                and not is_strong_context
+            ):
                 result["skip_reason"].append(
                     f"NLI confidence too low ({nli_score:.2f} < {self.NLI_CONFIDENCE_GATE}) — unreliable signal"
                 )
@@ -1227,18 +1313,19 @@ class VerifyController:
                     article_content=article.content or "",
                     has_topical_match=bool(topical_matches),
                 )
-                
-                # --- Negated UX Refinement (Score Flip) ---
-                if is_negated and verdict_score != 0:
-                    verdict_score = -verdict_score
+
+                if self.USE_NEGATION_LOGIC:
+                    # --- Negated UX Refinement (Score Flip) ---
+                    if is_negated and verdict_score != 0:
+                        verdict_score = -verdict_score
 
                 result["verdict"] = verdict_score
-        
+
         # FINAL GATE CHECK: Ensure UI consistency.
         # If it failed any gate (Keyword or NLI), clear the verdict and populate skip reasons.
         if not meets_relevance_gate:
             result["verdict"] = None
-            if requires_specific_match and not has_specific_match:
+            if requires_specific_match and not has_specific_entity_token_match:
                 result["skip_reason"].append(
                     "Specific name/identifier from claim not found in matched result"
                 )
@@ -1275,16 +1362,22 @@ class VerifyController:
         claim_embedding = await loop.run_in_executor(
             self.executor, self.embedding_service.embed_text, user_claim_for_matching
         )
-        claim_entities = await loop.run_in_executor(
-            self.executor, self.extract_entities, user_claim_for_matching
+        (claim_entities, entity_parts, token_to_entity_map) = (
+            await loop.run_in_executor(
+                self.executor, self.extract_entities, user_claim_for_matching
+            )
         )
 
         # 1. Stream search hits — use same 20-candidate retrieval as verify_claim
-        core_claim_for_stream, _ = self.detect_claim_stance(user_claim_for_matching)
+        core_claim_for_stream, is_negated = self.detect_claim_stance(
+            user_claim_for_matching
+        )
         claim_embedding = await loop.run_in_executor(
             self.executor, self.embedding_service.embed_text, core_claim_for_stream
         )
-        factcheck_results = self.find_claims_with_articles(claim_embedding, self.DB_RETRIEVE_LIMIT)
+        factcheck_results = self.find_claims_with_articles(
+            claim_embedding, self.DB_RETRIEVE_LIMIT
+        )
         news_results = self.find_news_articles(claim_embedding, self.DB_RETRIEVE_LIMIT)
 
         search_hits = []
@@ -1331,8 +1424,11 @@ class VerifyController:
                         claim_text=claim.claim_text,
                         claim_verdict=claim.verdict,
                         source_bias=article.source_bias,
+                        is_negated=is_negated,
                         is_factcheck=True,
                         chunk_texts=chunk_texts,
+                        entity_parts=entity_parts,
+                        token_to_entity_map=token_to_entity_map,
                     )
                 )
 
@@ -1350,8 +1446,11 @@ class VerifyController:
                         claim_text=None,
                         claim_verdict=None,
                         source_bias=article.source_bias,
+                        is_negated=is_negated,
                         is_factcheck=False,
                         chunk_texts=chunk_texts,
+                        entity_parts=entity_parts,
+                        token_to_entity_map=token_to_entity_map,
                     )
                 )
 
@@ -1380,10 +1479,10 @@ class VerifyController:
                 0 if x.found_claim else 1,
             )
         )
-        
+
         limit = self.AGGREGATION_LIMIT
         aggregated_results = non_skipped[:limit]
-        
+
         # Mark aggregated for UI identification
         for i, res in enumerate(non_skipped):
             res.is_aggregated = i < limit

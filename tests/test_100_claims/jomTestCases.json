@@ -1,902 +1,902 @@
 [
-    {
-        "index": 1,
-        "doc_id": "44de844809fa74fd4dd78c674c1a8d49412a39e0b293a30cb539d97b1babaa98",
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2016/aug/15/sean-patrick-maloney/donald-trump-against-same-sex-marriage/",
-        "expected_verdict": "TRUE",
-        "claim": "Donald Trump is against marriage equality.",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 2,
-        "doc_id": "9ae793a2099cd4311c479fb760a64fe28d38d2e834b13cef77ea16201d38c0bc",
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2016/may/16/mamie-locke/mamie-locke-says-us-has-low-voter-turnout-rate/",
-        "expected_verdict": "TRUE",
-        "claim": "The United States has a low voter turnout rate.",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 3,
-        "doc_id": "a7e1884574a13a279e13f581e190c3a20cbb7d5862fe920ddb33748aee4e621e",
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/daughter-trans-musk/",
-        "expected_verdict": "TRUE",
-        "claim": "Tech billionaire Elon Musk has a transgender daughter.",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 4,
-        "doc_id": "5979f3a72eb0873e50c92f88f64e40df9637a7c255835aff442ebd89986c9417",
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/kamala-harris-gun-owner/",
-        "expected_verdict": "TRUE",
-        "claim": "Democratic presidential candidate Kamala Harris is a gun owner.",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 5,
-        "doc_id": "d7e63eb553fde60512ca1ec3b63f0a927778f3b6628438c7fbfe4812c2e6dd10",
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/kamala-harris-biological-children/",
-        "expected_verdict": "TRUE",
-        "claim": "Vice President Kamala Harris does not have any biological children.",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 6,
-        "doc_id": "3b38c0723f12e4ab3b82da89644c0957fe8a31a1eed276f436ab878645807e3d",
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/trump-donation-kamala-harris/",
-        "expected_verdict": "TRUE",
-        "claim": "Former U.S. President Donald Trump once donated to Kamala Harris' campaign.",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 7,
-        "doc_id": "be04bec9425ab51debf04b7b5ef9c2153cc714597b5648e624635e4e6d9ec25c",
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/elon-musk-immigrant/",
-        "expected_verdict": "TRUE",
-        "claim": "Elon Musk is an immigrant to the United States.",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 8,
-        "doc_id": "971d143456f4b89a1daff95309d6a46f0b85a4893bbe04cb45579c191ed64ebb",
-        "source": "TSEK",
-        "url": "https://www.tsek.ph/vp-robredo-said-in-a-2016-radio-quiz-bee-that-ph-has-1700-islands/",
-        "expected_verdict": "TRUE",
-        "claim": "Vice President Leni Robredo once said that the Philippines has 1,700 islands.",
-        "type": "LOCAL"
-    },
-    {
-        "index": 9,
-        "doc_id": "8c50e30f000c19b2e779f4a359d68149e7da08a5323a5aba84796d45eae0287b",
-        "source": "TSEK",
-        "url": "https://www.tsek.ph/robredo-says-she-has-repeatedly-beaten-marcos-jr-in-election-related-contests/",
-        "expected_verdict": "TRUE",
-        "claim": "Vice President Leni Robredo has repeatedly beaten Ferdinand Marcos Jr. in election-related contests.",
-        "type": "LOCAL"
-    },
-    {
-        "index": 10,
-        "doc_id": "8d883202e0d79bb84630904afcbc19a5785c718c66f7df4b9897fa13f667fd4e",
-        "source": "TSEK",
-        "url": "https://www.tsek.ph/fact-check-the-philippines-used-to-have-a-local-tv-and-radio-brand-until-the-martial-law-of-marcos-destroyed-it/",
-        "expected_verdict": "TRUE",
-        "claim": "The Philippines had a promising local electronic and automotive industry but was cut short when Martial Law was declared.",
-        "type": "LOCAL"
-    },
-    {
-        "index": 11,
-        "doc_id": "0629e52bd8aad3efb2b3fdeb7d3ad4db5671fd065fd2f6df137589396f0e5279",
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2016/may/12/gwen-moore/arm-world-bank-tied-8-fold-rise-water-rates-manila/",
-        "expected_verdict": "TRUE",
-        "claim": "Water rates in Manila, Philippines, were raised up to 845 percent when a subsidiary of the World Bank became a partial owner.",
-        "type": "LOCAL"
-    },
-    {
-        "index": 12,
-        "doc_id": "8f4543bac54125e4c8738e172593f97eab4a5e129c981fdb8fea545221973838",
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/new-jersey-rhode-island-incest/",
-        "expected_verdict": "TRUE",
-        "claim": "Incest is legal in New Jersey and Rhode Island.",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 13,
-        "doc_id": "53e390f7a7cc05d397981e4add87673e951c4bdbc72b616df8ead55fadb25da1",
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/lifeguards-paris-olympics-swimming/",
-        "expected_verdict": "TRUE",
-        "claim": "Lifeguards are present at Olympic swimming competitions.",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 14,
-        "doc_id": "47741eb5519056bc95dd741a72a21e31b4fcce1111903dd7dbc1d4567071e2cd",
-        "source": "FULLFACT",
-        "url": "https://fullfact.org/online/flawed-list-conservative-costs/",
-        "expected_verdict": "TRUE",
-        "claim": "The EU ‘divorce bill’ will cost £42 billion.",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "doc_id": "d318085a3aa883843fe16cd13f699ad13db4989d418a6f35100f39891f8e4515",
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2020/jan/24/facebook-posts/yes-iran-does-ban-twitter/",
-        "expected_verdict": "TRUE",
-        "claim": "Twitter is banned in Iran.",
-        "type": "INTERNATIONAL",
-        "index": 15
-    },
-    {
-        "doc_id": "6652ecca3c545c68b5d6bb0668c02a81a50aa2429b615cba02a1f61489e97f60",
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2018/apr/12/marcus-molinaro/do-ny-residents-have-among-highest-tax-burdens-mol/",
-        "expected_verdict": "TRUE",
-        "claim": "New York has among the highest tax burdens of any state in the nation",
-        "type": "INTERNATIONAL",
-        "index": 16
-    },
-    {
-        "doc_id": "6c3c69e9a44e64dbcbb2b32cbae8a265af7ee8ee21734692c3f73c18c90b93e3",
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2016/aug/17/gary-johnson/gary-johnson-correct-most-americans-support-legali/",
-        "expected_verdict": "TRUE",
-        "claim": "Most Americans support the legalization of marijuana.",
-        "type": "INTERNATIONAL",
-        "index": 17
-    },
-    {
-        "doc_id": "8096d4a3135d688485dd61d39ac90975274185f27f5dab85ff8ea2d987dc1eb7",
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2021/aug/31/mitt-romney/mitt-romney-accurately-says-trump-administration-w/",
-        "expected_verdict": "TRUE",
-        "claim": "The Trump administration worked to free 5,000 Taliban prisoners.",
-        "type": "INTERNATIONAL",
-        "index": 18
-    },
-    {
-        "doc_id": "1cf36e87a0ad21ec60163d8f8a47a11aba6124b50ff64c68b9f22da158987940",
-        "source": "FULLFACT",
-        "url": "https://fullfact.org/crime/knife-crime-october-2019/",
-        "expected_verdict": "TRUE",
-        "claim": "Knife crime has soared to a record high.",
-        "type": "INTERNATIONAL",
-        "index": 19
-    },
-    {
-        "doc_id": "c4fef82369ede2b153efa1cb083f88a93256bc68f3156e8077bef4cebef51e80",
-        "source": "FULLFACT",
-        "url": "https://fullfact.org/economy/uk-us-trading-and-investment/",
-        "expected_verdict": "TRUE",
-        "claim": "The USA is the largest investor in the UK economy.",
-        "type": "INTERNATIONAL",
-        "index": 20
-    },
-    {
-        "doc_id": "0a7090e76d6c3f85ea75b67925225e1e7ccf7d442dc807790a9123478359c43e",
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/rfk-jr-heroin-addict/",
-        "expected_verdict": "TRUE",
-        "claim": "Robert F. Kennedy Jr. was a heroin addict from his teenage years into adulthood.",
-        "type": "INTERNATIONAL",
-        "index": 21
-    },
-    {
-        "index": 22,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/trump-ross-ulbricht-silk-road-marketplace/",
-        "expected_verdict": "TRUE",
-        "claim": "U.S. President Donald Trump pardoned Ross Ulbricht, the creator of dark web marketplace Silk Road.",
-        "doc_id": "fb4916e57b86230cc660134f7ac5527ab8f09ae69e6ecb1b68e88d512770c339",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 23,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/hersheys-chocolate-founder-school/",
-        "expected_verdict": "TRUE",
-        "claim": "The founder of The Hershey Chocolate Company, Milton Hershey, founded a boarding school for orphaned boys.",
-        "doc_id": "32ef520fde22b9f17390c73230ea9769852a9cb564aca2586592918a3e3bf275",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 24,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/spotify-ice-recruitment-ads/",
-        "expected_verdict": "TRUE",
-        "claim": "In 2025, streaming service Spotify ran recruitment advertisements for U.S. Immigration and Customs Enforcement.",
-        "doc_id": "ea0ebf003f82dfb5c6b871f2de0a9e710350d8a7b84ae5bd16cda7b8323236e1",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 25,
-        "source": "FULLFACT",
-        "url": "https://fullfact.org/election-2024/bbc-debate-sunak-starmer/",
-        "expected_verdict": "TRUE",
-        "claim": "Labour will introduce a “retirement tax”.",
-        "doc_id": "66ab19224cfedca95f09cfb5435df4c364262149c2d8a919344c8debfd9880d1",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 26,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/diddy-ye-prince-harry-pic/",
-        "expected_verdict": "TRUE",
-        "claim": "An image authentically depicts Sean \"Diddy\" Combs with Prince Harry and Kanye \"Ye\" West.",
-        "doc_id": "01774e811e5055d1b8289c02c91bc2d01bdc6d6e9503f33f554c2b5903b90f0e",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 27,
-        "source": "FULLFACT",
-        "url": "https://fullfact.org/news/anneliese-dodds-women-mps/",
-        "expected_verdict": "TRUE",
-        "claim": "Labour is the first political party to reach parity in terms of men and women MPs.",
-        "doc_id": "f51a64f88eb866ed9f0babbbbb15ca2b3814c40c899515755ee8c2ed69fc3498",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 28,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2024/sep/06/kamala-harris/project-2025-would-phase-out-federal-funds-for-pub/",
-        "expected_verdict": "TRUE",
-        "claim": "Project 2025 would defund K-12 schools.",
-        "doc_id": "106919e55aba6c9a7cf263e884316a046d00a641a2fac6dd6f9b7b9a570a202f",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 29,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2024/jun/03/joe-biden/does-trump-want-to-repeal-the-aca-as-biden-says-tr/",
-        "expected_verdict": "TRUE",
-        "claim": "Donald Trump wants to terminate the Affordable Care Act.",
-        "doc_id": "d9e24ebb87a1b65a4253c30ba1943bfc393117e999839ef60138bb82a4b3bb97",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 30,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2023/nov/14/ted-cruz/does-texas-really-outproduce-california-in-wind-en/",
-        "expected_verdict": "TRUE",
-        "claim": "“We produce a lot more wind energy in Texas than California does.”",
-        "doc_id": "17d99db7f83cd3ab227e6b7f99af14f45772f594c64885ddd7a04842aa820da7",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 31,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2024/jul/23/kamala-harris/kamala-harris-correct-that-project-2025-would-end/",
-        "expected_verdict": "TRUE",
-        "claim": "Project 2025 would “end Head Start.”",
-        "doc_id": "45e2358528ba5f4ea4f2381f750f851c2764849c003cc51f29e6ca65015fb7e6",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 32,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2023/apr/18/kamala-harris/kamala-harris-said-1-in-5-americans-have-lost-a-fa/",
-        "expected_verdict": "TRUE",
-        "claim": "“One in 5 Americans has lost a family member to gun violence.”",
-        "doc_id": "1f536d07a2f6af77a35a3117c4f72e6b6a0430de4e771d2869d9c67ab9327141",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 33,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2022/jul/14/val-demings/val-demings-ad-criticizes-rubios-attendance-record/",
-        "expected_verdict": "TRUE",
-        "claim": "Sen. Marco Rubio has \"one of the worst attendance records in the Senate.\"",
-        "doc_id": "07c7a1172d4b441c9c5052d74e85fa7874b231a3947f876e88e2242bc7200208",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 34,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2021/nov/09/david-gura/west-virginia-home-zero-billionaires/",
-        "expected_verdict": "TRUE",
-        "claim": "“West Virginia is home to zero billionaires.”",
-        "doc_id": "4fb0f0119bc6c4f3046a534b508f16745ce6079227f8a31ab00b7f3f868c7677",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 35,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2022/feb/21/john-cornyn/cornyn-right-drug-overdose-deaths-topped100000-nat/",
-        "expected_verdict": "TRUE",
-        "claim": "100,000 Americans died of an overdose in a single year.",
-        "doc_id": "d9ea477e675689c46d4e017f540a9a079bf39035ec55a7592cecdc7c96f26126",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 36,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2020/jun/11/planned-parenthood/yes-if-federal-abortion-law-were-overturned-wiscon/",
-        "expected_verdict": "TRUE",
-        "claim": "If Roe is overturned, Wisconsin has a law on the books that would immediately make abortion a crime.",
-        "doc_id": "a796fd67211a6b0d524d7096a77b0712121c1c164fd1d513671045aafec92cd7",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 37,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2020/mar/25/facebook-posts/bill-gates-warned-2015-we-were-unprepared-infectio/",
-        "expected_verdict": "TRUE",
-        "claim": "“Bill Gates told us about the coronavirus in 2015.”",
-        "doc_id": "b1eb7e9457757066ba9f96955ee9f70f5fa4bb8d8b80d1e148ffcb93581891db",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 38,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2020/jun/25/dan-forest/how-many-states-have-reopened-gyms/",
-        "expected_verdict": "TRUE",
-        "claim": "North Carolina is one of four states that hasn't opened gyms.",
-        "doc_id": "ff8dd87375e0a330d7d9d700bbc7dfe5cc4c74da1ba1002ef14a55393fefc378",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 39,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2020/jul/24/donald-trump/fact-checking-trump-rising-murders-philly/",
-        "expected_verdict": "TRUE",
-        "claim": "“Murders this year have spiked 27% in Philadelphia.”",
-        "doc_id": "3459a43feb550c3f18609f38b47dd221a7988ea602530545c6e130043e783acc",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 40,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2020/sep/09/nick-freitas/spanberger-has-voted-pelosi-relatively-low-92-time/",
-        "expected_verdict": "TRUE",
-        "claim": "Abigail Spanberger “has voted with Nancy Pelosi over 90% of the time…”",
-        "doc_id": "355f3c70e75e5c8f9872944c7e1ee9f4a2e459de6a8328b5548e5265688d8548",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 41,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2020/dec/22/christi-craddick/examining-texas-oil-and-gas-industry-amid-pandemic/",
-        "expected_verdict": "TRUE",
-        "claim": "Says that the oil and gas industry comprises 35% of the Texas economy.",
-        "doc_id": "4746a4d954d552d8b0187894835ea4dfa6866bf8de810aa3a5f12cd74a86d261",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 42,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2020/jul/08/ron-mcmullen/fact-checking-history-iowa-countys-namesake/",
-        "expected_verdict": "TRUE",
-        "claim": "Former U.S. Vice President Richard Mentor Johnson was a slave owner married to one of his slaves and father of two children with her.",
-        "doc_id": "c9d13cbf4652ee6f94d1d4ddf090517b899f5c448819b65e129dc4e12771a337",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 43,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2020/aug/12/state-democratic-party-wisconsin/yes-high-percentage-wisconsin-renters-are-risk-evi/",
-        "expected_verdict": "TRUE",
-        "claim": "“34% of Wisconsin renters are at risk of eviction.”",
-        "doc_id": "43c37bb140d0e9df2181092d8ac141e780c80de26b9df48d31254cdf4f3e81b2",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 44,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2020/sep/08/ron-johnson/johnson-mostly-track-claim-flu-harder-kids-covid-1/",
-        "expected_verdict": "TRUE",
-        "claim": "For younger people, seasonal flu is “in many cases” a deadlier virus than COVID-19",
-        "doc_id": "8f780eb7d1b99133e75e58f415718ac833e24eaa30ba173c26e0d73438f6cb65",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 45,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2020/sep/25/michael-burgess/how-many-adults-get-flu-shots-each-year/",
-        "expected_verdict": "TRUE",
-        "claim": "“In the last 10 years less than half of adults in the U.S. received a flu shot.”",
-        "doc_id": "9b5318314cfa98e27cc81bf516b85830d3bd3d1006dcba2e42ee1eca3e988eed",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 46,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2020/dec/04/mandy-cohen/nc-covid-19-deaths-surpass-10-years-flu-deaths/",
-        "expected_verdict": "TRUE",
-        "claim": "Says COVID-19 has killed more North Carolinians in a year than the flu has in 10 years.",
-        "doc_id": "2aaaa58509bf122cfb6862f75f0983cb73b21147d07ad7312e053a9164ea588a",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 47,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2021/jan/20/kirk-cox/virginia-among-slowest-states-vaccine-rollout-cox-/",
-        "expected_verdict": "TRUE",
-        "claim": "Virginia ranks “in the bottom third of states” in administering the COVID-19 vaccine.",
-        "doc_id": "5c265aacabf826e3bc9ef1009b77ffc820cec096fffcd96b5b9a6110f7589698",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 48,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2021/feb/18/facebook-posts/yes-aversion-federal-regulation-drove-texas-isolat/",
-        "expected_verdict": "TRUE",
-        "claim": "The Texas power grid is not part of the US power grid because they wanted to avoid federal regulation.",
-        "doc_id": "3897ae43b137d4f84a288135262123407485cc673411c84508d76cf131a47fc6",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 49,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2021/jan/28/jennifer-boysko/us-only-industrialized-nation-no-paid-family-leave/",
-        "expected_verdict": "TRUE",
-        "claim": "“The United States is the only industrialized, modernized country that does not already have a paid family medical leave program in place.”",
-        "doc_id": "311d2ba487ffbe03dc1751c5c7183f9930cd2c3cab1711138ed58f42930c3c82",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 50,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2021/apr/12/nicholas-langworthy/does-new-york-state-have-highest-taxes-united-stat/",
-        "expected_verdict": "TRUE",
-        "claim": "Residents of New York state “pay the highest taxes in the nation.”",
-        "doc_id": "06e1cd4253100e12b8cb9cfe637fc9add7753804860d09b5ed3408e02c24812a",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 1,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2025/jul/29/benjamin-netanyahu/benjamin-netanyahus-pants-on-fire-statement-that-t/",
-        "expected_verdict": "FALSE",
-        "claim": "“There is no starvation in Gaza.”",
-        "doc_id": "508afeb08455402b5b7d95e60ea883822b99b72a777c59ade48f1fc4c6b3cfae",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 2,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2025/apr/02/jd-vance/jd-vance-falsely-says-maryland-man-deported-to/",
-        "expected_verdict": "FALSE",
-        "claim": "Kilmar Armando Abrego Garcia “was a convicted MS-13 gang member.”",
-        "doc_id": "45692bd48d57d0d0d495e7f97434dd8bb3ea19330cf382ffce55c3bd28964365",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 3,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2025/feb/25/instagram-posts/no-former-first-daughter-malia-obama-didnt-get-22/",
-        "expected_verdict": "FALSE",
-        "claim": "“Malia Obama received $2.2 million in funds from USAID.”",
-        "doc_id": "5cdf54c78c2efde4d1b8088ef4768bd6afadb5339175d616878f4916f9622bd0",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 4,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2025/jan/07/facebook-posts/did-elon-musk-acquire-boeing-no-thats-a-baseless-c/",
-        "expected_verdict": "FALSE",
-        "claim": "“Elon Musk has just acquired Boeing.”",
-        "doc_id": "d5c07c0770c1e1994ae0f03a3ae572808f60f0a314db56cf7ab90dce821ac3b1",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 5,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2025/jan/10/viral-image/no-actor-tom-hanks-didnt-die-in-a-fatal-new-year-c/",
-        "expected_verdict": "FALSE",
-        "claim": "Actor Tom Hanks died in a “fatal car accident.”",
-        "doc_id": "a647c41efa92eae1e0a55efe2698e288b887362a8eb6556f90b5881c3e40b4d6",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 6,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2024/dec/05/threads-posts/elon-musk-has-been-a-us-citizen-since-2002/",
-        "expected_verdict": "FALSE",
-        "claim": "“Elon Musk is not a citizen of the United States.”",
-        "doc_id": "b4cf8f4bd138c23df9f75613bb5f3e07181367eeaa33d4536dd211bed61bf9e1",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 7,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2024/oct/12/winsenate/democratic-ad-overstates-dave-mccormicks-abortion/",
-        "expected_verdict": "FALSE",
-        "claim": "“Dave McCormick is fully against abortion.”",
-        "doc_id": "62a6dd10be9928953cd2351f86dbe958e28c8683f15fd2dbea8235fc6e5da561",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 8,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2024/sep/24/threads-posts/no-travis-kelce-didnt-endorse-kamala-harris-for-pr/",
-        "expected_verdict": "FALSE",
-        "claim": "Travis Kelce endorsed Kamala Harris.",
-        "doc_id": "cad19e74da08f733307803f009b5a5ca5f7f4ecc4cb41639bed6dceb38dabaa7",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 9,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/nasa-announces-life-on-mars/",
-        "expected_verdict": "FALSE",
-        "claim": "NASA announced in September 2025 that it had found life on Mars.",
-        "doc_id": "b5586cb885638458fbdb456f1074d13a44bc30b2d547543c99d23b4d25daf0c2",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 10,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/valentines-day-history/",
-        "expected_verdict": "FALSE",
-        "claim": "Greeting card companies invented Valentine's Day.",
-        "doc_id": "5fc44480ac230de28a4b9a2df1587374795995b05c38f7bcfa3b17c6fd58531e",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 11,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/who-you-vote-for-is-not-public-record/",
-        "expected_verdict": "FALSE",
-        "claim": "In Indiana, who you voted for is public record.",
-        "doc_id": "96b4709ffbc988790ad9b8ad964ff90140b33d2951b4c8ec1277388451b76ee4",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 12,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/biden-worst-inflation-in-us-history/",
-        "expected_verdict": "FALSE",
-        "claim": "Inflation was the highest in U.S. history under President Joe Biden.",
-        "doc_id": "e4ec6e70b16f0417842545854ddfec6894f6b0e169d1b89ddb06abece7deae3b",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 13,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/george-washingtons-wooden-teeth/",
-        "expected_verdict": "FALSE",
-        "claim": "U.S. President George Washington had wooden teeth.",
-        "doc_id": "5b1b0973e59900ab00702568c5bf013b1a25b9bced1912928fd901b4ae6c1141",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 14,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/nasa-us-timeline-conspiracy/",
-        "expected_verdict": "FALSE",
-        "claim": "NASA was established before the U.S.",
-        "doc_id": "77e24859ff6eccd74b74472a1142d2e4242f8c11c21361de8f7c06d440955130",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 15,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2025/apr/22/tiktok-posts/simpsons-didnt-predict-pope-francis-would-die-2025/",
-        "expected_verdict": "FALSE",
-        "claim": "“The Simpsons” predicted Pope Francis’ 2025 death.",
-        "doc_id": "9942dcd877120404f590bf1d5db24e83744c32fedc02b77d1328f3235ef90340",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/elon-musk-bought-google/",
-        "expected_verdict": "FALSE",
-        "claim": "Elon Musk bought Google.",
-        "doc_id": "4854215d7077b144aa12e8e534ca4581041840f0ca3f95ed6752a9d60853e3a5",
-        "type": "INTERNATIONAL",
-        "index": 16
-    },
-    {
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2024/dec/30/instagram-posts/no-bill-gates-isnt-implanting-digital-ids-in-newbo/",
-        "expected_verdict": "FALSE",
-        "claim": "“Bill Gates will be implanting digital IDs in newborns in Kenya.”",
-        "doc_id": "79b928620d5b36402e13c7e8a2291aa382497d5b3026219fb12f39b4f98100ba",
-        "type": "INTERNATIONAL",
-        "index": 17
-    },
-    {
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2024/jul/30/donald-trump/fact-checking-trumps-false-statement-that-kamala-h/",
-        "expected_verdict": "FALSE",
-        "claim": "Kamala Harris “wants to defund the police.”",
-        "doc_id": "10aee83995654f7ea165aa886c0c87186c4b0da71fe24e3fc024d22c626db7a0",
-        "type": "INTERNATIONAL",
-        "index": 18
-    },
-    {
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2024/jul/16/instagram-posts/no-switzerland-didnt-ban-mammograms/",
-        "expected_verdict": "FALSE",
-        "claim": "Switzerland banned mammograms.",
-        "doc_id": "ccf1a30a639f452e2afcd0ff0570048a31fb2e760f63f1e3b96051a63a49044f",
-        "type": "INTERNATIONAL",
-        "index": 19
-    },
-    {
-        "index": 20,
-        "source": "RAPPLER",
-        "url": "https://www.rappler.com/newsbreak/fact-check/covid-19-vaccines-kill-elderly-people/",
-        "expected_verdict": "FALSE",
-        "claim": "COVID-19 vaccines can kill elderly people.",
-        "doc_id": "ada1cd57fbdfec73f7a2af2a81f5e12f8aef837dc9d43f6320b2edd5d8af8c6f",
-        "type": "LOCAL"
-    },
-    {
-        "index": 21,
-        "source": "RAPPLER",
-        "url": "https://www.rappler.com/newsbreak/fact-check/ferdinand-marcos-richest-person-world/",
-        "expected_verdict": "FALSE",
-        "claim": "Si Ferdinand Marcos Sr. ang pinakamayamang tao sa mundo.",
-        "doc_id": "f7c78454f3e9a18f284e26263eb6e3ad32edbd777e5fefede3875245d94ad528",
-        "type": "LOCAL"
-    },
-    {
-        "index": 22,
-        "source": "RAPPLER",
-        "url": "https://www.rappler.com/newsbreak/fact-check/death-penalty-not-yet-approved-senate/",
-        "expected_verdict": "FALSE",
-        "claim": "The death penalty in the Philippines has been approved in the Senate.",
-        "doc_id": "b1be1f3dc7a7fcbc3edd197382a77683e2ab6144f741020012cd9714afa24fae",
-        "type": "LOCAL"
-    },
-    {
-        "index": 23,
-        "source": "RAPPLER",
-        "url": "https://www.rappler.com/newsbreak/fact-check/yellowstone-supervolcano-not-due-erupt-anytime-soon/",
-        "expected_verdict": "FALSE",
-        "claim": "The Yellowstone supervolcano is due for an eruption any time soon.",
-        "doc_id": "d1b0548c0b40b2693b9770ed0fe74612d82237664c064821f3a3684a66596c81",
-        "type": "LOCAL"
-    },
-    {
-        "index": 24,
-        "source": "RAPPLER",
-        "url": "https://www.rappler.com/newsbreak/fact-check/philippines-no-chinook-helicopter-factory/",
-        "expected_verdict": "FALSE",
-        "claim": "The Philippines has a Chinook helicopter factory.",
-        "doc_id": "13b62546eae0b97d8a3959f3844bc8f0a0ad0578cb0a812446b424891db234fb",
-        "type": "LOCAL"
-    },
-    {
-        "index": 25,
-        "source": "RAPPLER",
-        "url": "https://www.rappler.com/newsbreak/fact-check/russia-did-not-declare-war-united-states/",
-        "expected_verdict": "FALSE",
-        "claim": "Russian President Vladimir Putin has declared war on the United States.",
-        "doc_id": "d274e712421f0ff8bff706c7bd444c77776b5e5308e595ee90dae38cf91fd6aa",
-        "type": "LOCAL"
-    },
-    {
-        "index": 26,
-        "source": "RAPPLER",
-        "url": "https://www.rappler.com/newsbreak/fact-check/billy-crawford-alive/",
-        "expected_verdict": "FALSE",
-        "claim": "Filipino actor and singer Billy Crawford has died.",
-        "doc_id": "d40c42f29445ea079759fee75746f55a490df6dcf91bf1fb04432bd96f72a7f4",
-        "type": "LOCAL"
-    },
-    {
-        "index": 27,
-        "source": "RAPPLER",
-        "url": "https://www.rappler.com/newsbreak/fact-check/philippines-yet-to-receive-corvettes-south-korea/",
-        "expected_verdict": "FALSE",
-        "claim": "The Philippine Navy has received two new warships from South Korea.",
-        "doc_id": "f5dbfba87509dcff6d6bd77e147bd5a89ddb8520c258d5622e90927d5be3b68c",
-        "type": "LOCAL"
-    },
-    {
-        "index": 28,
-        "source": "RAPPLER",
-        "url": "https://www.rappler.com/newsbreak/fact-check/china-did-not-attack-taiwan-may-28-2024/",
-        "expected_verdict": "FALSE",
-        "claim": "China has launched an attack against Taiwan.",
-        "doc_id": "d057e6be338948e5073430ca82faf7d116b620d53a88fcee582141ed6f933634",
-        "type": "LOCAL"
-    },
-    {
-        "index": 29,
-        "source": "VERAFILES",
-        "url": "https://verafiles.org/articles/fact-check-old-video-of-manny-pacquiao-edited-using-ai-to-promote-online-gambling-app",
-        "expected_verdict": "FALSE",
-        "claim": "Former senator and international boxing champ Manny Pacquiao is promoting an online gambling app.",
-        "doc_id": "974ee572a31bb0f293b86c3d0f76f9e97b5af0109945d0d77463bb1f6244baf6",
-        "type": "LOCAL"
-    },
-    {
-        "index": 30,
-        "source": "VERAFILES",
-        "url": "https://verafiles.org/articles/fact-check-villanueva-did-not-resign-as-senator",
-        "expected_verdict": "FALSE",
-        "claim": "Joel Villanueva has resigned from the Philippine Senate",
-        "doc_id": "f292c78fa1a67c03c78d61437b0f6ea1cce8daeef4f28a756013842d81f9c190",
-        "type": "LOCAL"
-    },
-    {
-        "index": 31,
-        "source": "VERAFILES",
-        "url": "https://verafiles.org/articles/fact-check-kris-aquino-death-bewitched-rumors-fake",
-        "expected_verdict": "FALSE",
-        "claim": "Kris Aquino has been bewitched and passed away.",
-        "doc_id": "7087392db454aa226e98074bfc794210097915ac61e0b8d214ccf62d134877a3",
-        "type": "LOCAL"
-    },
-    {
-        "index": 32,
-        "source": "VERAFILES",
-        "url": "https://verafiles.org/articles/fact-check-marcoleta-falsely-claims-no-such-thing-as-wps-cites-wrong-data",
-        "expected_verdict": "FALSE",
-        "claim": "The West Philippine Sea does not appear in any maps.",
-        "doc_id": "21684a73b5149512b942c8d54e96dfe23d7cc9c09f5c236e335a796575f620ba",
-        "type": "LOCAL"
-    },
-    {
-        "index": 33,
-        "source": "VERAFILES",
-        "url": "https://verafiles.org/articles/fact-check-claim-that-pfizer-hasnt-cured-any-disease-not-true",
-        "expected_verdict": "FALSE",
-        "claim": "Pfizer has not cured any type of disease",
-        "doc_id": "9b869dc915b984ee87891da290fa9e18f5633f6af94e1fa57a06b9e9ebdc97a2",
-        "type": "LOCAL"
-    },
-    {
-        "index": 34,
-        "source": "VERAFILES",
-        "url": "https://verafiles.org/articles/fact-check-ph-did-not-bomb-chinese-monster-ship-in-wps",
-        "expected_verdict": "FALSE",
-        "claim": "The Philippines blew up China’s monster ship in the West Philippine Sea",
-        "doc_id": "ee696e6170345f5cbf02fe4e32c942f40bd430ef5be689ebc2bb258158d8485f",
-        "type": "LOCAL"
-    },
-    {
-        "index": 35,
-        "source": "VERAFILES",
-        "url": "https://verafiles.org/articles/fact-check-marcos-stealing-ph-gold-reserves-has-no-basis",
-        "expected_verdict": "FALSE",
-        "claim": "President Ferdinand Marcos Jr. stole the country’s gold reserves",
-        "doc_id": "3a64da80df237c655339078d89f5fbb39c08dc63aaf41d497b0172a070e9dafd",
-        "type": "LOCAL"
-    },
-    {
-        "index": 36,
-        "source": "VERAFILES",
-        "url": "https://verafiles.org/articles/fact-check-no-senate-order-to-detain-harry-roque",
-        "expected_verdict": "FALSE",
-        "claim": "Harry Roque has been ordered imprisoned by the Senate",
-        "doc_id": "eca0ad9e3f4e52269e87876a59f0b29a03b71f8c15eec02b925df7cba9580351",
-        "type": "LOCAL"
-    },
-    {
-        "index": 37,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/rachel-maddow-baby-surrogate/",
-        "expected_verdict": "FALSE",
-        "claim": "Rachel Maddow announced in July 2025 that she is having a baby via surrogacy.",
-        "doc_id": "4eb9151e3ac25eb6b8385b55116428e52da548887e239daa87149259bbb474e7",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 38,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/orca-jessica-radcliffe-death/",
-        "expected_verdict": "FALSE",
-        "claim": "Marine animal trainer Jessica Radcliffe was attacked and killed by an orca in front of a large crowd.",
-        "doc_id": "87567fe3f8e0ec2ee753ca6ae32a7fb65b2f1dfa385f430666dc7f9ee77539c0",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 39,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/trump-convicted-felonies/",
-        "expected_verdict": "FALSE",
-        "claim": "U.S. President-elect Donald Trump has never been convicted of any felonies.",
-        "doc_id": "5d07296dd222063b255ba80b3660ff531e439f43bf29d24a15dafd4a4af94edb",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 40,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/bluetooth-earbuds-brain-cancer/",
-        "expected_verdict": "FALSE",
-        "claim": "The radiation from Bluetooth earbuds, such as AirPods, causes brain cancer.",
-        "doc_id": "5239f1ffa83d294eabd8d4d2995529d08a277939072aba3bb8cff46fbc2994da",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 41,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2024/oct/29/facebook-posts/claims-elon-musk-is-developing-a-surrogate-robot-a/",
-        "expected_verdict": "FALSE",
-        "claim": "“Elon Musk launches new pregnancy robot.”",
-        "doc_id": "f5c437faf906378ef18eeb32249ea0162bcfced3045c738ce1beaa6528f038c5",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 42,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2024/nov/01/kamala-harris/kamala-harris-wrong-that-donald-trump-would-force/",
-        "expected_verdict": "FALSE",
-        "claim": "Former President Donald Trump would “force states to monitor women's pregnancies.”",
-        "doc_id": "400b247daa381d961df40966d96a9300ef83c817e7b0e7527a23de50bb234882",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 43,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2024/oct/22/facebook-posts/no-october-surprise-claims-melania-trump-said-she/",
-        "expected_verdict": "FALSE",
-        "claim": "“Melania Trump declares that she wants a divorce.”",
-        "doc_id": "390b7edd21d0ae79400bdbbe2bf69545cf48b1038a0900b27a88ef16593a0ac6",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 44,
-        "source": "RAPPLER",
-        "url": "https://www.rappler.com/newsbreak/fact-check/chiz-escudero-still-senate-president-august-2025/",
-        "expected_verdict": "FALSE",
-        "claim": "Senate President Chiz Escudero was removed from his post due to corruption.",
-        "doc_id": "82247b9a28eaf227b8594892ea2a852909ed13bdcc4a725e367a4a9bc902c679",
-        "type": "LOCAL"
-    },
-    {
-        "index": 45,
-        "source": "POLITIFACT",
-        "url": "https://www.politifact.com/factchecks/2024/oct/17/jd-vance/fact-check-here-is-how-we-know-vances-statement-th/",
-        "expected_verdict": "FALSE",
-        "claim": "Says former President Donald Trump did not lose the 2020 election.",
-        "doc_id": "95e4621ad5251eb8fd9025a79d1b67636289fcf214548a1b6ab78a0ed75461b2",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 46,
-        "source": "RAPPLER",
-        "url": "https://www.rappler.com/newsbreak/fact-check/no-iran-philippine-alliance-vs-china/",
-        "expected_verdict": "FALSE",
-        "claim": "Iran and the Philippines are forming an alliance against China.",
-        "doc_id": "0a167248015375f9ff40fbffec2bf16bb7e0c133e8b9193719f0714cba2ef7d2",
-        "type": "LOCAL"
-    },
-    {
-        "index": 47,
-        "source": "RAPPLER",
-        "url": "https://www.rappler.com/newsbreak/fact-check/russia-did-not-declare-war-united-states/",
-        "expected_verdict": "FALSE",
-        "claim": "Russian President Vladimir Putin has declared war on the United States.",
-        "doc_id": "d274e712421f0ff8bff706c7bd444c77776b5e5308e595ee90dae38cf91fd6aa",
-        "type": "LOCAL"
-    },
-    {
-        "index": 48,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/trump-deal-to-buy-greenland/",
-        "expected_verdict": "FALSE",
-        "claim": "Reports show U.S. President-elect Donald Trump has a deal ready to buy Greenland.",
-        "doc_id": "28543a4a0ca9b2d0d04fc6a2faf55e7f43f4a5ec2ff4b6516a24ad79adaf44d3",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 49,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/biden-worst-inflation-us-history/",
-        "expected_verdict": "FALSE",
-        "claim": "Inflation was the highest in U.S. history under President Joe Biden.",
-        "doc_id": "dc224cad8adcc6669e1274cf1fef5628e19d63316dacf3942c6ec1b8ad6b45b9",
-        "type": "INTERNATIONAL"
-    },
-    {
-        "index": 50,
-        "source": "SNOPES",
-        "url": "https://www.snopes.com/fact-check/harris-teleprompter-univision/",
-        "expected_verdict": "FALSE",
-        "claim": "Kamala Harris used a teleprompter during her town hall appearance on Univision.",
-        "doc_id": "480fa89b398da248ad61f5221857d490d05d2c8c4e80c988cba32013361af531",
-        "type": "INTERNATIONAL"
-    }
+  {
+    "index": 1,
+    "doc_id": "44de844809fa74fd4dd78c674c1a8d49412a39e0b293a30cb539d97b1babaa98",
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2016/aug/15/sean-patrick-maloney/donald-trump-against-same-sex-marriage/",
+    "expected_verdict": "TRUE",
+    "claim": "Donald Trump is against marriage equality.",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 2,
+    "doc_id": "9ae793a2099cd4311c479fb760a64fe28d38d2e834b13cef77ea16201d38c0bc",
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2016/may/16/mamie-locke/mamie-locke-says-us-has-low-voter-turnout-rate/",
+    "expected_verdict": "TRUE",
+    "claim": "The United States has a low voter turnout rate.",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 3,
+    "doc_id": "a7e1884574a13a279e13f581e190c3a20cbb7d5862fe920ddb33748aee4e621e",
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/daughter-trans-musk/",
+    "expected_verdict": "TRUE",
+    "claim": "Tech billionaire Elon Musk has a transgender daughter.",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 4,
+    "doc_id": "5979f3a72eb0873e50c92f88f64e40df9637a7c255835aff442ebd89986c9417",
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/kamala-harris-gun-owner/",
+    "expected_verdict": "TRUE",
+    "claim": "Democratic presidential candidate Kamala Harris is a gun owner.",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 5,
+    "doc_id": "d7e63eb553fde60512ca1ec3b63f0a927778f3b6628438c7fbfe4812c2e6dd10",
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/kamala-harris-biological-children/",
+    "expected_verdict": "TRUE",
+    "claim": "Vice President Kamala Harris does not have any biological children.",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 6,
+    "doc_id": "3b38c0723f12e4ab3b82da89644c0957fe8a31a1eed276f436ab878645807e3d",
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/trump-donation-kamala-harris/",
+    "expected_verdict": "TRUE",
+    "claim": "Former U.S. President Donald Trump once donated to Kamala Harris' campaign.",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 7,
+    "doc_id": "be04bec9425ab51debf04b7b5ef9c2153cc714597b5648e624635e4e6d9ec25c",
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/elon-musk-immigrant/",
+    "expected_verdict": "TRUE",
+    "claim": "Elon Musk is an immigrant to the United States.",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 8,
+    "doc_id": "971d143456f4b89a1daff95309d6a46f0b85a4893bbe04cb45579c191ed64ebb",
+    "source": "TSEK",
+    "url": "https://www.tsek.ph/vp-robredo-said-in-a-2016-radio-quiz-bee-that-ph-has-1700-islands/",
+    "expected_verdict": "TRUE",
+    "claim": "Vice President Leni Robredo once said that the Philippines has 1,700 islands.",
+    "type": "LOCAL"
+  },
+  {
+    "index": 9,
+    "doc_id": "8c50e30f000c19b2e779f4a359d68149e7da08a5323a5aba84796d45eae0287b",
+    "source": "TSEK",
+    "url": "https://www.tsek.ph/robredo-says-she-has-repeatedly-beaten-marcos-jr-in-election-related-contests/",
+    "expected_verdict": "TRUE",
+    "claim": "Vice President Leni Robredo has repeatedly beaten Ferdinand Marcos Jr. in election-related contests.",
+    "type": "LOCAL"
+  },
+  {
+    "index": 10,
+    "doc_id": "8d883202e0d79bb84630904afcbc19a5785c718c66f7df4b9897fa13f667fd4e",
+    "source": "TSEK",
+    "url": "https://www.tsek.ph/fact-check-the-philippines-used-to-have-a-local-tv-and-radio-brand-until-the-martial-law-of-marcos-destroyed-it/",
+    "expected_verdict": "TRUE",
+    "claim": "The Philippines had a promising local electronic and automotive industry but was cut short when Martial Law was declared.",
+    "type": "LOCAL"
+  },
+  {
+    "index": 11,
+    "doc_id": "6b4d677bc7d598404ea2ba729841f72fbbfa624325e04955231242d58ad80cf1",
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2016/nov/03/hillary-clinton/hillary-clinton-says-donald-trump-wants-undo-marri/",
+    "expected_verdict": "TRUE",
+    "claim": "Says Donald Trump wants to undo marriage equality.",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 12,
+    "doc_id": "8f4543bac54125e4c8738e172593f97eab4a5e129c981fdb8fea545221973838",
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/new-jersey-rhode-island-incest/",
+    "expected_verdict": "TRUE",
+    "claim": "Incest is legal in New Jersey and Rhode Island.",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 13,
+    "doc_id": "79ae19019752519634756843e256b699068f0d78e87847b5bd7e9eea7cf18f2b",
+    "source": "FULLFACT",
+    "url": "https://fullfact.org/online/kangaroo-shoes/",
+    "expected_verdict": "TRUE",
+    "claim": "Adidas, Puma and Nike use kangaroo leather in their football boots.",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 14,
+    "doc_id": "47741eb5519056bc95dd741a72a21e31b4fcce1111903dd7dbc1d4567071e2cd",
+    "source": "FULLFACT",
+    "url": "https://fullfact.org/online/flawed-list-conservative-costs/",
+    "expected_verdict": "TRUE",
+    "claim": "The EU ‘divorce bill’ will cost £42 billion.",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "doc_id": "d318085a3aa883843fe16cd13f699ad13db4989d418a6f35100f39891f8e4515",
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2020/jan/24/facebook-posts/yes-iran-does-ban-twitter/",
+    "expected_verdict": "TRUE",
+    "claim": "Twitter is banned in Iran.",
+    "type": "INTERNATIONAL",
+    "index": 15
+  },
+  {
+    "doc_id": "6652ecca3c545c68b5d6bb0668c02a81a50aa2429b615cba02a1f61489e97f60",
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2018/apr/12/marcus-molinaro/do-ny-residents-have-among-highest-tax-burdens-mol/",
+    "expected_verdict": "TRUE",
+    "claim": "New York has among the highest tax burdens of any state in the nation",
+    "type": "INTERNATIONAL",
+    "index": 16
+  },
+  {
+    "doc_id": "6c3c69e9a44e64dbcbb2b32cbae8a265af7ee8ee21734692c3f73c18c90b93e3",
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2016/aug/17/gary-johnson/gary-johnson-correct-most-americans-support-legali/",
+    "expected_verdict": "TRUE",
+    "claim": "Most Americans support the legalization of marijuana.",
+    "type": "INTERNATIONAL",
+    "index": 17
+  },
+  {
+    "doc_id": "8096d4a3135d688485dd61d39ac90975274185f27f5dab85ff8ea2d987dc1eb7",
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2021/aug/31/mitt-romney/mitt-romney-accurately-says-trump-administration-w/",
+    "expected_verdict": "TRUE",
+    "claim": "The Trump administration worked to free 5,000 Taliban prisoners.",
+    "type": "INTERNATIONAL",
+    "index": 18
+  },
+  {
+    "doc_id": "1cf36e87a0ad21ec60163d8f8a47a11aba6124b50ff64c68b9f22da158987940",
+    "source": "FULLFACT",
+    "url": "https://fullfact.org/crime/knife-crime-october-2019/",
+    "expected_verdict": "TRUE",
+    "claim": "Knife crime has soared to a record high.",
+    "type": "INTERNATIONAL",
+    "index": 19
+  },
+  {
+    "doc_id": "c4fef82369ede2b153efa1cb083f88a93256bc68f3156e8077bef4cebef51e80",
+    "source": "FULLFACT",
+    "url": "https://fullfact.org/economy/uk-us-trading-and-investment/",
+    "expected_verdict": "TRUE",
+    "claim": "The USA is the largest investor in the UK economy.",
+    "type": "INTERNATIONAL",
+    "index": 20
+  },
+  {
+    "doc_id": "0a7090e76d6c3f85ea75b67925225e1e7ccf7d442dc807790a9123478359c43e",
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/rfk-jr-heroin-addict/",
+    "expected_verdict": "TRUE",
+    "claim": "Robert F. Kennedy Jr. was a heroin addict from his teenage years into adulthood.",
+    "type": "INTERNATIONAL",
+    "index": 21
+  },
+  {
+    "index": 22,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/trump-ross-ulbricht-silk-road-marketplace/",
+    "expected_verdict": "TRUE",
+    "claim": "U.S. President Donald Trump pardoned Ross Ulbricht, the creator of dark web marketplace Silk Road.",
+    "doc_id": "fb4916e57b86230cc660134f7ac5527ab8f09ae69e6ecb1b68e88d512770c339",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 23,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/hersheys-chocolate-founder-school/",
+    "expected_verdict": "TRUE",
+    "claim": "The founder of The Hershey Chocolate Company, Milton Hershey, founded a boarding school for orphaned boys.",
+    "doc_id": "32ef520fde22b9f17390c73230ea9769852a9cb564aca2586592918a3e3bf275",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 24,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/spotify-ice-recruitment-ads/",
+    "expected_verdict": "TRUE",
+    "claim": "In 2025, streaming service Spotify ran recruitment advertisements for U.S. Immigration and Customs Enforcement.",
+    "doc_id": "ea0ebf003f82dfb5c6b871f2de0a9e710350d8a7b84ae5bd16cda7b8323236e1",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 25,
+    "source": "FULLFACT",
+    "url": "https://fullfact.org/election-2024/bbc-debate-sunak-starmer/",
+    "expected_verdict": "TRUE",
+    "claim": "Labour will introduce a “retirement tax”.",
+    "doc_id": "66ab19224cfedca95f09cfb5435df4c364262149c2d8a919344c8debfd9880d1",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 26,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/diddy-ye-prince-harry-pic/",
+    "expected_verdict": "TRUE",
+    "claim": "An image authentically depicts Sean \"Diddy\" Combs with Prince Harry and Kanye \"Ye\" West.",
+    "doc_id": "01774e811e5055d1b8289c02c91bc2d01bdc6d6e9503f33f554c2b5903b90f0e",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 27,
+    "source": "FULLFACT",
+    "url": "https://fullfact.org/news/anneliese-dodds-women-mps/",
+    "expected_verdict": "TRUE",
+    "claim": "Labour is the first political party to reach parity in terms of men and women MPs.",
+    "doc_id": "f51a64f88eb866ed9f0babbbbb15ca2b3814c40c899515755ee8c2ed69fc3498",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 28,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/joe-biden-stutter/",
+    "expected_verdict": "TRUE",
+    "claim": "U.S. President Joe Biden has a speech impediment.",
+    "doc_id": "12ca312554717c525dbc087b115d793666415e07fc08d91fd50b81c670cd9517",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 29,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2024/jun/03/joe-biden/does-trump-want-to-repeal-the-aca-as-biden-says-tr/",
+    "expected_verdict": "TRUE",
+    "claim": "Donald Trump wants to terminate the Affordable Care Act.",
+    "doc_id": "d9e24ebb87a1b65a4253c30ba1943bfc393117e999839ef60138bb82a4b3bb97",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 30,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2023/nov/14/ted-cruz/does-texas-really-outproduce-california-in-wind-en/",
+    "expected_verdict": "TRUE",
+    "claim": "“We produce a lot more wind energy in Texas than California does.”",
+    "doc_id": "17d99db7f83cd3ab227e6b7f99af14f45772f594c64885ddd7a04842aa820da7",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 31,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2024/jul/23/kamala-harris/kamala-harris-correct-that-project-2025-would-end/",
+    "expected_verdict": "TRUE",
+    "claim": "Project 2025 would “end Head Start.”",
+    "doc_id": "45e2358528ba5f4ea4f2381f750f851c2764849c003cc51f29e6ca65015fb7e6",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 32,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2023/apr/18/kamala-harris/kamala-harris-said-1-in-5-americans-have-lost-a-fa/",
+    "expected_verdict": "TRUE",
+    "claim": "“One in 5 Americans has lost a family member to gun violence.”",
+    "doc_id": "1f536d07a2f6af77a35a3117c4f72e6b6a0430de4e771d2869d9c67ab9327141",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 33,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2022/jul/14/val-demings/val-demings-ad-criticizes-rubios-attendance-record/",
+    "expected_verdict": "TRUE",
+    "claim": "Sen. Marco Rubio has \"one of the worst attendance records in the Senate.\"",
+    "doc_id": "07c7a1172d4b441c9c5052d74e85fa7874b231a3947f876e88e2242bc7200208",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 34,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2021/nov/09/david-gura/west-virginia-home-zero-billionaires/",
+    "expected_verdict": "TRUE",
+    "claim": "“West Virginia is home to zero billionaires.”",
+    "doc_id": "4fb0f0119bc6c4f3046a534b508f16745ce6079227f8a31ab00b7f3f868c7677",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 35,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2022/feb/21/john-cornyn/cornyn-right-drug-overdose-deaths-topped100000-nat/",
+    "expected_verdict": "TRUE",
+    "claim": "100,000 Americans died of an overdose in a single year.",
+    "doc_id": "d9ea477e675689c46d4e017f540a9a079bf39035ec55a7592cecdc7c96f26126",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 36,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2020/jun/11/planned-parenthood/yes-if-federal-abortion-law-were-overturned-wiscon/",
+    "expected_verdict": "TRUE",
+    "claim": "If Roe is overturned, Wisconsin has a law on the books that would immediately make abortion a crime.",
+    "doc_id": "a796fd67211a6b0d524d7096a77b0712121c1c164fd1d513671045aafec92cd7",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 37,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2020/mar/25/facebook-posts/bill-gates-warned-2015-we-were-unprepared-infectio/",
+    "expected_verdict": "TRUE",
+    "claim": "“Bill Gates told us about the coronavirus in 2015.”",
+    "doc_id": "b1eb7e9457757066ba9f96955ee9f70f5fa4bb8d8b80d1e148ffcb93581891db",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 38,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2020/jun/25/dan-forest/how-many-states-have-reopened-gyms/",
+    "expected_verdict": "TRUE",
+    "claim": "North Carolina is one of four states that hasn't opened gyms.",
+    "doc_id": "ff8dd87375e0a330d7d9d700bbc7dfe5cc4c74da1ba1002ef14a55393fefc378",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 39,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2020/jul/24/donald-trump/fact-checking-trump-rising-murders-philly/",
+    "expected_verdict": "TRUE",
+    "claim": "“Murders this year have spiked 27% in Philadelphia.”",
+    "doc_id": "3459a43feb550c3f18609f38b47dd221a7988ea602530545c6e130043e783acc",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 40,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2018/mar/23/evan-jenkins/does-west-virginia-lead-nation-overdose-drug-death/",
+    "expected_verdict": "TRUE",
+    "claim": "West Virginia has the highest overdose death rate in the nation.",
+    "doc_id": "27dcfc707c26d608183237d12a6e593c756cece1a6566d31480e7dbf7ad14ea9",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 41,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2013/sep/03/john-mccain/mccain-says-million-children-are-refugees-syrian-c/",
+    "expected_verdict": "TRUE",
+    "claim": "Fleeing Syria, a million children are now refugees.",
+    "doc_id": "66efe252ffca58cc1ac9fd5d4393eab7782340abf8d138024c58f2d1ace514a2",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 42,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2020/jul/08/ron-mcmullen/fact-checking-history-iowa-countys-namesake/",
+    "expected_verdict": "TRUE",
+    "claim": "Former U.S. Vice President Richard Mentor Johnson was a slave owner married to one of his slaves and father of two children with her.",
+    "doc_id": "c9d13cbf4652ee6f94d1d4ddf090517b899f5c448819b65e129dc4e12771a337",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 43,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2020/aug/12/state-democratic-party-wisconsin/yes-high-percentage-wisconsin-renters-are-risk-evi/",
+    "expected_verdict": "TRUE",
+    "claim": "“34% of Wisconsin renters are at risk of eviction.”",
+    "doc_id": "43c37bb140d0e9df2181092d8ac141e780c80de26b9df48d31254cdf4f3e81b2",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 44,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2020/sep/08/ron-johnson/johnson-mostly-track-claim-flu-harder-kids-covid-1/",
+    "expected_verdict": "TRUE",
+    "claim": "For younger people, seasonal flu is “in many cases” a deadlier virus than COVID-19",
+    "doc_id": "8f780eb7d1b99133e75e58f415718ac833e24eaa30ba173c26e0d73438f6cb65",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 45,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2022/aug/26/mark-kelly/blake-masters-still-supports-national-abortion-ban/",
+    "expected_verdict": "TRUE",
+    "claim": "Blake Masters “wants to pass a national ban on abortion.”",
+    "doc_id": "103e358560536ca736853f7a889afc44d45b4e7fd3b006359aec2054cb713e00",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 46,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2020/dec/04/mandy-cohen/nc-covid-19-deaths-surpass-10-years-flu-deaths/",
+    "expected_verdict": "TRUE",
+    "claim": "Says COVID-19 has killed more North Carolinians in a year than the flu has in 10 years.",
+    "doc_id": "2aaaa58509bf122cfb6862f75f0983cb73b21147d07ad7312e053a9164ea588a",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 47,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2021/jan/20/kirk-cox/virginia-among-slowest-states-vaccine-rollout-cox-/",
+    "expected_verdict": "TRUE",
+    "claim": "Virginia ranks “in the bottom third of states” in administering the COVID-19 vaccine.",
+    "doc_id": "5c265aacabf826e3bc9ef1009b77ffc820cec096fffcd96b5b9a6110f7589698",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 48,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2021/feb/18/facebook-posts/yes-aversion-federal-regulation-drove-texas-isolat/",
+    "expected_verdict": "TRUE",
+    "claim": "The Texas power grid is not part of the US power grid because they wanted to avoid federal regulation.",
+    "doc_id": "3897ae43b137d4f84a288135262123407485cc673411c84508d76cf131a47fc6",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 49,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2021/jan/28/jennifer-boysko/us-only-industrialized-nation-no-paid-family-leave/",
+    "expected_verdict": "TRUE",
+    "claim": "“The United States is the only industrialized, modernized country that does not already have a paid family medical leave program in place.”",
+    "doc_id": "311d2ba487ffbe03dc1751c5c7183f9930cd2c3cab1711138ed58f42930c3c82",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 50,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2021/apr/12/nicholas-langworthy/does-new-york-state-have-highest-taxes-united-stat/",
+    "expected_verdict": "TRUE",
+    "claim": "Residents of New York state “pay the highest taxes in the nation.”",
+    "doc_id": "06e1cd4253100e12b8cb9cfe637fc9add7753804860d09b5ed3408e02c24812a",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 1,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2025/jul/29/benjamin-netanyahu/benjamin-netanyahus-pants-on-fire-statement-that-t/",
+    "expected_verdict": "FALSE",
+    "claim": "“There is no starvation in Gaza.”",
+    "doc_id": "508afeb08455402b5b7d95e60ea883822b99b72a777c59ade48f1fc4c6b3cfae",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 2,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2025/apr/02/jd-vance/jd-vance-falsely-says-maryland-man-deported-to/",
+    "expected_verdict": "FALSE",
+    "claim": "Kilmar Armando Abrego Garcia “was a convicted MS-13 gang member.”",
+    "doc_id": "45692bd48d57d0d0d495e7f97434dd8bb3ea19330cf382ffce55c3bd28964365",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 3,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2025/feb/25/instagram-posts/no-former-first-daughter-malia-obama-didnt-get-22/",
+    "expected_verdict": "FALSE",
+    "claim": "“Malia Obama received $2.2 million in funds from USAID.”",
+    "doc_id": "5cdf54c78c2efde4d1b8088ef4768bd6afadb5339175d616878f4916f9622bd0",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 4,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2025/jan/07/facebook-posts/did-elon-musk-acquire-boeing-no-thats-a-baseless-c/",
+    "expected_verdict": "FALSE",
+    "claim": "“Elon Musk has just acquired Boeing.”",
+    "doc_id": "d5c07c0770c1e1994ae0f03a3ae572808f60f0a314db56cf7ab90dce821ac3b1",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 5,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2025/jan/10/viral-image/no-actor-tom-hanks-didnt-die-in-a-fatal-new-year-c/",
+    "expected_verdict": "FALSE",
+    "claim": "Actor Tom Hanks died in a “fatal car accident.”",
+    "doc_id": "a647c41efa92eae1e0a55efe2698e288b887362a8eb6556f90b5881c3e40b4d6",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 6,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2024/dec/05/threads-posts/elon-musk-has-been-a-us-citizen-since-2002/",
+    "expected_verdict": "FALSE",
+    "claim": "“Elon Musk is not a citizen of the United States.”",
+    "doc_id": "b4cf8f4bd138c23df9f75613bb5f3e07181367eeaa33d4536dd211bed61bf9e1",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 7,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2024/oct/12/winsenate/democratic-ad-overstates-dave-mccormicks-abortion/",
+    "expected_verdict": "FALSE",
+    "claim": "“Dave McCormick is fully against abortion.”",
+    "doc_id": "62a6dd10be9928953cd2351f86dbe958e28c8683f15fd2dbea8235fc6e5da561",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 8,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2024/sep/24/threads-posts/no-travis-kelce-didnt-endorse-kamala-harris-for-pr/",
+    "expected_verdict": "FALSE",
+    "claim": "Travis Kelce endorsed Kamala Harris.",
+    "doc_id": "cad19e74da08f733307803f009b5a5ca5f7f4ecc4cb41639bed6dceb38dabaa7",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 9,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/nasa-announces-life-on-mars/",
+    "expected_verdict": "FALSE",
+    "claim": "NASA announced in September 2025 that it had found life on Mars.",
+    "doc_id": "b5586cb885638458fbdb456f1074d13a44bc30b2d547543c99d23b4d25daf0c2",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 10,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/valentines-day-history/",
+    "expected_verdict": "FALSE",
+    "claim": "Greeting card companies invented Valentine's Day.",
+    "doc_id": "5fc44480ac230de28a4b9a2df1587374795995b05c38f7bcfa3b17c6fd58531e",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 11,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/who-you-vote-for-is-not-public-record/",
+    "expected_verdict": "FALSE",
+    "claim": "In Indiana, who you voted for is public record.",
+    "doc_id": "96b4709ffbc988790ad9b8ad964ff90140b33d2951b4c8ec1277388451b76ee4",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 12,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/biden-worst-inflation-in-us-history/",
+    "expected_verdict": "FALSE",
+    "claim": "Inflation was the highest in U.S. history under President Joe Biden.",
+    "doc_id": "e4ec6e70b16f0417842545854ddfec6894f6b0e169d1b89ddb06abece7deae3b",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 13,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/george-washingtons-wooden-teeth/",
+    "expected_verdict": "FALSE",
+    "claim": "U.S. President George Washington had wooden teeth.",
+    "doc_id": "5b1b0973e59900ab00702568c5bf013b1a25b9bced1912928fd901b4ae6c1141",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 14,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2019/apr/02/viral-image/no-mueller-report-wasnt-leaked/",
+    "expected_verdict": "FALSE",
+    "claim": "The Mueller report was leaked.",
+    "doc_id": "40271102c64844af686d9b7c90260f4f16e6637d3d19135d835f871e693504c2",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 15,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2025/apr/22/tiktok-posts/simpsons-didnt-predict-pope-francis-would-die-2025/",
+    "expected_verdict": "FALSE",
+    "claim": "“The Simpsons” predicted Pope Francis’ 2025 death.",
+    "doc_id": "9942dcd877120404f590bf1d5db24e83744c32fedc02b77d1328f3235ef90340",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "source": "VERAFILES",
+    "url": "https://verafiles.org/articles/vera-files-fact-check-duterte-not-replacing-romualdez-as-new-house-speaker",
+    "expected_verdict": "FALSE",
+    "claim": "Rodrigo Duterte has replaced Martin Romualdez as House speaker.",
+    "doc_id": "bba0e4e21cada60d748943c59ab785667e4e864c5f471ffd96564adff124d252",
+    "type": "LOCAL",
+    "index": 16
+  },
+  {
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2023/aug/18/instagram-posts/no-evidence-direct-energy-weapons-caused-maui-wild/",
+    "expected_verdict": "FALSE",
+    "claim": "Hawaii is being attacked by direct energy weapons.",
+    "doc_id": "6c7ab5f22c56f216a0cdb516ed519d532f068ea4f6ca697cab42f8158094a3e3",
+    "type": "INTERNATIONAL",
+    "index": 17
+  },
+  {
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2024/jul/30/donald-trump/fact-checking-trumps-false-statement-that-kamala-h/",
+    "expected_verdict": "FALSE",
+    "claim": "Kamala Harris “wants to defund the police.”",
+    "doc_id": "10aee83995654f7ea165aa886c0c87186c4b0da71fe24e3fc024d22c626db7a0",
+    "type": "INTERNATIONAL",
+    "index": 18
+  },
+  {
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2024/jul/16/instagram-posts/no-switzerland-didnt-ban-mammograms/",
+    "expected_verdict": "FALSE",
+    "claim": "Switzerland banned mammograms.",
+    "doc_id": "ccf1a30a639f452e2afcd0ff0570048a31fb2e760f63f1e3b96051a63a49044f",
+    "type": "INTERNATIONAL",
+    "index": 19
+  },
+  {
+    "index": 20,
+    "source": "RAPPLER",
+    "url": "https://www.rappler.com/newsbreak/fact-check/covid-19-vaccines-kill-elderly-people/",
+    "expected_verdict": "FALSE",
+    "claim": "COVID-19 vaccines can kill elderly people.",
+    "doc_id": "ada1cd57fbdfec73f7a2af2a81f5e12f8aef837dc9d43f6320b2edd5d8af8c6f",
+    "type": "LOCAL"
+  },
+  {
+    "index": 21,
+    "source": "RAPPLER",
+    "url": "https://www.rappler.com/newsbreak/fact-check/ferdinand-marcos-richest-person-world/",
+    "expected_verdict": "FALSE",
+    "claim": "Si Ferdinand Marcos Sr. ang pinakamayamang tao sa mundo.",
+    "doc_id": "f7c78454f3e9a18f284e26263eb6e3ad32edbd777e5fefede3875245d94ad528",
+    "type": "LOCAL"
+  },
+  {
+    "index": 22,
+    "source": "RAPPLER",
+    "url": "https://www.rappler.com/newsbreak/fact-check/death-penalty-not-yet-approved-senate/",
+    "expected_verdict": "FALSE",
+    "claim": "The death penalty in the Philippines has been approved in the Senate.",
+    "doc_id": "b1be1f3dc7a7fcbc3edd197382a77683e2ab6144f741020012cd9714afa24fae",
+    "type": "LOCAL"
+  },
+  {
+    "index": 23,
+    "source": "RAPPLER",
+    "url": "https://www.rappler.com/newsbreak/fact-check/yellowstone-supervolcano-not-due-erupt-anytime-soon/",
+    "expected_verdict": "FALSE",
+    "claim": "The Yellowstone supervolcano is due for an eruption any time soon.",
+    "doc_id": "d1b0548c0b40b2693b9770ed0fe74612d82237664c064821f3a3684a66596c81",
+    "type": "LOCAL"
+  },
+  {
+    "index": 24,
+    "source": "RAPPLER",
+    "url": "https://www.rappler.com/newsbreak/fact-check/philippines-no-chinook-helicopter-factory/",
+    "expected_verdict": "FALSE",
+    "claim": "The Philippines has a Chinook helicopter factory.",
+    "doc_id": "13b62546eae0b97d8a3959f3844bc8f0a0ad0578cb0a812446b424891db234fb",
+    "type": "LOCAL"
+  },
+  {
+    "index": 25,
+    "source": "RAPPLER",
+    "url": "https://www.rappler.com/newsbreak/fact-check/russia-did-not-declare-war-united-states/",
+    "expected_verdict": "FALSE",
+    "claim": "Russian President Vladimir Putin has declared war on the United States.",
+    "doc_id": "d274e712421f0ff8bff706c7bd444c77776b5e5308e595ee90dae38cf91fd6aa",
+    "type": "LOCAL"
+  },
+  {
+    "index": 26,
+    "source": "RAPPLER",
+    "url": "https://www.rappler.com/newsbreak/fact-check/billy-crawford-alive/",
+    "expected_verdict": "FALSE",
+    "claim": "Filipino actor and singer Billy Crawford has died.",
+    "doc_id": "d40c42f29445ea079759fee75746f55a490df6dcf91bf1fb04432bd96f72a7f4",
+    "type": "LOCAL"
+  },
+  {
+    "index": 27,
+    "source": "RAPPLER",
+    "url": "https://www.rappler.com/newsbreak/fact-check/philippines-yet-to-receive-corvettes-south-korea/",
+    "expected_verdict": "FALSE",
+    "claim": "The Philippine Navy has received two new warships from South Korea.",
+    "doc_id": "f5dbfba87509dcff6d6bd77e147bd5a89ddb8520c258d5622e90927d5be3b68c",
+    "type": "LOCAL"
+  },
+  {
+    "index": 28,
+    "source": "RAPPLER",
+    "url": "https://www.rappler.com/newsbreak/fact-check/china-did-not-attack-taiwan-may-28-2024/",
+    "expected_verdict": "FALSE",
+    "claim": "China has launched an attack against Taiwan.",
+    "doc_id": "d057e6be338948e5073430ca82faf7d116b620d53a88fcee582141ed6f933634",
+    "type": "LOCAL"
+  },
+  {
+    "index": 29,
+    "source": "VERAFILES",
+    "url": "https://verafiles.org/articles/fact-check-old-video-of-manny-pacquiao-edited-using-ai-to-promote-online-gambling-app",
+    "expected_verdict": "FALSE",
+    "claim": "Former senator and international boxing champ Manny Pacquiao is promoting an online gambling app.",
+    "doc_id": "974ee572a31bb0f293b86c3d0f76f9e97b5af0109945d0d77463bb1f6244baf6",
+    "type": "LOCAL"
+  },
+  {
+    "index": 30,
+    "source": "VERAFILES",
+    "url": "https://verafiles.org/articles/fact-check-villanueva-did-not-resign-as-senator",
+    "expected_verdict": "FALSE",
+    "claim": "Joel Villanueva has resigned from the Philippine Senate",
+    "doc_id": "f292c78fa1a67c03c78d61437b0f6ea1cce8daeef4f28a756013842d81f9c190",
+    "type": "LOCAL"
+  },
+  {
+    "index": 31,
+    "source": "VERAFILES",
+    "url": "https://verafiles.org/articles/fact-check-kris-aquino-death-bewitched-rumors-fake",
+    "expected_verdict": "FALSE",
+    "claim": "Kris Aquino has been bewitched and passed away.",
+    "doc_id": "7087392db454aa226e98074bfc794210097915ac61e0b8d214ccf62d134877a3",
+    "type": "LOCAL"
+  },
+  {
+    "index": 32,
+    "source": "VERAFILES",
+    "url": "https://verafiles.org/articles/fact-check-marcoleta-falsely-claims-no-such-thing-as-wps-cites-wrong-data",
+    "expected_verdict": "FALSE",
+    "claim": "The West Philippine Sea does not appear in any maps.",
+    "doc_id": "21684a73b5149512b942c8d54e96dfe23d7cc9c09f5c236e335a796575f620ba",
+    "type": "LOCAL"
+  },
+  {
+    "index": 33,
+    "source": "VERAFILES",
+    "url": "https://verafiles.org/articles/fact-check-claim-that-pfizer-hasnt-cured-any-disease-not-true",
+    "expected_verdict": "FALSE",
+    "claim": "Pfizer has not cured any type of disease",
+    "doc_id": "9b869dc915b984ee87891da290fa9e18f5633f6af94e1fa57a06b9e9ebdc97a2",
+    "type": "LOCAL"
+  },
+  {
+    "index": 34,
+    "source": "VERAFILES",
+    "url": "https://verafiles.org/articles/fact-check-ph-did-not-bomb-chinese-monster-ship-in-wps",
+    "expected_verdict": "FALSE",
+    "claim": "The Philippines blew up China’s monster ship in the West Philippine Sea",
+    "doc_id": "ee696e6170345f5cbf02fe4e32c942f40bd430ef5be689ebc2bb258158d8485f",
+    "type": "LOCAL"
+  },
+  {
+    "index": 35,
+    "source": "VERAFILES",
+    "url": "https://verafiles.org/articles/fact-check-marcos-stealing-ph-gold-reserves-has-no-basis",
+    "expected_verdict": "FALSE",
+    "claim": "President Ferdinand Marcos Jr. stole the country’s gold reserves",
+    "doc_id": "3a64da80df237c655339078d89f5fbb39c08dc63aaf41d497b0172a070e9dafd",
+    "type": "LOCAL"
+  },
+  {
+    "index": 36,
+    "source": "VERAFILES",
+    "url": "https://verafiles.org/articles/fact-check-no-senate-order-to-detain-harry-roque",
+    "expected_verdict": "FALSE",
+    "claim": "Harry Roque has been ordered imprisoned by the Senate",
+    "doc_id": "eca0ad9e3f4e52269e87876a59f0b29a03b71f8c15eec02b925df7cba9580351",
+    "type": "LOCAL"
+  },
+  {
+    "index": 37,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/rachel-maddow-baby-surrogate/",
+    "expected_verdict": "FALSE",
+    "claim": "Rachel Maddow announced in July 2025 that she is having a baby via surrogacy.",
+    "doc_id": "4eb9151e3ac25eb6b8385b55116428e52da548887e239daa87149259bbb474e7",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 38,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/orca-jessica-radcliffe-death/",
+    "expected_verdict": "FALSE",
+    "claim": "Marine animal trainer Jessica Radcliffe was attacked and killed by an orca in front of a large crowd.",
+    "doc_id": "87567fe3f8e0ec2ee753ca6ae32a7fb65b2f1dfa385f430666dc7f9ee77539c0",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 39,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/trump-convicted-felonies/",
+    "expected_verdict": "FALSE",
+    "claim": "U.S. President-elect Donald Trump has never been convicted of any felonies.",
+    "doc_id": "5d07296dd222063b255ba80b3660ff531e439f43bf29d24a15dafd4a4af94edb",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 40,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/bluetooth-earbuds-brain-cancer/",
+    "expected_verdict": "FALSE",
+    "claim": "The radiation from Bluetooth earbuds, such as AirPods, causes brain cancer.",
+    "doc_id": "5239f1ffa83d294eabd8d4d2995529d08a277939072aba3bb8cff46fbc2994da",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 41,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2024/oct/29/facebook-posts/claims-elon-musk-is-developing-a-surrogate-robot-a/",
+    "expected_verdict": "FALSE",
+    "claim": "“Elon Musk launches new pregnancy robot.”",
+    "doc_id": "f5c437faf906378ef18eeb32249ea0162bcfced3045c738ce1beaa6528f038c5",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 42,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2024/nov/01/kamala-harris/kamala-harris-wrong-that-donald-trump-would-force/",
+    "expected_verdict": "FALSE",
+    "claim": "Former President Donald Trump would “force states to monitor women's pregnancies.”",
+    "doc_id": "400b247daa381d961df40966d96a9300ef83c817e7b0e7527a23de50bb234882",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 43,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2024/oct/22/facebook-posts/no-october-surprise-claims-melania-trump-said-she/",
+    "expected_verdict": "FALSE",
+    "claim": "“Melania Trump declares that she wants a divorce.”",
+    "doc_id": "390b7edd21d0ae79400bdbbe2bf69545cf48b1038a0900b27a88ef16593a0ac6",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 44,
+    "source": "RAPPLER",
+    "url": "https://www.rappler.com/newsbreak/fact-check/chiz-escudero-still-senate-president-august-2025/",
+    "expected_verdict": "FALSE",
+    "claim": "Senate President Chiz Escudero was removed from his post due to corruption.",
+    "doc_id": "82247b9a28eaf227b8594892ea2a852909ed13bdcc4a725e367a4a9bc902c679",
+    "type": "LOCAL"
+  },
+  {
+    "index": 45,
+    "source": "POLITIFACT",
+    "url": "https://www.politifact.com/factchecks/2024/oct/17/jd-vance/fact-check-here-is-how-we-know-vances-statement-th/",
+    "expected_verdict": "FALSE",
+    "claim": "Says former President Donald Trump did not lose the 2020 election.",
+    "doc_id": "95e4621ad5251eb8fd9025a79d1b67636289fcf214548a1b6ab78a0ed75461b2",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 46,
+    "source": "RAPPLER",
+    "url": "https://www.rappler.com/newsbreak/fact-check/no-iran-philippine-alliance-vs-china/",
+    "expected_verdict": "FALSE",
+    "claim": "Iran and the Philippines are forming an alliance against China.",
+    "doc_id": "0a167248015375f9ff40fbffec2bf16bb7e0c133e8b9193719f0714cba2ef7d2",
+    "type": "LOCAL"
+  },
+  {
+    "index": 47,
+    "source": "RAPPLER",
+    "url": "https://www.rappler.com/newsbreak/fact-check/russia-did-not-declare-war-united-states/",
+    "expected_verdict": "FALSE",
+    "claim": "Russian President Vladimir Putin has declared war on the United States.",
+    "doc_id": "d274e712421f0ff8bff706c7bd444c77776b5e5308e595ee90dae38cf91fd6aa",
+    "type": "LOCAL"
+  },
+  {
+    "index": 48,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/trump-deal-to-buy-greenland/",
+    "expected_verdict": "FALSE",
+    "claim": "Reports show U.S. President-elect Donald Trump has a deal ready to buy Greenland.",
+    "doc_id": "28543a4a0ca9b2d0d04fc6a2faf55e7f43f4a5ec2ff4b6516a24ad79adaf44d3",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 49,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/biden-worst-inflation-us-history/",
+    "expected_verdict": "FALSE",
+    "claim": "Inflation was the highest in U.S. history under President Joe Biden.",
+    "doc_id": "dc224cad8adcc6669e1274cf1fef5628e19d63316dacf3942c6ec1b8ad6b45b9",
+    "type": "INTERNATIONAL"
+  },
+  {
+    "index": 50,
+    "source": "SNOPES",
+    "url": "https://www.snopes.com/fact-check/harris-teleprompter-univision/",
+    "expected_verdict": "FALSE",
+    "claim": "Kamala Harris used a teleprompter during her town hall appearance on Univision.",
+    "doc_id": "480fa89b398da248ad61f5221857d490d05d2c8c4e80c988cba32013361af531",
+    "type": "INTERNATIONAL"
+  }
 ]
