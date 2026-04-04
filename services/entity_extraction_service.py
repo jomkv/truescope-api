@@ -47,23 +47,33 @@ class EntityExtractionService:
                     entities[ent_text] = ent.label_
 
         # 3. Filter & Cleanup
-        # Remove entities that are just generic tokens or entirely made of stopwords.
+        # Remove entities that are just generic tokens, single stopwords, or phrases 
+        # made entirely of generic words (e.g. "super typhoon").
         filtered_entities = []
         for ent_text, label in entities.items():
-            ent_low = ent_text.lower()
+            ent_low = ent_text.lower().strip()
             tokens = ent_low.split()
             
-            # Filter if EVERY word in a multi-word phrase is generic/stopword
+            # 1. Skip if the entire text is a single stopword or generic token
+            if ent_low in stop_lower or ent_low in generic_lower:
+                continue
+                
+            # 2. Skip if it's too short (garbage tokens like "I" or "X")
+            if len(ent_text) <= 1:
+                continue
+
+            # 3. Filter if EVERY word in a multi-word phrase is generic/stopword
+            # This catches "Super Typhoon" but keeps "Super Typhoon Uwan"
             is_all_generic = all(t in generic_lower or t in stop_lower for t in tokens)
-            
-            if is_all_generic or len(ent_text) <= 1:
+            if is_all_generic:
                 continue
                 
             filtered_entities.append((ent_text, label))
 
         # 4. Fallback: If no entities found, use the whole text as a pseudo-entity
         if not filtered_entities and len(text.strip()) > 3:
-            # We label it as 'MISC' for the downstream gates to handle
-            filtered_entities.append((text.strip(), "MISC"))
+            # We Title-Case the fallback to help with downstream matching
+            fallback_text = text.strip().title()
+            filtered_entities.append((fallback_text, "MISC"))
 
         return filtered_entities
