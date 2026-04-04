@@ -176,47 +176,68 @@ class StatsService:
     @staticmethod
     def calculate_bias_consistency(results: list[ArticleResultModel]) -> float:
         """
-        Calculate overall bias consistency - how well bias patterns align with verdicts.
-
-        Computes a score on a -1 to 1 scale based on how consistently biased sources produce aligned verdicts.
-        A high score means biased sources reliably produce verdicts consistent with their bias.
-
+        Calculate Cross-Spectrum Consensus - how well sources with different biases agree on the verdict.
+        
+        A high score means sources from across the ideological spectrum (e.g., Left and Right) 
+        are producing the SAME verdict, indicating a strong, bias-independent consensus.
+        
         Returns -1 to 1 where:
-        - -1 = No consistency between bias and verdict
-        - 1 = Perfect consistency between bias and verdict
+        - 1 = Perfect consensus across different biases
+        - 0 = Neutral / Mixed signals
+        - -1 = High polarization (sources agree only within their own bias groups)
         """
-        if not results:
+        if not results or len(results) < 2:
             return 0.0
 
-        consistency_scores = []
-
-        for result in results:
-            bias = result.source_bias
-            verdict = result.verdict
-
-            # Skip if missing bias or verdict
-            if not bias or verdict is None:
+        # Group results by verdict polarity (Support, Refute, Neutral)
+        # We use a small threshold to avoid 0.0001 being treated as non-neutral
+        support_group = []
+        refute_group = []
+        
+        for r in results:
+            if r.verdict is None:
                 continue
+            
+            bias_val = SOURCE_BIAS_SPECTRUM_MAP.get(r.source_bias, 0)
+            
+            if r.verdict > 0.1:
+                support_group.append(bias_val)
+            elif r.verdict < -0.1:
+                refute_group.append(bias_val)
 
-            # Get bias value (-2 to 2)
-            bias_value = SOURCE_BIAS_SPECTRUM_MAP.get(bias, 0)
+        def calculate_group_consensus(bias_values: list[float]) -> float:
+            if len(bias_values) < 2:
+                return 0.0
+            
+            # Consensus is high if the spread (std dev) of biases is high
+            # i.e., different types of sources agree.
+            mean_bias = sum(bias_values) / len(bias_values)
+            variance = sum((x - mean_bias) ** 2 for x in bias_values) / len(bias_values)
+            std_dev = variance ** 0.5
+            
+            # Normalize: max std dev is ~2.0 for range [-2, 2]
+            return min(std_dev / 1.5, 1.0) # Use 1.5 as "high diversity" threshold
 
-            # Calculate how well verdict aligns with bias direction
-            # Bias consistency = how aligned the verdict is with the bias direction
-            # Normalize bias_value to 0-1 range and compare with verdict
-            bias_normalized = (bias_value + 2) / 4  # Convert -2 to 2 into 0 to 1
+        support_consensus = calculate_group_consensus(support_group)
+        refute_consensus = calculate_group_consensus(refute_group)
+        
+        # Weighted average based on group sizes
+        total_non_neutral = len(support_group) + len(refute_group)
+        if total_non_neutral == 0:
+            return 0.0
+            
+        consensus_score = (
+            (support_consensus * len(support_group)) + 
+            (refute_consensus * len(refute_group))
+        ) / total_non_neutral
 
-            # Normalize verdict from -1..1 to 0..1 for alignment comparison
-            verdict_normalized = (verdict + 1) / 2
+        # Map 0..1 to -1..1
+        return (consensus_score * 2) - 1
 
-            # Consistency = 1 - |difference| between bias direction and verdict
-            alignment = 1 - abs(bias_normalized - verdict_normalized)
-            consistency_scores.append(alignment)
-
-        # Return average consistency
-        consistency = (
-            sum(consistency_scores) / len(consistency_scores)
-            if consistency_scores
-            else 0.0
-        )
-        return (consistency * 2) - 1
+    @staticmethod
+    def map_to_percentage(value: float) -> float:
+        """
+        Maps a -1 to 1 metric to a 0 to 100 percentage.
+        Used for thesis reporting (Accuracy, Consistency, etc).
+        """
+        return round(((value + 1) / 2) * 100, 2)
