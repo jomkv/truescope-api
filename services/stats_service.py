@@ -39,13 +39,28 @@ class StatsService:
         for r in results:
             if r.verdict is not None:
                 verdicts.append(r.verdict)
-                # Use NLI confidence as weight if available, otherwise use 0.5 as default
+                
+                # --- Semantic Relevance Weighting (Quartic Focus) ---
+                # A simple weighted average is easily drowned by 'Evidence Dilution'.
+                # We use high-order Power-4 Weighting (Similarity^4) to aggressively 
+                # prioritize direct semantic matches over peripheral noise.
+                # Example: 0.9 sim (0.65 factor) vs 0.45 sim (0.04 factor) = 16x weight difference.
+                similarity = r.similarity_score if hasattr(r, "similarity_score") else 0.5
+                relevance_factor = (similarity ** 4)
+                
+                # Primary Signal Bonus: If the article is a near-perfect topical match (>0.85),
+                # we double its weight to ensure the 'Primary Verdict' is respected.
+                if similarity > 0.85:
+                    relevance_factor *= 2.0
+
                 nli_conf = (
                     r.nli_result.relationship_confidence
                     if r.nli_result and r.nli_result.relationship_confidence is not None
                     else 0.5
                 )
-                weights.append(nli_conf)
+                
+                # Final weight is the product of NLI confidence and semantic relevance.
+                weights.append(nli_conf * relevance_factor)
 
         if verdicts:
             total_weight = sum(weights)

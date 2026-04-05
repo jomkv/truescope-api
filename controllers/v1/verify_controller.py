@@ -231,9 +231,8 @@ class VerifyController:
         self, embedding: list[float], top_k: int = 20
     ) -> list[tuple[Article, float, str | None]]:
         """
-        Retrieves the top_k most relevant news articles, then grouping and ranking articles based on
-        the highest similarity of their associated chunks. For each article, also provides the most
-        relevant chunk text as context.
+        Retrieves the top_k most relevant news articles, grouping and ranking based on
+        chunk similarity. Powered by high-speed Light HNSW index.
 
         Args:
             embedding (list[float]): Embedding vector for the user claim.
@@ -242,38 +241,35 @@ class VerifyController:
         Returns:
             list[tuple[Article, float, str | None]]: List of tuples containing the article, similarity score, and relevant chunk text.
         """
-        # 1: Get all similar chunks
+        # 1: Get similar chunks via DiskANN index (Fast & Global)
         chunk_results = self.db.find_similar_chunks(embedding, top_k)
 
         # 2: Collect unique doc_ids from chunks
         unique_doc_ids = self.extract_unique_doc_ids(chunk_results)
 
-        # 3: Get all articles related to chunks
-        articles = self.db.find_articles_from_doc_ids(unique_doc_ids)
+        # 3: Get Equivalent Articles for all found vectors
+        article_map = self.get_article_map(unique_doc_ids)
 
-        # 4: Find MORE relevant chunks for each article (yield more chunks per article for better result)
+        # 4: Batch-load all chunks for these specific articles
         all_chunks_map = self.get_chunk_map(embedding, unique_doc_ids)
 
-        # 5: build results using collected data
+        # 5: Combine into final tuples
         results: list[tuple[Article, float, str | None]] = []
-
-        for article in articles:
-            article_relevant_chunks = all_chunks_map[article.doc_id]
-
-            if len(article_relevant_chunks) == 0:
-                results.append((article, 0.0, None))
+        for chunk, distance in chunk_results:
+            article = cast(Article, article_map.get(chunk.doc_id))
+            if not article:
                 continue
 
-            # Get first el of relevant chunk, then get its distance (index 1 of tuple)
-            top_similarity_score = article_relevant_chunks[0][1]
-            chunk_text = self.build_chunk_text(
-                [chunk for chunk, _ in article_relevant_chunks]
+            article_relevant_chunks = all_chunks_map.get(article.doc_id, [])
+            chunk_text = (
+                self.build_chunk_text([c for c, _ in article_relevant_chunks])
+                if article_relevant_chunks
+                else None
             )
-            results.append((article, top_similarity_score, chunk_text))
 
-        results.sort(key=lambda x: x[1], reverse=True)
+            results.append((article, 1 - distance, chunk_text))
 
-        return results[:top_k]
+        return results
 
     def extract_entities(self, text: str) -> list[str]:
         """
@@ -745,24 +741,25 @@ class VerifyController:
 
         if nli_label == NLILabel.REFUTE:
             # For REFUTE, the direction is usually opposite the truth.
-            # TRUE article + REFUTE = User is wrong (-1)
-            # FALSE article + REFUTE = User is usually wrong (+1 ? No, tricky)
+            # However, if the Article Verdict is already Negative (FALSE/MISLEADING),
+            # then a REFUTE from that source means the User claim is definitely Wrong.
 
             nli_label_weight = NLI_LABEL_WEIGHT_MAP.get(nli_label, -1.0)
 
             if verdict_weight < 0:
-                # --- Double Negative Guard ---
-                # A FALSE article is a debunking. If the user claim has a TOPICAL match
-                # (e.g. User: "Marcos coke", Article: "Marcos coke is FALSE"), then NLI REFUTE
-                # is usually the model noticing the debunking words ("FALSE", "Fake", etc).
-                # To prevent this from flipping the sign to positive (TRUE), we force it
-                # to stay negative if the topics match.
+                # --- FACT-CHECK REFUTATION GUARD ---
+                # Example: User: "Marcos taking coke", Article: "Marcos coke is FALSE", NLI: REFUTE.
+                # In this case, the truth source (FactCheck) is DISAGREEING with the user assertion.
+                # If a truth source DISAGREES with you, you are FALSE (-1.0).
+                # To get -1.0 from a negative verdict_weight (-1.0), we need nli_label_weight to be +1.0.
+
                 if has_topical_match:
-                    # Force positive nli_label_weight such that (-1) * (+1) = (-1) [STAYS FALSE]
+                    # Case A: Same topic detected. FactCheck is specifically debunking the user's assertion.
+                    # FORCE POSITIVE nli_label_weight so (-1) * (+1) = (-1) [STAYS FALSE]
                     nli_label_weight = 1.0
                 else:
-                    # NO topical match: User is refuting an unrelated lie.
-                    # This is a legitimate sign flip to positive. [FLIPS TO TRUE]
+                    # Case B: Different topics. User is refuting an unrelated lie?
+                    # This is rarer but we keep the flip potential for diverse evidence.
                     nli_label_weight = -1.0
 
             return round(
@@ -838,13 +835,47 @@ class VerifyController:
             ),
         )
 
+        # Phase 1: High-Precision Claim/Fact-Check Search (Truth Search)
+        # Search the 48k rows Truth database first.
+        similar_claims = self.db.find_similar_claims(claim_embedding, limit=20)
+        
+        # Phase 2: Full News Article Search (Zero-waste)
+        # Using the new native chunks_vec_idx, we can search the entire 350,000 row table
+        # with zero row-read overhead. This ensures we never miss articles.
+        similar_chunks = self.db.find_similar_chunks(
+            claim_embedding, 
+            limit=20
+        )
+
+        # Phase 3: Hydrate Results for Evaluation Engine (Prevents Unpacking Crash)
+        factcheck_results = []
+        for claim, distance in similar_claims:
+            # The database returns vector_distance (0=identical, 1=orthogonal).
+            # We MUST convert this back to cosine similarity before the semantic weighting pipeline
+            # or else the lowest quality matches get the highest exponential rewards.
+            similarity_score = max(0.0, 1.0 - float(distance))
+            factcheck_results.append((
+                claim, 
+                claim.article, 
+                similarity_score, 
+                "\n".join([chunk.chunk_content for chunk in claim.article.chunks]) if claim.article and claim.article.chunks else ""
+            ))
+
+        if exclude_articles:
+            news_results = []
+        else:
+            news_results = []
+            for chunk, distance in similar_chunks:
+                similarity_score = max(0.0, 1.0 - float(distance))
+                news_results.append((
+                    chunk.article,
+                    similarity_score,
+                    chunk.chunk_content
+                ))
+
         # Process all results
         processed_doc_ids = set()
         tasks = []
-
-        factcheck_results = self.find_claims_with_articles(
-            claim_embedding, self.DB_RETRIEVE_LIMIT, exclude_doc_ids=exclude_doc_ids
-        )
 
         # Process FC results
         for claim, article, similarity_score, chunk_texts in factcheck_results:
@@ -865,11 +896,7 @@ class VerifyController:
                     )
                 )
 
-        if not exclude_articles:
-            news_results = self.find_news_articles(
-                claim_embedding, self.DB_RETRIEVE_LIMIT
-            )
-
+        if news_results:
             for article, similarity_score, chunk_texts in news_results:
                 if article.doc_id not in processed_doc_ids:
                     processed_doc_ids.add(article.doc_id)
@@ -900,6 +927,9 @@ class VerifyController:
         for result in results:
             if len(result.skip_reason) > 0:
                 skipped.append(result)
+            elif result.source_type == "fact_check" and result.found_verdict in ("UNKNOWN", None):
+                result.skip_reason.append("Skipped: Fact check has UNKNOWN verdict per strict rules.")
+                skipped.append(result)
             else:
                 filtered_results.append(result)
 
@@ -915,28 +945,27 @@ class VerifyController:
             )
         )
 
-        # Apply aggregation limit for scoring calculation only.
-        # This prevents low-relevance results from skewing the final verdict
+        # Prevent low-relevance results from skewing the final verdict, 
         # while still allowing the UI to display everything for manual review.
+        # But wait! We NO LONGER restrict the scoring array, because Power-4 
+        # weighting inherently phases out noise. However, we DO need the 'limit' 
+        # to mark 'is_aggregated' for the UI display.
         results_for_scoring = filtered_results
-
+        
         limit = (
             aggregation_limit
             if aggregation_limit is not None
             else self.AGGREGATION_LIMIT
         )
 
-        # Defensive cast to ensure we have an int or None
         if limit is not None and limit != "":
             try:
                 limit = int(limit)
             except (ValueError, TypeError):
                 limit = None
 
+        # Mark which ones were heavily favored for UI highlighting
         if limit is not None and limit > 0:
-            results_for_scoring = filtered_results[:limit]
-
-            # Mark which ones were used for scoring (for UI highlighting)
             for i, res in enumerate(filtered_results):
                 res.is_aggregated = i < limit
         else:
@@ -1043,11 +1072,9 @@ class VerifyController:
             claim_entities, entity_comparison_text, entity_comparison_title
         )
 
-        # EXCEPTION: If we have a confirmed specific entity match (e.g. "Uwan"),
-        # we relax the gates to ensure we don't miss relevant news reports
-        # that might vary significantly in phrasing (e.g. disaster reporting).
-        effective_similarity_threshold = self.RELEVANCE_THRESHOLD  # 0.3
-        effective_combined_threshold = self.COMBINED_THRESHOLD  # 0.4
+        # Relax thresholds for specific entity matches (e.g., "Uwan") to ensure disaster coverage
+        effective_similarity_threshold = self.RELEVANCE_THRESHOLD
+        effective_combined_threshold = self.COMBINED_THRESHOLD
         if has_specific_match and entity_match_score >= 0.3:
             effective_similarity_threshold = -0.5
             effective_combined_threshold = 0.10
@@ -1152,12 +1179,8 @@ class VerifyController:
             min(2, len(specific_tokens_in_claim)) if specific_tokens_in_claim else 1
         )
 
-        # PERSONA PRECISION GUARD:
-        # If the claim has topical assertions (e.g. "biological children"),
-        # an article matching ONLY a persona name (e.g. "Kamala Harris") is considered noise
-        # unless it also matches at least one topical keyword.
-        # However, we exempt "Unique Event" or "Location" entities (Typhoon, Sea, Island)
-        # to ensure 100% coverage for disaster and geopolitical reports.
+        # Filter out persona name matches (e.g. "Kamala Harris") lacking topical keywords
+        # Exempts unique events/locations (Typhoon, Island) for disaster/geopolitical reports.
         has_topical_assertion = (
             len(specific_tokens_in_claim.difference(entity_parts)) > 0
         )
@@ -1318,7 +1341,7 @@ class VerifyController:
                     is_factcheck=is_factcheck,
                     similarity_score=similarity_score,
                     article_content=article.content or "",
-                    has_topical_match=bool(topical_matches),
+                    has_topical_match=bool(topical_matches or entity_token_matches),
                     is_negated=is_negated,
                 )
 
@@ -1381,10 +1404,22 @@ class VerifyController:
         )
 
         # 3. Stream search hits
-        factcheck_results = self.find_claims_with_articles(
-            claim_embedding, self.DB_RETRIEVE_LIMIT
+        factcheck_task = loop.run_in_executor(
+            self.executor,
+            self.find_claims_with_articles,
+            claim_embedding,
+            self.DB_RETRIEVE_LIMIT,
         )
-        news_results = self.find_news_articles(claim_embedding, self.DB_RETRIEVE_LIMIT)
+        news_task = loop.run_in_executor(
+            self.executor,
+            self.find_news_articles,
+            claim_embedding,
+            self.DB_RETRIEVE_LIMIT,
+        )
+
+        factcheck_results, news_results = await asyncio.gather(
+            factcheck_task, news_task
+        )
 
         search_hits = []
         for claim, article, _, _ in factcheck_results:

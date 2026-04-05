@@ -1,9 +1,10 @@
 import asyncio
 from services.entity_extraction_service import EntityExtractionService
 
+
 def test_ner_suite():
     service = EntityExtractionService()
-    
+
     test_cases = [
         # --- 1. PERSON NAMES (Lowercase/Mixed) ---
         {"text": "donald trump is against marriage equality", "expect": "Donald Trump"},
@@ -31,7 +32,6 @@ def test_ner_suite():
         {"text": "vice ganda on it's showtime", "expect": "Vice Ganda"},
         {"text": "anne curtis marathon in london", "expect": "Anne Curtis"},
         {"text": "marian rivera new teleserye", "expect": "Marian Rivera"},
-        
         # --- 2. WEATHER & DISASTERS ---
         {"text": "super typhoon uwan caused great damage", "expect": "Uwan"},
         {"text": "tropical storm kristine approach luzon", "expect": "Kristine"},
@@ -42,11 +42,19 @@ def test_ner_suite():
         {"text": "landslide in benguet mountains", "expect": "Benguet"},
         {"text": "storm surge in leyte island", "expect": "Leyte"},
         {"text": "typhoon pepito leaves philipines", "expect": "Pepito"},
-        {"text": "super typhoon super typhoon uwan", "expect": "Uwan"}, # Multi-generic test
-        
+        {
+            "text": "super typhoon super typhoon uwan",
+            "expect": "Uwan",
+        },  # Multi-generic test
         # --- 3. GEOPOLITICAL / PLACES ---
-        {"text": "china and philippines dispute over scarborough shoal", "expect": "Scarborough Shoal"},
-        {"text": "west philippine sea tension increases", "expect": "West Philippine Sea"},
+        {
+            "text": "china and philippines dispute over scarborough shoal",
+            "expect": "Scarborough Shoal",
+        },
+        {
+            "text": "west philippine sea tension increases",
+            "expect": "West Philippine Sea",
+        },
         {"text": "sabah claim resurrected by sultanate", "expect": "Sabah"},
         {"text": "marcos visits malacanang palace", "expect": "Malacanang"},
         {"text": "meeting in asean summit cambodia", "expect": "Asean"},
@@ -55,7 +63,6 @@ def test_ner_suite():
         {"text": "south china sea freedom of navigation", "expect": "South China Sea"},
         {"text": "batanes island military base", "expect": "Batanes"},
         {"text": "spratly islands constructed runway", "expect": "Spratly Islands"},
-        
         # --- 4. ORGANIZATIONS / BRANDS ---
         {"text": "apple inc launches new iphone", "expect": "Apple"},
         {"text": "samsung electronics profit surge", "expect": "Samsung"},
@@ -67,17 +74,18 @@ def test_ner_suite():
         {"text": "grab philippines service expansion", "expect": "Grab"},
         {"text": "shopee flash sale today", "expect": "Shopee"},
         {"text": "lazada voucher for electronics", "expect": "Lazada"},
-        
         # --- 5. SOCIAL MEDIA / DEBUNKS ---
         {"text": "tiktok video shows fake bagyong kristine", "expect": "Kristine"},
-        {"text": "facebook post about sara duterte resignation", "expect": "Sara Duterte"},
+        {
+            "text": "facebook post about sara duterte resignation",
+            "expect": "Sara Duterte",
+        },
         {"text": "manipulated images of kamala harris", "expect": "Kamala Harris"},
         {"text": "youtube livestream of eruption", "expect": "Eruption"},
         {"text": "twitter hashgtag #MarcosOut", "expect": "Marcos"},
         {"text": "deepfake video of biden", "expect": "Biden"},
-        {"text": "fact check on election results", "expect_fallback": True}, # Generic
+        {"text": "fact check on election results", "expect_fallback": True},  # Generic
         {"text": "debunking the military takeover rumor", "expect_fallback": True},
-        
         # --- 6. GENERIC / NOISY (SHOULD BE EMPTY) ---
         {"text": "100 percent of the people said no", "expect_fallback": True},
         {"text": "the for and of in on", "expect_fallback": True},
@@ -94,10 +102,12 @@ def test_ner_suite():
         {"text": "only 10 percent of them", "expect_fallback": True},
         {"text": "highly credible reported source says", "expect_fallback": True},
         {"text": "breaking news update now", "expect_fallback": True},
-        
         # --- 7. COMPLEX / MIXED ---
         {"text": "Marcos and Duterte join the APEC summit in USA", "expect": "Marcos"},
-        {"text": "Typhoon Kristine heads to Batanes and Ilocos Norte", "expect": "Kristine"},
+        {
+            "text": "Typhoon Kristine heads to Batanes and Ilocos Norte",
+            "expect": "Kristine",
+        },
         {"text": "QC Mayor Joy Belmonte opens new park", "expect": "Belmonte"},
         {"text": "SM Mall of Asia fireworks display", "expect": "Mall of Asia"},
         {"text": "UP Diliman student protest", "expect": "UP Diliman"},
@@ -115,21 +125,21 @@ def test_ner_suite():
         {"text": "Maya bank savings rate", "expect": "Maya"},
         {"text": "Globe vs Smart internet speed", "expect": "Globe"},
         {"text": "Dito Telecommunity network coverage", "expect": "Dito"},
-        {"text": "Sky Cable maintenance schedule", "expect": "Sky Cable"}
+        {"text": "Sky Cable maintenance schedule", "expect": "Sky Cable"},
     ]
 
     print(f"=== NER STRESS TEST ({len(test_cases)} CASES) ===")
     passed = 0
     total = len(test_cases)
-    
+
     for i, case in enumerate(test_cases, 1):
         text = case["text"]
         entities = service.extract_entities(text)
         ent_texts = [e[0].lower() for e in entities]
-        
+
         print(f"\n[{i:03d}] Input: '{text}'")
         print(f"      Extracted: {entities}")
-        
+
         success = False
         if "expect" in case:
             expected = case["expect"].lower()
@@ -137,16 +147,19 @@ def test_ner_suite():
         elif case.get("expect_fallback"):
             # Success if it returns the fallback (MISC label)
             success = any(e[1] == "MISC" for e in entities)
-            
+
         if success:
             print("      Result: [PASS]")
             passed += 1
         else:
-            print(f"      Result: [FAIL] (Expected: '{case.get('expect', 'Empty List')}')")
+            print(
+                f"      Result: [FAIL] (Expected: '{case.get('expect', 'Empty List')}')"
+            )
 
     print(f"\n{'='*30}")
     print(f"TOTAL PASSED: {passed}/{total} ({ (passed/total)*100:.1f}%)")
     print(f"{'='*30}")
+
 
 if __name__ == "__main__":
     test_ner_suite()

@@ -11,6 +11,10 @@ class Claim(Base):
     embedding = Column(get_vector_type(384), nullable=False)
     claim_text = Column(String, nullable=False)
     verdict = Column(String)
+    
+    # Relationships
+    from sqlalchemy.orm import relationship
+    article = relationship("Article", back_populates="claims", lazy="selectin")
 
     # Dialect-aware table args
     if engine.dialect.name == "postgresql":

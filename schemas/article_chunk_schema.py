@@ -11,6 +11,10 @@ class ArticleChunk(Base):
     chunk_content = Column(String, nullable=False)
     doc_id = Column(String, ForeignKey("articles.doc_id"), nullable=False)
     embedding = Column(get_vector_type(384), nullable=False)
+    
+    # Relationships
+    from sqlalchemy.orm import relationship
+    article = relationship("Article", back_populates="chunks", lazy="selectin")
 
     # Dialect-aware table args
     if engine.dialect.name == "postgresql":
