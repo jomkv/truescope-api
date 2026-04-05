@@ -39,6 +39,7 @@ from services import (
     RemarksGenerationService,
     StatsService,
 )
+import numpy as np
 import unicodedata
 import re
 from datetime import datetime
@@ -127,20 +128,31 @@ class VerifyController:
     ) -> dict[str, list[tuple[ArticleChunk, float]]]:
         """
         For each doc_id in doc_ids, finds the most relevant article chunks.
-        Optimization: Uses batch non-vector retrieval to save row reads.
+        Optimization: Uses batch non-vector retrieval followed by local numpy ranking.
         """
-        # Optimization: To reduce row-read consumption on Turso, we fetch all chunks
-        # for these documents in a single non-vector query.
+        # Fetch all chunks (now including embeddings)
         all_doc_chunks = self.db.find_chunks_by_doc_ids(doc_ids)
+        
+        # Prepare query vector
+        query_vec = np.array(embedding)
+        query_norm = np.linalg.norm(query_vec)
 
-        # Group by doc_id
+        # Group and rank chunks by doc_id
         chunk_map: dict[str, list[tuple[ArticleChunk, float]]] = defaultdict(list)
         for chunk in all_doc_chunks:
-            # We assign 0.0 since we're skipping individual chunk-level vector distance.
-            chunk_map[chunk.doc_id].append((chunk, 0.0))
+            similarity = 0.0
+            if chunk.embedding:
+                chunk_vec = np.array(chunk.embedding)
+                chunk_norm = np.linalg.norm(chunk_vec)
+                if query_norm > 0 and chunk_norm > 0:
+                    similarity = float(np.dot(query_vec, chunk_vec) / (query_norm * chunk_norm))
+            
+            chunk_map[chunk.doc_id].append((chunk, similarity))
 
-        # For each doc_id, take top_n (preserving database order)
-        for doc_id, chunk_list in chunk_map.items():
+        # Sort each doc_id's chunks by similarity descending and take top_n
+        for doc_id in chunk_map:
+            chunk_list = chunk_map[doc_id]
+            chunk_list.sort(key=lambda x: x[1], reverse=True)
             chunk_map[doc_id] = chunk_list[:top_n]
 
         return chunk_map

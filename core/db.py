@@ -3,22 +3,18 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-from core.config import DATABASE_URI, TURSO_DATABASE_URL, TURSO_AUTH_TOKEN
+from core.config import DATABASE_URI, TURSO_DATABASE_URL, TURSO_AUTH_TOKEN, USE_LOCAL_SQLITE, LOCAL_DB_PATH
 
 logger = logging.getLogger(__name__)
 
 # Standard SQLAlchemy sqlite dialect Base
 Base = declarative_base()
 
-if TURSO_DATABASE_URL and TURSO_AUTH_TOKEN:
+if USE_LOCAL_SQLITE or (TURSO_DATABASE_URL and TURSO_AUTH_TOKEN):
     try:
         import libsql
 
         class LibSQLCursorWrapper:
-            """
-            Wraps a native libsql.Cursor to automatically sanitize parameters
-            (e.g., converting memoryview -> bytes).
-            """
             def __init__(self, cursor, sanitizer):
                 self.cursor = cursor
                 self.sanitizer = sanitizer
@@ -36,9 +32,6 @@ if TURSO_DATABASE_URL and TURSO_AUTH_TOKEN:
                 return self.cursor.executemany(sql, new_param_list)
 
         class LibSQLConnectionWrapper:
-            """
-            Wraps a native libsql.Connection to return our LibSQLCursorWrapper.
-            """
             def __init__(self, conn):
                 self.conn = conn
 
@@ -49,7 +42,6 @@ if TURSO_DATABASE_URL and TURSO_AUTH_TOKEN:
                 return LibSQLCursorWrapper(self.conn.cursor(), self._sanitize_params)
 
             def _sanitize_params(self, params):
-                """Convert memoryview objects back to bytes for Turso compatibility."""
                 if isinstance(params, (list, tuple)):
                     return [self._sanitize_params(p) for p in params]
                 if isinstance(params, dict):
@@ -59,25 +51,25 @@ if TURSO_DATABASE_URL and TURSO_AUTH_TOKEN:
                 return params
 
             def create_function(self, *args, **kwargs):
-                # Standard SQLAlchemy sqlite dialect calls this to register functions.
-                # Remote Turso does not support client-side injection.
                 pass
 
-        def get_turso_connection():
-            # Force protocol to https:// to bypass sync quotas
-            url = TURSO_DATABASE_URL
-            if url.startswith("libsql://"):
-                url = url.replace("libsql://", "https://", 1)
-            
-            conn = libsql.connect(url, auth_token=TURSO_AUTH_TOKEN)
+        def get_libsql_connection():
+            if USE_LOCAL_SQLITE:
+                conn = libsql.connect(LOCAL_DB_PATH)
+            else:
+                url = TURSO_DATABASE_URL
+                if url.startswith("libsql://"):
+                    url = url.replace("libsql://", "https://", 1)
+                conn = libsql.connect(url, auth_token=TURSO_AUTH_TOKEN)
             return LibSQLConnectionWrapper(conn)
 
         engine = create_engine(
             "sqlite://",
-            creator=get_turso_connection,
+            creator=get_libsql_connection,
             pool_pre_ping=True
         )
     except ImportError:
+        logger.error("libsql package missing. Vector features will not work.")
         engine = create_engine(DATABASE_URI, pool_pre_ping=True)
 else:
     engine = create_engine(DATABASE_URI, pool_pre_ping=True)

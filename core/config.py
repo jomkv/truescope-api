@@ -7,7 +7,12 @@ load_dotenv()
 TURSO_DATABASE_URL = os.getenv("TURSO_DATABASE_URL")
 TURSO_AUTH_TOKEN = os.getenv("TURSO_AUTH_TOKEN")
 
-if TURSO_DATABASE_URL:
+USE_LOCAL_SQLITE = os.getenv("USE_LOCAL_SQLITE", "false").lower() == "true"
+LOCAL_DB_PATH = os.getenv("LOCAL_DB_PATH", "truescope_sqlite.db")
+
+if USE_LOCAL_SQLITE:
+    DATABASE_URI = f"sqlite:///{LOCAL_DB_PATH}"
+elif TURSO_DATABASE_URL:
     DATABASE_URI = TURSO_DATABASE_URL
 else:
     DB_USER = os.getenv("DB_USER", "postgres")
@@ -16,7 +21,6 @@ else:
     DB_HOST = os.getenv("DB_HOST", "localhost")
     DB_PORT = os.getenv("DB_PORT", "5432")
     DATABASE_URI = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-
 
 API_NAME = os.getenv("API_NAME")
 API_VERSION = os.getenv("API_VERSION", "v1")

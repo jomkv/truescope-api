@@ -64,24 +64,42 @@ class VerifyDatabase:
         Retrieves similar article chunks using the clean native Turso index (chunks_vec_idx).
         Searches ALL 350,000 chunks for the best possible evidence, with zero scanning overhead.
         """
+        # --- Postgres High-Performance Search ---
+        if engine.dialect.name == "postgresql":
+            distance_col = self.chunk_distance_col(embedding)
+            with Session() as session:
+                return (
+                    session.query(ArticleChunk, distance_col)
+                    .options(defer(ArticleChunk.embedding))
+                    .order_by(distance_col)
+                    .limit(limit)
+                    .all()
+                )
+
+        # --- Turso High-Performance Search ---
         try:
             import struct
+
             vec_list = embedding.tolist() if hasattr(embedding, "tolist") else embedding
             vec_blob = struct.pack("<384f", *vec_list)
 
             with Session() as session:
                 # Use vector index for performance; map rowid back to UUID
-                top_k_query = text(f"""
+                top_k_query = text(
+                    f"""
                     SELECT c.id 
                     FROM vector_top_k('chunks_vec_idx', CAST(:v AS BLOB), {limit}) v
                     JOIN article_chunks c ON v.id = c.rowid
-                """)
-                
+                """
+                )
+
                 rows = session.execute(top_k_query, {"v": vec_blob}).fetchall()
-                
+
                 # Fallback to brute-force scan if index returns no results (e.g. index lag)
                 if not rows:
-                    logger.info("Vector index empty; falling back to high-accuracy scan.")
+                    logger.info(
+                        "Vector index empty; falling back to high-accuracy scan."
+                    )
                     distance_col = self.chunk_distance_col(embedding)
                     return (
                         session.query(ArticleChunk, distance_col)
@@ -93,26 +111,29 @@ class VerifyDatabase:
 
                 chunk_ids = [r[0] for r in rows]
                 distance_col = self.chunk_distance_col(embedding)
-                
+
                 chunks_with_dist = (
                     session.query(ArticleChunk, distance_col)
                     .filter(ArticleChunk.id.in_(chunk_ids))
                     .options(defer(ArticleChunk.embedding))
                     .all()
                 )
-                
+
                 # Maintain index order
                 chunks_with_dist.sort(
-                    key=lambda x: next((i for i, cid in enumerate(chunk_ids) if cid == x[0].id), 999)
+                    key=lambda x: next(
+                        (i for i, cid in enumerate(chunk_ids) if cid == x[0].id), 999
+                    )
                 )
-                
-                # If doc_ids are provided, we optionally filter *after* retrieval 
+
+                # If doc_ids are provided, we optionally filter *after* retrieval
                 # (but in practice, VerifyController won't restrict it anymore)
                 if doc_ids:
-                    chunks_with_dist = [c for c in chunks_with_dist if c[0].doc_id in doc_ids]
+                    chunks_with_dist = [
+                        c for c in chunks_with_dist if c[0].doc_id in doc_ids
+                    ]
 
                 return chunks_with_dist
-
 
         except Exception as e:
             logger.warning(
@@ -171,7 +192,6 @@ class VerifyDatabase:
             with Session() as session:
                 return (
                     session.query(ArticleChunk)
-                    .options(defer(ArticleChunk.embedding))
                     .filter(ArticleChunk.doc_id.in_(doc_ids))
                     .all()
                 )

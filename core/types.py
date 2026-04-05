@@ -1,4 +1,5 @@
 import struct
+from core.config import DATABASE_URI
 from sqlalchemy.types import TypeDecorator, BLOB
 
 try:
@@ -42,9 +43,10 @@ class VectorType(TypeDecorator):
 
 def get_vector_type(dimensions=384):
     """
-    Returns the appropriate vector type.
-    Prioritizes VectorType (binary F32_BLOB) for Turso compatibility.
+    Returns the appropriate vector type based on the database dialect.
+    Returns PG_VECTOR (pgvector) for Postgres, and custom VectorType (BLOB) for Turso.
     """
-    # Force VectorType to avoid conflicts with pgvector in the environment
-    # when connecting to Turso.
+    if DATABASE_URI and DATABASE_URI.startswith("postgresql") and PG_VECTOR:
+        return PG_VECTOR(dimensions)
+        
     return VectorType(dimensions)
