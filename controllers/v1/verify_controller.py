@@ -864,6 +864,13 @@ class VerifyController:
         # Phase 3: Hydrate Results for Evaluation Engine (Prevents Unpacking Crash)
         factcheck_results = []
         for claim, distance in similar_claims:
+            if (
+                exclude_doc_ids
+                and claim.article
+                and claim.article.doc_id in exclude_doc_ids
+            ):
+                continue
+
             # The database returns vector_distance (0=identical, 1=orthogonal).
             # We MUST convert this back to cosine similarity before the semantic weighting pipeline
             # or else the lowest quality matches get the highest exponential rewards.
@@ -888,6 +895,13 @@ class VerifyController:
         else:
             news_results = []
             for chunk, distance in similar_chunks:
+                if (
+                    exclude_doc_ids
+                    and chunk.article
+                    and chunk.article.doc_id in exclude_doc_ids
+                ):
+                    continue
+
                 similarity_score = max(0.0, 1.0 - float(distance))
                 news_results.append(
                     (chunk.article, similarity_score, chunk.chunk_content)
@@ -1188,6 +1202,16 @@ class VerifyController:
             t for t in matched_meaningful if t in ENTITY_GENERIC_TOKENS
         }
 
+        # Ensure meaningful_claim_tokens exists if I used it above
+        meaningful_claim_tokens = {
+            t
+            for t in claim_tokens
+            if t not in COMMON_STOPWORDS and t not in STOP_TITLES
+        }
+        specific_tokens_in_claim = {
+            t for t in meaningful_claim_tokens if t not in ENTITY_GENERIC_TOKENS
+        }
+
         matched_full_entities = set()
         for t in entity_token_matches:
             if t in token_to_entity_map:
@@ -1199,15 +1223,6 @@ class VerifyController:
             if "meaningful_claim_tokens" in locals()
             else set()
         )
-        # Ensure meaningful_claim_tokens exists if I used it above
-        meaningful_claim_tokens = {
-            t
-            for t in claim_tokens
-            if t not in COMMON_STOPWORDS and t not in STOP_TITLES
-        }
-        specific_tokens_in_claim = {
-            t for t in meaningful_claim_tokens if t not in ENTITY_GENERIC_TOKENS
-        }
 
         gate_threshold = (
             min(2, len(specific_tokens_in_claim)) if specific_tokens_in_claim else 1
@@ -1442,8 +1457,7 @@ class VerifyController:
                 self.executor,
                 self.nli_service.classify_nli,
                 pre_res["nli_text"],
-                # Use the original user claim text for NLI
-                result.get("original_user_claim", user_claim_norm),
+                user_claim_norm,
             )
 
         return self._postprocess_result(
