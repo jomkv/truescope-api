@@ -13,3 +13,8 @@ class Article(Base):
     source = Column(String)
     type = Column(String)
     source_bias = Column(String)
+    
+    # Relationships
+    from sqlalchemy.orm import relationship
+    claims = relationship("Claim", back_populates="article", lazy="selectin")
+    chunks = relationship("ArticleChunk", back_populates="article", lazy="selectin")

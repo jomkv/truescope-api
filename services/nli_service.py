@@ -96,28 +96,37 @@ class NLIService:
         )
 
     def classify_nli_batch(
-        self, premise: str, hypotheses: list[str]
+        self, premises: list[str] | str, hypotheses: list[str] | str
     ) -> list[tuple[NLILabel, float, float]]:
         """
-        Batch classify NLI for multiple hypotheses against one premise.
-
-        ✅ ONE forward pass for all hypotheses - 5-10x faster than sequential.
-
-        Args:
-            premise (str): The premise text (user claim)
-            hypotheses (list[str]): List of hypothesis texts to classify
-
-        Returns:
-            list[tuple[NLILabel, float, float]]: List of (label, confidence, avg_prob) for each hypothesis
+        Batch classify NLI for multiple pairs.
+        Supports:
+        - One premise vs many hypotheses
+        - Many premises vs one hypothesis
         """
-        if not hypotheses:
+        # Universal list conversion
+        if isinstance(premises, str):
+            premises = [premises]
+        if isinstance(hypotheses, str):
+            hypotheses = [hypotheses]
+
+        if not hypotheses or not premises:
             return []
+
+        # Broadcast if one side is single and other is multiple
+        if len(premises) == 1 and len(hypotheses) > 1:
+            premises = premises * len(hypotheses)
+        elif len(hypotheses) == 1 and len(premises) > 1:
+            hypotheses = hypotheses * len(premises)
+
+        if len(premises) != len(hypotheses):
+            raise ValueError(f"Batch mismatch: {len(premises)} premises vs {len(hypotheses)} hypotheses.")
 
         device = next(self.model.parameters()).device
 
         # Tokenize all pairs at once
         inputs = self.tokenizer(
-            [premise] * len(hypotheses),
+            premises,
             hypotheses,
             return_tensors="pt",
             truncation=True,
@@ -128,7 +137,6 @@ class NLIService:
 
         with torch.no_grad():
             outputs = self.model(**inputs)
-            # Get probabilities for all samples at once
             all_probs = torch.softmax(outputs.logits, dim=-1)
 
         results = []
