@@ -43,19 +43,76 @@ class VerifyDatabase:
         self, embedding: list[float], limit: int
     ) -> list[tuple[Claim, float]]:
         """
-        Retrieves similar claims using a standard distance scan.
-        For a 48,000 row table, this is extremely fast and 100% reliable,
-        avoiding Turso's parser issues entirely.
+        Retrieves similar claims using the native Turso index (claims_idx).
+        For a 48,000 row table, this is very fast and prevents noisy results.
         """
-        distance_col = self.claim_distance_col(embedding)
-        with Session() as session:
-            return (
-                session.query(Claim, distance_col)
-                .options(defer(Claim.embedding))
-                .order_by(distance_col)
-                .limit(limit)
-                .all()
-            )
+        # --- Postgres Search ---
+        if engine.dialect.name == "postgresql":
+            distance_col = self.claim_distance_col(embedding)
+            with Session() as session:
+                return (
+                    session.query(Claim, distance_col)
+                    .options(defer(Claim.embedding))
+                    .order_by(distance_col)
+                    .limit(limit)
+                    .all()
+                )
+
+        # --- Turso Search ---
+        try:
+            import struct
+            vec_list = embedding.tolist() if hasattr(embedding, "tolist") else embedding
+            vec_blob = struct.pack("<384f", *vec_list)
+
+            with Session() as session:
+                # Use vector index: claims_idx
+                top_k_query = text(
+                    f"""
+                    SELECT c.id 
+                    FROM vector_top_k('claims_idx', CAST(:v AS BLOB), {limit}) v
+                    JOIN claims c ON v.id = c.rowid
+                """
+                )
+                rows = session.execute(top_k_query, {"v": vec_blob}).fetchall()
+
+                if not rows:
+                    distance_col = self.claim_distance_col(embedding)
+                    return (
+                        session.query(Claim, distance_col)
+                        .options(defer(Claim.embedding))
+                        .order_by(distance_col)
+                        .limit(limit)
+                        .all()
+                    )
+
+                claim_ids = [r[0] for r in rows]
+                distance_col = self.claim_distance_col(embedding)
+
+                claims_with_dist = (
+                    session.query(Claim, distance_col)
+                    .filter(Claim.id.in_(claim_ids))
+                    .options(defer(Claim.embedding))
+                    .all()
+                )
+                # Maintain order
+                claims_with_dist.sort(
+                    key=lambda x: next(
+                        (i for i, cid in enumerate(claim_ids) if cid == x[0].id), 999
+                    )
+                )
+                return claims_with_dist
+
+        except Exception as e:
+            logger.warning(f"Claims index (claims_idx) fallback: {e}")
+            distance_col = self.claim_distance_col(embedding)
+            with Session() as session:
+                return (
+                    session.query(Claim, distance_col)
+                    .options(defer(Claim.embedding))
+                    .order_by(distance_col)
+                    .limit(limit)
+                    .all()
+                )
 
     def find_similar_chunks(
         self, embedding: list[float], limit: int, doc_ids: set[str] = None
@@ -85,6 +142,7 @@ class VerifyDatabase:
 
             with Session() as session:
                 # Use vector index for performance; map rowid back to UUID
+                # Correction: index name is chunks_vec_idx
                 top_k_query = text(
                     f"""
                     SELECT c.id 
@@ -92,7 +150,6 @@ class VerifyDatabase:
                     JOIN article_chunks c ON v.id = c.rowid
                 """
                 )
-
                 rows = session.execute(top_k_query, {"v": vec_blob}).fetchall()
 
                 # Fallback to brute-force scan if index returns no results (e.g. index lag)
@@ -137,7 +194,7 @@ class VerifyDatabase:
 
         except Exception as e:
             logger.warning(
-                f"Native index (chunks_idx) failed or not found, falling back to high-accuracy scan: {e}"
+                f"Native index (chunks_vec_idx) failed or not found, falling back to high-accuracy scan: {e}"
             )
             # FAIL-SAFE: Revert to the 100% reliable scan pattern if indexer is busy or missing
             distance_col = self.chunk_distance_col(embedding)
