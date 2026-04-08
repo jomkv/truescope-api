@@ -1,0 +1,4996 @@
+{
+  "accuracy": 0.66,
+  "correct": 66,
+  "total": 100,
+  "skipped": 0,
+  "results": [
+    {
+      "claim": "Donald Trump is against marriage equality.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.0878,
+      "id": 1,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8428,
+          "nli_label": "support",
+          "nli_score": 0.9109394550323486,
+          "snippet": "Hillary Clinton says Donald Trump 'wants to undo marriage equality'\nDemocratic presidential nominee Hillary Clinton accused Donald Trump in a campaign speech of wanting to reverse the landmark 2015 Su..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6375,
+          "nli_label": "refute",
+          "nli_score": 0.6273224353790283,
+          "snippet": "Trump hasn't banned same-sex marriage in US; claim he has is Pants on Fire!\nIF YOUR TIME IS SHORT\nPresident-elect Donald Trump has not banned same-sex marriage in the U.S. Trump has not taken office y..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.5841,
+          "nli_label": "support",
+          "nli_score": 0.48480063676834106,
+          "snippet": "Mostly True: Trump reversed the ACA's LGBTQ+ health care protections. But lawsuits muddied impact\nIF YOUR TIME IS SHORT\nUnder the former President Donald Trump’s administration, the Department of Heal..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "The United States has a low voter turnout rate.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0512,
+      "id": 2,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8526,
+          "nli_label": "support",
+          "nli_score": 0.9115447402000427,
+          "snippet": "Mostly True: Bernie Sanders' claim about U.S. voter turnout one of 'lowest on earth'\nDoes the United States have a lower voter turnout rate than countries from Germany to Greece, and the Netherlands t..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.686,
+          "nli_label": "support",
+          "nli_score": 0.9510599970817566,
+          "snippet": "New York consistently ranks low for voter turnout\nAndrea Stewart-Cousins, the top-ranking Democrat in the New York State Senate, claimed New York state has one of the lowest voter turnout rates in the..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6649,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "Sanders largely off-base in saying he wins when voter turnout is high and loses when it's low\nOn the eve of the New York Democratic primary -- where he needs a strong showing to have any hope of winni..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Key entities not found (0.15)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.15)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Tech billionaire Elon Musk has a transgender daughter.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1271,
+      "id": 3,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 1.0,
+          "nli_label": "support",
+          "nli_score": 0.8869405388832092,
+          "snippet": "Vivian Jenna Wilson, who is openly trans, is Musk's biological daughter. However, she told NBC News in July 2024 that she had not spoken to him in four years. The status of their relationship, as of t..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.6763,
+          "nli_label": "support",
+          "nli_score": 0.9386779069900513,
+          "snippet": "A persistent claim that tech mogul Elon Musk's father, Errol Musk, had children with his stepdaughter has circulated online for years (archived). We recently spotted the claim on Dec. 15, 2024, on X (..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.6972,
+          "nli_label": "refute",
+          "nli_score": 0.7017802000045776,
+          "snippet": "A rumor circulating online in early 2025 claimed tech entrepreneur Elon Musk, the head of the new U.S. Department of Government Efficiency (DOGE), helped a Starbucks barista — specifically a \"cashier\"..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Democratic presidential candidate Kamala Harris is a gun owner.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.0355,
+      "id": 4,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 1.0,
+          "nli_label": "support",
+          "nli_score": 0.9069681167602539,
+          "snippet": "As the 2024 presidential election nears, Democratic pick Kamala Harris faces the challenging task of appealing to a wide spectrum of voters who share widely different views on gun rights.\nAs of this w..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8164,
+          "nli_label": "refute",
+          "nli_score": 0.726929247379303,
+          "snippet": "No, Kamala Harris spokesperson didn’t say the Democratic presidential nominee doesn’t own a gun\nIF YOUR TIME IS SHORT\nThis video was manipulated. A spokesperson for Vice President Kamala Harris’ 2024 ..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.7573,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "A video is being shared online with false claims that it shows a Kamala Harris staffer confirming that the Vice President lied about owning a gun in a CNN interview.\nAdrienne Elrod, senior spokesperso..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Vice President Kamala Harris does not have any biological children.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.4108,
+      "id": 5,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.7337,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "Harris' paternal grandmother died in 1995, when Harris was 31. An unrelated woman at the center of the claim died in 1960.\nIn late September 2024, conspiracy theorist Candace Owens asserted that she h..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.5463,
+          "nli_label": "support",
+          "nli_score": 0.6269709467887878,
+          "snippet": "Since U.S. President Joe Biden dropped out of the 2024 presidential race and endorsed Vice President Kamala Harris to become the Democratic nominee, rumors have swirled around her. We've fact-checked ..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.6404,
+          "nli_label": "support",
+          "nli_score": 0.9207866787910461,
+          "snippet": "The requirements to qualify for the U.S. presidency have nothing to with the citizenship status of one’s parents. The individual must have been born in the United States or be born to a parent who is ..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "GMANETWORK",
+          "reason": [
+            "Article is neutrally related (different event/topic)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Former U.S. President Donald Trump once donated to Kamala Harris' campaign.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4365,
+      "id": 6,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.8627,
+          "nli_label": "refute",
+          "nli_score": 0.5160601735115051,
+          "snippet": "In August 2020, readers asked us to examine the accuracy of claims that before he took office, U.S. President Donald Trump had made donations to a previous election campaign of Sen. Kamala Harris, D-C..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8651,
+          "nli_label": "support",
+          "nli_score": 0.941641628742218,
+          "snippet": "Donald Trump once donated to Kamala Harris’ campaign. Here’s what she did with the money.\nIF YOUR TIME IS SHORT\nIn 2011, Donald Trump, as a private citizen, donated $5,000 to Kamala Harris’ California..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7138,
+          "nli_label": "refute",
+          "nli_score": 0.5750711560249329,
+          "snippet": "No, these government agencies didn’t donate taxpayer money to Kamala Harris’ campaign\nIF YOUR TIME IS SHORT\nGovernment agencies did not donate taxpayer money to Kamala Harris’ presidential campaign. T..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Elon Musk is an immigrant to the United States.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2236,
+      "id": 7,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8319,
+          "nli_label": "refute",
+          "nli_score": 0.4488101899623871,
+          "snippet": "Elon Musk has been a U.S. citizen since 2002\nIF YOUR TIME IS SHORT\nEntrepreneur Elon Musk was born in South Africa to Canadian and South African parents.\nHe immigrated to the U.S. as a student in 1992..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.7404,
+          "nli_label": "support",
+          "nli_score": 0.3907490074634552,
+          "snippet": "In early 2025, Trump adviser Elon Musk's Department of Government Efficiency (DOGE) implemented cuts in the Veterans Affairs (VA) agency, leading to disruptions and widespread criticism from military ..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.6608,
+          "nli_label": "support",
+          "nli_score": 0.3648247718811035,
+          "snippet": "The U.S. Constitution states that the president must be a natural-born citizen of the United States. Elon Musk was born in South Africa.\nOn Dec. 22, 2024, U.S. President-elect Donald Trump rebuffed cr..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Vice President Leni Robredo once said that the Philippines has 1,700 islands.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2741,
+      "id": 8,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "GMANETWORK",
+          "similarity": 0.5833,
+          "nli_label": "support",
+          "nli_score": 0.9708272814750671,
+          "snippet": "Vice President Leni Robredo wants the Philippines to become a \"maritime power\" if she wins the presidency and becomes the military's commander in chief, a retired rear admiral said at a forum of the 1..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.5257,
+          "nli_label": "support",
+          "nli_score": 0.9500043988227844,
+          "snippet": "Buod\nAng sabi-sabi: Nang tanungin Vice President Leni Robredo kung ano ang sasabihin niya kay US President Joe Biden kapag siya’y naging pangulo ng Pilipinas, ang isinagot lang niya ay ibibigay niya k..."
+        },
+        {
+          "source": "GMANETWORK",
+          "similarity": 0.5712,
+          "nli_label": "refute",
+          "nli_score": 0.5990665555000305,
+          "snippet": "Outgoing Vice President Leni Robredo, along with her daughters, returned to the Philippines on Saturday after attending her youngest child Jillian’s graduation in New York City.\nThe Office of the Vice..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Vice President Leni Robredo has repeatedly beaten Ferdinand Marcos Jr. in election-related contests.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4063,
+      "id": 9,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "VERAFILES",
+          "similarity": 0.788,
+          "nli_label": "refute",
+          "nli_score": 0.4949864149093628,
+          "snippet": "A Facebook reel shows former vice president Leni Robredo supposedly expressing her support for President Ferdinand Marcos Jr. This is misleading.\nTo the contrary, Robredo was taking a swipe at then-pr..."
+        },
+        {
+          "source": "TSEK",
+          "similarity": 0.7398,
+          "nli_label": "refute",
+          "nli_score": 0.6071052551269531,
+          "snippet": "A Facebook reel shows former vice president Leni Robredo supposedly expressing her support for President Ferdinand Marcos Jr. This is misleading.\nTo the contrary, Robredo was taking a swipe at then-pr..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.7617,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "Claim: Rehashed claims of “final, official results” of the 2016 vice presidential elections reflect a different winner – and not incumbent Vice President Maria Leonor “Leni” Robredo.\nAt least two grap..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "GMANETWORK",
+          "reason": [
+            "NLI Support rejected: Evidence lacks topical assertions (beaten...)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "The Philippines had a promising local electronic and automotive industry but was cut short when Martial Law was declared.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.111,
+      "id": 10,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "VERAFILES",
+          "similarity": 0.6382,
+          "nli_label": "support",
+          "nli_score": 0.930703341960907,
+          "snippet": "Nearly 17 years after the Philippines became a party to the Framework Convention on Tobacco Control (FCTC), the first international treaty negotiated under the auspices of the World Health Organizatio..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.6131,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "Claim: The idea that the Martial Law period was a “dark” part of the country’s history was “twisted” and invented.\nThis was the message of several completely identical comments on Rappler’s post about..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.6318,
+          "nli_label": "refute",
+          "nli_score": 0.9359849691390991,
+          "snippet": "Claim: President Ferdinand “Bongbong” Marcos Jr. has signed a declaration placing the Philippines under martial law.\nRating: FALSE\nWhy we fact-checked this: A YouTube video posted on January 13 on the..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "RAPPLER",
+          "reason": [
+            "Key entities not found (0.2)",
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        },
+        {
+          "source": "RAPPLER",
+          "reason": [
+            "Key entities not found (0.2)",
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Water rates in Manila, Philippines, were raised up to 845 percent when a subsidiary of the World Bank became a partial owner.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1988,
+      "id": 11,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "RAPPLER",
+          "similarity": 0.6739,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "At a glance\nClaim: The World Bank’s interest rate when loaning to the Philippines is 0%.\nRating: FALSE\nThe facts: Data from the World Bank show that its lending interest rate to the Philippines is not..."
+        },
+        {
+          "source": "PHILSTAR",
+          "similarity": 0.5812,
+          "nli_label": "neutral",
+          "nli_score": 0.929536759853363,
+          "snippet": "MANILA, Philippines — The Bangko Sentral ng Pilipinas’ Monetary Board once again trimmed its interest rates by another 25 basis points, it said on Thursday, August 28.\nThis marks the third consecutive..."
+        },
+        {
+          "source": "PHILSTAR",
+          "similarity": 0.5949,
+          "nli_label": "support",
+          "nli_score": 0.9762544631958008,
+          "snippet": "MANILA, Philippines — A total of 38 Filipino companies have landed in the maiden Fortune Southeast Asia 500 list, with diversified conglomerate San Miguel Corp. (SMC) leading the charge as the only Fi..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Key entities not found (0.1875)"
+          ]
+        },
+        {
+          "source": "RAPPLER",
+          "reason": [
+            "Key entities not found (0.1875)",
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.225)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Incest is legal in New Jersey and Rhode Island.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.317,
+      "id": 12,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.5235,
+          "nli_label": "support",
+          "nli_score": 0.3740951120853424,
+          "snippet": "Tax Foundation official says only 25 percent of what people buy in R.I. is subject to sales tax\nRhode Island’s 7-percent sales tax is the second-highest rate in the nation. Whether it should stay that..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.5812,
+          "nli_label": "support",
+          "nli_score": 0.4908899962902069,
+          "snippet": "R.I. among states with strongest gun-control laws\nHouse Speaker Nicholas Mattiello is not among Rhode Island lawmakers eager to further restrict gun ownership following a rash of gun-related mass kill..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.5684,
+          "nli_label": "support",
+          "nli_score": 0.48797595500946045,
+          "snippet": "State Rep. Linda Finn says that in Rhode Island, police who encounter a young person with a gun can’t legally take it from them\nIn the wake of the Newtown, Conn., shootings, the Rhode Island General A..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Lifeguards are present at Olympic swimming competitions.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1422,
+      "id": 13,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "FRONTPAGEPH",
+          "similarity": 0.4226,
+          "nli_label": "neutral",
+          "nli_score": 0.5662716031074524,
+          "snippet": "THE house of Representatives, led by Speaker Lord Allan Velasco, gave honors to Tokyo Olympic medalists Hidilyn Diaz, Nesthy Petecio, Carlo Paalam and Eumir Marcial when they came to the Batasang Pamb..."
+        },
+        {
+          "source": "FRONTPAGEPH",
+          "similarity": 0.4226,
+          "nli_label": "neutral",
+          "nli_score": 0.5662716031074524,
+          "snippet": "THE house of Representatives, led by Speaker Lord Allan Velasco, gave honors to Tokyo Olympic medalists Hidilyn Diaz, Nesthy Petecio, Carlo Paalam and Eumir Marcial when they came to the Batasang Pamb..."
+        },
+        {
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "similarity": 0.374,
+          "nli_label": "support",
+          "nli_score": 0.4672485589981079,
+          "snippet": "The Armed Forces of the Philippines (AFP) on Friday received weightlifting equipment from Tokyo 2020 Olympic gold medalist and Air Force Staff Sgt. Hidilyn Diaz-Naranjo.\nThe donation was made in partn..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.0)",
+            "Insufficient topical overlap (Points: 0)"
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "NLI Support rejected: Evidence lacks topical assertions (lifeguards...)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "The EU ‘divorce bill’ will cost £42 billion.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1212,
+      "id": 14,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "FULLFACT",
+          "similarity": 0.8986,
+          "nli_label": "support",
+          "nli_score": 0.6327555179595947,
+          "snippet": "The latest estimate for the size of the UK’s ‘divorce bill’ upon leaving the EU is £33 billion (€36 billion). That was assuming the UK left the EU on 31 October 2019.\nThe often-quoted figure of £39 bi..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.741,
+          "nli_label": "support",
+          "nli_score": 0.6554515361785889,
+          "snippet": "We’ll be paying the divorce bill until 2064—but most of the bill will be paid off by 2021, according to estimates from the financial watchdog, the Office for Budget Responsibility. The latest estimate..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.7376,
+          "nli_label": "support",
+          "nli_score": 0.7479354739189148,
+          "snippet": "This is correct, according to estimates released this week about the Brexit “divorce bill” from the Office for Budget Responsibility (OBR).\nThe joint statement from the UK and EU published in December..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Twitter is banned in Iran.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2841,
+      "id": 15,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "FULLFACT",
+          "similarity": 0.619,
+          "nli_label": "refute",
+          "nli_score": 0.9455325603485107,
+          "snippet": "A video is being shared of protests in Iran with captions falsely implying it depicts recent anti-government demonstrations.\nIn the clip, which was shared on X (formerly Twitter) and Facebook on 28 an..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.5686,
+          "nli_label": "refute",
+          "nli_score": 0.9427168965339661,
+          "snippet": "Claim: A video shows airstrikes hitting Iran, causing buildings to catch fire.\nRating: FALSE\nWhy we fact-checked this: The video posted on Facebook has garnered 9.9 million views, 39,000 reactions, an..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.5612,
+          "nli_label": "neutral",
+          "nli_score": 0.5740969181060791,
+          "snippet": "On Dec. 10, 2023, Instagram account @hamidreza.edalatnia posted a series of eight images. Each image contained a spiral pattern, taking shape in either the architecture, greenery, or surrounding lands..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Article is neutrally related (different event/topic)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "NLI uncertainty too high (entropy 1.01 > 0.85)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "New York has among the highest tax burdens of any state in the nation",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.0739,
+      "id": 16,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8659,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "Comparing tax burdens, New York at (or near) the top of the list\nIF YOUR TIME IS SHORT\nNew York is at the top, or in second place, of various rankings of individual tax burdens.\nThe Tax Foundation ana..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8245,
+          "nli_label": "support",
+          "nli_score": 0.8974823951721191,
+          "snippet": "Does New York state have the highest taxes in the United States?\nIF YOUR TIME IS SHORT\n• According to a comprehensive study by the Tax Foundation, New York does have the highest overall tax burden in ..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7382,
+          "nli_label": "support",
+          "nli_score": 0.8906192183494568,
+          "snippet": "Does New York state have the second highest tax on the wealthy? No\nNew York state ranks only behind California for taxing the rich, Christine Quinn said at the Democratic Party’s state convention on L..."
+        }
+      ],
+      "skip_reasons": []
+    },
+    {
+      "claim": "Most Americans support the legalization of marijuana.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.2195,
+      "id": 17,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8117,
+          "nli_label": "support",
+          "nli_score": 0.9055624604225159,
+          "snippet": "Do 6 of 10 Americans back legalizing marijuana, as presidential candidate Gary Johnson says?\nIn a TV interview during a campaign visit to Milwaukee, Libertarian presidential candidate Gary Johnson was..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8187,
+          "nli_label": "support",
+          "nli_score": 0.9905121922492981,
+          "snippet": "Do a majority of Americans live in states with legal marijuana?\nFor the first time this week, Californians can celebrate \"4/20,\" the unofficial pot holiday, by purchasing legal recreational cannabis a..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8081,
+          "nli_label": "support",
+          "nli_score": 0.992435872554779,
+          "snippet": "Clearing the air over marijuana support\nGallup pollsters took the nation’s pulse on marijuana legalization in October and the findings led supporters of legal pot use to declare victory.\n\"It’s pretty ..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Key entities not found (0.225)"
+          ]
+        },
+        {
+          "source": "GMANETWORK",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.225)"
+          ]
+        },
+        {
+          "source": "GMANETWORK",
+          "reason": [
+            "Article is neutrally related (different event/topic)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "The Trump administration worked to free 5,000 Taliban prisoners.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3829,
+      "id": 18,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.8896,
+          "nli_label": "refute",
+          "nli_score": 0.8540641665458679,
+          "snippet": "In early December 2022, we received inquiries from readers who asked if it was true that former U.S. President Donald Trump's administration had previously agreed to an exchange that released 5,000 Ta..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.5099,
+          "nli_label": "support",
+          "nli_score": 0.6608611345291138,
+          "snippet": "A rumor circulating online in December 2025 claimed that throughout 2025, and specifically on Dec. 8, U.S. President Donald Trump's administration sent $45 million in weekly cash payments to the Talib..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.5029,
+          "nli_label": "neutral",
+          "nli_score": 0.6710527539253235,
+          "snippet": "A rumor circulating online in December 2025 claimed that throughout 2025, and specifically on Dec. 8, U.S. President Donald Trump's administration sent $45 million in weekly cash payments to the Talib..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.1688)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.0)",
+            "Insufficient topical overlap (Points: 0)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.1688)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Knife crime has soared to a record high.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.0215,
+      "id": 19,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "FULLFACT",
+          "similarity": 0.8551,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "It’s not correct that violent crime is at a record high. Several reliable sources indicate that violent crime is far lower now than it was in the 1990s in England and Wales.\nLouise Haigh’s claims are ..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.716,
+          "nli_label": "refute",
+          "nli_score": 0.9377173185348511,
+          "snippet": "Crime was a key issue in the recent general election campaign, with parties making competing claims that only their policies would keep people safe, reduce the level of offending and provide the neces..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.6815,
+          "nli_label": "support",
+          "nli_score": 0.9932308197021484,
+          "snippet": "More people are being caught carrying knives\nBetween 2016 and 2017, there was a 33% increase in the number of offences relating to possession of an article with a blade or point recorded by police in ..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "The USA is the largest investor in the UK economy.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.3104,
+      "id": 20,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "FULLFACT",
+          "similarity": 0.8442,
+          "nli_label": "support",
+          "nli_score": 0.9861556887626648,
+          "snippet": "There are three claims here. One about the USA’s importance as a trading partner, one about the size of its economy, and one about its importance as a military and diplomatic ally.\nThe USA is the UK’s..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7647,
+          "nli_label": "refute",
+          "nli_score": 0.587248682975769,
+          "snippet": "Donald Trump said the UK is America’s largest trading partner. It ranks 5th\nAt a business roundtable on his visit to the United Kingdom, President Donald Trump said there was a great opportunity to ex..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.6872,
+          "nli_label": "support",
+          "nli_score": 0.9848894476890564,
+          "snippet": "What does the High Court’s Article 50 ruling mean for Brexit?\nMs Nandy is referring to the High Court judgment on Brexit handed down by the Lord Chief Justice yesterday. It’s correct that it’s signifi..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "U.S. President Donald Trump pardoned Ross Ulbricht, the creator of dark web marketplace Silk Road.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1947,
+      "id": 22,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 1.0,
+          "nli_label": "support",
+          "nli_score": 0.7791429162025452,
+          "snippet": "In early March 2025, U.S. President Donald Trump threatened sweeping tariffs on imports from Canada and Mexico due in part to what he described as an \"influx of lethal drugs flowing into our country.\"..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 1.0,
+          "nli_label": "refute",
+          "nli_score": 0.4774908125400543,
+          "snippet": "In January 2025, a claim (archived) circulated that U.S. President Donald Trump had pardoned Ross Ulbricht, who was imprisoned for operating the dark web marketplace Silk Road.\nThe rumor was true. On ..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.5256,
+          "nli_label": "support",
+          "nli_score": 0.9151381254196167,
+          "snippet": "Trump said on many occasions he would pardon the rioters, without offering specifics. In 2023, he said he was \"inclined to pardon many of them,\" though not all. He added he likely would not pardon a f..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "TSEK",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.0)",
+            "Insufficient topical overlap (Points: 0)"
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Key entities not found (0.2)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Robert F. Kennedy Jr. was a heroin addict from his teenage years into adulthood.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1652,
+      "id": 21,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.988,
+          "nli_label": "support",
+          "nli_score": 0.9335232377052307,
+          "snippet": "As Robert F. Kennedy Jr. appeared for his first Senate confirmation hearing to be the U.S.'s top health official in January 2025, some people online called attention to his past as an alleged heroin u..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7371,
+          "nli_label": "refute",
+          "nli_score": 0.9410637021064758,
+          "snippet": "Evidence lacking that President John F. Kennedy smoked marijuana in the White House due to ailments\nIF YOUR TIME IS SHORT\nOne unconfirmed, secondhand report says Kennedy smoked marijuana once at the W..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.6557,
+          "nli_label": "refute",
+          "nli_score": 0.6602040529251099,
+          "snippet": "In late March and early April 2021, identically phrased social media posts started repeating a confused collection of made-up quotes and dubious legal and medical claims involving Robert F. Kennedy Jr..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.15)"
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Key entities not found (0.15)"
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "The founder of The Hershey Chocolate Company, Milton Hershey, founded a boarding school for orphaned boys.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4843,
+      "id": 23,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 1.0,
+          "nli_label": "refute",
+          "nli_score": 0.57094407081604,
+          "snippet": "A claim that the namesake behind Hershey's Chocolate, Milton Hershey, once founded a boarding school for orphaned boys circulated online in October 2025.\nMilton Hershey was a wealthy businessman and p..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.4075,
+          "nli_label": "support",
+          "nli_score": 0.8261732459068298,
+          "snippet": "Scott Walker gave $10,000 private school tax break to millionaires, AFL-CIO says\nIn a mass-mail piece headlined \"Falling Behind,\" the Wisconsin State AFL-CIO contends that under Wisconsin’s Republican..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.4083,
+          "nli_label": "support",
+          "nli_score": 0.9487011432647705,
+          "snippet": "Rose Mary Grant says R.I. charter schools ‘outperform’ those in other states\nThe subject of charter schools — the state money they get and the regulations they operate under — has been at the center o..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.2062)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.2062)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.2438)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "In 2025, streaming service Spotify ran recruitment advertisements for U.S. Immigration and Customs Enforcement.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5945,
+      "id": 24,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 1.0,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "A Spotify spokesperson confirmed that at least one ICE recruitment advertisement appeared on the platform, adding that the advertising \"is part of a broad campaign the US government is running\" across..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.5304,
+          "nli_label": "support",
+          "nli_score": 0.8676705956459045,
+          "snippet": "While the letter was authentic and sent to USPS employees, it didn't signal a new policy or a departure from normal practices. The letter is regularly reissued to postal workers, according to a spokes..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.4975,
+          "nli_label": "refute",
+          "nli_score": 0.7047796845436096,
+          "snippet": "Henry Cuellar claim about social media, rebates and children in Central America lacks proof\nEDITOR’S NOTE: Our first review of this claim, posted Aug. 12, 2014 and readable here, resulted in a Pants o..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.0321)",
+            "Insufficient topical overlap (Points: 0)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.0643)"
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Labour will introduce a “retirement tax”.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1024,
+      "id": 25,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "FULLFACT",
+          "similarity": 0.8513,
+          "nli_label": "refute",
+          "nli_score": 0.5578287839889526,
+          "snippet": "Following the Conservative party’s “triple lock plus” policy announcement last week the party has claimed Labour’s pension plans would result in a “£1,000 retirement tax”, with the Prime Minister clai..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.881,
+          "nli_label": "support",
+          "nli_score": 0.7274614572525024,
+          "snippet": "On 12 June the Prime Minister and Conservative leader Rishi Sunak and Labour leader Sir Keir Starmer both featured on a special Sky News programme, ‘The Battle for Number 10’.\nThe show was broadcast l..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.66,
+          "nli_label": "neutral",
+          "nli_score": 0.445159375667572,
+          "snippet": "The Conservative claim that a Labour government would mean a £2,000 tax rise for every working family dominated the first TV debate of the election on 4 June, and has been very widely covered since.\nT..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "An image authentically depicts Sean \"Diddy\" Combs with Prince Harry and Kanye \"Ye\" West.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0304,
+      "id": 26,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.9572,
+          "nli_label": "support",
+          "nli_score": 0.7328367829322815,
+          "snippet": "On March 26, 2024, \"Prince Harry\" trended on X (formerly Twitter) due to his alleged association with American rapper Sean \"Diddy\" Combs, who was sued in a $30 million sex trafficking lawsuit on Feb. ..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.7173,
+          "nli_label": "refute",
+          "nli_score": 0.5221461057662964,
+          "snippet": "In late September 2024, two images circulated on social media, allegedly showing pop star Taylor Swift with embattled music mogul Sean \"Diddy\" Combs. Combs was arrested on Sept. 16, 2024, on charges i..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.7291,
+          "nli_label": "support",
+          "nli_score": 0.944775402545929,
+          "snippet": "Two photographs shared to X on Sept. 17, 2024, purported to show U.S. President-elect Donald Trump — one in which he appears to be standing alongside hip hop mogul and accused sex trafficker Sean \"Did..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Labour is the first political party to reach parity in terms of men and women MPs.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0137,
+      "id": 27,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "FULLFACT",
+          "similarity": 0.5803,
+          "nli_label": "support",
+          "nli_score": 0.30857977271080017,
+          "snippet": "The leader of the Scottish National Party said on Newsnight last night that she will attempt to keep the Conservative Party out of government after the election, even if it has up to 40 seats more tha..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.5164,
+          "nli_label": "refute",
+          "nli_score": 0.5529550313949585,
+          "snippet": "During her speech at Labour’s National Annual Women’s Conference on 7 October, shadow women and equalities secretary Anneliese Dodds MP criticised the Conservative government’s record on equal pay, sa..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.6226,
+          "nli_label": "support",
+          "nli_score": 0.4957049787044525,
+          "snippet": "Labour has 119 women MPs, which is more than every other party combined. The Conservatives have 67, the SNP 12, and there are ten more among smaller parties and independents. That adds up to 208 women..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Project 2025 would defund K-12 schools.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.0282,
+      "id": 28,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "RAPPLER",
+          "similarity": 0.5868,
+          "nli_label": "refute",
+          "nli_score": 0.9448103308677673,
+          "snippet": "Claim: The Department of Education (DepEd) announced the return to the four-year high school system in the country, essentially scrapping the K to 12 program.\nRating: FALSE\nWhy we fact-checked this: T..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.5687,
+          "nli_label": "support",
+          "nli_score": 0.9403418302536011,
+          "snippet": "Deal's statement on education funding missing critical context\nGov. Nathan Deal has promised financially strapped local school districts that better days are ahead.\nHe started down that road last year..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.5671,
+          "nli_label": "refute",
+          "nli_score": 0.6456844210624695,
+          "snippet": "Claim: The Department of Education (DepEd) recently launched K-10 to replace the K to 12 program.\nRating: FALSE\nWhy we fact-checked this: The claim can be found in a video uploaded on August 11 by a Y..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Key entities not found (0.15)"
+          ]
+        },
+        {
+          "source": "RAPPLER",
+          "reason": [
+            "Key entities not found (0.15)"
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Key entities not found (0.15)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "“We produce a lot more wind energy in Texas than California does.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.2027,
+      "id": 30,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7092,
+          "nli_label": "support",
+          "nli_score": 0.732991099357605,
+          "snippet": "Abbott referred to installed capacity in the grid, not power available during severe winter weather\nIF YOUR TIME IS SHORT\nTexas Gov. Greg Abbott was referring to installed capacity when he said Texas ..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7804,
+          "nli_label": "support",
+          "nli_score": 0.9661721587181091,
+          "snippet": "Barack Obama says wind power cheaper in Texas than power from 'dirty fossil fuels'\nBarack Obama, exhorting Dallas Democrats during a March 2016 Texas swing, called Republican claims that the country a..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7491,
+          "nli_label": "refute",
+          "nli_score": 0.7013098001480103,
+          "snippet": "Is California's economy 'growing a hell of a lot faster' than Texas?\nStoking their long-running feud, California Gov. Jerry Brown recently jabbed at former Texas Gov. Rick Perry, saying Golden State i..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.2)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Donald Trump wants to terminate the Affordable Care Act.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3921,
+      "id": 29,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8973,
+          "nli_label": "refute",
+          "nli_score": 0.8917949795722961,
+          "snippet": "Ad Watch: Does Donald Trump want to terminate the Affordable Care Act, as Harris campaign ad claims?\nRead in Español\nIF YOUR TIME IS SHORT\nThe Harris’ campaign ad uses a 2017 video in which former Pre..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8034,
+          "nli_label": "support",
+          "nli_score": 0.5967119932174683,
+          "snippet": "Vance misleads: Trump tried to take the Affordable Care Act down, not build upon it\nIF YOUR TIME IS SHORT\nAs president, Donald Trump cut funding for Affordable Care Act  marketing, outreach and enroll..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.732,
+          "nli_label": "refute",
+          "nli_score": 0.7509429454803467,
+          "snippet": "Donald Trump’s Pants on Fire claim that he ‘never mentioned’ ending the Affordable Care Act\nIF YOUR TIME IS SHORT\nDuring the 2024 campaign, former President Donald Trump has said inconsistent things a..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "“One in 5 Americans has lost a family member to gun violence.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.4105,
+      "id": 32,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7817,
+          "nli_label": "support",
+          "nli_score": 0.8918318748474121,
+          "snippet": "Mostly True for California initiative's claim: Guns kill 32,000 Americans each year\nCalls to strengthen California’s gun laws intensified this week after the nation’s deadliest mass shooting in histor..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7292,
+          "nli_label": "support",
+          "nli_score": 0.8880448341369629,
+          "snippet": "Debbie Wasserman Schultz right about far-reaching effects of gun violence\nIn the wake of the Orlando shootings and lacking congressional action regarding gun reform legislation, many are calling atten..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7232,
+          "nli_label": "support",
+          "nli_score": 0.7173820734024048,
+          "snippet": "Group uses kid gun deaths to demand tougher laws\nThere’s little that is more tragic than the death of a child.\nOne group recently attempted to use those emotions to sway a prominent Georgia lawmaker t..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.18)"
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.18)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Project 2025 would “end Head Start.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5057,
+      "id": 31,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.4606,
+          "nli_label": "refute",
+          "nli_score": 0.8189591765403748,
+          "snippet": "For several months, claims that Project 2025 intends to eliminate the U.S. Head Start program, which provides early childhood education and services to low-income families, have circulated in various ..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.5345,
+          "nli_label": "support",
+          "nli_score": 0.4626901149749756,
+          "snippet": "JD Vance wrote the foreword for Project 2025’s Kevin Roberts’ upcoming book\nIF YOUR TIME IS SHORT\nIn June, Sen. JD Vance, R-Ohio, announced that he had written the foreword for Heritage Foundation Pre..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.5322,
+          "nli_label": "support",
+          "nli_score": 0.4793153405189514,
+          "snippet": "Would Project 2025 ‘cut’ FEMA? Proposals would reduce support, hinder disaster response, experts say\nIF YOUR TIME IS SHORT\nProject 2025 outlines changes to the Federal Emergency Management Agency, inc..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "NLI Support rejected: Evidence lacks topical assertions (end...)"
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.0)",
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Sen. Marco Rubio has \"one of the worst attendance records in the Senate.\"",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1919,
+      "id": 33,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8055,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "Donald Trump is right: Marco Rubio has worst Senate voting record\nIn a heated exchange, Republican presidential candidate Donald Trump criticized rival Sen. Marco Rubio of Florida for his Senate votin..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7664,
+          "nli_label": "support",
+          "nli_score": 0.7752029299736023,
+          "snippet": "Donald Trump says Marco Rubio has 'worst voting record there is today'\nIn one of many heated exchanges during the second Republican primary debate, Donald Trump mocked Florida Sen. Marco Rubio’s poor ..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7006,
+          "nli_label": "support",
+          "nli_score": 0.9446025490760803,
+          "snippet": "Mostly True: Marco Rubio has worst voting record of any Florida senator in nearly 50 years\nU.S. Rep. Patrick Murphy wasted no time attacking incumbent Marco Rubio’s voting record after handily winning..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "GMANETWORK",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.225)"
+          ]
+        },
+        {
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.225)"
+          ]
+        },
+        {
+          "source": "GMANETWORK",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.225)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "“West Virginia is home to zero billionaires.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1054,
+      "id": 34,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6325,
+          "nli_label": "support",
+          "nli_score": 0.9416115283966064,
+          "snippet": "Has West Virginia received a record amount of federal funding over the last four years?\nIF YOUR TIME IS SHORT\nSen. Joe Manchin, D-W.Va., actually understated the flow of federal money. West Virginia h..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6142,
+          "nli_label": "support",
+          "nli_score": 0.8877919912338257,
+          "snippet": "Does West Virginia lead the nation in overdose drug death rate? Yes\nAs he runs for a U.S. Senate seat, Rep. Evan Jenkins, R-W.Va., is seeking targeted funding for states grappling with opioid addictio..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6223,
+          "nli_label": "support",
+          "nli_score": 0.9808969497680664,
+          "snippet": "Shelley Moore Capito correct on suicides in West Virginia\nSen. Shelley Moore Capito, R-W.Va., recently sought to raise awareness about suicide, focusing on its toll in her home state.\n\"On average, one..."
+        }
+      ],
+      "skip_reasons": []
+    },
+    {
+      "claim": "100,000 Americans died of an overdose in a single year.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.2171,
+      "id": 35,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6825,
+          "nli_label": "support",
+          "nli_score": 0.667951762676239,
+          "snippet": "Tom McClintock Claimed ‘The Flu Killed 80,000 Americans Last Year.’ Here’s Why That’s Misleading.\nIF YOUR TIME IS SHORT\nTwo years ago, the CDC initially reported 80,000 deaths during the 2017-18 influ..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6613,
+          "nli_label": "support",
+          "nli_score": 0.6448374390602112,
+          "snippet": "Trump touts one year’s decline in drug overdoses, ignoring three years of increases\nIF YOUR TIME IS SHORT\n• The overdose death rate did drop in 2018. However, this is a cherry-picked view of the trend..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6063,
+          "nli_label": "refute",
+          "nli_score": 0.5355345010757446,
+          "snippet": "Post comparing mass shooting deaths to homicides by undocumented immigrants way off\nA viral post circulating on Facebook claims that, in 2018, tens of thousands more people died at the hands of undocu..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.1125)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.1125)"
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "If Roe is overturned, Wisconsin has a law on the books that would immediately make abortion a crime.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.0792,
+      "id": 36,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8828,
+          "nli_label": "refute",
+          "nli_score": 0.6849907040596008,
+          "snippet": "Governor hopeful Kelda Roys' claim that abortion is a crime in Wisconsin has some truth but misleads\nIf someone gets caught robbing a store in Wisconsin, that person could go to jail. After all, robbe..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.853,
+          "nli_label": "support",
+          "nli_score": 0.9416502118110657,
+          "snippet": "Yes, Wisconsin’s abortion law is older than 20 U.S. states\nIF YOUR TIME IS SHORT\nWisconsin’s abortion law, which would be in effect if Roe v. Wade is overturned by the U.S. Supreme Court, was passed i..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8285,
+          "nli_label": "support",
+          "nli_score": 0.9126514792442322,
+          "snippet": "Kamala Harris wrong that Republican lawmakers played a role in reinstating abortion ban in Wisconsin\nIF YOUR TIME IS SHORT\nThe overturning of Roe v. Wade put Wisconsin’s 1849 ban into effect.\nUnlike o..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "“Bill Gates told us about the coronavirus in 2015.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6831,
+      "id": 37,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "FULLFACT",
+          "similarity": 0.7492,
+          "nli_label": "refute",
+          "nli_score": 0.6613944172859192,
+          "snippet": "A Facebook post that has made several claims about the relationship between 5G, vaccines and the ongoing coronavirus pandemic has been shared thousands of times.\nThe main claim of the post, that the n..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.6367,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "Claim: The Federal Bureau of Investigation (FBI) arrested billionaire Bill Gates on charges of biological terrorism after he allegedly created the novel coronavirus, the virus that causes COVID-19.\nTh..."
+        },
+        {
+          "source": "VERAFILES",
+          "similarity": 0.6299,
+          "nli_label": "refute",
+          "nli_score": 0.810120165348053,
+          "snippet": "Apart from the coronavirus disease 2019 (COVID-19) itself, there is a battle being waged against vaccine hesitancy and vaccine-related misinformation.\nThis month, one post detected by VERA Files Fact ..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "North Carolina is one of four states that hasn't opened gyms.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1032,
+      "id": 38,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.518,
+          "nli_label": "refute",
+          "nli_score": 0.9924498796463013,
+          "snippet": "Trump wrong about auto plant coming to North Carolina\nIF YOUR TIME IS SHORT\nOn at least three occasions, President Trump has suggested that a major auto plant or company is expanding in North Carolina..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6593,
+          "nli_label": "support",
+          "nli_score": 0.706207275390625,
+          "snippet": "Democrat running for mayor says southeast Raleigh gyms \"don't have air conditioning\"\nCharles Francis says Raleigh isn’t spending its parks money fairly.\nFrancis, a Democrat, is running for mayor of Ra..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.5258,
+          "nli_label": "refute",
+          "nli_score": 0.5364194512367249,
+          "snippet": "Does North Carolina have the largest military bases?\nThe U.S. spends far more than any other country in the world on its military.\nAnd at the Republican National Convention, the North Carolina Republi..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "PHILSTAR",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.2)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "“Murders this year have spiked 27% in Philadelphia.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5161,
+      "id": 39,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8884,
+          "nli_label": "support",
+          "nli_score": 0.8352741599082947,
+          "snippet": "Will Philly’s murder rate be the highest this decade, as AG Jeff Sessions said?\nOn Friday, another member of the Trump administration discussed crime in Philly.\nIn town for a speech to law enforcement..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.852,
+          "nli_label": "support",
+          "nli_score": 0.8296821713447571,
+          "snippet": "Donald Trump falsely tells GOP Philly homicides are ‘terribly increasing’\nDonald Trump made his first visit to Philadelphia as president today and at the beginning of his speech at the GOP Retreat sai..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7614,
+          "nli_label": "refute",
+          "nli_score": 0.8370278477668762,
+          "snippet": "Did major crimes drop in Philly compared to other cities in 2016?\nMayor Jim Kenney’s administration recently released a report stuffed with the good news that happened during his first year in office...."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.225)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Abigail Spanberger “has voted with Nancy Pelosi over 90% of the time…”",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0417,
+      "id": 40,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8107,
+          "nli_label": "support",
+          "nli_score": 0.9316591024398804,
+          "snippet": "Spanberger agrees with Biden most of the time\nIF YOUR TIME IS SHORT\nPresident Joe Biden has taken a position on 73 bills and resolutions in the House of Representatives. Rep. Abigail Spanberger, D-Va...."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7444,
+          "nli_label": "support",
+          "nli_score": 0.8627398610115051,
+          "snippet": "Kevin McCarthy falsely says Justin Amash votes more often with Nancy Pelosi than him\nIn the aftermath of his tweets referring to the Mueller report as evidence for President Donald Trump’s impeachment..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7264,
+          "nli_label": "support",
+          "nli_score": 0.7338864207267761,
+          "snippet": "What’s ‘love’ got to do with it? Ad shows Ryan’s support for Pelosi, but omits bid to replace her\nIF YOUR TIME IS SHORT\nRyan wasn’t just professing \"love for Pelosi.\" He was saying that despite his lo..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.0)",
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Former U.S. Vice President Richard Mentor Johnson was a slave owner married to one of his slaves and father of two children with her.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0427,
+      "id": 42,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.5033,
+          "nli_label": "neutral",
+          "nli_score": 0.7055283784866333,
+          "snippet": "In September 2024, old claims that former U.S. President Donald Trump committed acts of sexual violence against minors in the 1990s reemerged on social media platforms including X and Reddit, sharing ..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.5642,
+          "nli_label": "support",
+          "nli_score": 0.5238903164863586,
+          "snippet": "There is no available evidence to conclusively demonstrate that Lyndon B. Johnson had Jewish ancestry. Regardless, he did not identify as Jewish.\nU.S. President Lyndon B. Johnson cultivated a close re..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.455,
+          "nli_label": "support",
+          "nli_score": 0.3051737844944,
+          "snippet": "Rumors circulated online in mid-November 2025 that a man pardoned for his participation in the Jan. 6, 2021, insurrection at the U.S. Capitol in Washington, D.C., was later arrested over an allegation..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Key entities not found (0.2118)"
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Key entities not found (0.2118)"
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Key entities not found (0.2118)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Says that the oil and gas industry comprises 35% of the Texas economy.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1068,
+      "id": 41,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7911,
+          "nli_label": "support",
+          "nli_score": 0.9559919834136963,
+          "snippet": "Secession petition says Texas has 15th largest economy in the world\nWhen numerous petitions to secede popped up on the White House’s website after President Barack Obama was re-elected, one drew a Tex..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6583,
+          "nli_label": "support",
+          "nli_score": 0.972956120967865,
+          "snippet": "UPDATED: Rick Perry says Texas created 1.5 million jobs in seven years, rest of country down 400,000\nAddressing supporters in an airport hangar in Addison, Perry said that on his watch, companies in T..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7688,
+          "nli_label": "support",
+          "nli_score": 0.9048478007316589,
+          "snippet": "Larry Kilgore says Texas economy is about 30 percent larger than Australia’s\nAs tens of thousands of signatures piled up on a petition for Texas to withdraw from the United States, Larry Kilgore of Ar..."
+        }
+      ],
+      "skip_reasons": []
+    },
+    {
+      "claim": "“34% of Wisconsin renters are at risk of eviction.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1362,
+      "id": 43,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7994,
+          "nli_label": "refute",
+          "nli_score": 0.5312265753746033,
+          "snippet": "Advocate misses mark on claim half the population pays at least half their income for housing\nIF YOUR TIME IS SHORT\nVolk’s claims are misleading and inaccurate.\nA 2021 report released by the National ..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7085,
+          "nli_label": "refute",
+          "nli_score": 0.604295551776886,
+          "snippet": "Nancy Pelosi claims 200K “will be prohibited from voting” in Wisconsin. That's wrong.\nUp to 234,000 Wisconsin residents are at risk of being removed from the voter rolls, a political lightning-rod tha..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6927,
+          "nli_label": "support",
+          "nli_score": 0.9805464148521423,
+          "snippet": "Scott Walker says Wisconsin property taxes, as percentage of income, are lowest since end of WWII\nWisconsin Gov. Scott Walker recited a number of statistical accomplishments during his seventh state o..."
+        }
+      ],
+      "skip_reasons": []
+    },
+    {
+      "claim": "For younger people, seasonal flu is “in many cases” a deadlier virus than COVID-19",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2125,
+      "id": 44,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "FULLFACT",
+          "similarity": 0.7451,
+          "nli_label": "support",
+          "nli_score": 0.9796006083488464,
+          "snippet": "We were asked by readers how the Covid-19 and SARS-CoV-2, the coronavirus that causes it, compares to influenza, in terms of both its infection rate and its death rate.\nIt is difficult to get a precis..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.7434,
+          "nli_label": "support",
+          "nli_score": 0.5465107560157776,
+          "snippet": "We were asked by readers how the Covid-19 and SARS-CoV-2, the coronavirus that causes it, compares to influenza, in terms of both its infection rate and its death rate.\nIt is difficult to get a precis..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.7422,
+          "nli_label": "neutral",
+          "nli_score": 0.6357989311218262,
+          "snippet": "We were asked by readers how the Covid-19 and SARS-CoV-2, the coronavirus that causes it, compares to influenza, in terms of both its infection rate and its death rate.\nIt is difficult to get a precis..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "“In the last 10 years less than half of adults in the U.S. received a flu shot.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.451,
+      "id": 45,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8261,
+          "nli_label": "refute",
+          "nli_score": 0.6802354454994202,
+          "snippet": "Facebook post exaggerates seasonal flu deaths for last year\nIF YOUR TIME IS SHORT\nThe CDC’s estimate for seasonal flu deaths for the 2017-18 season was about 61,000.\nThe CDC’s preliminary estimate for..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.817,
+          "nli_label": "support",
+          "nli_score": 0.8366453051567078,
+          "snippet": "Tom McClintock Claimed ‘The Flu Killed 80,000 Americans Last Year.’ Here’s Why That’s Misleading.\nIF YOUR TIME IS SHORT\nTwo years ago, the CDC initially reported 80,000 deaths during the 2017-18 influ..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7794,
+          "nli_label": "refute",
+          "nli_score": 0.7969452738761902,
+          "snippet": "Influenza caused 9 million illnesses, 5,000 deaths last flu season, CDC says\nIF YOUR TIME IS SHORT\nCOVID-19 and influenza are caused by two different viruses, each requiring different tests to diagnos..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Key entities not found (0.1385)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Specific name/identifier from claim not found",
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Virginia ranks “in the bottom third of states” in administering the COVID-19 vaccine.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.0501,
+      "id": 47,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8213,
+          "nli_label": "support",
+          "nli_score": 0.44422367215156555,
+          "snippet": "Fact-checking the WV Democratic Party’s tweet on COVID-19 transmission\nIF YOUR TIME IS SHORT\nOn the day the tweet was posted, West Virginia did have the highest rate of transmission of coronavirus, ac..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.782,
+          "nli_label": "support",
+          "nli_score": 0.9776671528816223,
+          "snippet": "Virginia lags in coronavirus testing, as Mayor LeVar Stoney says\nRichmond Mayor LeVar Stoney recently said Virginia needs to dramatically expand covid-19 testing before it reopens its economy.\n\"We’re ..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.759,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "COVID has struck Florida harder than Virginia, contrary to Pete Snyder's claim\nIF YOUR TIME IS SHORT\nFlorida's per capita COVID case rate was 29% higher than Virginia's over the last 12 months.\nFlorid..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Says COVID-19 has killed more North Carolinians in a year than the flu has in 10 years.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1992,
+      "id": 46,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7344,
+          "nli_label": "refute",
+          "nli_score": 0.6820550560951233,
+          "snippet": "No, the flu hasn't killed more people than coronavirus\nIF YOUR TIME IS SHORT\nNorth Carolina Lt. Governor Dan Forest, a Republican, is running for governor against Democratic incumbent Roy Cooper and h..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7439,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "No, COVID-19 hasn’t killed fewer people than the flu\nIF YOUR TIME IS SHORT\nAbout 3.1 million people around the world have died of COVID-19 since the first case was reported in December 2019.\n\nThe flu ..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.7112,
+          "nli_label": "refute",
+          "nli_score": 0.7469415664672852,
+          "snippet": "Several newspapers, magazines and broadcasters—including the Sun, the Mirror, the Mail, the Week, the Spectator, the Times and talkRADIO—as well as some social media accounts, have claimed that influe..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "GMANETWORK",
+          "reason": [
+            "Article is neutrally related (different event/topic)"
+          ]
+        },
+        {
+          "source": "GMANETWORK",
+          "reason": [
+            "Article is neutrally related (different event/topic)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "The Texas power grid is not part of the US power grid because they wanted to avoid federal regulation.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.2664,
+      "id": 48,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.7591,
+          "nli_label": "refute",
+          "nli_score": 0.8434363603591919,
+          "snippet": "In mid-to-late February 2021, readers emailed Snopes asking about memes and stories posted online that claimed U.S. President Joe Biden had signed an executive order granting the Chinese government ac..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7005,
+          "nli_label": "neutral",
+          "nli_score": 0.39552968740463257,
+          "snippet": "Tucker Carlson falsely blames Green New Deal, wind energy for Texas power outage\nIF YOUR TIME IS SHORT\n• Wind energy accounts for 10% of the winter energy supply in the Texas power grid. The failure o..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.6851,
+          "nli_label": "refute",
+          "nli_score": 0.9008546471595764,
+          "snippet": "In February 2021, as Texas began to recover from a devastating winter storm that brought record-low temperatures, killed dozens of people, and cut the power to millions of homes, a report emerged onli..."
+        }
+      ],
+      "skip_reasons": []
+    },
+    {
+      "claim": "“The United States is the only industrialized, modernized country that does not already have a paid family medical leave program in place.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4966,
+      "id": 49,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.699,
+          "nli_label": "support",
+          "nli_score": 0.9585034847259521,
+          "snippet": "It’s true: The US is an outlier on paid parental leave\nIF YOUR TIME IS SHORT\nThe U.S. requires 12 weeks of unpaid leave a year for parents of newborn or newly adopted children if the parents work for ..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7461,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "Beyer says U.S. is only developed nation not mandating paid family leave\nFormer Lt. Gov. Don Beyer has his eyes set on the 8th District congressional seat in Northern Virginia, calling for stronger gu..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7336,
+          "nli_label": "support",
+          "nli_score": 0.34778663516044617,
+          "snippet": "Barack Obama says U.S. differs from developed world on paid maternity leave\nPresident Barack Obama convened the first Working Families Summit in Washington this week to unite his administration, labor..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.2475)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Residents of New York state “pay the highest taxes in the nation.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0681,
+      "id": 50,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8558,
+          "nli_label": "support",
+          "nli_score": 0.987118124961853,
+          "snippet": "Is New York's tax burden 'among the highest' in the nation?\nA Republican who wants to unseat Gov. Andrew M. Cuomo this year says New York state residents face one of the highest tax burdens in the cou..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7934,
+          "nli_label": "support",
+          "nli_score": 0.8403810262680054,
+          "snippet": "Does New York state have the second highest tax on the wealthy? No\nNew York state ranks only behind California for taxing the rich, Christine Quinn said at the Democratic Party’s state convention on L..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7918,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "Comparing tax burdens, New York at (or near) the top of the list\nIF YOUR TIME IS SHORT\nNew York is at the top, or in second place, of various rankings of individual tax burdens.\nThe Tax Foundation ana..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.225)"
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Key entities not found (0.225)"
+          ]
+        },
+        {
+          "source": "GMANETWORK",
+          "reason": [
+            "Key entities not found (0.225)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Kilmar Armando Abrego Garcia “was a convicted MS-13 gang member.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4625,
+      "id": 2,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.8032,
+          "nli_label": "support",
+          "nli_score": 0.6197266578674316,
+          "snippet": "According to a U.S. Immigration and Customs Enforcement court filing, an immigration judge said that evidence indicated Abrego Garcia was a \"verified member\" of MS-13. However, the word of an immigrat..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.8032,
+          "nli_label": "support",
+          "nli_score": 0.5921960473060608,
+          "snippet": "According to a U.S. Immigration and Customs Enforcement court filing, an immigration judge said that evidence indicated Abrego Garcia was a \"verified member\" of MS-13. However, the word of an immigrat..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.5795,
+          "nli_label": "refute",
+          "nli_score": 0.9493311643600464,
+          "snippet": "President Donald Trump says Kilmar Abrego Garcia has “‘MS-13’ on his knuckles.” Pants on Fire!\nIF YOUR TIME IS SHORT\nThe figures M, S, 1 and 3 and words below the symbols don’t appear in other photogr..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "RAPPLER",
+          "reason": [
+            "Key entities not found (0.1)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "“There is no starvation in Gaza.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5858,
+      "id": 1,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.8296,
+          "nli_label": "refute",
+          "nli_score": 0.9980171918869019,
+          "snippet": "Note: This story contains disturbing images.\nIn August 2025, a rumor began to spread that a 27-year-old Palestinian man in Gaza named Adel Madi had died of malnutrition and starvation. Several images ..."
+        },
+        {
+          "source": "GMANETWORK",
+          "similarity": 0.8091,
+          "nli_label": "refute",
+          "nli_score": 0.7216663956642151,
+          "snippet": "CAIRO/JERUSALEM/LONDON — Food shortages in parts of the Gaza Strip have already far exceeded famine levels, and mass death is now imminent without an immediate ceasefire and surge of food into areas c..."
+        },
+        {
+          "source": "GMANETWORK",
+          "similarity": 0.8074,
+          "nli_label": "refute",
+          "nli_score": 0.999537467956543,
+          "snippet": "GENEVA, Switzerland - The head of the World Health Organization (WHO) called for a ceasefire and a \"true solution\" to the Israel-Palestinian conflict in an emotional plea to the global health body's g..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "“Malia Obama received $2.2 million in funds from USAID.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7699,
+      "id": 3,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "FULLFACT",
+          "similarity": 0.8571,
+          "nli_label": "refute",
+          "nli_score": 0.9698981046676636,
+          "snippet": "Posts claiming that Malia Obama received $2.2 million from the United States Agency for International Development, USAID, are circulating on social media. But this claim appears to have been first sha..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.6987,
+          "nli_label": "refute",
+          "nli_score": 0.8352140784263611,
+          "snippet": "Claims that former US president Barack Obama has been receiving millions of dollars a year in royalties from Obamacare have been circulating online. But these claims aren’t true—they originate from a ..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.7217,
+          "nli_label": "support",
+          "nli_score": 0.8251497149467468,
+          "snippet": "Committees working on behalf of President Barack Obama's 2012 re-election campaign unknowingly received approximately $1.87 million in foreign contributions as a result of an alleged criminal conspira..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Actor Tom Hanks died in a “fatal car accident.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6034,
+      "id": 5,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.843,
+          "nli_label": "refute",
+          "nli_score": 0.9426609873771667,
+          "snippet": "No, Tom Hanks didn’t die\nIF YOUR TIME IS SHORT\nTom Hanks didn’t die.\n\nThe screenshot of a story about his supposed death that’s being shared on social media comes from a self-described satire website...."
+        },
+        {
+          "source": "GMANETWORK",
+          "similarity": 0.6986,
+          "nli_label": "support",
+          "nli_score": 0.3332368731498718,
+          "snippet": "An Iranian who got stuck for 18 years in a Paris airport, inspiring a Steven Spielberg movie starring Tom Hanks died on Saturday at the terminal, an airport official said...."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6759,
+          "nli_label": "refute",
+          "nli_score": 0.8202114701271057,
+          "snippet": "No, Tom Hanks’ name is not on Jeffrey Epstein’s flight logs\nIF YOUR TIME IS SHORT\nTom Hanks’ name does not appear on the flight logs and there is no other evidence to indicate he flew on Epstein’s pla..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "“Elon Musk has just acquired Boeing.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6563,
+      "id": 4,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.9,
+          "nli_label": "refute",
+          "nli_score": 0.9859946966171265,
+          "snippet": "A rumor circulating online in the latter weeks of 2024 claimed tech entrepreneur Elon Musk bought the Boeing aerospace company. Musk serves as CEO of SpaceX, a space-technology company, and Tesla, an ..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.7394,
+          "nli_label": "refute",
+          "nli_score": 0.9627736210823059,
+          "snippet": "On Dec. 4, 2022, a YouTube channel named Elon Musk Rewind posted a video promoting a rumor that claimed Tesla CEO and Twitter owner Elon Musk had bought General Motors, the automobile company better k..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6483,
+          "nli_label": "refute",
+          "nli_score": 0.9702584147453308,
+          "snippet": "No, Elon Musk did not buy Ford Motor Co.\nRead in Español\nIF YOUR TIME IS SHORT\nThere have been no announcements by Ford Motor Co. or Tesla CEO Elon Musk about Musk acquiring Ford.\nA Ford spokesperson ..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "“Dave McCormick is fully against abortion.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.248,
+      "id": 7,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8066,
+          "nli_label": "support",
+          "nli_score": 0.5257728695869446,
+          "snippet": "Pennsylvania Senate candidate Dave McCormick has not called to outlaw abortion\nIF YOUR TIME IS SHORT\nU.S. Senate candidate Dave McCormick, a Republican from Pennsylvania, has said during the 2024 camp..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.61,
+          "nli_label": "refute",
+          "nli_score": 0.5169296860694885,
+          "snippet": "Mehmet Oz supports abortion in limited cases, but wants Roe v. Wade overturned\nIF YOUR TIME IS SHORT\nOz has campaigned as being \"100% pro-life.\" He has said he personally opposes abortion and supports..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6204,
+          "nli_label": "support",
+          "nli_score": 0.6755778193473816,
+          "snippet": "Moore's wife coins new anti-abortion term to attack his Democratic opponent\nAs Alabama Republican Senate nominee Roy Moore wrestles with accounts of sexual encounters with underaged teens, his Democra..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.0)",
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.0)",
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.0)",
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "“Elon Musk is not a citizen of the United States.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1541,
+      "id": 6,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.8715,
+          "nli_label": "refute",
+          "nli_score": 0.4559081196784973,
+          "snippet": "On March 28, 2024, U.S. Rep. Alexandria Ocasio-Cortez published a post on X (formerly Twitter) directed at billionaire Elon Musk, reminding him of the fact that he was an immigrant to the United State..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.6999,
+          "nli_label": "support",
+          "nli_score": 0.7287270426750183,
+          "snippet": "The U.S. Constitution states that the president must be a natural-born citizen of the United States. Elon Musk was born in South Africa.\nOn Dec. 22, 2024, U.S. President-elect Donald Trump rebuffed cr..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.5465,
+          "nli_label": "support",
+          "nli_score": 0.7213954329490662,
+          "snippet": "In early 2025, Trump adviser Elon Musk's Department of Government Efficiency (DOGE) implemented cuts in the Veterans Affairs (VA) agency, leading to disruptions and widespread criticism from military ..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Travis Kelce endorsed Kamala Harris.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4435,
+      "id": 8,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7556,
+          "nli_label": "refute",
+          "nli_score": 0.7314623594284058,
+          "snippet": "No, Taylor Swift’s boyfriend Travis Kelce didn’t say he could ‘twist’ Elon Musk ‘into a pretzel’\nIF YOUR TIME IS SHORT\nWe found no evidence that Travis Kelce responded to Elon Musk after the X owner r..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.625,
+          "nli_label": "refute",
+          "nli_score": 0.7483625411987305,
+          "snippet": "On Aug. 6, 2024, an X account published a post alleging that pop star Taylor Swift had subtly endorsed U.S. Vice President Kamala Harris for the upcoming presidential election, which was perceived as ..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6122,
+          "nli_label": "refute",
+          "nli_score": 0.9397457838058472,
+          "snippet": "Not the real thing: Coca-Cola didn’t break ties with Taylor Swift after Kamala Harris endorsement\nIF YOUR TIME IS SHORT\nThis claim originated from a satirical website.\nSee the sources for this fact-ch..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "NASA announced in September 2025 that it had found life on Mars.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5867,
+      "id": 9,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.6548,
+          "nli_label": "support",
+          "nli_score": 0.3066857159137726,
+          "snippet": "While the photograph is genuine, it depicts a wind-carved rock.\nA smooth, tadpolelike object photographed on the surface of Mars has stumped internet users curious about what it may be. Take these pho..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6399,
+          "nli_label": "refute",
+          "nli_score": 0.810344398021698,
+          "snippet": "No, rover photos aren’t proof that scientists have found fungi growing on Mars\nIF YOUR TIME IS SHORT\n• A group of scientists published a paper in which they claim that Mars Rover photographs indicate ..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.6396,
+          "nli_label": "refute",
+          "nli_score": 0.9318770170211792,
+          "snippet": "A Facebook post which claims that the Mars landings are being faked and that NASA is a hoax is false.\nThe post contains two side by side images of what appears to be an identical, remote location. The..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Greeting card companies invented Valentine's Day.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3649,
+      "id": 10,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 1.0,
+          "nli_label": "support",
+          "nli_score": 0.5467703938484192,
+          "snippet": "Every year around Feb. 14, social media users argue that greeting card companies invented Valentine's Day.\nThe rumor gained traction in pop culture due to a line in the 2004 film \"Eternal Sunshine of ..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.9622,
+          "nli_label": "support",
+          "nli_score": 0.7859245538711548,
+          "snippet": "The idea that Valentine's Day, which falls yearly on Feb. 14, was a cynical gambit by greeting card companies, came with a line of dialogue in the 2004 Jim Carrey/Kate Winslet romance \"Eternal Sunshin..."
+        },
+        {
+          "source": "GMANETWORK",
+          "similarity": 0.565,
+          "nli_label": "neutral",
+          "nli_score": 0.43320804834365845,
+          "snippet": "The Bureau of Immigration (BI) issued a warning on Valentine's Day, Friday, against a new love scam targeting Filipinos online...."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Key entities not found (0.225)"
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.0)",
+            "Insufficient topical overlap (Points: 0)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "In Indiana, who you voted for is public record.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3955,
+      "id": 11,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7731,
+          "nli_label": "refute",
+          "nli_score": 0.6755435466766357,
+          "snippet": "Did Indiana purge 20,000 voters in violation of a federal court order?\nVoter purges in Georgia and Ohio have captivated a national audience leading up to the midterms. Does Indiana face the same probl..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.5809,
+          "nli_label": "support",
+          "nli_score": 0.6114716529846191,
+          "snippet": "Snopes coordinated an all-hands-on-deck operation to debunk Election Day's most dangerous falsehoods while identifying more-truthful rumors that may deserve some extra context. We monitored claims in ..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.6137,
+          "nli_label": "neutral",
+          "nli_score": 0.6221180558204651,
+          "snippet": "This article is republished here with permission from The Conversation. This content is shared here because the topic may interest Snopes readers; it does not, however, represent the work of Snopes fa..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.225)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.0)",
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.225)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "U.S. President George Washington had wooden teeth.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1683,
+      "id": 13,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.6608,
+          "nli_label": "refute",
+          "nli_score": 0.5415189266204834,
+          "snippet": "In May 2022, social media users shared images that supposedly showed the face of the first U.S. President, George Washington, facing right — not left — on the front of a new quarter coin released in 2..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.5995,
+          "nli_label": "refute",
+          "nli_score": 0.8481871485710144,
+          "snippet": "For years, social media users have claimed the U.S. Capitol contains a tomb that was originally built for George Washington, the first U.S. president, but was never used and remains empty.\nThe claim h..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.5084,
+          "nli_label": "refute",
+          "nli_score": 0.5952679514884949,
+          "snippet": "Although the photo is authentic, serious doubts have been raised about the man's age and claims of military service.\nIn October 2024, a photo circulated online allegedly showing \"a 116-year-old U.S. C..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.15)"
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Insufficient topical overlap (Points: 0)"
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Insufficient topical overlap (Points: 0)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "NASA was established before the U.S.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0375,
+      "id": 14,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.5325,
+          "nli_label": "refute",
+          "nli_score": 0.7800436615943909,
+          "snippet": "On Jan. 20, 2026, while discussing U.S. President Trump's stated desire to acquire Greenland, an autonomous territory of Denmark, Fox News host Jesse Watters drew online ridicule for a comment he made..."
+        },
+        {
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "similarity": 0.5539,
+          "nli_label": "support",
+          "nli_score": 0.9857653975486755,
+          "snippet": "The Philippines is being considered as a possible location for the next United States Geological Survey (USGS) Landsat ground station, the State Department has announced.\nThe subject was floated at th..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.5457,
+          "nli_label": "refute",
+          "nli_score": 0.5210612416267395,
+          "snippet": "No hay restos de una nave nodriza gigante en Marte, las imágenes son falsas\nSI TIENES POCO TIEMPO\nUna publicación en Facebook alega mostrar imágenes de una nave nodriza gigante en Marte, expertos conf..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Inflation was the highest in U.S. history under President Joe Biden.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4819,
+      "id": 12,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 1.0,
+          "nli_label": "refute",
+          "nli_score": 0.5840993523597717,
+          "snippet": "While it is true that certain items, like some groceries, saw steep price increases during Biden's administration, the overall inflation rate was much higher in the 1970s and early 1980s.\nU.S. Preside..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.8979,
+          "nli_label": "support",
+          "nli_score": 0.7832454442977905,
+          "snippet": "Inflation was 1.4% when Biden took office. It reached 9.1% nearly a year and a half into his presidency, coinciding with a period of rapid economic growth.\nAs he defended his record in an interview th..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.8226,
+          "nli_label": "refute",
+          "nli_score": 0.6880233883857727,
+          "snippet": "As the 2024 U.S. presidential election campaign gathered momentum in June, President Joe Biden defended his record by saying inflation had slowed to its lowest level since April 2021 and food prices h..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "“The Simpsons” predicted Pope Francis’ 2025 death.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5249,
+      "id": 15,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.9324,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "In early 2025, a rumor spread on social media that an episode of the animated TV series \"The Simpsons\" predicted the date of Pope Francis' death. Francis died on April 21, 2025.\n\"The Simpsons predicte..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.67,
+          "nli_label": "refute",
+          "nli_score": 0.6740684509277344,
+          "snippet": "In the weeks following the death of Pope Francis in April 2025, a wide variety of videos alleging to showcase the pontiff's heartwarming relationship with his dog circulated on the internet.\nSome vide..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.67,
+          "nli_label": "refute",
+          "nli_score": 0.8602579236030579,
+          "snippet": "In the wake of Pope Francis' death in April 2025, a slew of videos purportedly telling the heartwarming story of the pope's dog refusing to leave his side were posted on YouTube.\nThe videos purport to..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Elon Musk bought Google.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6961,
+      "id": 16,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.665,
+          "nli_label": "refute",
+          "nli_score": 0.9590950608253479,
+          "snippet": "On Dec. 4, 2022, a YouTube channel named Elon Musk Rewind posted a video promoting a rumor that claimed Tesla CEO and Twitter owner Elon Musk had bought General Motors, the automobile company better k..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.5994,
+          "nli_label": "refute",
+          "nli_score": 0.8551716804504395,
+          "snippet": "A rumor claiming tech entrepreneur Elon Musk said he bought Amazon — the retail, media and technology company founded by fellow billionaire Jeff Bezos — circulated online in late 2024. According to so..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.6296,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "In late March 2025, a rumor spread online that Elon Musk, the tech billionaire and adviser to U.S. President Donald Trump, had invested $5 million to build affordable housing for low-income families.\n..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "“Bill Gates will be implanting digital IDs in newborns in Kenya.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6693,
+      "id": 17,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.5938,
+          "nli_label": "support",
+          "nli_score": 0.8895555138587952,
+          "snippet": "In mid-January 2024, a meme about Microsoft Co-Founder Bill Gates and digital identifications (IDs) was shared widely on the social media platform X:\n(Twitter)\nThe meme said: \"Bill Gates: 'Digital ID ..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.5616,
+          "nli_label": "refute",
+          "nli_score": 0.9945857524871826,
+          "snippet": "Social media posts have shared a claim that the government has announced “mandatory digital ID implants” by 2026 to access services like banking and healthcare, but this is not true.\nThe claim appears..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.6581,
+          "nli_label": "refute",
+          "nli_score": 0.8220528364181519,
+          "snippet": "A viral video on Facebook includes a number of false and misleading claims about the Covid-19 pandemic.\nThe video consists of a woman recommending a publication in New Zealand called The Real News, wh..."
+        }
+      ],
+      "skip_reasons": []
+    },
+    {
+      "claim": "Kamala Harris “wants to defund the police.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7256,
+      "id": 18,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.8156,
+          "nli_label": "refute",
+          "nli_score": 0.9024918675422668,
+          "snippet": "In early October 2020, Snopes readers asked about the authenticity of an image of a tweet circulating on social media platforms that was mocked up to look like it had been written by Democratic vice p..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7228,
+          "nli_label": "refute",
+          "nli_score": 0.8575102090835571,
+          "snippet": "Ad Watch: Kamala Harris doesn’t want to ‘defund, dismantle and dissolve’ the police\nIF YOUR TIME IS SHORT\nJoe Biden’s official campaign platform says his administration would not defund police departm..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.5934,
+          "nli_label": "support",
+          "nli_score": 0.9694060683250427,
+          "snippet": "Joe Biden says he doesn’t want to defund police\nIF YOUR TIME IS SHORT\nBiden campaign spokesman Andrew Bates said in a statement that \"Biden does not believe that police should be defunded.\"\nThe Biden ..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Switzerland banned mammograms.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6262,
+      "id": 19,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.8997,
+          "nli_label": "refute",
+          "nli_score": 0.9446356296539307,
+          "snippet": "Over the course of several months in 2025, a claim circulated online that Switzerland had become the first nation to ban mammograms – an effective method of screening for breast cancer — citing radiat..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.4553,
+          "nli_label": "refute",
+          "nli_score": 0.9864447712898254,
+          "snippet": "Claims that World Economic Forum is hiring only unvaccinated pilots don’t fly\nIF YOUR TIME IS SHORT\nThere’s no evidence to support this claim.\n\nSee the sources for this fact-check\nThe World Economic F..."
+        },
+        {
+          "source": "GMANETWORK",
+          "similarity": 0.4918,
+          "nli_label": "refute",
+          "nli_score": 0.8743488788604736,
+          "snippet": "Switzerland will destroy more than 620,000 expired doses of Moderna's COVID-19 vaccine, health officials said on Friday, as demand for the shots drops dramatically.\n\"It was consciously accepted that u..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.15)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.15)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.15)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "COVID-19 vaccines can kill elderly people.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5852,
+      "id": 20,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "FULLFACT",
+          "similarity": 0.887,
+          "nli_label": "refute",
+          "nli_score": 0.6252256631851196,
+          "snippet": "A screenshot of a tweet making various claims about Covid-19 and a possible vaccine has been going viral on Facebook.\nIt starts by claiming that Covid-19 “does NOT kill 99.99% of us.”\nThis suggests Co..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.8584,
+          "nli_label": "refute",
+          "nli_score": 0.6750295162200928,
+          "snippet": "This article was published before the MHRA announced a possible link between the AstraZeneca vaccine and a very rare type of blood clot, which can be fatal. It was correct at the time of writing. Our ..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.8797,
+          "nli_label": "refute",
+          "nli_score": 0.838487446308136,
+          "snippet": "A meme being shared on Facebook says: “We are being told to line up our children to get something that might kill them, to protect them from something that can’t kill them.”\nThis appears to be a refer..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Si Ferdinand Marcos Sr. ang pinakamayamang tao sa mundo.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.428,
+      "id": 21,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "TSEK",
+          "similarity": 0.7752,
+          "nli_label": "support",
+          "nli_score": 0.7086410522460938,
+          "snippet": "Walang pruweba na magpapatunay na \"ginamit ng Diyos\" si Ferdinand E. Marcos Sr. para tipunin ang kayamanan niya sa mundo.\nFerdinand E. Marcos was not appointed by God as steward of His wealth on Earth..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.7715,
+          "nli_label": "refute",
+          "nli_score": 0.8705223202705383,
+          "snippet": "Buod\nAng sabi-sabi: Isa sa pinakamayayamang bansa ang Pilipinas noong diktadura ni Ferdinand E. Marcos.\nMarka: HINDI TOTOO\nAng katotohanan: Batay sa pinagkomparang gross domestic product ng mga bansa ..."
+        },
+        {
+          "source": "TSEK",
+          "similarity": 0.7267,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "Rebisyunismo ng kasaysayan ang mismong mga pahayag ni Ferdinand Marcos Jr.\nMatibay ang ebidensiyang pinatay si Jose Rizal noong December 30, 1896, mahigit dalawang dekada bago pa ipinanganak si Ferdin..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "RAPPLER",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "GMANETWORK",
+          "reason": [
+            "Key entities not found (0.0)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "The death penalty in the Philippines has been approved in the Senate.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1898,
+      "id": 22,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "VERAFILES",
+          "similarity": 0.6828,
+          "nli_label": "refute",
+          "nli_score": 0.433265745639801,
+          "snippet": "Sen. Ronald “Bato” Dela Rosa misled fellow lawmakers and the public when he cherrypicked the findings of a 2017 Inquirer report to bolster his stance for the revival of capital punishment in the count..."
+        },
+        {
+          "source": "VERAFILES",
+          "similarity": 0.6671,
+          "nli_label": "support",
+          "nli_score": 0.9662087559700012,
+          "snippet": "President Rodrigo Duterte’s self-imposed deadline to eradicate illegal drugs and reduce criminality “within three to six months” has long passed, and Congress has yet to respond to his constant plea f..."
+        },
+        {
+          "source": "VERAFILES",
+          "similarity": 0.6809,
+          "nli_label": "support",
+          "nli_score": 0.41733518242836,
+          "snippet": "Sen. Ronald “Bato” Dela Rosa misled fellow lawmakers and the public when he cherrypicked the findings of a 2017 Inquirer report to bolster his stance for the revival of capital punishment in the count..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "The Yellowstone supervolcano is due for an eruption any time soon.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.8011,
+      "id": 23,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7803,
+          "nli_label": "refute",
+          "nli_score": 0.8630850315093994,
+          "snippet": "A video doesn’t show Yellowstone supervolcano erupting. It’s an old clip taken in Indonesia.\nIF YOUR TIME IS SHORT\nThe video shows Indonesia’s Mount Dukono in August, not Wyoming’s Yellowstone Nationa..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6616,
+          "nli_label": "refute",
+          "nli_score": 0.9104322195053101,
+          "snippet": "No, Yellowstone volcano's eruption threat level did not increase in 2018\nAmid partisan allegations of political disasters, should we be more worried about the natural variety—and cancel any upcoming v..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6598,
+          "nli_label": "refute",
+          "nli_score": 0.982743501663208,
+          "snippet": "Crack in a rock wall is old news, not evidence that Yellowstone volcano is erupting\nIF YOUR TIME IS SHORT\nA 100-foot crack on a rock wall at Grand Teton National Park in 2018 has no connection to volc..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "The Philippines has a Chinook helicopter factory.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.0641,
+      "id": 24,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "RAPPLER",
+          "similarity": 0.7841,
+          "nli_label": "refute",
+          "nli_score": 0.9823827147483826,
+          "snippet": "Claim: Australia donated a heavy-lift Chinook helicopter to the Philippines on March 5, 2023.\nRating: FALSE\nWhy we fact-checked this: The YouTube video containing the claim has over 143,562 views as o..."
+        },
+        {
+          "source": "GMANETWORK",
+          "similarity": 0.6733,
+          "nli_label": "support",
+          "nli_score": 0.9274974465370178,
+          "snippet": "The Philippines is looking to buy heavy-lift Chinook helicopters from the United States, after scrapping a deal with Russia worth P12.7 billion ($227.35 million) in order to avoid sanctions, Manila's ..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.624,
+          "nli_label": "refute",
+          "nli_score": 0.7695212364196777,
+          "snippet": "Claim: A video shows Russian helicopters allegedly given by the Russian government to the Philippines.\nThe video says it captured the arrival of the helicopter in the country on February 15, 2023.\nRat..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "RAPPLER",
+          "reason": [
+            "Key entities not found (0.2)"
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Key entities not found (0.1)"
+          ]
+        },
+        {
+          "source": "RAPPLER",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Russian President Vladimir Putin has declared war on the United States.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1394,
+      "id": 25,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "RAPPLER",
+          "similarity": 0.9102,
+          "nli_label": "refute",
+          "nli_score": 0.967954158782959,
+          "snippet": "At a glance\nClaim: Russian President Vladimir Putin has declared war on all Western nations, as of July 2022.\nRating: FALSE.\nThe facts: The Russian invasion on Ukraine is ongoing. European countries a..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.816,
+          "nli_label": "refute",
+          "nli_score": 0.9401493668556213,
+          "snippet": "On Feb. 6, 2024, former Fox News host Tucker Carlson sat down for an interview with Vladimir Putin. It was the president of Russia's first interview with an American since Russia's attempted invasion ..."
+        },
+        {
+          "source": "GMANETWORK",
+          "similarity": 0.7012,
+          "nli_label": "neutral",
+          "nli_score": 0.7484148740768433,
+          "snippet": "ANCHORAGE, Alaska - US President Donald Trump and Russian President Vladimir Putin met face-to-face in Alaska on Friday in a high-stakes summit that could determine whether a ceasefire can be reached ..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Filipino actor and singer Billy Crawford has died.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7723,
+      "id": 26,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "RAPPLER",
+          "similarity": 0.8024,
+          "nli_label": "refute",
+          "nli_score": 0.9522642493247986,
+          "snippet": "Claim: Filipino actor and singer Billy Crawford was killed by his wife, actress Coleen Garcia.\nRating: FALSE\nWhy we fact-checked this: The Facebook post bearing the claim was posted on November 5 and ..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.5995,
+          "nli_label": "refute",
+          "nli_score": 0.9729506373405457,
+          "snippet": "Claim: Filipino actor and singer Billy Crawford vouches for EcoFit, a product that claims to be a weight loss supplement.\nRating: FALSE\nWhy we fact-checked this: The Facebook video containing the clai..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.4125,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "At a glance:\nClaim: Former senator Benigno “Ninoy” Aquino Jr was killed by euthanasia.\nRating: FALSE\nThe facts: Multiple sources say Aquino was assassinated. He was killed by a bullet to the head.\nWhy..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.1125)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "The Philippine Navy has received two new warships from South Korea.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2635,
+      "id": 27,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "RAPPLER",
+          "similarity": 0.8819,
+          "nli_label": "refute",
+          "nli_score": 0.9957370758056641,
+          "snippet": "Claim: The Philippines is set to receive 12 large warships from South Korea this year.\nRating: FALSE\nWhy we fact-checked this: The claim was made in the title of a YouTube video that has garnered 4,89..."
+        },
+        {
+          "source": "VERAFILES",
+          "similarity": 0.5668,
+          "nli_label": "refute",
+          "nli_score": 0.7389622926712036,
+          "snippet": "A Facebook video claimed that the Philippines and South Korea have entered into an alliance to oppose China. This is false. There is no such agreement between the two countries.\nUploaded on Sept. 25, ..."
+        },
+        {
+          "source": "VERAFILES",
+          "similarity": 0.7099,
+          "nli_label": "refute",
+          "nli_score": 0.8625837564468384,
+          "snippet": "A YouTube video featured an Italian Navy warship and passed it off as the latest Philippine-made navy vessel supposedly to be deployed in the West Philippine Sea.\nUploaded on Nov. 22, the one-minute a..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "GMANETWORK",
+          "reason": [
+            "Article is neutrally related (different event/topic)"
+          ]
+        },
+        {
+          "source": "GMANETWORK",
+          "reason": [
+            "Article is neutrally related (different event/topic)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "China has launched an attack against Taiwan.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3052,
+      "id": 28,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "RAPPLER",
+          "similarity": 0.7831,
+          "nli_label": "refute",
+          "nli_score": 0.9429367780685425,
+          "snippet": "Claim: Chinese special forces have started invading Taiwan.\nRating: FALSE\nWhy we fact-checked this: The claim was made in an August 1 YouTube video that currently has 4,255 views and 89 likes as of wr..."
+        },
+        {
+          "source": "GMANETWORK",
+          "similarity": 0.734,
+          "nli_label": "refute",
+          "nli_score": 0.8122616410255432,
+          "snippet": "Cities across northern Taiwan ordered cars off roads and people to stay indoors on Monday for an annual air-raid exercise as the island steps up preparations in the event of a Chinese attack amid risi..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.7301,
+          "nli_label": "refute",
+          "nli_score": 0.9305216670036316,
+          "snippet": "Claim: Taiwan fired water cannons and nearly destroyed Chinese fishing vessels recently caught operating in its waters.\nRating: FALSE\nWhy we fact-checked this:  The YouTube video with the claim was po..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Insufficient topical overlap (Points: 1)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Former senator and international boxing champ Manny Pacquiao is promoting an online gambling app.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4625,
+      "id": 29,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "RAPPLER",
+          "similarity": 0.7826,
+          "nli_label": "refute",
+          "nli_score": 0.6879237294197083,
+          "snippet": "Claim: Manny Pacquiao’s online gambling platform, “Manny Casino,” was featured in the GMA news show 24 Oras with the boxing champion and former senator himself endorsing the app.\nRating: FALSE\nWhy we ..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.8911,
+          "nli_label": "refute",
+          "nli_score": 0.5118017196655273,
+          "snippet": "Claim: Renowned Filipino boxer Manny Pacquiao endorses various online casino apps, including the “Manny Pacquiao Online Casino Game.”\nRating: FALSE\nWhy we fact-checked this: Several Facebook posts and..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.8661,
+          "nli_label": "refute",
+          "nli_score": 0.9249265789985657,
+          "snippet": "Claim: Filipino boxer Manny Pacquiao has launched and is endorsing an online casino application.\nRating: FALSE\nWhy we fact-checked this: The video posted on August 9 has gained 7.4 million views, 37,0..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Joel Villanueva has resigned from the Philippine Senate",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4248,
+      "id": 30,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "RAPPLER",
+          "similarity": 0.9613,
+          "nli_label": "refute",
+          "nli_score": 0.9892628788948059,
+          "snippet": "Claim: Joel Villanueva has resigned as senator.\nRating: FALSE\nWhy we fact-checked this: The posts making the false claim have been circulating on Facebook, with the most recent one gaining 640 reactio..."
+        },
+        {
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "similarity": 0.7065,
+          "nli_label": "support",
+          "nli_score": 0.989660382270813,
+          "snippet": "Senate Majority Leader Joel Villanueva on Wednesday filed a resolution to honor the legacy of former Armed Forces of the Philippines (AFP) chief of staff and ex-Senator Rodolfo “Pong” Biazon who died ..."
+        },
+        {
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "similarity": 0.6409,
+          "nli_label": "support",
+          "nli_score": 0.985395610332489,
+          "snippet": "Newly elected Senate Majority Floor Leader Joel Villanueva on Monday thanked colleagues Francis Escudero and Alan Peter Cayetano for guiding him to where he is now.\nHe recalled that when he was electe..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Key entities not found (0.18)"
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Key entities not found (0.18)"
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Kris Aquino has been bewitched and passed away.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3661,
+      "id": 31,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "VERAFILES",
+          "similarity": 0.7282,
+          "nli_label": "refute",
+          "nli_score": 0.9591012001037598,
+          "snippet": "A Facebook (FB) video is duping people into thinking that celebrity Kris Aquino has passed away.\nPosted on June 29, the video was titled: “LATEST TODAY KRIS AQUINO SUMUKO NA SA KANIYANG SAKIT (Latest ..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.7174,
+          "nli_label": "refute",
+          "nli_score": 0.6454741358757019,
+          "snippet": "Claim: Kris Aquino died on Wednesday, January 3.\nRating: FALSE\nWhy we fact-checked this: The Facebook post containing the claim has over 1,100 reactions, 343 comments, and 165 shares as of writing. Th..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.7036,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "At a glance\nClaim: Kris Aquino died in America on Sunday, January 23.\nRating: FALSE\nThe facts: Aquino is alive and has been active on social media. She debunked the claim on her verified Instagram acc..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "The West Philippine Sea does not appear in any maps.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0353,
+      "id": 32,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "TSEK",
+          "similarity": 0.7784,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "SAGIP Party-list Rep. Rodante Marcoleta claimed “there is nothing (sic) as West Philippine Sea,” saying the area does not appear in local maps as it merely refers to the country’s exclusive economic z..."
+        },
+        {
+          "source": "GMANETWORK",
+          "similarity": 0.8622,
+          "nli_label": "refute",
+          "nli_score": 0.9803926348686218,
+          "snippet": "The “West Philippine Sea” label, located west of the Philippines has disappeared from Google Maps...."
+        },
+        {
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "similarity": 0.7238,
+          "nli_label": "support",
+          "nli_score": 0.9922730326652527,
+          "snippet": "Malacañang on Monday welcomed the appearance of the West Philippine Sea (WPS) label on Google Maps, saying the recognition affirms the country’s sovereign rights and brings pride to the Filipino peopl..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Pfizer has not cured any type of disease",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.4373,
+      "id": 33,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "FULLFACT",
+          "similarity": 0.7167,
+          "nli_label": "refute",
+          "nli_score": 0.5796862840652466,
+          "snippet": "An online article by science pressure group the Health Advisory and Recovery Team (HART) has claimed a video by children’s TV show Newsround made a number of misleading claims about the Pfizer/BioNTec..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.6205,
+          "nli_label": "support",
+          "nli_score": 0.773743212223053,
+          "snippet": "MPs recently debated an e-petition asking the government to conduct an investigation into whether Covid-19 vaccines are responsible for an alleged “increase in heart attacks and related health issues”..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6565,
+          "nli_label": "refute",
+          "nli_score": 0.98883455991745,
+          "snippet": "No living organisms in the Pfizer vaccine\nIF YOUR TIME IS SHORT\nThe Pfizer mRNA COVID-19 vaccine does not contain living organisms, only chemical components.\nSee the sources for this fact-check\nA 17-m..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "President Ferdinand Marcos Jr. stole the country’s gold reserves",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7473,
+      "id": 35,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "RAPPLER",
+          "similarity": 0.722,
+          "nli_label": "refute",
+          "nli_score": 0.8838555812835693,
+          "snippet": "Claim: The Hong Kong Monetary Authority has frozen 350 tons of gold linked to the Marcos family.\nRating: FALSE\nWhy we fact-checked this: The Facebook video containing the claim has 2,500 likes, 1,500 ..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.7423,
+          "nli_label": "refute",
+          "nli_score": 0.8721573352813721,
+          "snippet": "Claim: Former president Ferdinand E. Marcos deposited 156 tons of gold bars in the World Bank.\nRating: FALSE\nWhy we fact-checked this: The YouTube video was posted on January 31 by a channel with 73,7..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.7935,
+          "nli_label": "refute",
+          "nli_score": 0.9626379609107971,
+          "snippet": "Claim: President Ferdinand Marcos Jr. has a huge amount of gold secretly stored in Japan.\nRating: FALSE\nWhy we fact-checked this: The false claim on YouTube was posted by PweDelie TV with the title: “..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "TSEK",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "The Philippines blew up China’s monster ship in the West Philippine Sea",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2148,
+      "id": 34,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "FRONTPAGEPH",
+          "similarity": 0.7296,
+          "nli_label": "support",
+          "nli_score": 0.9849120378494263,
+          "snippet": "The China Coast Guard (CCG) vessel 5901, infamously known as the “monster ship,” maintained its presence near the Philippine coast on Wednesday, defying calls from Manila for its withdrawal.\nThe Phili..."
+        },
+        {
+          "source": "FRONTPAGEPH",
+          "similarity": 0.7296,
+          "nli_label": "support",
+          "nli_score": 0.9849120378494263,
+          "snippet": "The China Coast Guard (CCG) vessel 5901, infamously known as the “monster ship,” maintained its presence near the Philippine coast on Wednesday, defying calls from Manila for its withdrawal.\nThe Phili..."
+        },
+        {
+          "source": "GMANETWORK",
+          "similarity": 0.727,
+          "nli_label": "support",
+          "nli_score": 0.9888738393783569,
+          "snippet": "The Philippines on Tuesday called on China to withdraw its China Coast Guard (CCG) vessel 5901, also known as the “monster ship,” from Philippine waters.\n“The Philippine government is alarmed by the p..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Rachel Maddow announced in July 2025 that she is having a baby via surrogacy.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.793,
+      "id": 37,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.968,
+          "nli_label": "refute",
+          "nli_score": 0.9353566765785217,
+          "snippet": "In July 2025, MSNBC host Rachel Maddow publicly addressed AI slop circulating the internet that used her image to spread misinformation. She highlighted one such claim — that she and her partner, Susa..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.4874,
+          "nli_label": "support",
+          "nli_score": 0.8648185729980469,
+          "snippet": "A rumor that circulated online in August 2025 claimed MSNBC TV host Rachel Maddow launched her own newsroom in the summer of 2025, and that fellow U.S. progressive voices including CBS late-night host..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.5267,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "In early July 2025, as Texas reeled from damaging floods that left at least 120 people dead and 161 missing, claims circulated online that MSNBC host Rachel Maddow donated millions of dollars, hired t..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.15)"
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Key entities not found (0.0)",
+            "Insufficient topical overlap (Points: 0)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Marine animal trainer Jessica Radcliffe was attacked and killed by an orca in front of a large crowd.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5889,
+      "id": 38,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "FULLFACT",
+          "similarity": 0.9226,
+          "nli_label": "refute",
+          "nli_score": 0.6024459004402161,
+          "snippet": "The claim that a marine animal trainer named Jessica Radcliffe has been killed by an orca—or killer whale—during a live performance has gone viral on social media in recent days.\nThousands of people h..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.4474,
+          "nli_label": "refute",
+          "nli_score": 0.5144854784011841,
+          "snippet": "Between January 2020 and mid-2025, there were only six confirmed incidents of orcas sinking boats. Scientists are also still uncertain about why the orcas are behaving this way, but the leading theory..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.4256,
+          "nli_label": "refute",
+          "nli_score": 0.5697495937347412,
+          "snippet": "In January 2022, late night host Stephen Colbert brought widespread attention to a viral clip that supposedly showed an orangutan driving a golf cart. The original video, which has been online since a..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Key entities not found (0.09)"
+          ]
+        },
+        {
+          "source": "RAPPLER",
+          "reason": [
+            "Key entities not found (0.0)",
+            "Insufficient topical overlap (Points: 0)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Article is neutrally related (different event/topic)",
+            "Key entities not found (0.09)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Harry Roque has been ordered imprisoned by the Senate",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3344,
+      "id": 36,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "RAPPLER",
+          "similarity": 0.8098,
+          "nli_label": "refute",
+          "nli_score": 0.8629151582717896,
+          "snippet": "Claim: Former presidential spokesperson Harry Roque will be imprisoned for life after a contempt citation from a House of Representatives mega panel investigating the proliferation of Philippine offsh..."
+        },
+        {
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "similarity": 0.6618,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "Malacañang on Tuesday denied that former presidential spokesperson Harry Roque was being politically persecuted in the Philippines, amid his plan to seek political asylum in the Netherlands.\nSpeaking ..."
+        },
+        {
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "similarity": 0.66,
+          "nli_label": "support",
+          "nli_score": 0.9699982404708862,
+          "snippet": "Malacañang on Monday urged former presidential spokesperson Harry Roque to return to the Philippines after he resurfaced in the Netherlands while facing an arrest order from the House of Representativ..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "TSEK",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "The radiation from Bluetooth earbuds, such as AirPods, causes brain cancer.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7132,
+      "id": 40,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 1.0,
+          "nli_label": "refute",
+          "nli_score": 0.7735065221786499,
+          "snippet": "For years, rumors have spread that the radiation from Bluetooth-operated, wireless earbuds such as AirPods can \"fry\" or \"cook\" our brains — in other words, that they can cause brain cancer:\nThis is be..."
+        },
+        {
+          "source": "FULLFACT",
+          "similarity": 0.8137,
+          "nli_label": "refute",
+          "nli_score": 0.7756344676017761,
+          "snippet": "A Facebook post claims that Apple AirPods are “directing radiation & Bluetooth signals directly into the brain”, and encourages people to get rid of the in-ear headphones “unless you want a brain tumo..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.5968,
+          "nli_label": "refute",
+          "nli_score": 0.9069480299949646,
+          "snippet": "There’s no evidence that radiation emitted from Apple AirPods will cook your brain\nIF YOUR TIME IS SHORT\nApple’s AirPods and similar wireless devices emit radiofrequency radiation, a kind of low-level..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Key entities not found (0.2)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "“Elon Musk launches new pregnancy robot.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7677,
+      "id": 41,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.7308,
+          "nli_label": "refute",
+          "nli_score": 0.5855247378349304,
+          "snippet": "In October 2024, a claim that Elon Musk and Tesla were developing \"a new version of robots that can carry your baby for 9 months while you go about your work\" circulated on social media.\nOne user resp..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6957,
+          "nli_label": "refute",
+          "nli_score": 0.9913753867149353,
+          "snippet": "These photos of Elon Musk kissing a ‘robot wife’ aren’t real. They’re AI-generated\nIF YOUR TIME IS SHORT\nThe images of Twitter owner Elon Musk kissing robots were generated by artificial intelligence...."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6678,
+          "nli_label": "refute",
+          "nli_score": 0.9544575214385986,
+          "snippet": "This image of Elon Musk dining with a ‘robot girlfriend’ isn’t real, it’s AI-generated\nRead in Español\nIF YOUR TIME IS SHORT\nA parody account posted the image in July on X.\nPolitiFact didn’t find cred..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "U.S. President-elect Donald Trump has never been convicted of any felonies.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.169,
+      "id": 39,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.7903,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "Amid the Trump administration's flurry of executive orders in the first month of U.S. President Donald Trump's second term came a rumor of the existence of a memo ordering that the word \"felon\" no lon..."
+        },
+        {
+          "source": "GMANETWORK",
+          "similarity": 0.6762,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "Donald Trump, the former US president and front-runner for the 2024 Republican nomination, pleaded not guilty on Tuesday to 34 felony counts of falsifying business records after an investigation into ..."
+        },
+        {
+          "source": "GMANETWORK",
+          "similarity": 0.6662,
+          "nli_label": "refute",
+          "nli_score": 0.9707944989204407,
+          "snippet": "U.S. President Joe Biden's reelection campaign said Donald Trump's sweeping guilty verdict in his hush-money trial on Thursday proves that \"no one is above the law,\" but will do little to change the d..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Former President Donald Trump would “force states to monitor women's pregnancies.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2293,
+      "id": 42,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8104,
+          "nli_label": "refute",
+          "nli_score": 0.9428328275680542,
+          "snippet": "Trump told Time that states should decide abortion laws. He didn't say they 'should' punish women.\nIF YOUR TIME IS SHORT\nFormer President Donald Trump didn’t tell Time magazine that he thought states ..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.7978,
+          "nli_label": "support",
+          "nli_score": 0.9130553007125854,
+          "snippet": "Time magazine reported that Trump said policies surrounding abortion bans \"should be left to the states to do what they want, including monitoring women’s pregnancies.\"\nOn May 1, 2024, Harvard Law pro..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7019,
+          "nli_label": "support",
+          "nli_score": 0.963002622127533,
+          "snippet": "Did Trump say states have the right to monitor, punish women over abortion, as Kamala Harris said?\nIF YOUR TIME IS SHORT\nFormer President Donald Trump’s comments to a Time magazine reporter allowed fo..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.225)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "“Melania Trump declares that she wants a divorce.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6409,
+      "id": 43,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.7961,
+          "nli_label": "refute",
+          "nli_score": 0.7877365946769714,
+          "snippet": "No, Melania Trump didn’t file for divorce in Palm Beach over Labor Day weekend\nIF YOUR TIME IS SHORT\nThis claim originated from data scientist and former congressional candidate Rebekah Jones, who sai..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.6213,
+          "nli_label": "refute",
+          "nli_score": 0.7268410325050354,
+          "snippet": "In November 2020, a number of tabloids and other news sources published what looked to be bombshell news. The articles reported that Melania Trump was planning to divorce then-U.S. President Donald Tr..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.6203,
+          "nli_label": "refute",
+          "nli_score": 0.8778087496757507,
+          "snippet": "In November 2020, a number of tabloids and other news sources published what looked to be bombshell news. The articles reported that Melania Trump was planning to divorce then-U.S. President Donald Tr..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.15)"
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.15)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Says former President Donald Trump did not lose the 2020 election.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.2367,
+      "id": 45,
+      "is_correct": false,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "RAPPLER",
+          "similarity": 0.8664,
+          "nli_label": "refute",
+          "nli_score": 0.786779522895813,
+          "snippet": "PLAY VIDEO\nAt a glance:\nClaim: US President Donald Trump has won the 2020 presidential election.\nRating: FALSE\nThe facts: Neither Trump nor his opponent Joe Biden has acquired the 270 electoral votes ..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.7449,
+          "nli_label": "refute",
+          "nli_score": 0.5755059719085693,
+          "snippet": "A popular November 2018 U.S. election night Twitter thread, created by writer and Twitter user Ally Maynard, followed a collection of candidates President Trump had supported on Twitter for the 2018 m..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.7255,
+          "nli_label": "refute",
+          "nli_score": 0.8,
+          "snippet": "In December 2020, as states certified their election results and confirmed that Democratic candidate Joe Biden had won the U.S. presidential election, President Donald Trump continued to push baseless..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Senate President Chiz Escudero was removed from his post due to corruption.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6968,
+      "id": 44,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "RAPPLER",
+          "similarity": 0.9005,
+          "nli_label": "refute",
+          "nli_score": 0.9805384874343872,
+          "snippet": "Claim: Senate President Chiz Escudero has stepped down from the Senate.\nRating: FALSE\nWhy we fact-checked this: A YouTube video posted on June 12 by a channel with 26,000 subscribers bears the claim. ..."
+        },
+        {
+          "source": "VERAFILES",
+          "similarity": 0.8884,
+          "nli_label": "refute",
+          "nli_score": 0.982813835144043,
+          "snippet": "A YouTube video claims that Senate President Francis “Chiz” Escudero has bid the Senate goodbye after he was allegedly dismissed from his post by President Ferdinand Marcos Jr. This is false.\nThere ar..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.8606,
+          "nli_label": "refute",
+          "nli_score": 0.9258986115455627,
+          "snippet": "Claim: Senate President Francis “Chiz” Escudero has died.\nRating: FALSE\nWhy we fact-checked this: The claim was made in an August 14 YouTube video by a channel with almost 66,000 subscribers. As of wr..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "TSEK",
+          "reason": [
+            "Key entities not found (0.1)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Iran and the Philippines are forming an alliance against China.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2119,
+      "id": 46,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "VERAFILES",
+          "similarity": 0.9394,
+          "nli_label": "refute",
+          "nli_score": 0.9776688814163208,
+          "snippet": "A video circulating on Facebook and YouTube claims that the Philippines and Iran have formed a military alliance against China. No such pact was forged. Iran’s new ambassador just made the customary c..."
+        },
+        {
+          "source": "RAPPLER",
+          "similarity": 0.6931,
+          "nli_label": "refute",
+          "nli_score": 0.9621092081069946,
+          "snippet": "Claim: The Philippines has created a North Atlantic Treaty Organization (NATO)-like alliance in response to China’s hostility in the West Philippine Sea.\nRating: FALSE\nWhy we fact-checked this: The cl..."
+        },
+        {
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "similarity": 0.6908,
+          "nli_label": "support",
+          "nli_score": 0.9906253814697266,
+          "snippet": "Four presidential hopefuls have laid out their plans to address the long-standing maritime dispute between the Philippines and China over the West Philippine Sea and the plight of Filipino fishermen i..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "POLITIFACT",
+          "reason": [
+            "Key entities not found (0.225)"
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Russian President Vladimir Putin has declared war on the United States.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1394,
+      "id": 47,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "RAPPLER",
+          "similarity": 0.9102,
+          "nli_label": "refute",
+          "nli_score": 0.967954158782959,
+          "snippet": "At a glance\nClaim: Russian President Vladimir Putin has declared war on all Western nations, as of July 2022.\nRating: FALSE.\nThe facts: The Russian invasion on Ukraine is ongoing. European countries a..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.816,
+          "nli_label": "refute",
+          "nli_score": 0.9401493668556213,
+          "snippet": "On Feb. 6, 2024, former Fox News host Tucker Carlson sat down for an interview with Vladimir Putin. It was the president of Russia's first interview with an American since Russia's attempted invasion ..."
+        },
+        {
+          "source": "GMANETWORK",
+          "similarity": 0.7012,
+          "nli_label": "neutral",
+          "nli_score": 0.7484148740768433,
+          "snippet": "ANCHORAGE, Alaska - US President Donald Trump and Russian President Vladimir Putin met face-to-face in Alaska on Friday in a high-stakes summit that could determine whether a ceasefire can be reached ..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "VERAFILES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Reports show U.S. President-elect Donald Trump has a deal ready to buy Greenland.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4524,
+      "id": 48,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 0.8035,
+          "nli_label": "refute",
+          "nli_score": 0.9639245271682739,
+          "snippet": "In late March 2025, a video began to circulate supposedly showing the Danish parliament and Prime Minister Mette Frederiksen laughing while listening to a recording of U.S. President Donald Trump talk..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8104,
+          "nli_label": "refute",
+          "nli_score": 0.7633674144744873,
+          "snippet": "Video shows Danish lawmakers laughing at prime minister, not at Trump’s Greenland remarks\nIF YOUR TIME IS SHORT\nThis video was altered. The original shows Danish lawmakers laughing at their prime mini..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.7359,
+          "nli_label": "support",
+          "nli_score": 0.48486754298210144,
+          "snippet": "Spurring a flurry of news headlines in the U.S. over the years, President Donald Trump has repeatedly said he wants to acquire Greenland, floating the possibility of a military takeover.\nGreenland is ..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Inflation was the highest in U.S. history under President Joe Biden.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6197,
+      "id": 49,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "SNOPES",
+          "similarity": 1.0,
+          "nli_label": "refute",
+          "nli_score": 0.9752939939498901,
+          "snippet": "While it is true that certain items, like some groceries, saw steep price increases during Biden's administration, the overall inflation rate was much higher in the 1970s and early 1980s.\nFormer U.S. ..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.8979,
+          "nli_label": "support",
+          "nli_score": 0.7832454442977905,
+          "snippet": "Inflation was 1.4% when Biden took office. It reached 9.1% nearly a year and a half into his presidency, coinciding with a period of rapid economic growth.\nAs he defended his record in an interview th..."
+        },
+        {
+          "source": "SNOPES",
+          "similarity": 0.8226,
+          "nli_label": "refute",
+          "nli_score": 0.6880233883857727,
+          "snippet": "As the 2024 U.S. presidential election campaign gathered momentum in June, President Joe Biden defended his record by saying inflation had slowed to its lowest level since April 2021 and food prices h..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Kamala Harris used a teleprompter during her town hall appearance on Univision.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5781,
+      "id": 50,
+      "is_correct": true,
+      "skipped": false,
+      "evidence_debug": [
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.845,
+          "nli_label": "support",
+          "nli_score": 0.5816932320594788,
+          "snippet": "Teleprompter at Univision town hall was for moderator, not Kamala Harris\nRead in Español\nIF YOUR TIME IS SHORT\nVice President Kamala Harris spoke Oct. 10 at a town hall on Univision in Las Vegas.\nA te..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.8106,
+          "nli_label": "refute",
+          "nli_score": 0.6900476217269897,
+          "snippet": "No, this video doesn’t show Kamala Harris using a teleprompter during a live televised forum\nIF YOUR TIME IS SHORT\nThis video shows a teleprompter that Oprah Winfrey used during a Sept. 19 forum in wh..."
+        },
+        {
+          "source": "POLITIFACT",
+          "similarity": 0.6129,
+          "nli_label": "refute",
+          "nli_score": 0.8557584285736084,
+          "snippet": "Es falso que la vicepresidenta Kamala Harris usó un ‘teleprompter’ en foro de Univision\nRead in English\nSI TIENES POCO TIEMPO\nLa vicepresidenta Kamala Harris habló el 10 de octubre en una audiencia pú..."
+        }
+      ],
+      "skip_reasons": [
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "FULLFACT",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        },
+        {
+          "source": "SNOPES",
+          "reason": [
+            "Skipped: Fact check has UNKNOWN verdict per strict rules."
+          ]
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "Support": {
+      "precision": 0.81,
+      "recall": 0.42,
+      "f1-score": 0.55
+    },
+    "Refute": {
+      "precision": 0.61,
+      "recall": 0.9,
+      "f1-score": 0.73
+    }
+  }
+}
