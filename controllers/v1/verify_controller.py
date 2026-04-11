@@ -1170,7 +1170,6 @@ class VerifyController:
             t for t in matched_meaningful if t in ENTITY_GENERIC_TOKENS
         }
 
-        # Statistics for the UI
         matched_full_entities = set()
         for t in entity_token_matches:
             if t in token_to_entity_map:
