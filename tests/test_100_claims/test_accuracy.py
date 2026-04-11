@@ -79,11 +79,13 @@ async def main():
     for entry in claims:
         claim_text = entry["claim"]
         # Handle various field names for ground truth in different test versions
-        ground_truth = entry.get("expected_verdict", entry.get("ground_truth", entry.get("Ground_truth")))
+        ground_truth = entry.get(
+            "expected_verdict", entry.get("ground_truth", entry.get("Ground_truth"))
+        )
         claim_id = entry["index"]
         # If the test case specifies a doc_id to exclude, pass it to the search
         exclude_docs = [entry["doc_id"]] if "doc_id" in entry else []
-        
+
         # Perform a full search identical to the live /simulation/verify endpoint
         result = await vc.verify_claim(claim_text, exclude_doc_ids=exclude_docs)
         # Handle skipped evidence
