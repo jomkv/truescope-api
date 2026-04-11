@@ -77,37 +77,39 @@ async def main():
         claims = json.load(f)
     print(f"Dataset loaded. Total claims: {len(claims)}", flush=True)
 
-    semaphore = asyncio.Semaphore(2)
+    correct = 0
+    total = 0
+    skipped = 0
     results_list = []
-    stats = {"correct": 0, "total": 0, "skipped": 0}
 
-    async def process_entry(idx, entry):
+    for entry in claims:
         claim_text = entry["claim"]
+        # Handle various field names for ground truth in different test versions
         ground_truth = entry.get(
             "expected_verdict", entry.get("ground_truth", entry.get("Ground_truth"))
         )
-        claim_id = entry.get("index", idx)
+        claim_id = entry["index"]
+        # If the test case specifies a doc_id to exclude, pass it to the search
         exclude_docs = [entry["doc_id"]] if "doc_id" in entry else []
 
-        async with semaphore:
-            result = await vc.verify_claim(claim_text, exclude_doc_ids=exclude_docs)
-
+        # Perform a full search identical to the live /simulation/verify endpoint
+        result = await vc.verify_claim(claim_text, exclude_doc_ids=exclude_docs)
+        # Handle skipped evidence
         if not result["results"]:
             score_label = "NEUTRAL"
             system_score = None
-            stats["skipped"] += 1
+            skipped += 1
         else:
             system_score = result["overall_verdict"]
             score_label = get_score_label(system_score)
 
         ground_truth_norm = normalize_verdict_label(ground_truth)
         is_correct = score_label == ground_truth_norm
-
+        # Only include in accuracy if system_score is not None
         if system_score is not None:
-            stats["total"] += 1
+            total += 1
             if is_correct:
-                stats["correct"] += 1
-
+                correct += 1
         results_list.append(
             {
                 "claim": claim_text,
@@ -117,52 +119,11 @@ async def main():
                 "id": claim_id,
                 "is_correct": is_correct,
                 "skipped": not result["results"],
-                "evidence_debug": (
-                    [
-                        {
-                            "source": res.source,
-                            "similarity": res.similarity_score,
-                            "nli_label": (
-                                str(res.nli_result.relationship.value)
-                                if res.nli_result
-                                else None
-                            ),
-                            "nli_score": (
-                                res.nli_result.relationship_confidence
-                                if res.nli_result
-                                else None
-                            ),
-                            "snippet": res.content[:200] + "..." if res.content else "",
-                        }
-                        for res in result["results"][: vc.AGGREGATION_LIMIT]
-                    ]
-                    if result.get("results")
-                    else []
-                ),
-                "skip_reasons": (
-                    [
-                        {"source": res.source, "reason": res.skip_reason}
-                        for res in result["skipped"][: vc.AGGREGATION_LIMIT]
-                    ]
-                    if result.get("skipped")
-                    else []
-                ),
             }
         )
-
-        status_icon = "✅" if is_correct else "❌"
-        if score_label == "NEUTRAL":
-            status_icon = "⚪"
         print(
-            f"[{idx}/{len(claims)}] Truth: {ground_truth_norm}, Pred: {score_label} {status_icon}. {claim_text}"
+            f"Claim: {claim_text}\nTrue: {ground_truth_norm}, Pred: {score_label} (score: {system_score})\n"
         )
-
-    # Process claims with 2-concurrency
-    await asyncio.gather(
-        *(process_entry(idx, entry) for idx, entry in enumerate(claims, 1))
-    )
-
-    correct, total, skipped = stats["correct"], stats["total"], stats["skipped"]
 
     accuracy = correct / total if total else 0
     metrics = compute_metrics(results_list)
