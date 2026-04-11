@@ -5,15 +5,11 @@ NEGATION_PHRASES = [
     "it is false that ",
     "it's false that ",
     "this is false that ",
-    "it is a lie that ",
-    "it's a lie that ",
-    "fake news that ",
     "false claim that ",
     "false that ",
     "it is not true that ",
     "it's not true that ",
     "not true that ",
-    "not the case that ",
     "no truth to the claim that ",
     "there is no truth that ",
     "there is no evidence that ",
@@ -39,18 +35,5 @@ NEGATION_WORD_PATTERNS = [
     (r"^no\s+(proof|evidence|sign|indication|record|footage|video|photo)\s+", True),
 ]
 
-# Polar opposites that imply negation of a positive baseline (e.g. "against" -> "support")
-# Used to normalize claims before DB search and NLI.
-POLAR_STRIP_MAP = {
-    r"\bis\s+against\b": "supports",
-    r"\bopposes\b": "supports",
-    r"\bis\s+anti\b": "is pro",
-}
-
-# Individual negation tokens for keyword-based polarity checking.
-# Include common contractions and misspelled variants often found in social media.
-NEGATION_TOKENS = {
-    "not", "no", "never", "none", "cannot", "cant", "wont", "dont", "doesnt", 
-    "isnt", "hasnt", "didnt", "wasnt", "werent", "arent", "hadnt", "shouldnt", 
-    "couldnt", "mightnt", "wouldnt", "false", "lie", "fake", "untrue", "misleading"
-}
+# Individual negation tokens for keyword-based polarity checking
+NEGATION_TOKENS = {"not", "no", "never", "none", "cannot", "isnt", "hasnt", "didnt", "wasnt"}

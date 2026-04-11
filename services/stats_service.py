@@ -39,28 +39,13 @@ class StatsService:
         for r in results:
             if r.verdict is not None:
                 verdicts.append(r.verdict)
-                
-                # --- Semantic Relevance Weighting (Quartic Focus) ---
-                # A simple weighted average is easily drowned by 'Evidence Dilution'.
-                # We use high-order Power-4 Weighting (Similarity^4) to aggressively 
-                # prioritize direct semantic matches over peripheral noise.
-                # Example: 0.9 sim (0.65 factor) vs 0.45 sim (0.04 factor) = 16x weight difference.
-                similarity = r.similarity_score if hasattr(r, "similarity_score") else 0.5
-                relevance_factor = (similarity ** 4)
-                
-                # Primary Signal Bonus: If the article is a near-perfect topical match (>0.85),
-                # we double its weight to ensure the 'Primary Verdict' is respected.
-                if similarity > 0.85:
-                    relevance_factor *= 2.0
-
+                # Use NLI confidence as weight if available, otherwise use 0.5 as default
                 nli_conf = (
                     r.nli_result.relationship_confidence
                     if r.nli_result and r.nli_result.relationship_confidence is not None
                     else 0.5
                 )
-                
-                # Final weight is the product of NLI confidence and semantic relevance.
-                weights.append(nli_conf * relevance_factor)
+                weights.append(nli_conf)
 
         if verdicts:
             total_weight = sum(weights)
@@ -191,68 +176,47 @@ class StatsService:
     @staticmethod
     def calculate_bias_consistency(results: list[ArticleResultModel]) -> float:
         """
-        Calculate Cross-Spectrum Consensus - how well sources with different biases agree on the verdict.
-        
-        A high score means sources from across the ideological spectrum (e.g., Left and Right) 
-        are producing the SAME verdict, indicating a strong, bias-independent consensus.
-        
+        Calculate overall bias consistency - how well bias patterns align with verdicts.
+
+        Computes a score on a -1 to 1 scale based on how consistently biased sources produce aligned verdicts.
+        A high score means biased sources reliably produce verdicts consistent with their bias.
+
         Returns -1 to 1 where:
-        - 1 = Perfect consensus across different biases
-        - 0 = Neutral / Mixed signals
-        - -1 = High polarization (sources agree only within their own bias groups)
+        - -1 = No consistency between bias and verdict
+        - 1 = Perfect consistency between bias and verdict
         """
-        if not results or len(results) < 2:
+        if not results:
             return 0.0
 
-        # Group results by verdict polarity (Support, Refute, Neutral)
-        # We use a small threshold to avoid 0.0001 being treated as non-neutral
-        support_group = []
-        refute_group = []
-        
-        for r in results:
-            if r.verdict is None:
+        consistency_scores = []
+
+        for result in results:
+            bias = result.source_bias
+            verdict = result.verdict
+
+            # Skip if missing bias or verdict
+            if not bias or verdict is None:
                 continue
-            
-            bias_val = SOURCE_BIAS_SPECTRUM_MAP.get(r.source_bias, 0)
-            
-            if r.verdict > 0.1:
-                support_group.append(bias_val)
-            elif r.verdict < -0.1:
-                refute_group.append(bias_val)
 
-        def calculate_group_consensus(bias_values: list[float]) -> float:
-            if len(bias_values) < 2:
-                return 0.0
-            
-            # Consensus is high if the spread (std dev) of biases is high
-            # i.e., different types of sources agree.
-            mean_bias = sum(bias_values) / len(bias_values)
-            variance = sum((x - mean_bias) ** 2 for x in bias_values) / len(bias_values)
-            std_dev = variance ** 0.5
-            
-            # Normalize: max std dev is ~2.0 for range [-2, 2]
-            return min(std_dev / 1.5, 1.0) # Use 1.5 as "high diversity" threshold
+            # Get bias value (-2 to 2)
+            bias_value = SOURCE_BIAS_SPECTRUM_MAP.get(bias, 0)
 
-        support_consensus = calculate_group_consensus(support_group)
-        refute_consensus = calculate_group_consensus(refute_group)
-        
-        # Weighted average based on group sizes
-        total_non_neutral = len(support_group) + len(refute_group)
-        if total_non_neutral == 0:
-            return 0.0
-            
-        consensus_score = (
-            (support_consensus * len(support_group)) + 
-            (refute_consensus * len(refute_group))
-        ) / total_non_neutral
+            # Calculate how well verdict aligns with bias direction
+            # Bias consistency = how aligned the verdict is with the bias direction
+            # Normalize bias_value to 0-1 range and compare with verdict
+            bias_normalized = (bias_value + 2) / 4  # Convert -2 to 2 into 0 to 1
 
-        # Map 0..1 to -1..1
-        return (consensus_score * 2) - 1
+            # Normalize verdict from -1..1 to 0..1 for alignment comparison
+            verdict_normalized = (verdict + 1) / 2
 
-    @staticmethod
-    def map_to_percentage(value: float) -> float:
-        """
-        Maps a -1 to 1 metric to a 0 to 100 percentage.
-        Used for thesis reporting (Accuracy, Consistency, etc).
-        """
-        return round(((value + 1) / 2) * 100, 2)
+            # Consistency = 1 - |difference| between bias direction and verdict
+            alignment = 1 - abs(bias_normalized - verdict_normalized)
+            consistency_scores.append(alignment)
+
+        # Return average consistency
+        consistency = (
+            sum(consistency_scores) / len(consistency_scores)
+            if consistency_scores
+            else 0.0
+        )
+        return (consistency * 2) - 1

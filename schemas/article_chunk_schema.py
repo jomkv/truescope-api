@@ -1,7 +1,9 @@
-from core.types import get_vector_type
-from core.db import Base, engine
-from sqlalchemy import UUID, Index, Column, String, ForeignKey
+from sqlalchemy import Index
 import uuid
+from core.db import Base
+from sqlalchemy import UUID, Column, String, ForeignKey
+from pgvector.sqlalchemy import VECTOR
+
 
 class ArticleChunk(Base):
     __tablename__ = "article_chunks"
@@ -10,24 +12,16 @@ class ArticleChunk(Base):
     chunk_id = Column(String, unique=True, nullable=False)
     chunk_content = Column(String, nullable=False)
     doc_id = Column(String, ForeignKey("articles.doc_id"), nullable=False)
-    embedding = Column(get_vector_type(384), nullable=False)
-    
-    # Relationships
-    from sqlalchemy.orm import relationship
-    article = relationship("Article", back_populates="chunks", lazy="selectin")
+    embedding = Column(VECTOR(384), nullable=False)
 
-    # Dialect-aware table args
-    if engine.dialect.name == "postgresql":
-        __table_args__ = (
-            Index(
-                "hnsw_cosine_article_chunks_idx",
-                "embedding",
-                postgresql_using="hnsw",
-                postgresql_with={"m": 16, "ef_construction": 64},
-                postgresql_ops={"embedding": "vector_cosine_ops"},
-            ),
-        )
-    else:
-        # SQLite / Turso managed independently
-        __table_args__ = ()
-
+    # Improves performance and potentially the accuracy of results
+    __table_args__ = (
+        Index(
+            "hnsw_cosine_article_chunks_idx",
+            "embedding",
+            postgresql_using="hnsw",
+            # Experimental
+            postgresql_with={"m": 16, "ef_construction": 64},
+            postgresql_ops={"embedding": "vector_cosine_ops"},
+        ),
+    )

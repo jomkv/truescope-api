@@ -2,11 +2,7 @@ from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config, Connection
 from sqlalchemy import pool
-try:
-    from pgvector import sqlalchemy as pgvector_sa
-except ImportError:
-    pgvector_sa = None
-
+from pgvector import sqlalchemy
 
 from alembic import context
 
@@ -44,9 +40,7 @@ target_metadata = Base.metadata
 def do_run_migrations(connection: Connection) -> None:
     # Need to hack the "vector" type into postgres dialect schema types.
     # Otherwise, `alembic check` does not recognize the type
-    if connection.dialect.name == "postgresql" and pgvector_sa:
-        connection.dialect.ischema_names["vector"] = pgvector_sa.Vector
-
+    connection.dialect.ischema_names["vector"] = sqlalchemy.Vector
 
     context.configure(
         connection=connection,
