@@ -1169,11 +1169,6 @@ class VerifyController:
         descriptor_matches = {
             t for t in matched_meaningful if t in ENTITY_GENERIC_TOKENS
         }
-        entity_token_matches = {
-            t
-            for t in matched_meaningful
-            if t in entity_parts and t not in ENTITY_GENERIC_TOKENS
-        }
 
         # Statistics for the UI
         matched_full_entities = set()
@@ -1182,11 +1177,21 @@ class VerifyController:
                 matched_full_entities.update(token_to_entity_map[t])
         distinct_entities_matched = len(matched_full_entities)
 
-        # Gate thresholding:
-        # Requirement: At least 2 meaningful matches for specific claims, or 1 for extremely short ones.
+        specific_tokens_in_claim = (
+            {t for t in meaningful_claim_tokens if t not in ENTITY_GENERIC_TOKENS}
+            if "meaningful_claim_tokens" in locals()
+            else set()
+        )
+        # Ensure meaningful_claim_tokens exists if I used it above
+        meaningful_claim_tokens = {
+            t
+            for t in claim_tokens
+            if t not in COMMON_STOPWORDS and t not in STOP_TITLES
+        }
         specific_tokens_in_claim = {
             t for t in meaningful_claim_tokens if t not in ENTITY_GENERIC_TOKENS
         }
+
         gate_threshold = (
             min(2, len(specific_tokens_in_claim)) if specific_tokens_in_claim else 1
         )
@@ -1390,9 +1395,105 @@ class VerifyController:
             if not result["skip_reason"]:
                 result["skip_reason"].append("Did not meet filtering criteria")
 
-        return ArticleResultModel(**result)
+        # Cleanup internal keys before returning model
+        final_keys = [f for f in ArticleResultModel.__fields__]
+        final_dict = {k: result[k] for k in result if k in final_keys}
+        return ArticleResultModel(**final_dict)
 
-    async def verify_claim_stream_with_stats(self, user_claim: str):
+    async def process_result_async(
+        self,
+        user_claim_norm: str,
+        claim_entities: list[str],
+        similarity_score: float,
+        article: Article,
+        claim_text: str | None,
+        claim_verdict: Verdict | None,
+        source_bias: SourceBias,
+        is_factcheck: bool,
+        is_negated: bool = False,
+        chunk_texts: str | None = None,
+    ) -> ArticleResultModel:
+        """
+        Legacy entry point for processing a single result.
+        Uses the new phase-based pipeline internally.
+        """
+        pre_res = self._preprocess_result(
+            user_claim_norm=user_claim_norm,
+            claim_entities=claim_entities,
+            similarity_score=similarity_score,
+            article=article,
+            claim_text=claim_text,
+            claim_verdict=claim_verdict,
+            source_bias=source_bias,
+            is_factcheck=is_factcheck,
+            is_negated=is_negated,
+            chunk_texts=chunk_texts,
+        )
+
+        nli_label, nli_score, nli_uncertainty = NLILabel.NEUTRAL, 0.0, 0.0
+        if pre_res["meets_relevance_gate"]:
+            loop = asyncio.get_event_loop()
+            nli_label, nli_score, nli_uncertainty = await loop.run_in_executor(
+                self.executor,
+                self.nli_service.classify_nli,
+                pre_res["nli_text"],
+                # Use the original user claim text for NLI
+                result.get("original_user_claim", user_claim_norm),
+            )
+
+        return self._postprocess_result(
+            result=pre_res,
+            nli_label=nli_label,
+            nli_score=nli_score,
+            nli_uncertainty=nli_uncertainty,
+            article=article,
+            is_factcheck=is_factcheck,
+            is_negated=is_negated,
+        )
+    
+    def calculate_stats(self, evidences: list[ArticleResultModel]):
+        return self.stats_service.calculate_stats(evidences)
+    
+    @staticmethod
+    def aggregate_results(
+        results: list[ArticleResultModel], max_evidences: int, use_non_factcheck: bool
+    ) -> list[ArticleResultModel]:
+        # Sort results first
+        results.sort(
+            key=lambda x: (
+                0 if x.nli_result else 1,
+                -x.combined_relevance_score,
+                0 if x.found_claim else 1,
+            )
+        )
+
+        aggregated_results: list[ArticleResultModel] = []
+
+        # Aggregate, get top n where n = max_evidences with respect to use_non_factcheck
+        for result in results:
+            # If we have reached max_evidences, stop
+            if len(aggregated_results) >= max_evidences:
+                break
+
+            # If not using non-factcheck and current result is a non-factcheck, skip
+            if not use_non_factcheck and result.found_verdict is None:
+                continue
+
+            aggregated_results.append(result)
+
+        return aggregated_results
+    
+    def load_config(self, config: dict | None):
+        limit = self.AGGREGATION_LIMIT
+        use_non_factcheck = True
+
+        if config is not None:
+            limit = config.get("maxEvidence", limit)
+            use_non_factcheck = config.get("useNonFactcheck", use_non_factcheck)
+
+        return (limit, use_non_factcheck)
+
+    async def verify_claim_stream_with_stats(self, user_claim: str, config: dict | None = None):
         """
         Streams search hits, then result items (filtered/skipped), then remarks updates.
         """
