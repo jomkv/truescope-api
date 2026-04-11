@@ -1049,7 +1049,7 @@ class VerifyController:
             for res in filtered_results:
                 res.is_aggregated = True
 
-        stats = self.calculate_stats(results_for_scoring)
+        stats = self.stats_service.calculate_stats(results_for_scoring)
 
         overall_verdict = stats["overall_verdict"]
 
@@ -1469,50 +1469,8 @@ class VerifyController:
             is_factcheck=is_factcheck,
             is_negated=is_negated,
         )
-    
-    def calculate_stats(self, evidences: list[ArticleResultModel]):
-        return self.stats_service.calculate_stats(evidences)
-    
-    @staticmethod
-    def aggregate_results(
-        results: list[ArticleResultModel], max_evidences: int, use_non_factcheck: bool
-    ) -> list[ArticleResultModel]:
-        # Sort results first
-        results.sort(
-            key=lambda x: (
-                0 if x.nli_result else 1,
-                -x.combined_relevance_score,
-                0 if x.found_claim else 1,
-            )
-        )
 
-        aggregated_results: list[ArticleResultModel] = []
-
-        # Aggregate, get top n where n = max_evidences with respect to use_non_factcheck
-        for result in results:
-            # If we have reached max_evidences, stop
-            if len(aggregated_results) >= max_evidences:
-                break
-
-            # If not using non-factcheck and current result is a non-factcheck, skip
-            if not use_non_factcheck and result.found_verdict is None:
-                continue
-
-            aggregated_results.append(result)
-
-        return aggregated_results
-    
-    def load_config(self, config: dict | None):
-        limit = self.AGGREGATION_LIMIT
-        use_non_factcheck = True
-
-        if config is not None:
-            limit = config.get("maxEvidence", limit)
-            use_non_factcheck = config.get("useNonFactcheck", use_non_factcheck)
-
-        return (limit, use_non_factcheck)
-
-    async def verify_claim_stream_with_stats(self, user_claim: str, config: dict | None = None):
+    async def verify_claim_stream_with_stats(self, user_claim: str):
         """
         Streams search hits, then result items (filtered/skipped), then remarks updates.
         """
@@ -1641,24 +1599,26 @@ class VerifyController:
         # 3. Stream final stats
         # Ensure consistent sorting and aggregation for streaming results
         non_skipped = [r for r in results if not r.skip_reason]
-        (max_evidences, use_non_factcheck) = self.load_config(config)
-
-        aggregated_results = self.aggregate_results(
-            non_skipped, max_evidences, use_non_factcheck
+        non_skipped.sort(
+            key=lambda x: (
+                0 if x.nli_result else 1,
+                -x.combined_relevance_score,
+                0 if x.found_claim else 1,
+            )
         )
-        aggregated_ids = [r.doc_id for r in aggregated_results]
-        
-        # Mark aggregated for debugging
-        for res in non_skipped:
-            if res.doc_id in aggregated_ids:
-                res.is_aggregated = True
 
-        final_stats = self.calculate_stats(aggregated_results)
+        limit = self.AGGREGATION_LIMIT
+        aggregated_results = non_skipped[:limit]
+
+        # Mark aggregated for UI identification
+        for i, res in enumerate(non_skipped):
+            res.is_aggregated = i < limit
+
+        final_stats = self.stats_service.calculate_stats(aggregated_results)
         yield {
             "type": StreamEventType.STATS,
             "total_results": len(results),
             "stats": final_stats,
-            "doc_ids": aggregated_ids,
         }
 
         # 4. Catch-up: Generate remarks and stream updates

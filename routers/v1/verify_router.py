@@ -2,7 +2,6 @@ from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from constants.enums import StreamEventType
 from models.verify_claim_model import VerifyClaimModel
 from models.verify_result_model import VerifyResultModel
-from models.article_result_model import ArticleResultModel
 
 router = APIRouter()
 
@@ -15,7 +14,6 @@ def _get_controller():
     instance — including any live threshold changes applied via the dashboard.
     """
     import main
-
     return main.verify_controller
 
 
@@ -29,14 +27,6 @@ async def verify_claim(verify: VerifyClaimModel):
     entities = controller.extract_entities(verify.claim)
     timeframe = controller.extract_claim_timeframe(verify.claim)
     return {"entities": entities, "timeframe": timeframe, **results}
-
-
-@router.post("/calculate")
-async def calculate_score(evidences: list[ArticleResultModel]):
-    controller = _get_controller()
-    stats = controller.calculate_stats(evidences)
-
-    return stats
 
 
 @router.websocket("/ws")
@@ -57,7 +47,6 @@ async def websocket_verify_endpoint(websocket: WebSocket):
     try:
         data = await websocket.receive_json()
         claim = data.get("claim")
-        config = data.get("config")
 
         if not claim:
             await websocket.send_json(
@@ -71,7 +60,7 @@ async def websocket_verify_endpoint(websocket: WebSocket):
         entities = controller.extract_entities(claim)
         await websocket.send_json({"entities": entities, "results": []})
 
-        async for message in controller.verify_claim_stream_with_stats(claim, config):
+        async for message in controller.verify_claim_stream_with_stats(claim):
             await websocket.send_json(message)
 
     except WebSocketDisconnect:
