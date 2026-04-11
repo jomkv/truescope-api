@@ -714,21 +714,21 @@ class VerifyController:
             # For REFUTE, the direction is usually opposite the truth.
             # TRUE article + REFUTE = User is wrong (-1)
             # FALSE article + REFUTE = User is usually wrong (+1 ? No, tricky)
-            
+
             nli_label_weight = NLI_LABEL_WEIGHT_MAP.get(nli_label, -1.0)
             
             if verdict_weight < 0:
                 # --- Double Negative Guard ---
-                # A FALSE article is a debunking. If the user claim has a TOPICAL match 
-                # (e.g. User: "Marcos coke", Article: "Marcos coke is FALSE"), then NLI REFUTE 
+                # A FALSE article is a debunking. If the user claim has a TOPICAL match
+                # (e.g. User: "Marcos coke", Article: "Marcos coke is FALSE"), then NLI REFUTE
                 # is usually the model noticing the debunking words ("FALSE", "Fake", etc).
-                # To prevent this from flipping the sign to positive (TRUE), we force it 
+                # To prevent this from flipping the sign to positive (TRUE), we force it
                 # to stay negative if the topics match.
                 if has_topical_match:
                     # Force positive nli_label_weight such that (-1) * (+1) = (-1) [STAYS FALSE]
                     nli_label_weight = 1.0
                 else:
-                    # NO topical match: User is refuting an unrelated lie. 
+                    # NO topical match: User is refuting an unrelated lie.
                     # This is a legitimate sign flip to positive. [FLIPS TO TRUE]
                     nli_label_weight = -1.0
 
@@ -884,9 +884,13 @@ class VerifyController:
         # This prevents low-relevance results from skewing the final verdict
         # while still allowing the UI to display everything for manual review.
         results_for_scoring = filtered_results
-        
-        limit = aggregation_limit if aggregation_limit is not None else self.AGGREGATION_LIMIT
-        
+
+        limit = (
+            aggregation_limit
+            if aggregation_limit is not None
+            else self.AGGREGATION_LIMIT
+        )
+
         # Defensive cast to ensure we have an int or None
         if limit is not None and limit != "":
             try:
@@ -896,7 +900,7 @@ class VerifyController:
 
         if limit is not None and limit > 0:
             results_for_scoring = filtered_results[:limit]
-            
+
             # Mark which ones were used for scoring (for UI highlighting)
             for i, res in enumerate(filtered_results):
                 res.is_aggregated = i < limit
@@ -1004,11 +1008,11 @@ class VerifyController:
             claim_entities, entity_comparison_text, entity_comparison_title
         )
 
-        # EXCEPTION: If we have a confirmed specific entity match (e.g. "Uwan"), 
+        # EXCEPTION: If we have a confirmed specific entity match (e.g. "Uwan"),
         # we relax the gates to ensure we don't miss relevant news reports
         # that might vary significantly in phrasing (e.g. disaster reporting).
-        effective_similarity_threshold = self.RELEVANCE_THRESHOLD # 0.3
-        effective_combined_threshold = self.COMBINED_THRESHOLD    # 0.4
+        effective_similarity_threshold = self.RELEVANCE_THRESHOLD  # 0.3
+        effective_combined_threshold = self.COMBINED_THRESHOLD  # 0.4
         if has_specific_match and entity_match_score >= 0.3:
             effective_similarity_threshold = -0.5
             effective_combined_threshold = 0.10
@@ -1081,16 +1085,22 @@ class VerifyController:
         
         # Gate thresholding: 
         # Requirement: At least 2 meaningful matches for specific claims, or 1 for extremely short ones.
-        specific_tokens_in_claim = {t for t in meaningful_claim_tokens if t not in ENTITY_GENERIC_TOKENS}
-        gate_threshold = min(2, len(specific_tokens_in_claim)) if specific_tokens_in_claim else 1
-        
+        specific_tokens_in_claim = {
+            t for t in meaningful_claim_tokens if t not in ENTITY_GENERIC_TOKENS
+        }
+        gate_threshold = (
+            min(2, len(specific_tokens_in_claim)) if specific_tokens_in_claim else 1
+        )
+
         # PERSONA PRECISION GUARD:
-        # If the claim has topical assertions (e.g. "biological children"), 
-        # an article matching ONLY a persona name (e.g. "Kamala Harris") is considered noise 
+        # If the claim has topical assertions (e.g. "biological children"),
+        # an article matching ONLY a persona name (e.g. "Kamala Harris") is considered noise
         # unless it also matches at least one topical keyword.
         # However, we exempt "Unique Event" or "Location" entities (Typhoon, Sea, Island)
         # to ensure 100% coverage for disaster and geopolitical reports.
-        has_topical_assertion = len(specific_tokens_in_claim.difference(entity_parts)) > 0
+        has_topical_assertion = (
+            len(specific_tokens_in_claim.difference(entity_parts)) > 0
+        )
         has_event_marker = any(t in EVENT_MARKERS for t in descriptor_matches)
 
         is_persona_noise = (
@@ -1271,20 +1281,25 @@ class VerifyController:
         user_claim_for_matching = self.normalize_text(user_claim, lowercase=False)
         loop = asyncio.get_event_loop()
 
-        # Embedding & entity extraction
-        claim_embedding = await loop.run_in_executor(
-            self.executor, self.embedding_service.embed_text, user_claim_for_matching
-        )
-        claim_entities = await loop.run_in_executor(
-            self.executor, self.extract_entities, user_claim_for_matching
+        # --- Parallel Startup ---
+        # 1. Detect negation/stance
+        core_claim_text, is_negated = self.detect_claim_stance(user_claim_for_matching)
+        user_claim_core_norm = self.normalize_text(core_claim_text)
+
+        # 2. Run embedding and entity extraction in parallel (Gathers expensive ML once)
+        claim_embedding, claim_entities = await asyncio.gather(
+            loop.run_in_executor(
+                self.executor, self.embedding_service.embed_text, core_claim_text
+            ),
+            loop.run_in_executor(
+                self.executor, self.extract_entities, user_claim_for_matching
+            ),
         )
 
-        # 1. Stream search hits — use same 20-candidate retrieval as verify_claim
-        core_claim_for_stream, _ = self.detect_claim_stance(user_claim_for_matching)
-        claim_embedding = await loop.run_in_executor(
-            self.executor, self.embedding_service.embed_text, core_claim_for_stream
+        # 3. Stream search hits
+        factcheck_results = self.find_claims_with_articles(
+            claim_embedding, self.DB_RETRIEVE_LIMIT
         )
-        factcheck_results = self.find_claims_with_articles(claim_embedding, self.DB_RETRIEVE_LIMIT)
         news_results = self.find_news_articles(claim_embedding, self.DB_RETRIEVE_LIMIT)
 
         search_hits = []
