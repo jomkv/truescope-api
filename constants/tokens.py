@@ -77,29 +77,15 @@ ENTITY_GENERIC_TOKENS = {
     "central",
     "general",
     # Topical/Numerical descriptors
-    "percent",
-    "percentage",
-    "rate",
-    "rates",
-    "level",
-    "levels",
-    "amount",
-    "value",
-    "total",
-    "average",
-    "number",
-    "numbers",
-    "year",
-    "years",
-    "data",
-    "report",
-    "claims",
-    "claim",
+    "percent", "percentage", "rate", "rates", "level", "levels",
+    "amount", "value", "total", "average", "number", "numbers",
+    "year", "years", "data", "report", "claims", "claim",
 }
 
 # Initialize a blank English model to access default stopwords
 # This is fast as it doesn't load any model weights
 nlp = spacy.blank("en")
+
 
 # Common English stopwords/noise words to exclude from topical relevance points
 # We combine spaCy's defaults with domain-specific terms (metrics, reporting verbs)
