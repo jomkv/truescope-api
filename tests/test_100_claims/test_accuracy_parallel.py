@@ -10,11 +10,14 @@ from controllers.v1.verify_controller import VerifyController
 
 DATASET_FILES = ["jomTestCases.json", "negatedClaims.json"]
 _timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+_save_files = os.getenv("ACCURACY_SAVE_FILES", "1") == "1"
+_quiet_logs = os.getenv("ACCURACY_QUIET", "0") == "1"
 
 
 # ---------------------------------------------------------------------------
 # Label helpers
 # ---------------------------------------------------------------------------
+
 
 def get_score_label(score: float) -> str:
     return "TRUE" if score >= 0 else "FALSE"
@@ -28,6 +31,7 @@ def normalize_verdict_label(verdict: str) -> str:
 # ---------------------------------------------------------------------------
 # Metrics
 # ---------------------------------------------------------------------------
+
 
 def compute_metrics(results_list: list[dict]) -> dict:
     label_map = {"TRUE": "Support", "FALSE": "Refute"}
@@ -51,7 +55,11 @@ def compute_metrics(results_list: list[dict]) -> dict:
     for cls in classes:
         precision = tp[cls] / (tp[cls] + fp[cls]) if (tp[cls] + fp[cls]) > 0 else 0.0
         recall = tp[cls] / (tp[cls] + fn[cls]) if (tp[cls] + fn[cls]) > 0 else 0.0
-        f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0.0
+        f1 = (
+            2 * precision * recall / (precision + recall)
+            if (precision + recall) > 0
+            else 0.0
+        )
         metrics[cls] = {
             "precision": round(precision, 4),
             "recall": round(recall, 4),
@@ -80,9 +88,9 @@ def compute_error_breakdown(results_list: list[dict]) -> dict:
         if e["skipped"]:
             # Skipped items are excluded from accuracy but we still categorise them
             if e["ground_truth"] == "TRUE":
-                skipped_correct.append(e)   # would have defaulted to TRUE anyway
+                skipped_correct.append(e)  # would have defaulted to TRUE anyway
             else:
-                skipped_wrong.append(e)     # we missed a FALSE claim
+                skipped_wrong.append(e)  # we missed a FALSE claim
             continue
         if not e["is_correct"]:
             if e["predicted_label"] == "TRUE":
@@ -91,7 +99,10 @@ def compute_error_breakdown(results_list: list[dict]) -> dict:
                 false_negatives.append(e)
 
     def slim(entries: list[dict]) -> list[dict]:
-        return [{"id": e["id"], "claim": e["claim"], "score": e["system_score"]} for e in entries]
+        return [
+            {"id": e["id"], "claim": e["claim"], "score": e["system_score"]}
+            for e in entries
+        ]
 
     return {
         "false_positive_count": len(false_positives),
@@ -108,11 +119,11 @@ def compute_error_breakdown(results_list: list[dict]) -> dict:
 def compute_score_distribution(results_list: list[dict]) -> dict:
     """Bucket system_score values to understand confidence distribution."""
     buckets = {
-        "strong_true  (>= 0.5)":  0,
+        "strong_true  (>= 0.5)": 0,
         "weak_true    (0.0–0.5)": 0,
         "weak_false   (-0.5–0.0)": 0,
         "strong_false (<= -0.5)": 0,
-        "skipped":               0,
+        "skipped": 0,
     }
     for e in results_list:
         s = e["system_score"]
@@ -132,6 +143,7 @@ def compute_score_distribution(results_list: list[dict]) -> dict:
 # ---------------------------------------------------------------------------
 # Model loader helper
 # ---------------------------------------------------------------------------
+
 
 def load_hitl_models(vc: VerifyController, dataset_name: str) -> None:
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
@@ -162,6 +174,7 @@ def load_hitl_models(vc: VerifyController, dataset_name: str) -> None:
 # Per-dataset runner
 # ---------------------------------------------------------------------------
 
+
 async def run_dataset(vc: VerifyController, dataset_filename: str) -> dict:
     dataset_path = os.path.join(os.path.dirname(__file__), dataset_filename)
     dataset_name = os.path.splitext(dataset_filename)[0]
@@ -182,7 +195,9 @@ async def run_dataset(vc: VerifyController, dataset_filename: str) -> dict:
 
     for entry in claims:
         claim_text = entry["claim"]
-        ground_truth = entry.get("expected_verdict", entry.get("ground_truth", entry.get("Ground_truth")))
+        ground_truth = entry.get(
+            "expected_verdict", entry.get("ground_truth", entry.get("Ground_truth"))
+        )
         claim_id = entry["index"]
         exclude_docs = [entry["doc_id"]] if "doc_id" in entry else []
 
@@ -204,25 +219,33 @@ async def run_dataset(vc: VerifyController, dataset_filename: str) -> dict:
             if is_correct:
                 correct += 1
 
-        # Capture richer per-result diagnostics
-        top_results = result.get("results", [])
-        results_list.append({
-            "id": claim_id,
-            "claim": claim_text,
-            "ground_truth": ground_truth_norm,
-            "predicted_label": score_label,
-            "system_score": system_score,
-            "is_correct": is_correct,
-            "skipped": not result["results"],
-            "is_negated": result.get("is_negated", False),
-            "truth_confidence": result.get("truth_confidence_score"),
-            "top_evidence": [
+        # Capture richer per-result diagnostics when file output is enabled.
+        top_evidence = []
+        if _save_files:
+            top_results = result.get("results", [])
+            top_evidence = [
                 {
                     "source": r.source if hasattr(r, "source") else r.get("source"),
-                    "source_type": r.source_type if hasattr(r, "source_type") else r.get("source_type"),
-                    "similarity": r.similarity_score if hasattr(r, "similarity_score") else r.get("similarity_score"),
-                    "entity_match": r.entity_match_score if hasattr(r, "entity_match_score") else r.get("entity_match_score"),
-                    "combined": r.combined_relevance_score if hasattr(r, "combined_relevance_score") else r.get("combined_relevance_score"),
+                    "source_type": (
+                        r.source_type
+                        if hasattr(r, "source_type")
+                        else r.get("source_type")
+                    ),
+                    "similarity": (
+                        r.similarity_score
+                        if hasattr(r, "similarity_score")
+                        else r.get("similarity_score")
+                    ),
+                    "entity_match": (
+                        r.entity_match_score
+                        if hasattr(r, "entity_match_score")
+                        else r.get("entity_match_score")
+                    ),
+                    "combined": (
+                        r.combined_relevance_score
+                        if hasattr(r, "combined_relevance_score")
+                        else r.get("combined_relevance_score")
+                    ),
                     "verdict": r.verdict if hasattr(r, "verdict") else r.get("verdict"),
                     "nli_label": (
                         r.nli_result.relationship.value
@@ -236,15 +259,30 @@ async def run_dataset(vc: VerifyController, dataset_filename: str) -> dict:
                     ),
                 }
                 for r in top_results[:3]  # top 3 only to keep file size manageable
-            ],
-        })
+            ]
 
-        print(
-            f"[{dataset_name}] #{claim_id:03d} {'✓' if is_correct else '✗'}  "
-            f"GT={ground_truth_norm:<5} Pred={score_label:<5} Score={str(round(system_score, 4)) if system_score is not None else 'SKIP':<8}  "
-            f"{claim_text[:80]}",
-            flush=True,
+        results_list.append(
+            {
+                "id": claim_id,
+                "claim": claim_text,
+                "ground_truth": ground_truth_norm,
+                "predicted_label": score_label,
+                "system_score": system_score,
+                "is_correct": is_correct,
+                "skipped": not result["results"],
+                "is_negated": result.get("is_negated", False),
+                "truth_confidence": result.get("truth_confidence_score"),
+                "top_evidence": top_evidence,
+            }
         )
+
+        if not _quiet_logs:
+            print(
+                f"[{dataset_name}] #{claim_id:03d} {'✓' if is_correct else '✗'}  "
+                f"GT={ground_truth_norm:<5} Pred={score_label:<5} Score={str(round(system_score, 4)) if system_score is not None else 'SKIP':<8}  "
+                f"{claim_text[:80]}",
+                flush=True,
+            )
 
     accuracy = correct / total if total else 0.0
     metrics = compute_metrics(results_list)
@@ -264,8 +302,9 @@ async def run_dataset(vc: VerifyController, dataset_filename: str) -> dict:
         "results": results_list,
     }
 
-    with open(results_path, "w", encoding="utf-8") as f:
-        json.dump(output_data, f, ensure_ascii=False, indent=2)
+    if _save_files:
+        with open(results_path, "w", encoding="utf-8") as f:
+            json.dump(output_data, f, ensure_ascii=False, indent=2)
 
     # Console summary
     print(f"\n{'='*60}")
@@ -273,8 +312,12 @@ async def run_dataset(vc: VerifyController, dataset_filename: str) -> dict:
     print(f"{'='*60}")
     print(f"  Accuracy : {correct}/{total} = {accuracy:.2%}")
     print(f"  Skipped  : {skipped}")
-    print(f"  FP       : {error_breakdown['false_positive_count']}  (predicted TRUE, actually FALSE)")
-    print(f"  FN       : {error_breakdown['false_negative_count']}  (predicted FALSE, actually TRUE)")
+    print(
+        f"  FP       : {error_breakdown['false_positive_count']}  (predicted TRUE, actually FALSE)"
+    )
+    print(
+        f"  FN       : {error_breakdown['false_negative_count']}  (predicted FALSE, actually TRUE)"
+    )
     print(f"\n  Per-class metrics:")
     for cls, vals in metrics.items():
         print(
@@ -284,7 +327,8 @@ async def run_dataset(vc: VerifyController, dataset_filename: str) -> dict:
     print(f"\n  Score distribution:")
     for bucket, count in score_dist.items():
         print(f"    {bucket}: {count}")
-    print(f"\n  Results saved to {results_path}")
+    if _save_files:
+        print(f"\n  Results saved to {results_path}")
     print(f"{'='*60}\n")
 
     return {
@@ -302,7 +346,8 @@ async def run_dataset(vc: VerifyController, dataset_filename: str) -> dict:
 # Combined summary report
 # ---------------------------------------------------------------------------
 
-def write_combined_summary(all_results: list[dict]) -> None:
+
+def write_combined_summary(all_results: list[dict]) -> dict:
     summary_path = os.path.join(
         os.path.dirname(__file__),
         f"test_accuracy_SUMMARY_{_timestamp}.json",
@@ -325,9 +370,11 @@ def write_combined_summary(all_results: list[dict]) -> None:
             "support_f1": r["metrics"]["Support"]["f1-score"],
             "refute_f1": r["metrics"]["Refute"]["f1-score"],
         }
-        print(f"  {name:<25} {r['correct']}/{r['total']} = {r['accuracy']:.2%}  "
-              f"(FP={r['error_breakdown']['false_positive_count']}  FN={r['error_breakdown']['false_negative_count']}  "
-              f"Skipped={r['skipped']})")
+        print(
+            f"  {name:<25} {r['correct']}/{r['total']} = {r['accuracy']:.2%}  "
+            f"(FP={r['error_breakdown']['false_positive_count']}  FN={r['error_breakdown']['false_negative_count']}  "
+            f"Skipped={r['skipped']})"
+        )
 
     # Goal check
     print("\n  Goal check (target: both ≥80%, ideally normal > negated):")
@@ -335,15 +382,22 @@ def write_combined_summary(all_results: list[dict]) -> None:
         status = "✓" if vals["accuracy"] >= 0.80 else "✗"
         print(f"    {status} {name}: {vals['accuracy']:.2%}")
 
-    with open(summary_path, "w", encoding="utf-8") as f:
-        json.dump({"timestamp": _timestamp, "datasets": combined}, f, ensure_ascii=False, indent=2)
-    print(f"\n  Summary saved to {summary_path}")
+    summary_payload = {"timestamp": _timestamp, "datasets": combined}
+
+    if _save_files:
+        with open(summary_path, "w", encoding="utf-8") as f:
+            json.dump(summary_payload, f, ensure_ascii=False, indent=2)
+        print(f"\n  Summary saved to {summary_path}")
+
+    print("ACCURACY_SUMMARY_JSON=" + json.dumps(summary_payload, ensure_ascii=False))
     print("=" * 60)
+    return summary_payload
 
 
 # ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
+
 
 async def main():
     print("[shared] Initializing VerifyController once...", flush=True)

@@ -1180,8 +1180,6 @@ class VerifyController:
         """Sort by NLI presence → combined score → fact-check preference, then mark aggregated."""
         (limit, use_non_factcheck) = self._load_config(config)
 
-        print(f"LIM: {limit} USE: {use_non_factcheck}")
-
         # Sort results first
         results.sort(
             key=lambda x: (
