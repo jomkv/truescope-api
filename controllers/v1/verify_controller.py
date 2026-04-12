@@ -44,7 +44,7 @@ import re
 from datetime import datetime
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
-from typing import cast
+from typing import Any
 from collections import defaultdict
 from databases.verify import VerifyDatabase
 import logging
@@ -797,6 +797,10 @@ class VerifyController:
 
         return round(raw_score, 2)
 
+    def calculate_stats(self, evidences: list[ArticleResultModel]):
+        """Centralize usage of stats_service's calculate_stats via this function."""
+        return self.stats_service.calculate_stats(evidences)
+
     # -----------------------------------------------------------------------
     # Core per-result processor
     # -----------------------------------------------------------------------
@@ -1107,22 +1111,49 @@ class VerifyController:
         all_results: list[ArticleResultModel] = await asyncio.gather(*tasks)
         return user_claim_norm, user_claim_core_norm, is_negated, list(all_results)
 
-    @staticmethod
+    def _load_config(self, config: dict[str, Any] | None):
+        """Load config if there is any, use defaults if none."""
+        limit = self.AGGREGATION_LIMIT
+        use_non_factcheck = True
+
+        if config is not None:
+            limit = config.get("maxEvidence", limit)
+            use_non_factcheck = config.get("useNonFactcheck", use_non_factcheck)
+
+        return (limit, use_non_factcheck)
+
     def _sort_and_aggregate(
-        filtered_results: list[ArticleResultModel],
-        limit: int,
+        self, results: list[ArticleResultModel], config: dict[str, Any] | None
     ) -> list[ArticleResultModel]:
         """Sort by NLI presence → combined score → fact-check preference, then mark aggregated."""
-        filtered_results.sort(
+        (limit, use_non_factcheck) = self._load_config(config)
+
+        print(f"LIM: {limit} USE: {use_non_factcheck}")
+
+        # Sort results first
+        results.sort(
             key=lambda x: (
                 0 if x.nli_result else 1,
                 -x.combined_relevance_score,
                 0 if x.found_claim else 1,
             )
         )
-        for i, res in enumerate(filtered_results):
-            res.is_aggregated = i < limit
-        return filtered_results
+
+        aggregated_results: list[ArticleResultModel] = []
+
+        # Aggregate, get top n where n = max_evidences with respect to use_non_factcheck
+        for result in results:
+            # If we have reached max_evidences, stop
+            if len(aggregated_results) >= limit:
+                break
+
+            # If not using non-factcheck and current result is a non-factcheck, skip
+            if not use_non_factcheck and result.found_verdict is None:
+                continue
+
+            aggregated_results.append(result)
+
+        return aggregated_results
 
     # -----------------------------------------------------------------------
     # REST entry point
@@ -1131,10 +1162,9 @@ class VerifyController:
     async def verify_claim(
         self,
         user_claim: str,
-        use_fallback: bool = True,
         exclude_doc_ids: list[str] | None = None,
         exclude_articles: bool = False,
-        aggregation_limit: int | None = None,
+        config: dict[str, Any] | None = None,
     ) -> dict:
         """
         Main REST entry point for claim verification.
@@ -1151,15 +1181,8 @@ class VerifyController:
         skipped = [r for r in all_results if r.skip_reason]
         filtered = [r for r in all_results if not r.skip_reason]
 
-        limit = (
-            aggregation_limit
-            if isinstance(aggregation_limit, int) and aggregation_limit > 0
-            else self.AGGREGATION_LIMIT
-        )
-        filtered = self._sort_and_aggregate(filtered, limit)
-
-        results_for_scoring = filtered[:limit]
-        stats = self.stats_service.calculate_stats(results_for_scoring)
+        aggregated = self._sort_and_aggregate(filtered, config)
+        stats = self.calculate_stats(aggregated)
 
         return {
             "skipped": skipped,
@@ -1237,14 +1260,15 @@ class VerifyController:
 
         # 3. Emit stats
         non_skipped = [r for r in results if not r.skip_reason]
-        non_skipped = self._sort_and_aggregate(non_skipped, self.AGGREGATION_LIMIT)
-        aggregated = non_skipped[: self.AGGREGATION_LIMIT]
+        aggregated = self._sort_and_aggregate(non_skipped, config)
+        aggregated_ids = [r.doc_id for r in aggregated]
 
-        final_stats = self.stats_service.calculate_stats(aggregated)
+        final_stats = self.calculate_stats(aggregated)
         yield {
             "type": StreamEventType.STATS,
             "total_results": len(results),
             "stats": final_stats,
+            "doc_ids": aggregated_ids,
         }
 
         # 4. Emit remarks
