@@ -44,7 +44,7 @@ import re
 from datetime import datetime
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
-from typing import Any
+from typing import Any, Coroutine
 from collections import defaultdict
 from databases.verify import VerifyDatabase
 import logging
@@ -1029,18 +1029,24 @@ class VerifyController:
     # Shared pipeline core (used by both REST and WS entry points)
     # -----------------------------------------------------------------------
 
-    async def _run_pipeline(
+    async def _prepare_pipeline_tasks(
         self,
         user_claim: str,
         exclude_doc_ids: list[str] | None = None,
         exclude_articles: bool = False,
-    ) -> tuple[str, str, bool, list[ArticleResultModel]]:
+    ) -> tuple[
+        str,
+        str,
+        bool,
+        list[Coroutine[Any, Any, ArticleResultModel]],
+        list[dict[str, Any]],
+    ]:
         """
-        Embed → extract entities → retrieve evidences → process all results.
+        Build per-evidence processing tasks once so callers can either await all
+        results (REST) or consume them as they complete (WebSocket).
 
         Returns:
-            (user_claim_norm, user_claim_core_norm, is_negated, all_results)
-            where all_results mixes passed and skipped ArticleResultModels.
+            (user_claim_norm, user_claim_core_norm, is_negated, tasks, search_hits)
         """
         user_claim_for_matching = self.normalize_text(user_claim, lowercase=False)
         core_claim_text, is_negated = self.detect_claim_stance(user_claim_for_matching)
@@ -1058,13 +1064,24 @@ class VerifyController:
         )
 
         processed_doc_ids: set[str] = set()
-        tasks = []
+        tasks: list[Coroutine[Any, Any, ArticleResultModel]] = []
+        search_hits: list[dict[str, Any]] = []
 
         # Fact-check results
         factcheck_results = self.find_claims_with_articles(
             claim_embedding, self.DB_RETRIEVE_LIMIT, exclude_doc_ids=exclude_doc_ids
         )
         for claim, article, similarity_score, chunk_texts in factcheck_results:
+            search_hits.append(
+                {
+                    "doc_id": article.doc_id,
+                    "title": article.title,
+                    "url": article.url,
+                    "publish_date": article.publish_date.strftime("%Y-%m-%d %H:%M:%S"),
+                    "source": article.source,
+                    "source_type": "fact_check",
+                }
+            )
             if article.doc_id not in processed_doc_ids:
                 processed_doc_ids.add(article.doc_id)
                 tasks.append(
@@ -1088,6 +1105,18 @@ class VerifyController:
                 claim_embedding, self.DB_RETRIEVE_LIMIT
             )
             for article, similarity_score, chunk_texts in news_results:
+                search_hits.append(
+                    {
+                        "doc_id": article.doc_id,
+                        "title": article.title,
+                        "url": article.url,
+                        "publish_date": article.publish_date.strftime(
+                            "%Y-%m-%d %H:%M:%S"
+                        ),
+                        "source": article.source,
+                        "source_type": "news_article",
+                    }
+                )
                 if article.doc_id in processed_doc_ids:
                     continue
                 if (article.type or "").strip().lower() == "fact-check":
@@ -1107,6 +1136,29 @@ class VerifyController:
                         chunk_texts=chunk_texts,
                     )
                 )
+
+        return user_claim_norm, user_claim_core_norm, is_negated, tasks, search_hits
+
+    async def _run_pipeline(
+        self,
+        user_claim: str,
+        exclude_doc_ids: list[str] | None = None,
+        exclude_articles: bool = False,
+    ) -> tuple[str, str, bool, list[ArticleResultModel]]:
+        """
+        Embed → extract entities → retrieve evidences → process all results.
+
+        Returns:
+            (user_claim_norm, user_claim_core_norm, is_negated, all_results)
+            where all_results mixes passed and skipped ArticleResultModels.
+        """
+        user_claim_norm, user_claim_core_norm, is_negated, tasks, _ = (
+            await self._prepare_pipeline_tasks(
+                user_claim,
+                exclude_doc_ids=exclude_doc_ids,
+                exclude_articles=exclude_articles,
+            )
+        )
 
         all_results: list[ArticleResultModel] = await asyncio.gather(*tasks)
         return user_claim_norm, user_claim_core_norm, is_negated, list(all_results)
@@ -1199,56 +1251,23 @@ class VerifyController:
     # -----------------------------------------------------------------------
 
     async def verify_claim_stream_with_stats(
-        self, user_claim: str, config: dict | None = None
+        self, user_claim: str, config: dict[str, Any] | None = None
     ):
         """
-        Streams: SEARCH_HITS → per-RESULT events → STATS → REMARKS → COMPLETE.
+        Streams: SEARCH_HITS → per-RESULT events (as completed)
+        → STATS → REMARKS → COMPLETE.
         """
-        # --- Pre-flight: embed + entity extract to get search hits ---
-        user_claim_for_matching = self.normalize_text(user_claim, lowercase=False)
-        core_claim_text, _ = self.detect_claim_stance(user_claim_for_matching)
-
-        loop = asyncio.get_event_loop()
-        claim_embedding = await loop.run_in_executor(
-            self.executor, self.embedding_service.embed_text, core_claim_text
-        )
-
-        factcheck_results = self.find_claims_with_articles(
-            claim_embedding, self.DB_RETRIEVE_LIMIT
-        )
-        news_results = self.find_news_articles(claim_embedding, self.DB_RETRIEVE_LIMIT)
-
-        # 1. Emit search hits
-        search_hits = [
-            {
-                "doc_id": article.doc_id,
-                "title": article.title,
-                "url": article.url,
-                "publish_date": article.publish_date.strftime("%Y-%m-%d %H:%M:%S"),
-                "source": article.source,
-                "source_type": "fact_check",
-            }
-            for _, article, _, _ in factcheck_results
-        ] + [
-            {
-                "doc_id": article.doc_id,
-                "title": article.title,
-                "url": article.url,
-                "publish_date": article.publish_date.strftime("%Y-%m-%d %H:%M:%S"),
-                "source": article.source,
-                "source_type": "news_article",
-            }
-            for article, _, _ in news_results
-        ]
+        # 1. Build tasks once and emit search hits before results start flowing
+        _, _, _, tasks, search_hits = await self._prepare_pipeline_tasks(user_claim)
         yield {"type": StreamEventType.SEARCH_HITS, "hits": search_hits}
-
-        # 2. Run full pipeline (reuses same embedding / entity extraction)
-        _, _, is_negated, all_results = await self._run_pipeline(user_claim)
 
         results: list[ArticleResultModel] = []
         remarks_tasks: list[tuple[str, ArticleResultModel]] = []
+        loop = asyncio.get_event_loop()
 
-        for result in all_results:
+        # 2. Emit each result as soon as its task finishes
+        for completed in asyncio.as_completed(tasks):
+            result = await completed
             if not result.skip_reason:
                 remarks_tasks.append((result.doc_id, result))
             yield {
