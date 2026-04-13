@@ -1,6 +1,11 @@
 from pydantic import BaseModel
 
+
+class VerifyConfigModel(BaseModel):
+    maxEvidence: int | None = None
+    useNonFactcheck: bool | None = None
+
+
 class VerifyClaimModel(BaseModel):
     claim: str
-    limit: int = 10
-    use_fallback: bool = True
+    config: VerifyConfigModel | None = None

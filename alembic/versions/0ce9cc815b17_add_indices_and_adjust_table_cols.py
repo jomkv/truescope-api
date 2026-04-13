@@ -9,10 +9,8 @@ Create Date: 2026-01-22 23:24:46.681498
 from typing import Sequence, Union
 
 from alembic import op
-try:
-    import pgvector
-except ImportError:
-    pgvector = None
+import sqlalchemy as sa
+import pgvector
 
 
 # revision identifiers, used by Alembic.
@@ -24,26 +22,24 @@ depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade() -> None:
     """Upgrade schema."""
-    if op.get_context().dialect.name == "postgresql":
-        op.create_index(
-            "hnsw_cosine_claims_idx",
-            "claims",
-            ["embedding"],
-            unique=False,
-            postgresql_using="hnsw",
-            postgresql_with={"m": 16, "ef_construction": 64},
-            postgresql_ops={"embedding": "vector_cosine_ops"},
-        )
-        op.create_index(
-            "hnsw_cosine_article_chunks_idx",
-            "article_chunks",
-            ["embedding"],
-            unique=False,
-            postgresql_using="hnsw",
-            postgresql_with={"m": 16, "ef_construction": 64},
-            postgresql_ops={"embedding": "vector_cosine_ops"},
-        )
-
+    op.create_index(
+        "hnsw_cosine_claims_idx",
+        "claims",
+        ["embedding"],
+        unique=False,
+        postgresql_using="hnsw",
+        postgresql_with={"m": 16, "ef_construction": 64},
+        postgresql_ops={"embedding": "vector_cosine_ops"},
+    )
+    op.create_index(
+        "hnsw_cosine_article_chunks_idx",
+        "article_chunks",
+        ["embedding"],
+        unique=False,
+        postgresql_using="hnsw",
+        postgresql_with={"m": 16, "ef_construction": 64},
+        postgresql_ops={"embedding": "vector_cosine_ops"},
+    )
 
 
 def downgrade() -> None:

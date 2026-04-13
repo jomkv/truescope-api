@@ -2,6 +2,3 @@
 .env
 __pycache__/
 feedback.json
-truescope_sqlite.db
-truescope_sqlite.db-wal
-truescope_sqlite.db-shm

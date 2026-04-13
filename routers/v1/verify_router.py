@@ -1,4 +1,5 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
+from pydantic import ValidationError
 from constants.enums import StreamEventType
 from models.verify_claim_model import VerifyClaimModel
 from models.verify_result_model import VerifyResultModel
@@ -25,7 +26,11 @@ async def verify_claim(verify: VerifyClaimModel):
     Verify a claim by finding similar articles and checking if they support or refute it.
     """
     controller = _get_controller()
-    results = await controller.verify_claim(verify.claim)
+    config = verify.config.model_dump(exclude_none=True) if verify.config else None
+    results = await controller.verify_claim(
+        verify.claim,
+        config=config,
+    )
     entities = controller.extract_entities(verify.claim)
     timeframe = controller.extract_claim_timeframe(verify.claim)
     return {"entities": entities, "timeframe": timeframe, **results}
@@ -56,15 +61,32 @@ async def websocket_verify_endpoint(websocket: WebSocket):
 
     try:
         data = await websocket.receive_json()
-        claim = data.get("claim")
-        config = data.get("config")
+        try:
+            payload = VerifyClaimModel.model_validate(data)
+        except ValidationError as e:
+            await websocket.send_json(
+                {
+                    "type": StreamEventType.ERROR,
+                    "message": "Invalid payload",
+                    "details": e.errors(),
+                }
+            )
+            await websocket.close()
 
-        if not claim:
+            # Prevent error from propagating to parent try-catch
+            return
+
+        if not payload.claim:
             await websocket.send_json(
                 {"type": StreamEventType.ERROR, "message": "No claim provided"}
             )
             await websocket.close()
             return
+
+        claim = payload.claim
+        config = (
+            payload.config.model_dump(exclude_none=True) if payload.config else None
+        )
 
         controller = _get_controller()
 
