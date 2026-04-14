@@ -1,0 +1,25 @@
+{
+  "timestamp": "20260414_211137",
+  "datasets": {
+    "jomTestCases": {
+      "accuracy": 0.77,
+      "correct": 77,
+      "total": 100,
+      "skipped": 0,
+      "false_positives": 6,
+      "false_negatives": 17,
+      "support_f1": 0.7416,
+      "refute_f1": 0.7928
+    },
+    "negatedClaims": {
+      "accuracy": 0.84,
+      "correct": 84,
+      "total": 100,
+      "skipped": 0,
+      "false_positives": 8,
+      "false_negatives": 8,
+      "support_f1": 0.84,
+      "refute_f1": 0.84
+    }
+  }
+}

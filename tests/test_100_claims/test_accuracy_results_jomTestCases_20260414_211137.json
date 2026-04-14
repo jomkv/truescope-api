@@ -1,0 +1,4342 @@
+{
+  "dataset": "jomTestCases",
+  "timestamp": "20260414_211137",
+  "accuracy": 0.77,
+  "correct": 77,
+  "total": 100,
+  "skipped": 0,
+  "metrics": {
+    "Support": {
+      "precision": 0.8462,
+      "recall": 0.66,
+      "f1-score": 0.7416,
+      "tp": 33,
+      "fp": 6,
+      "fn": 17
+    },
+    "Refute": {
+      "precision": 0.7213,
+      "recall": 0.88,
+      "f1-score": 0.7928,
+      "tp": 44,
+      "fp": 17,
+      "fn": 6
+    }
+  },
+  "error_breakdown": {
+    "false_positive_count": 6,
+    "false_negative_count": 17,
+    "skipped_wrong_count": 0,
+    "skipped_correct_count": 0,
+    "false_positives": [
+      {
+        "id": 11,
+        "claim": "In Indiana, who you voted for is public record.",
+        "score": 0.0595
+      },
+      {
+        "id": 32,
+        "claim": "The West Philippine Sea does not appear in any maps.",
+        "score": 0.3384
+      },
+      {
+        "id": 33,
+        "claim": "Pfizer has not cured any type of disease",
+        "score": 0.6482
+      },
+      {
+        "id": 39,
+        "claim": "U.S. President-elect Donald Trump has never been convicted of any felonies.",
+        "score": 0.3663
+      },
+      {
+        "id": 42,
+        "claim": "Former President Donald Trump would “force states to monitor women's pregnancies.”",
+        "score": 0.1169
+      },
+      {
+        "id": 45,
+        "claim": "Says former President Donald Trump did not lose the 2020 election.",
+        "score": 0.5771
+      }
+    ],
+    "false_negatives": [
+      {
+        "id": 2,
+        "claim": "The United States has a low voter turnout rate.",
+        "score": -0.1194
+      },
+      {
+        "id": 7,
+        "claim": "Elon Musk is an immigrant to the United States.",
+        "score": -0.1991
+      },
+      {
+        "id": 9,
+        "claim": "Vice President Leni Robredo has repeatedly beaten Ferdinand Marcos Jr. in election-related contests.",
+        "score": -0.1758
+      },
+      {
+        "id": 13,
+        "claim": "Lifeguards are present at Olympic swimming competitions.",
+        "score": -0.0565
+      },
+      {
+        "id": 18,
+        "claim": "The Trump administration worked to free 5,000 Taliban prisoners.",
+        "score": -0.4963
+      },
+      {
+        "id": 24,
+        "claim": "In 2025, streaming service Spotify ran recruitment advertisements for U.S. Immigration and Customs Enforcement.",
+        "score": -0.289
+      },
+      {
+        "id": 25,
+        "claim": "Labour will introduce a “retirement tax”.",
+        "score": -0.5427
+      },
+      {
+        "id": 29,
+        "claim": "Donald Trump wants to terminate the Affordable Care Act.",
+        "score": -0.31
+      },
+      {
+        "id": 30,
+        "claim": "“We produce a lot more wind energy in Texas than California does.”",
+        "score": -0.2087
+      },
+      {
+        "id": 31,
+        "claim": "Project 2025 would “end Head Start.”",
+        "score": -0.1735
+      },
+      {
+        "id": 34,
+        "claim": "“West Virginia is home to zero billionaires.”",
+        "score": -0.2622
+      },
+      {
+        "id": 36,
+        "claim": "If Roe is overturned, Wisconsin has a law on the books that would immediately make abortion a crime.",
+        "score": -0.1116
+      },
+      {
+        "id": 38,
+        "claim": "North Carolina is one of four states that hasn't opened gyms.",
+        "score": -0.3784
+      },
+      {
+        "id": 39,
+        "claim": "“Murders this year have spiked 27% in Philadelphia.”",
+        "score": -0.5383
+      },
+      {
+        "id": 42,
+        "claim": "Former U.S. Vice President Richard Mentor Johnson was a slave owner married to one of his slaves and father of two children with her.",
+        "score": -0.6668
+      },
+      {
+        "id": 44,
+        "claim": "For younger people, seasonal flu is “in many cases” a deadlier virus than COVID-19",
+        "score": -0.4519
+      },
+      {
+        "id": 46,
+        "claim": "Says COVID-19 has killed more North Carolinians in a year than the flu has in 10 years.",
+        "score": -0.3073
+      }
+    ],
+    "skipped_wrong": [],
+    "skipped_correct": []
+  },
+  "score_distribution": {
+    "strong_true  (>= 0.5)": 13,
+    "weak_true    (0.0-0.5)": 26,
+    "weak_false   (-0.5-0.0)": 32,
+    "strong_false (<= -0.5)": 29,
+    "skipped": 0
+  },
+  "results": [
+    {
+      "id": 1,
+      "claim": "Donald Trump is against marriage equality.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.3218,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.4834,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8428,
+          "entity_match": 1.0,
+          "combined": 0.89,
+          "verdict": 0.52,
+          "nli_label": "support",
+          "nli_confidence": 0.8306531310081482
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.5561,
+          "entity_match": 1.0,
+          "combined": 0.6892,
+          "verdict": 0.23,
+          "nli_label": "refute",
+          "nli_confidence": 0.5220457315444946
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5931,
+          "entity_match": 0.5,
+          "combined": 0.5651,
+          "verdict": -0.09,
+          "nli_label": "support",
+          "nli_confidence": 0.2836
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "claim": "The United States has a low voter turnout rate.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1194,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.4472,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8526,
+          "entity_match": 1.0,
+          "combined": 0.8968,
+          "verdict": 0.69,
+          "nli_label": "support",
+          "nli_confidence": 0.9586858749389648
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6649,
+          "entity_match": 1.0,
+          "combined": 0.7654,
+          "verdict": -0.58,
+          "nli_label": "refute",
+          "nli_confidence": 0.7986361384391785
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.7213,
+          "entity_match": 0.85,
+          "combined": 0.7599,
+          "verdict": -0.67,
+          "nli_label": "refute",
+          "nli_confidence": 0.7411895394325256
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "claim": "Tech billionaire Elon Musk has a transgender daughter.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.3795,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.7333,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 1.0,
+          "entity_match": 1.0,
+          "combined": 1.0,
+          "verdict": 0.6,
+          "nli_label": "support",
+          "nli_confidence": 0.9456918239593506
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.6763,
+          "entity_match": 0.925,
+          "combined": 0.7509,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.8751698732376099
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.6972,
+          "entity_match": 0.5,
+          "combined": 0.638,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.6188892126083374
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "claim": "Democratic presidential candidate Kamala Harris is a gun owner.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1084,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5621,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 1.0,
+          "entity_match": 1.0,
+          "combined": 1.0,
+          "verdict": 0.89,
+          "nli_label": "support",
+          "nli_confidence": 0.9859744906425476
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7573,
+          "entity_match": 1.0,
+          "combined": 0.8301,
+          "verdict": -0.24,
+          "nli_label": "refute",
+          "nli_confidence": 0.8142930269241333
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "news_article",
+          "similarity": 0.653,
+          "entity_match": 1.0,
+          "combined": 0.7571,
+          "verdict": -0.43,
+          "nli_label": "refute",
+          "nli_confidence": 0.9043946862220764
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "claim": "Vice President Kamala Harris does not have any biological children.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": true,
+      "truth_confidence": 0.7885,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.7337,
+          "entity_match": 1.0,
+          "combined": 0.8136,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.6137474179267883
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7275,
+          "entity_match": 1.0,
+          "combined": 0.8092,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.8825182914733887
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.7131,
+          "entity_match": 1.0,
+          "combined": 0.7991,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.8693094849586487
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "claim": "Former U.S. President Donald Trump once donated to Kamala Harris' campaign.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.4532,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.3399,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.8627,
+          "entity_match": 1.0,
+          "combined": 0.9039,
+          "verdict": 0.71,
+          "nli_label": "support",
+          "nli_confidence": 0.7929407358169556
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.7032,
+          "entity_match": 1.0,
+          "combined": 0.7923,
+          "verdict": -0.09,
+          "nli_label": "support",
+          "nli_confidence": 0.2942
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.6607,
+          "entity_match": 1.0,
+          "combined": 0.7625,
+          "verdict": 0.28,
+          "nli_label": "support",
+          "nli_confidence": 0.2531
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "claim": "Elon Musk is an immigrant to the United States.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1991,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.6446,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.5861,
+          "entity_match": 0.9,
+          "combined": 0.6803,
+          "verdict": -0.39,
+          "nli_label": "refute",
+          "nli_confidence": 0.8769307136535645
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.5861,
+          "entity_match": 0.9,
+          "combined": 0.6803,
+          "verdict": -0.39,
+          "nli_label": "refute",
+          "nli_confidence": 0.8595687747001648
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.6608,
+          "entity_match": 0.6667,
+          "combined": 0.6626,
+          "verdict": 0.37,
+          "nli_label": "support",
+          "nli_confidence": 0.5823615789413452
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "claim": "Vice President Leni Robredo once said that the Philippines has 1,700 islands.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.2582,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.4742,
+      "top_evidence": [
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.5833,
+          "entity_match": 1.0,
+          "combined": 0.7083,
+          "verdict": 0.44,
+          "nli_label": "support",
+          "nli_confidence": 0.9565519094467163
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.5712,
+          "entity_match": 1.0,
+          "combined": 0.6999,
+          "verdict": 0.27,
+          "nli_label": "support",
+          "nli_confidence": 0.2181
+        },
+        {
+          "source": "TSEK",
+          "source_type": "fact_check",
+          "similarity": 0.5687,
+          "entity_match": 1.0,
+          "combined": 0.6981,
+          "verdict": -0.15,
+          "nli_label": "support",
+          "nli_confidence": 0.4325
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "claim": "Vice President Leni Robredo has repeatedly beaten Ferdinand Marcos Jr. in election-related contests.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1758,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.6481,
+      "top_evidence": [
+        {
+          "source": "TSEK",
+          "source_type": "fact_check",
+          "similarity": 0.7914,
+          "entity_match": 1.0,
+          "combined": 0.854,
+          "verdict": -0.2,
+          "nli_label": "support",
+          "nli_confidence": 0.955098569393158
+        },
+        {
+          "source": "TSEK",
+          "source_type": "fact_check",
+          "similarity": 0.7639,
+          "entity_match": 1.0,
+          "combined": 0.8347,
+          "verdict": -0.11,
+          "nli_label": "support",
+          "nli_confidence": 0.465
+        },
+        {
+          "source": "TSEK",
+          "source_type": "fact_check",
+          "similarity": 0.7618,
+          "entity_match": 1.0,
+          "combined": 0.8333,
+          "verdict": -0.19,
+          "nli_label": "refute",
+          "nli_confidence": 0.5291786789894104
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "claim": "The Philippines had a promising local electronic and automotive industry but was cut short when Martial Law was declared.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1341,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.7351,
+      "top_evidence": [
+        {
+          "source": "MANILASTANDARD",
+          "source_type": "news_article",
+          "similarity": 0.6381,
+          "entity_match": 0.85,
+          "combined": 0.7017,
+          "verdict": 0.35,
+          "nli_label": "support",
+          "nli_confidence": 0.9961487054824829
+        },
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.6131,
+          "entity_match": 0.85,
+          "combined": 0.6842,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.9844387173652649
+        },
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.611,
+          "entity_match": 0.85,
+          "combined": 0.6827,
+          "verdict": -0.11,
+          "nli_label": "support",
+          "nli_confidence": 0.3402
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "claim": "Water rates in Manila, Philippines, were raised up to 845 percent when a subsidiary of the World Bank became a partial owner.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0626,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5642,
+      "top_evidence": [
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.626,
+          "entity_match": 0.675,
+          "combined": 0.6407,
+          "verdict": 0.34,
+          "nli_label": "support",
+          "nli_confidence": 0.4954
+        },
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.6739,
+          "entity_match": 0.5,
+          "combined": 0.6217,
+          "verdict": -0.13,
+          "nli_label": "support",
+          "nli_confidence": 0.4237
+        },
+        {
+          "source": "PHILSTAR",
+          "source_type": "news_article",
+          "similarity": 0.5812,
+          "entity_match": 0.675,
+          "combined": 0.6093,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.8914456367492676
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "claim": "Incest is legal in New Jersey and Rhode Island.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0356,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5794,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5812,
+          "entity_match": 0.5,
+          "combined": 0.5568,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.798276424407959
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5807,
+          "entity_match": 0.5,
+          "combined": 0.5565,
+          "verdict": -0.61,
+          "nli_label": "refute",
+          "nli_confidence": 0.6780344843864441
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5684,
+          "entity_match": 0.5,
+          "combined": 0.5479,
+          "verdict": 0.54,
+          "nli_label": "support",
+          "nli_confidence": 0.924072265625
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "claim": "Lifeguards are present at Olympic swimming competitions.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.0565,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5382,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.4486,
+          "entity_match": 1.0,
+          "combined": 0.614,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.5322171449661255
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.4201,
+          "entity_match": 1.0,
+          "combined": 0.594,
+          "verdict": -0.17,
+          "nli_label": "support",
+          "nli_confidence": 0.5428903102874756
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.3332,
+          "entity_match": 1.0,
+          "combined": 0.5333,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.5588437914848328
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "claim": "The EU ‘divorce bill’ will cost £42 billion.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1568,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.505,
+      "top_evidence": [
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8986,
+          "entity_match": 1.0,
+          "combined": 0.9291,
+          "verdict": 0.71,
+          "nli_label": "support",
+          "nli_confidence": 0.7126749157905579
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7625,
+          "entity_match": 1.0,
+          "combined": 0.8337,
+          "verdict": -0.24,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.757,
+          "entity_match": 1.0,
+          "combined": 0.8299,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.4903431236743927
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "claim": "Twitter is banned in Iran.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.7366,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.6174,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.5612,
+          "entity_match": 1.0,
+          "combined": 0.6928,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.7359053492546082
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.619,
+          "entity_match": 1.0,
+          "combined": 0.7333,
+          "verdict": 0.99,
+          "nli_label": "refute",
+          "nli_confidence": 0.9888660311698914
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "claim": "New York has among the highest tax burdens of any state in the nation",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.3849,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5921,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8245,
+          "entity_match": 1.0,
+          "combined": 0.8771,
+          "verdict": 0.69,
+          "nli_label": "support",
+          "nli_confidence": 0.9554811120033264
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7401,
+          "entity_match": 1.0,
+          "combined": 0.818,
+          "verdict": -0.43,
+          "nli_label": "refute",
+          "nli_confidence": 0.594312846660614
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7216,
+          "entity_match": 1.0,
+          "combined": 0.8051,
+          "verdict": 0.58,
+          "nli_label": "support",
+          "nli_confidence": 0.9886943697929382
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "claim": "Most Americans support the legalization of marijuana.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.5831,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.739,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8187,
+          "entity_match": 1.0,
+          "combined": 0.8731,
+          "verdict": 0.73,
+          "nli_label": "support",
+          "nli_confidence": 0.8081417083740234
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8117,
+          "entity_match": 1.0,
+          "combined": 0.8682,
+          "verdict": 0.7,
+          "nli_label": "support",
+          "nli_confidence": 0.9704952836036682
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8081,
+          "entity_match": 1.0,
+          "combined": 0.8656,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.7795958518981934
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "claim": "The Trump administration worked to free 5,000 Taliban prisoners.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4963,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.7819,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.8896,
+          "entity_match": 1.0,
+          "combined": 0.9227,
+          "verdict": -0.83,
+          "nli_label": "refute",
+          "nli_confidence": 0.9254674315452576
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5647,
+          "entity_match": 1.0,
+          "combined": 0.6953,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.975646436214447
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5878,
+          "entity_match": 0.5,
+          "combined": 0.5615,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.9038251042366028
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "claim": "Knife crime has soared to a record high.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.422,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.4278,
+      "top_evidence": [
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8551,
+          "entity_match": 1.0,
+          "combined": 0.8986,
+          "verdict": -0.21,
+          "nli_label": "refute",
+          "nli_confidence": 0.6949851512908936
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6815,
+          "entity_match": 1.0,
+          "combined": 0.777,
+          "verdict": 0.99,
+          "nli_label": "support",
+          "nli_confidence": 0.9927079081535339
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6796,
+          "entity_match": 1.0,
+          "combined": 0.7757,
+          "verdict": 0.09,
+          "nli_label": "support",
+          "nli_confidence": 0.375580757856369
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "claim": "The USA is the largest investor in the UK economy.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.5583,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.6356,
+      "top_evidence": [
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8442,
+          "entity_match": 1.0,
+          "combined": 0.8909,
+          "verdict": 0.98,
+          "nli_label": "support",
+          "nli_confidence": 0.979629635810852
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.711,
+          "entity_match": 1.0,
+          "combined": 0.7977,
+          "verdict": 0.23,
+          "nli_label": "support",
+          "nli_confidence": 0.4695
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6781,
+          "entity_match": 1.0,
+          "combined": 0.7746,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.9829055070877075
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "claim": "Robert F. Kennedy Jr. was a heroin addict from his teenage years into adulthood.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.5614,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.6496,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.988,
+          "entity_match": 1.0,
+          "combined": 0.9916,
+          "verdict": 0.88,
+          "nli_label": "support",
+          "nli_confidence": 0.9775334000587463
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.6557,
+          "entity_match": 1.0,
+          "combined": 0.759,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.7488846182823181
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.6228,
+          "entity_match": 1.0,
+          "combined": 0.736,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.738757848739624
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "claim": "U.S. President Donald Trump pardoned Ross Ulbricht, the creator of dark web marketplace Silk Road.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.7807,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.6553,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 1.0,
+          "entity_match": 1.0,
+          "combined": 1.0,
+          "verdict": 0.89,
+          "nli_label": "support",
+          "nli_confidence": 0.9915876984596252
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 1.0,
+          "entity_match": 1.0,
+          "combined": 1.0,
+          "verdict": 0.89,
+          "nli_label": "support",
+          "nli_confidence": 0.9918038845062256
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.5256,
+          "entity_match": 0.4,
+          "combined": 0.4879,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.5106916427612305
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "claim": "The founder of The Hershey Chocolate Company, Milton Hershey, founded a boarding school for orphaned boys.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.7279,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.9663,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 1.0,
+          "entity_match": 1.0,
+          "combined": 1.0,
+          "verdict": 0.89,
+          "nli_label": "support",
+          "nli_confidence": 0.9901162981987
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.4225,
+          "entity_match": 0.35,
+          "combined": 0.4008,
+          "verdict": 0.57,
+          "nli_label": "support",
+          "nli_confidence": 0.96706223487854
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.4083,
+          "entity_match": 0.35,
+          "combined": 0.3908,
+          "verdict": 0.72,
+          "nli_label": "support",
+          "nli_confidence": 0.9930642247200012
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "claim": "In 2025, streaming service Spotify ran recruitment advertisements for U.S. Immigration and Customs Enforcement.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.289,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.4371,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 1.0,
+          "entity_match": 1.0,
+          "combined": 1.0,
+          "verdict": -0.72,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.5075,
+          "entity_match": 0.6667,
+          "combined": 0.5553,
+          "verdict": -0.14,
+          "nli_label": "support",
+          "nli_confidence": 0.4549
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.496,
+          "entity_match": 0.6667,
+          "combined": 0.5472,
+          "verdict": 0.24,
+          "nli_label": "refute",
+          "nli_confidence": 0.5237762928009033
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "claim": "Labour will introduce a “retirement tax”.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5427,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.7389,
+      "top_evidence": [
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.881,
+          "entity_match": 1.0,
+          "combined": 0.9167,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.9778798222541809
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8513,
+          "entity_match": 1.0,
+          "combined": 0.8959,
+          "verdict": -0.91,
+          "nli_label": "refute",
+          "nli_confidence": 0.9063838720321655
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.66,
+          "entity_match": 1.0,
+          "combined": 0.762,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.8844180703163147
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "claim": "An image authentically depicts Sean \"Diddy\" Combs with Prince Harry and Kanye \"Ye\" West.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.143,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.6557,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.9572,
+          "entity_match": 1.0,
+          "combined": 0.97,
+          "verdict": 0.44,
+          "nli_label": "support",
+          "nli_confidence": 0.6915098428726196
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.7291,
+          "entity_match": 0.3333,
+          "combined": 0.6103,
+          "verdict": 0.56,
+          "nli_label": "support",
+          "nli_confidence": 0.8858524560928345
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7256,
+          "entity_match": 0.3333,
+          "combined": 0.6079,
+          "verdict": -0.44,
+          "nli_label": "refute",
+          "nli_confidence": 0.9858637452125549
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "claim": "Labour is the first political party to reach parity in terms of men and women MPs.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.5141,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5303,
+      "top_evidence": [
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6226,
+          "entity_match": 1.0,
+          "combined": 0.7358,
+          "verdict": 0.99,
+          "nli_label": "support",
+          "nli_confidence": 0.9918270111083984
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5736,
+          "entity_match": 1.0,
+          "combined": 0.7015,
+          "verdict": -0.07,
+          "nli_label": "support",
+          "nli_confidence": 0.4418
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5673,
+          "entity_match": 1.0,
+          "combined": 0.6971,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.860105574131012
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "claim": "Project 2025 would defund K-12 schools.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.4605,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.7633,
+      "top_evidence": [
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5716,
+          "entity_match": 0.35,
+          "combined": 0.5051,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.7276275753974915
+        },
+        {
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "source_type": "news_article",
+          "similarity": 0.5538,
+          "entity_match": 0.35,
+          "combined": 0.4927,
+          "verdict": 0.42,
+          "nli_label": "support",
+          "nli_confidence": 0.8521445393562317
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5508,
+          "entity_match": 0.35,
+          "combined": 0.4906,
+          "verdict": 0.68,
+          "nli_label": "support",
+          "nli_confidence": 0.9456692337989807
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "claim": "Donald Trump wants to terminate the Affordable Care Act.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.31,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5729,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8973,
+          "entity_match": 1.0,
+          "combined": 0.9281,
+          "verdict": -0.56,
+          "nli_label": "refute",
+          "nli_confidence": 0.9639714956283569
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6775,
+          "entity_match": 1.0,
+          "combined": 0.7742,
+          "verdict": 0.11,
+          "nli_label": "support",
+          "nli_confidence": 0.4299
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6531,
+          "entity_match": 0.85,
+          "combined": 0.7122,
+          "verdict": -0.2,
+          "nli_label": "refute",
+          "nli_confidence": 0.5498389005661011
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "claim": "“We produce a lot more wind energy in Texas than California does.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2087,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5753,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7006,
+          "entity_match": 0.9,
+          "combined": 0.7604,
+          "verdict": -0.58,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7491,
+          "entity_match": 0.6667,
+          "combined": 0.7244,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.8281537890434265
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7804,
+          "entity_match": 0.5667,
+          "combined": 0.7162,
+          "verdict": 0.12,
+          "nli_label": "support",
+          "nli_confidence": 0.378
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "claim": "Project 2025 would “end Head Start.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1735,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.3793,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.4606,
+          "entity_match": 1.0,
+          "combined": 0.6224,
+          "verdict": 0.11,
+          "nli_label": "support",
+          "nli_confidence": 0.3551
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.4861,
+          "entity_match": 0.85,
+          "combined": 0.5952,
+          "verdict": -0.57,
+          "nli_label": "refute",
+          "nli_confidence": 0.6385695338249207
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.5636,
+          "entity_match": 0.5,
+          "combined": 0.5445,
+          "verdict": 0.15,
+          "nli_label": "support",
+          "nli_confidence": 0.4716
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "claim": "“One in 5 Americans has lost a family member to gun violence.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.8351,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7817,
+          "entity_match": 1.0,
+          "combined": 0.8472,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.7907237410545349
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7302,
+          "entity_match": 1.0,
+          "combined": 0.8111,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.7433363795280457
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7292,
+          "entity_match": 1.0,
+          "combined": 0.8104,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.971155047416687
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "claim": "Sen. Marco Rubio has \"one of the worst attendance records in the Senate.\"",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.678,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.9127,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7664,
+          "entity_match": 1.0,
+          "combined": 0.8365,
+          "verdict": 0.47,
+          "nli_label": "support",
+          "nli_confidence": 0.9242680668830872
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6823,
+          "entity_match": 1.0,
+          "combined": 0.7776,
+          "verdict": 0.89,
+          "nli_label": "support",
+          "nli_confidence": 0.985133171081543
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7006,
+          "entity_match": 0.85,
+          "combined": 0.7454,
+          "verdict": 0.66,
+          "nli_label": "support",
+          "nli_confidence": 0.917285680770874
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "claim": "“West Virginia is home to zero billionaires.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2622,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.4896,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6325,
+          "entity_match": 0.85,
+          "combined": 0.6977,
+          "verdict": -0.56,
+          "nli_label": "refute",
+          "nli_confidence": 0.7789610624313354
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6441,
+          "entity_match": 0.7,
+          "combined": 0.6609,
+          "verdict": 0.16,
+          "nli_label": "support",
+          "nli_confidence": 0.4529
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7185,
+          "entity_match": 0.5,
+          "combined": 0.6529,
+          "verdict": -0.18,
+          "nli_label": "support",
+          "nli_confidence": 0.4963
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "claim": "100,000 Americans died of an overdose in a single year.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.6167,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5017,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6825,
+          "entity_match": 1.0,
+          "combined": 0.7777,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.5524477362632751
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6339,
+          "entity_match": 1.0,
+          "combined": 0.7437,
+          "verdict": 0.89,
+          "nli_label": "support",
+          "nli_confidence": 0.9926854372024536
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6225,
+          "entity_match": 1.0,
+          "combined": 0.7358,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.4880901873111725
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "claim": "If Roe is overturned, Wisconsin has a law on the books that would immediately make abortion a crime.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1116,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.4586,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.853,
+          "entity_match": 1.0,
+          "combined": 0.8971,
+          "verdict": 0.5,
+          "nli_label": "support",
+          "nli_confidence": 0.5586384534835815
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8285,
+          "entity_match": 1.0,
+          "combined": 0.88,
+          "verdict": -0.68,
+          "nli_label": "refute",
+          "nli_confidence": 0.7517199516296387
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8201,
+          "entity_match": 1.0,
+          "combined": 0.8741,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.7671624422073364
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "claim": "“Bill Gates told us about the coronavirus in 2015.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0533,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.593,
+      "top_evidence": [
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7492,
+          "entity_match": 1.0,
+          "combined": 0.8244,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.648747980594635
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6666,
+          "entity_match": 0.5,
+          "combined": 0.6166,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.7006762623786926
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6632,
+          "entity_match": 0.5,
+          "combined": 0.6142,
+          "verdict": 0.21,
+          "nli_label": "refute",
+          "nli_confidence": 0.4589356780052185
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "claim": "North Carolina is one of four states that hasn't opened gyms.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3784,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": true,
+      "truth_confidence": 0.7494,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5374,
+          "entity_match": 1.0,
+          "combined": 0.6762,
+          "verdict": -0.54,
+          "nli_label": "refute",
+          "nli_confidence": 0.9229999780654907
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5307,
+          "entity_match": 1.0,
+          "combined": 0.6715,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.9167777299880981
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5258,
+          "entity_match": 1.0,
+          "combined": 0.6681,
+          "verdict": -0.41,
+          "nli_label": "refute",
+          "nli_confidence": 0.5672996640205383
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "claim": "“Murders this year have spiked 27% in Philadelphia.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5383,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.7606,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.726,
+          "entity_match": 1.0,
+          "combined": 0.8082,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.985221803188324
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8884,
+          "entity_match": 1.0,
+          "combined": 0.9219,
+          "verdict": -0.52,
+          "nli_label": "support",
+          "nli_confidence": 0.7227436304092407
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.852,
+          "entity_match": 1.0,
+          "combined": 0.8964,
+          "verdict": -0.83,
+          "nli_label": "support",
+          "nli_confidence": 0.9257827997207642
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "claim": "Abigail Spanberger “has voted with Nancy Pelosi over 90% of the time…”",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.3438,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5264,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8107,
+          "entity_match": 0.5,
+          "combined": 0.7175,
+          "verdict": 0.39,
+          "nli_label": "support",
+          "nli_confidence": 0.7831726670265198
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7444,
+          "entity_match": 0.5,
+          "combined": 0.6711,
+          "verdict": -0.11,
+          "nli_label": "support",
+          "nli_confidence": 0.2373
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7264,
+          "entity_match": 0.5,
+          "combined": 0.6585,
+          "verdict": 0.44,
+          "nli_label": "support",
+          "nli_confidence": 0.7436482906341553
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "claim": "Says that the oil and gas industry comprises 35% of the Texas economy.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.5306,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.7204,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7911,
+          "entity_match": 0.3333,
+          "combined": 0.6537,
+          "verdict": 0.86,
+          "nli_label": "support",
+          "nli_confidence": 0.9596548676490784
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7688,
+          "entity_match": 0.3333,
+          "combined": 0.6381,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.9487577676773071
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7414,
+          "entity_match": 0.3333,
+          "combined": 0.619,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.7459926009178162
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "claim": "Former U.S. Vice President Richard Mentor Johnson was a slave owner married to one of his slaves and father of two children with her.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6668,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.4869,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.5642,
+          "entity_match": 0.56,
+          "combined": 0.563,
+          "verdict": 0.03,
+          "nli_label": "support",
+          "nli_confidence": 0.2003
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.5533,
+          "entity_match": 0.56,
+          "combined": 0.5553,
+          "verdict": -0.73,
+          "nli_label": "refute",
+          "nli_confidence": 0.8134775161743164
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.4686,
+          "entity_match": 0.56,
+          "combined": 0.496,
+          "verdict": -0.77,
+          "nli_label": "refute",
+          "nli_confidence": 0.8533806204795837
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "claim": "“34% of Wisconsin renters are at risk of eviction.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.9388,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7994,
+          "entity_match": 1.0,
+          "combined": 0.8596,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.938785195350647
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "claim": "For younger people, seasonal flu is “in many cases” a deadlier virus than COVID-19",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4519,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.737,
+      "top_evidence": [
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8233,
+          "entity_match": 1.0,
+          "combined": 0.8763,
+          "verdict": -0.36,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7783,
+          "entity_match": 1.0,
+          "combined": 0.8448,
+          "verdict": -0.8,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7591,
+          "entity_match": 1.0,
+          "combined": 0.8313,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.931980550289154
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "claim": "“In the last 10 years less than half of adults in the U.S. received a flu shot.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.9225,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.817,
+          "entity_match": 0.5,
+          "combined": 0.7219,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.9471509456634521
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7033,
+          "entity_match": 0.5,
+          "combined": 0.6423,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.8977623581886292
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "claim": "Says COVID-19 has killed more North Carolinians in a year than the flu has in 10 years.",
+      "ground_truth": "TRUE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3073,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.4357,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7439,
+          "entity_match": 0.6667,
+          "combined": 0.7207,
+          "verdict": -0.72,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7344,
+          "entity_match": 0.6667,
+          "combined": 0.7141,
+          "verdict": 0.22,
+          "nli_label": "refute",
+          "nli_confidence": 0.4860427975654602
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.731,
+          "entity_match": 0.6667,
+          "combined": 0.7117,
+          "verdict": -0.15,
+          "nli_label": "support",
+          "nli_confidence": 0.4694
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "claim": "Virginia ranks “in the bottom third of states” in administering the COVID-19 vaccine.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.4128,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5918,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8213,
+          "entity_match": 1.0,
+          "combined": 0.8749,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.8699643015861511
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.782,
+          "entity_match": 1.0,
+          "combined": 0.8474,
+          "verdict": 0.67,
+          "nli_label": "support",
+          "nli_confidence": 0.7471426129341125
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.712,
+          "entity_match": 1.0,
+          "combined": 0.7984,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.4574424922466278
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "claim": "The Texas power grid is not part of the US power grid because they wanted to avoid federal regulation.",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.4359,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": true,
+      "truth_confidence": 0.6637,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.7591,
+          "entity_match": 1.0,
+          "combined": 0.8313,
+          "verdict": 0.72,
+          "nli_label": "support",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7005,
+          "entity_match": 0.8,
+          "combined": 0.7304,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.739242434501648
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.668,
+          "entity_match": 0.8,
+          "combined": 0.7076,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.7973669171333313
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "claim": "“The United States is the only industrialized, modernized country that does not already have a paid family medical leave program in place.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.6329,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": true,
+      "truth_confidence": 0.7466,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7461,
+          "entity_match": 1.0,
+          "combined": 0.8223,
+          "verdict": 0.58,
+          "nli_label": "support",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.699,
+          "entity_match": 0.8889,
+          "combined": 0.756,
+          "verdict": 0.81,
+          "nli_label": "support",
+          "nli_confidence": 0.9011938571929932
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6175,
+          "entity_match": 1.0,
+          "combined": 0.7323,
+          "verdict": 0.44,
+          "nli_label": "support",
+          "nli_confidence": 0.6083104014396667
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "claim": "Residents of New York state “pay the highest taxes in the nation.”",
+      "ground_truth": "TRUE",
+      "predicted_label": "TRUE",
+      "system_score": 0.3543,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.529,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8558,
+          "entity_match": 1.0,
+          "combined": 0.8991,
+          "verdict": 0.88,
+          "nli_label": "support",
+          "nli_confidence": 0.9759197235107422
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7847,
+          "entity_match": 1.0,
+          "combined": 0.8493,
+          "verdict": 0.58,
+          "nli_label": "support",
+          "nli_confidence": 0.9868450164794922
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7819,
+          "entity_match": 1.0,
+          "combined": 0.8473,
+          "verdict": -0.57,
+          "nli_label": "refute",
+          "nli_confidence": 0.7960287928581238
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "claim": "“There is no starvation in Gaza.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4349,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.9236,
+      "top_evidence": [
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.7912,
+          "entity_match": 1.0,
+          "combined": 0.8538,
+          "verdict": -0.45,
+          "nli_label": "refute",
+          "nli_confidence": 0.9978066086769104
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.7542,
+          "entity_match": 1.0,
+          "combined": 0.8279,
+          "verdict": -0.44,
+          "nli_label": "refute",
+          "nli_confidence": 0.9737873077392578
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.6434,
+          "entity_match": 1.0,
+          "combined": 0.7504,
+          "verdict": -0.41,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "claim": "Kilmar Armando Abrego Garcia “was a convicted MS-13 gang member.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.8349,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.914,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5795,
+          "entity_match": 1.0,
+          "combined": 0.7057,
+          "verdict": -0.71,
+          "nli_label": "refute",
+          "nli_confidence": 0.7914943099021912
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.8032,
+          "entity_match": 0.8667,
+          "combined": 0.8222,
+          "verdict": -0.89,
+          "nli_label": "support",
+          "nli_confidence": 0.9891126751899719
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.8032,
+          "entity_match": 0.8667,
+          "combined": 0.8222,
+          "verdict": -0.88,
+          "nli_label": "support",
+          "nli_confidence": 0.9819478988647461
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "claim": "“Malia Obama received $2.2 million in funds from USAID.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5077,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5541,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7747,
+          "entity_match": 0.35,
+          "combined": 0.6473,
+          "verdict": -0.86,
+          "nli_label": "refute",
+          "nli_confidence": 0.9548307061195374
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7256,
+          "entity_match": 0.35,
+          "combined": 0.6129,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.7599307298660278
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6592,
+          "entity_match": 0.5,
+          "combined": 0.6114,
+          "verdict": -0.12,
+          "nli_label": "support",
+          "nli_confidence": 0.3813
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "claim": "“Elon Musk has just acquired Boeing.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6743,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.7341,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.9,
+          "entity_match": 1.0,
+          "combined": 0.93,
+          "verdict": -0.87,
+          "nli_label": "refute",
+          "nli_confidence": 0.9704756140708923
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6483,
+          "entity_match": 0.5,
+          "combined": 0.6038,
+          "verdict": -0.59,
+          "nli_label": "refute",
+          "nli_confidence": 0.6583540439605713
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.5966,
+          "entity_match": 0.5,
+          "combined": 0.5676,
+          "verdict": -0.47,
+          "nli_label": "refute",
+          "nli_confidence": 0.6577371954917908
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "claim": "Actor Tom Hanks died in a “fatal car accident.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5331,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.541,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.843,
+          "entity_match": 0.5,
+          "combined": 0.7401,
+          "verdict": -0.89,
+          "nli_label": "refute",
+          "nli_confidence": 0.9905787110328674
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.6986,
+          "entity_match": 0.5,
+          "combined": 0.639,
+          "verdict": 0.39,
+          "nli_label": "support",
+          "nli_confidence": 0.7373076677322388
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6871,
+          "entity_match": 0.5,
+          "combined": 0.631,
+          "verdict": -0.87,
+          "nli_label": "refute",
+          "nli_confidence": 0.9705532193183899
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "claim": "“Elon Musk is not a citizen of the United States.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3614,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": true,
+      "truth_confidence": 0.5508,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.8715,
+          "entity_match": 1.0,
+          "combined": 0.91,
+          "verdict": -0.15,
+          "nli_label": "refute",
+          "nli_confidence": 0.4642
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.6999,
+          "entity_match": 1.0,
+          "combined": 0.79,
+          "verdict": -0.16,
+          "nli_label": "refute",
+          "nli_confidence": 0.4929937422275543
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6712,
+          "entity_match": 0.5,
+          "combined": 0.6199,
+          "verdict": -0.6,
+          "nli_label": "refute",
+          "nli_confidence": 0.8272860646247864
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "claim": "“Dave McCormick is fully against abortion.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.62,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.8586,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8066,
+          "entity_match": 1.0,
+          "combined": 0.8646,
+          "verdict": -0.62,
+          "nli_label": "refute",
+          "nli_confidence": 0.8586454391479492
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "claim": "Travis Kelce endorsed Kamala Harris.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.56,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5941,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7556,
+          "entity_match": 1.0,
+          "combined": 0.8289,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.806016206741333
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.625,
+          "entity_match": 0.5,
+          "combined": 0.5875,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.5168281197547913
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6122,
+          "entity_match": 0.5,
+          "combined": 0.5785,
+          "verdict": -0.86,
+          "nli_label": "refute",
+          "nli_confidence": 0.9525349736213684
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "claim": "NASA announced in September 2025 that it had found life on Mars.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3704,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5373,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.6548,
+          "entity_match": 1.0,
+          "combined": 0.7584,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.5194190740585327
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6399,
+          "entity_match": 1.0,
+          "combined": 0.7479,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.6615539789199829
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5629,
+          "entity_match": 1.0,
+          "combined": 0.694,
+          "verdict": -0.6,
+          "nli_label": "refute",
+          "nli_confidence": 0.6710281372070312
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "claim": "Greeting card companies invented Valentine's Day.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7607,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.8493,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.4359,
+          "entity_match": 0.7,
+          "combined": 0.5151,
+          "verdict": -0.42,
+          "nli_label": "refute",
+          "nli_confidence": 0.7197054624557495
+        },
+        {
+          "source": "VERAFILES",
+          "source_type": "fact_check",
+          "similarity": 0.413,
+          "entity_match": 0.7,
+          "combined": 0.4991,
+          "verdict": -0.88,
+          "nli_label": "refute",
+          "nli_confidence": 0.9820165038108826
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.9622,
+          "entity_match": 1.0,
+          "combined": 0.9735,
+          "verdict": -0.89,
+          "nli_label": "support",
+          "nli_confidence": 0.990522027015686
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "claim": "In Indiana, who you voted for is public record.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.0595,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5551,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7731,
+          "entity_match": 1.0,
+          "combined": 0.8412,
+          "verdict": -0.58,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5827,
+          "entity_match": 1.0,
+          "combined": 0.7079,
+          "verdict": 0.58,
+          "nli_label": "support",
+          "nli_confidence": 0.9829780459403992
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "claim": "Inflation was the highest in U.S. history under President Joe Biden.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7021,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5846,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 1.0,
+          "entity_match": 1.0,
+          "combined": 1.0,
+          "verdict": -0.88,
+          "nli_label": "refute",
+          "nli_confidence": 0.9798881411552429
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.8226,
+          "entity_match": 1.0,
+          "combined": 0.8758,
+          "verdict": -0.72,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.7112,
+          "entity_match": 1.0,
+          "combined": 0.7979,
+          "verdict": -0.1,
+          "nli_label": "support",
+          "nli_confidence": 0.3134
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "claim": "U.S. President George Washington had wooden teeth.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.0394,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5348,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.6608,
+          "entity_match": 1.0,
+          "combined": 0.7626,
+          "verdict": 0.14,
+          "nli_label": "support",
+          "nli_confidence": 0.4352
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.5995,
+          "entity_match": 1.0,
+          "combined": 0.7196,
+          "verdict": -0.24,
+          "nli_label": "refute",
+          "nli_confidence": 0.5295099020004272
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.5084,
+          "entity_match": 0.85,
+          "combined": 0.6109,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.7135826945304871
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "claim": "NASA was established before the U.S.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7061,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.8143,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5457,
+          "entity_match": 0.5,
+          "combined": 0.532,
+          "verdict": -0.46,
+          "nli_label": "support",
+          "nli_confidence": 0.735941469669342
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5176,
+          "entity_match": 0.5,
+          "combined": 0.5123,
+          "verdict": -0.89,
+          "nli_label": "support",
+          "nli_confidence": 0.9850518703460693
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "claim": "“The Simpsons” predicted Pope Francis’ 2025 death.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6568,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.6171,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.9324,
+          "entity_match": 1.0,
+          "combined": 0.9527,
+          "verdict": -0.72,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.753,
+          "entity_match": 0.85,
+          "combined": 0.7821,
+          "verdict": -0.17,
+          "nli_label": "refute",
+          "nli_confidence": 0.3880358934402466
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7307,
+          "entity_match": 0.85,
+          "combined": 0.7665,
+          "verdict": -0.81,
+          "nli_label": "refute",
+          "nli_confidence": 0.9031844139099121
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "claim": "Elon Musk bought Google.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.8199,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.8849,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.665,
+          "entity_match": 0.5,
+          "combined": 0.6155,
+          "verdict": -0.89,
+          "nli_label": "refute",
+          "nli_confidence": 0.9884812831878662
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6308,
+          "entity_match": 0.5,
+          "combined": 0.5915,
+          "verdict": -0.87,
+          "nli_label": "refute",
+          "nli_confidence": 0.9631072282791138
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.5994,
+          "entity_match": 0.5,
+          "combined": 0.5696,
+          "verdict": -0.66,
+          "nli_label": "refute",
+          "nli_confidence": 0.7355788946151733
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "claim": "“Bill Gates will be implanting digital IDs in newborns in Kenya.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.1339,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5544,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.5938,
+          "entity_match": 0.6667,
+          "combined": 0.6157,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.6818743944168091
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5616,
+          "entity_match": 0.5667,
+          "combined": 0.5631,
+          "verdict": -0.27,
+          "nli_label": "refute",
+          "nli_confidence": 0.5460487008094788
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6581,
+          "entity_match": 0.3333,
+          "combined": 0.5607,
+          "verdict": -0.17,
+          "nli_label": "support",
+          "nli_confidence": 0.4726
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "claim": "Kamala Harris “wants to defund the police.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.667,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.7337,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.8156,
+          "entity_match": 1.0,
+          "combined": 0.8709,
+          "verdict": -0.84,
+          "nli_label": "refute",
+          "nli_confidence": 0.935797929763794
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7228,
+          "entity_match": 1.0,
+          "combined": 0.806,
+          "verdict": -0.8,
+          "nli_label": "refute",
+          "nli_confidence": 0.8879653811454773
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6422,
+          "entity_match": 1.0,
+          "combined": 0.7495,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.8263943791389465
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "claim": "Switzerland banned mammograms.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4702,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5428,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.8997,
+          "entity_match": 1.0,
+          "combined": 0.9298,
+          "verdict": -0.21,
+          "nli_label": "refute",
+          "nli_confidence": 0.46507498621940613
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.4553,
+          "entity_match": 1.0,
+          "combined": 0.6187,
+          "verdict": -0.64,
+          "nli_label": "refute",
+          "nli_confidence": 0.7129977345466614
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "claim": "COVID-19 vaccines can kill elderly people.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5235,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5298,
+      "top_evidence": [
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.887,
+          "entity_match": 1.0,
+          "combined": 0.9209,
+          "verdict": 0.09,
+          "nli_label": "support",
+          "nli_confidence": 0.5020110607147217
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8784,
+          "entity_match": 1.0,
+          "combined": 0.9149,
+          "verdict": -0.73,
+          "nli_label": "refute",
+          "nli_confidence": 0.7303294539451599
+        },
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.8745,
+          "entity_match": 1.0,
+          "combined": 0.9121,
+          "verdict": -0.72,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "claim": "Si Ferdinand Marcos Sr. ang pinakamayamang tao sa mundo.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4573,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.7805,
+      "top_evidence": [
+        {
+          "source": "TSEK",
+          "source_type": "fact_check",
+          "similarity": 0.7267,
+          "entity_match": 1.0,
+          "combined": 0.8087,
+          "verdict": -0.56,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "TSEK",
+          "source_type": "fact_check",
+          "similarity": 0.6782,
+          "entity_match": 1.0,
+          "combined": 0.7748,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.9089867472648621
+        },
+        {
+          "source": "TSEK",
+          "source_type": "fact_check",
+          "similarity": 0.6782,
+          "entity_match": 1.0,
+          "combined": 0.7747,
+          "verdict": -0.6,
+          "nli_label": "refute",
+          "nli_confidence": 0.8576580882072449
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "claim": "The death penalty in the Philippines has been approved in the Senate.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4985,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5915,
+      "top_evidence": [
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.6224,
+          "entity_match": 1.0,
+          "combined": 0.7357,
+          "verdict": -0.73,
+          "nli_label": "refute",
+          "nli_confidence": 0.8100653290748596
+        },
+        {
+          "source": "VERAFILES",
+          "source_type": "news_article",
+          "similarity": 0.5663,
+          "entity_match": 1.0,
+          "combined": 0.6964,
+          "verdict": -0.41,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.5198,
+          "entity_match": 1.0,
+          "combined": 0.6639,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.4322275221347809
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "claim": "The Yellowstone supervolcano is due for an eruption any time soon.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.8867,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.9855,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7803,
+          "entity_match": 1.0,
+          "combined": 0.8462,
+          "verdict": -0.89,
+          "nli_label": "refute",
+          "nli_confidence": 0.9910053014755249
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6616,
+          "entity_match": 1.0,
+          "combined": 0.7631,
+          "verdict": -0.88,
+          "nli_label": "refute",
+          "nli_confidence": 0.9791390299797058
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6598,
+          "entity_match": 1.0,
+          "combined": 0.7619,
+          "verdict": -0.89,
+          "nli_label": "refute",
+          "nli_confidence": 0.9865254163742065
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "claim": "The Philippines has a Chinook helicopter factory.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4737,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.4993,
+      "top_evidence": [
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.7841,
+          "entity_match": 1.0,
+          "combined": 0.8489,
+          "verdict": -0.85,
+          "nli_label": "refute",
+          "nli_confidence": 0.942055344581604
+        },
+        {
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "source_type": "news_article",
+          "similarity": 0.635,
+          "entity_match": 0.85,
+          "combined": 0.6995,
+          "verdict": 0.37,
+          "nli_label": "support",
+          "nli_confidence": 0.6536843180656433
+        },
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.7457,
+          "entity_match": 0.5,
+          "combined": 0.672,
+          "verdict": -0.72,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "claim": "Russian President Vladimir Putin has declared war on the United States.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5189,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.2737,
+      "top_evidence": [
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.9102,
+          "entity_match": 1.0,
+          "combined": 0.9371,
+          "verdict": -0.88,
+          "nli_label": "refute",
+          "nli_confidence": 0.9779012203216553
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.816,
+          "entity_match": 1.0,
+          "combined": 0.8712,
+          "verdict": -0.08,
+          "nli_label": "support",
+          "nli_confidence": 0.267
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.6697,
+          "entity_match": 1.0,
+          "combined": 0.7688,
+          "verdict": 0.29,
+          "nli_label": "support",
+          "nli_confidence": 0.2916
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "claim": "Filipino actor and singer Billy Crawford has died.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7417,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.7501,
+      "top_evidence": [
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.8024,
+          "entity_match": 1.0,
+          "combined": 0.8616,
+          "verdict": -0.87,
+          "nli_label": "refute",
+          "nli_confidence": 0.9699854850769043
+        },
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.5995,
+          "entity_match": 1.0,
+          "combined": 0.7197,
+          "verdict": -0.53,
+          "nli_label": "refute",
+          "nli_confidence": 0.5880374908447266
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "claim": "The Philippine Navy has received two new warships from South Korea.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.3857,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5678,
+      "top_evidence": [
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.8819,
+          "entity_match": 1.0,
+          "combined": 0.9173,
+          "verdict": -0.88,
+          "nli_label": "refute",
+          "nli_confidence": 0.9784443974494934
+        },
+        {
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "source_type": "news_article",
+          "similarity": 0.6394,
+          "entity_match": 1.0,
+          "combined": 0.7476,
+          "verdict": 0.34,
+          "nli_label": "support",
+          "nli_confidence": 0.4983
+        },
+        {
+          "source": "VERAFILES",
+          "source_type": "fact_check",
+          "similarity": 0.6284,
+          "entity_match": 1.0,
+          "combined": 0.7399,
+          "verdict": -0.26,
+          "nli_label": "refute",
+          "nli_confidence": 0.9709710478782654
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "claim": "China has launched an attack against Taiwan.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4859,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5573,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7388,
+          "entity_match": 1.0,
+          "combined": 0.8172,
+          "verdict": -0.89,
+          "nli_label": "refute",
+          "nli_confidence": 0.9940388202667236
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.7219,
+          "entity_match": 1.0,
+          "combined": 0.8053,
+          "verdict": -0.45,
+          "nli_label": "refute",
+          "nli_confidence": 0.9927721619606018
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.7152,
+          "entity_match": 1.0,
+          "combined": 0.8006,
+          "verdict": 0.33,
+          "nli_label": "support",
+          "nli_confidence": 0.4485
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "claim": "Former senator and international boxing champ Manny Pacquiao is promoting an online gambling app.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6337,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.8592,
+      "top_evidence": [
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.8911,
+          "entity_match": 1.0,
+          "combined": 0.9238,
+          "verdict": -0.71,
+          "nli_label": "refute",
+          "nli_confidence": 0.7856336236000061
+        },
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.8661,
+          "entity_match": 1.0,
+          "combined": 0.9063,
+          "verdict": -0.82,
+          "nli_label": "refute",
+          "nli_confidence": 0.906930685043335
+        },
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.5908,
+          "entity_match": 1.0,
+          "combined": 0.7136,
+          "verdict": -0.4,
+          "nli_label": "refute",
+          "nli_confidence": 0.979910135269165
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "claim": "Joel Villanueva has resigned from the Philippine Senate",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4759,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.8406,
+      "top_evidence": [
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.9613,
+          "entity_match": 0.85,
+          "combined": 0.9279,
+          "verdict": -0.58,
+          "nli_label": "refute",
+          "nli_confidence": 0.644632875919342
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.7628,
+          "entity_match": 0.85,
+          "combined": 0.789,
+          "verdict": -0.43,
+          "nli_label": "refute",
+          "nli_confidence": 0.9105508327484131
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.6894,
+          "entity_match": 0.85,
+          "combined": 0.7376,
+          "verdict": -0.45,
+          "nli_label": "refute",
+          "nli_confidence": 0.979887843132019
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "claim": "Kris Aquino has been bewitched and passed away.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2118,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5962,
+      "top_evidence": [
+        {
+          "source": "VERAFILES",
+          "source_type": "fact_check",
+          "similarity": 0.7282,
+          "entity_match": 1.0,
+          "combined": 0.8098,
+          "verdict": -0.26,
+          "nli_label": "refute",
+          "nli_confidence": 0.964359700679779
+        },
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.7174,
+          "entity_match": 1.0,
+          "combined": 0.8022,
+          "verdict": -0.54,
+          "nli_label": "refute",
+          "nli_confidence": 0.5987256169319153
+        },
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.6864,
+          "entity_match": 1.0,
+          "combined": 0.7804,
+          "verdict": 0.24,
+          "nli_label": "refute",
+          "nli_confidence": 0.5378385186195374
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "claim": "The West Philippine Sea does not appear in any maps.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.3384,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": true,
+      "truth_confidence": 0.6722,
+      "top_evidence": [
+        {
+          "source": "TSEK",
+          "source_type": "fact_check",
+          "similarity": 0.8662,
+          "entity_match": 1.0,
+          "combined": 0.9064,
+          "verdict": -0.19,
+          "nli_label": "support",
+          "nli_confidence": 0.5462649464607239
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.8622,
+          "entity_match": 1.0,
+          "combined": 0.9035,
+          "verdict": 0.45,
+          "nli_label": "support",
+          "nli_confidence": 0.9982903599739075
+        },
+        {
+          "source": "TSEK",
+          "source_type": "fact_check",
+          "similarity": 0.7784,
+          "entity_match": 1.0,
+          "combined": 0.8449,
+          "verdict": 0.56,
+          "nli_label": "support",
+          "nli_confidence": 0.8
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "claim": "Pfizer has not cured any type of disease",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.6482,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": true,
+      "truth_confidence": 0.6853,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6553,
+          "entity_match": 1.0,
+          "combined": 0.7587,
+          "verdict": 0.79,
+          "nli_label": "support",
+          "nli_confidence": 0.8828919529914856
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6403,
+          "entity_match": 1.0,
+          "combined": 0.7482,
+          "verdict": 0.55,
+          "nli_label": "support",
+          "nli_confidence": 0.6087651252746582
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6211,
+          "entity_match": 1.0,
+          "combined": 0.7348,
+          "verdict": 0.54,
+          "nli_label": "support",
+          "nli_confidence": 0.6041787266731262
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "claim": "The Philippines blew up China’s monster ship in the West Philippine Sea",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.2712,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.6478,
+      "top_evidence": [
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.6496,
+          "entity_match": 1.0,
+          "combined": 0.7547,
+          "verdict": -0.43,
+          "nli_label": "refute",
+          "nli_confidence": 0.9204846024513245
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.687,
+          "entity_match": 0.85,
+          "combined": 0.7359,
+          "verdict": -0.43,
+          "nli_label": "refute",
+          "nli_confidence": 0.9213614463806152
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.6105,
+          "entity_match": 1.0,
+          "combined": 0.7274,
+          "verdict": 0.33,
+          "nli_label": "support",
+          "nli_confidence": 0.4865
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "claim": "President Ferdinand Marcos Jr. stole the country’s gold reserves",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7338,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.813,
+      "top_evidence": [
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.7423,
+          "entity_match": 0.8667,
+          "combined": 0.7796,
+          "verdict": -0.72,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.7246,
+          "entity_match": 0.8889,
+          "combined": 0.7739,
+          "verdict": -0.76,
+          "nli_label": "refute",
+          "nli_confidence": 0.8399565815925598
+        },
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.7206,
+          "entity_match": 0.8889,
+          "combined": 0.7711,
+          "verdict": -0.72,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "claim": "Harry Roque has been ordered imprisoned by the Senate",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5228,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.8871,
+      "top_evidence": [
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.8098,
+          "entity_match": 0.5,
+          "combined": 0.7169,
+          "verdict": -0.72,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.8025,
+          "entity_match": 0.5,
+          "combined": 0.7117,
+          "verdict": -0.43,
+          "nli_label": "refute",
+          "nli_confidence": 0.9174093008041382
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.7667,
+          "entity_match": 0.5,
+          "combined": 0.6867,
+          "verdict": -0.45,
+          "nli_label": "refute",
+          "nli_confidence": 0.9963839054107666
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "claim": "Rachel Maddow announced in July 2025 that she is having a baby via surrogacy.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4429,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.8083,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.968,
+          "entity_match": 1.0,
+          "combined": 0.9776,
+          "verdict": -0.71,
+          "nli_label": "refute",
+          "nli_confidence": 0.7884056568145752
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.5983,
+          "entity_match": 1.0,
+          "combined": 0.7188,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.9551417827606201
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "news_article",
+          "similarity": 0.5432,
+          "entity_match": 1.0,
+          "combined": 0.6802,
+          "verdict": -0.44,
+          "nli_label": "refute",
+          "nli_confidence": 0.9383506178855896
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "claim": "Marine animal trainer Jessica Radcliffe was attacked and killed by an orca in front of a large crowd.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.95,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.9473,
+      "top_evidence": [
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.9226,
+          "entity_match": 1.0,
+          "combined": 0.9458,
+          "verdict": -0.95,
+          "nli_label": "refute",
+          "nli_confidence": 0.947302520275116
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "claim": "U.S. President-elect Donald Trump has never been convicted of any felonies.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.3663,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": true,
+      "truth_confidence": 0.7613,
+      "top_evidence": [
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.6662,
+          "entity_match": 1.0,
+          "combined": 0.7663,
+          "verdict": 0.41,
+          "nli_label": "support",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.6492,
+          "entity_match": 1.0,
+          "combined": 0.7544,
+          "verdict": 0.45,
+          "nli_label": "support",
+          "nli_confidence": 0.9958040118217468
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.6193,
+          "entity_match": 1.0,
+          "combined": 0.7335,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.6122387051582336
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "claim": "The radiation from Bluetooth earbuds, such as AirPods, causes brain cancer.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4336,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.6224,
+      "top_evidence": [
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8137,
+          "entity_match": 1.0,
+          "combined": 0.8696,
+          "verdict": -0.64,
+          "nli_label": "refute",
+          "nli_confidence": 0.6376360058784485
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5968,
+          "entity_match": 0.3333,
+          "combined": 0.5178,
+          "verdict": -0.23,
+          "nli_label": "refute",
+          "nli_confidence": 0.5145615935325623
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.491,
+          "entity_match": 0.3333,
+          "combined": 0.4437,
+          "verdict": -0.4,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "claim": "“Elon Musk launches new pregnancy robot.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7304,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.6767,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6957,
+          "entity_match": 1.0,
+          "combined": 0.787,
+          "verdict": -0.87,
+          "nli_label": "refute",
+          "nli_confidence": 0.9654891490936279
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6678,
+          "entity_match": 1.0,
+          "combined": 0.7675,
+          "verdict": -0.14,
+          "nli_label": "support",
+          "nli_confidence": 0.4560925364494324
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.6619,
+          "entity_match": 1.0,
+          "combined": 0.7634,
+          "verdict": -0.87,
+          "nli_label": "refute",
+          "nli_confidence": 0.9639202952384949
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "claim": "Former President Donald Trump would “force states to monitor women's pregnancies.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.1169,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.5523,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7019,
+          "entity_match": 1.0,
+          "combined": 0.7913,
+          "verdict": -0.61,
+          "nli_label": "refute",
+          "nli_confidence": 0.8531172275543213
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6744,
+          "entity_match": 1.0,
+          "combined": 0.772,
+          "verdict": 0.87,
+          "nli_label": "support",
+          "nli_confidence": 0.9694985747337341
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.6384,
+          "entity_match": 1.0,
+          "combined": 0.7469,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.9407454133033752
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "claim": "“Melania Trump declares that she wants a divorce.”",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6666,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.8003,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.7961,
+          "entity_match": 1.0,
+          "combined": 0.8573,
+          "verdict": -0.53,
+          "nli_label": "refute",
+          "nli_confidence": 0.5880725383758545
+        },
+        {
+          "source": "FULLFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6236,
+          "entity_match": 1.0,
+          "combined": 0.7365,
+          "verdict": -0.97,
+          "nli_label": "refute",
+          "nli_confidence": 0.9748348593711853
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "news_article",
+          "similarity": 0.6203,
+          "entity_match": 1.0,
+          "combined": 0.7342,
+          "verdict": -0.45,
+          "nli_label": "refute",
+          "nli_confidence": 0.9947064518928528
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "claim": "Senate President Chiz Escudero was removed from his post due to corruption.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.874,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.972,
+      "top_evidence": [
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.9005,
+          "entity_match": 1.0,
+          "combined": 0.9303,
+          "verdict": -0.89,
+          "nli_label": "refute",
+          "nli_confidence": 0.9943746328353882
+        },
+        {
+          "source": "VERAFILES",
+          "source_type": "fact_check",
+          "similarity": 0.8884,
+          "entity_match": 1.0,
+          "combined": 0.9218,
+          "verdict": -0.84,
+          "nli_label": "refute",
+          "nli_confidence": 0.9344714283943176
+        },
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.8746,
+          "entity_match": 1.0,
+          "combined": 0.9122,
+          "verdict": -0.89,
+          "nli_label": "refute",
+          "nli_confidence": 0.9889629483222961
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "claim": "Says former President Donald Trump did not lose the 2020 election.",
+      "ground_truth": "FALSE",
+      "predicted_label": "TRUE",
+      "system_score": 0.5771,
+      "is_correct": false,
+      "skipped": false,
+      "is_negated": true,
+      "truth_confidence": 0.7206,
+      "top_evidence": [
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.8664,
+          "entity_match": 1.0,
+          "combined": 0.9065,
+          "verdict": 0.86,
+          "nli_label": "support",
+          "nli_confidence": 0.9570060968399048
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.7516,
+          "entity_match": 1.0,
+          "combined": 0.8261,
+          "verdict": 0.57,
+          "nli_label": "support",
+          "nli_confidence": 0.6347764134407043
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.7293,
+          "entity_match": 1.0,
+          "combined": 0.8105,
+          "verdict": 0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.9528440833091736
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "claim": "Iran and the Philippines are forming an alliance against China.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.0897,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.4601,
+      "top_evidence": [
+        {
+          "source": "VERAFILES",
+          "source_type": "fact_check",
+          "similarity": 0.9394,
+          "entity_match": 1.0,
+          "combined": 0.9576,
+          "verdict": -0.87,
+          "nli_label": "refute",
+          "nli_confidence": 0.9614733457565308
+        },
+        {
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "source_type": "news_article",
+          "similarity": 0.7176,
+          "entity_match": 0.6667,
+          "combined": 0.7023,
+          "verdict": 0.34,
+          "nli_label": "support",
+          "nli_confidence": 0.4977
+        },
+        {
+          "source": "PHILIPPINE-NEWS-AGENCY",
+          "source_type": "news_article",
+          "similarity": 0.7048,
+          "entity_match": 0.6667,
+          "combined": 0.6934,
+          "verdict": 0.45,
+          "nli_label": "support",
+          "nli_confidence": 0.9939186573028564
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "claim": "Russian President Vladimir Putin has declared war on the United States.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.5189,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.2737,
+      "top_evidence": [
+        {
+          "source": "RAPPLER",
+          "source_type": "fact_check",
+          "similarity": 0.9102,
+          "entity_match": 1.0,
+          "combined": 0.9371,
+          "verdict": -0.88,
+          "nli_label": "refute",
+          "nli_confidence": 0.9779012203216553
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.816,
+          "entity_match": 1.0,
+          "combined": 0.8712,
+          "verdict": -0.08,
+          "nli_label": "support",
+          "nli_confidence": 0.267
+        },
+        {
+          "source": "GMANETWORK",
+          "source_type": "news_article",
+          "similarity": 0.6697,
+          "entity_match": 1.0,
+          "combined": 0.7688,
+          "verdict": 0.29,
+          "nli_label": "support",
+          "nli_confidence": 0.2916
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "claim": "Reports show U.S. President-elect Donald Trump has a deal ready to buy Greenland.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.7732,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.8272,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.8035,
+          "entity_match": 1.0,
+          "combined": 0.8624,
+          "verdict": -0.62,
+          "nli_label": "refute",
+          "nli_confidence": 0.6837614178657532
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6948,
+          "entity_match": 1.0,
+          "combined": 0.7864,
+          "verdict": -0.89,
+          "nli_label": "refute",
+          "nli_confidence": 0.9921066761016846
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.6664,
+          "entity_match": 1.0,
+          "combined": 0.7665,
+          "verdict": -0.76,
+          "nli_label": "refute",
+          "nli_confidence": 0.8421974182128906
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "claim": "Inflation was the highest in U.S. history under President Joe Biden.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.4395,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.4064,
+      "top_evidence": [
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.8226,
+          "entity_match": 1.0,
+          "combined": 0.8758,
+          "verdict": -0.72,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.7112,
+          "entity_match": 1.0,
+          "combined": 0.7979,
+          "verdict": -0.1,
+          "nli_label": "support",
+          "nli_confidence": 0.3134
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.6516,
+          "entity_match": 1.0,
+          "combined": 0.7561,
+          "verdict": -0.11,
+          "nli_label": "support",
+          "nli_confidence": 0.3581
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "claim": "Kamala Harris used a teleprompter during her town hall appearance on Univision.",
+      "ground_truth": "FALSE",
+      "predicted_label": "FALSE",
+      "system_score": -0.6496,
+      "is_correct": true,
+      "skipped": false,
+      "is_negated": false,
+      "truth_confidence": 0.7475,
+      "top_evidence": [
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.8106,
+          "entity_match": 0.3333,
+          "combined": 0.6674,
+          "verdict": -0.89,
+          "nli_label": "refute",
+          "nli_confidence": 0.9846279621124268
+        },
+        {
+          "source": "POLITIFACT",
+          "source_type": "fact_check",
+          "similarity": 0.5916,
+          "entity_match": 0.6667,
+          "combined": 0.6141,
+          "verdict": -0.0,
+          "nli_label": "neutral",
+          "nli_confidence": 0.9044061899185181
+        },
+        {
+          "source": "SNOPES",
+          "source_type": "fact_check",
+          "similarity": 0.6575,
+          "entity_match": 0.3333,
+          "combined": 0.5602,
+          "verdict": -0.72,
+          "nli_label": "refute",
+          "nli_confidence": 0.8
+        }
+      ]
+    }
+  ]
+}
