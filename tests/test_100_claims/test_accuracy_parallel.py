@@ -120,8 +120,8 @@ def compute_score_distribution(results_list: list[dict]) -> dict:
     """Bucket system_score values to understand confidence distribution."""
     buckets = {
         "strong_true  (>= 0.5)": 0,
-        "weak_true    (0.0–0.5)": 0,
-        "weak_false   (-0.5–0.0)": 0,
+        "weak_true    (0.0-0.5)": 0,
+        "weak_false   (-0.5-0.0)": 0,
         "strong_false (<= -0.5)": 0,
         "skipped": 0,
     }
@@ -132,9 +132,9 @@ def compute_score_distribution(results_list: list[dict]) -> dict:
         elif s >= 0.5:
             buckets["strong_true  (>= 0.5)"] += 1
         elif s >= 0.0:
-            buckets["weak_true    (0.0–0.5)"] += 1
+            buckets["weak_true    (0.0-0.5)"] += 1
         elif s >= -0.5:
-            buckets["weak_false   (-0.5–0.0)"] += 1
+            buckets["weak_false   (-0.5-0.0)"] += 1
         else:
             buckets["strong_false (<= -0.5)"] += 1
     return buckets
@@ -278,7 +278,7 @@ async def run_dataset(vc: VerifyController, dataset_filename: str) -> dict:
 
         if not _quiet_logs:
             print(
-                f"[{dataset_name}] #{claim_id:03d} {'✓' if is_correct else '✗'}  "
+                f"[{dataset_name}] #{claim_id:03d} {'OK' if is_correct else 'X'}  "
                 f"GT={ground_truth_norm:<5} Pred={score_label:<5} Score={str(round(system_score, 4)) if system_score is not None else 'SKIP':<8}  "
                 f"{claim_text[:80]}",
                 flush=True,
@@ -377,9 +377,9 @@ def write_combined_summary(all_results: list[dict]) -> dict:
         )
 
     # Goal check
-    print("\n  Goal check (target: both ≥80%, ideally normal > negated):")
+    print("\n  Goal check (target: both >=80%, ideally normal > negated):")
     for name, vals in combined.items():
-        status = "✓" if vals["accuracy"] >= 0.80 else "✗"
+        status = "OK" if vals["accuracy"] >= 0.80 else "X"
         print(f"    {status} {name}: {vals['accuracy']:.2%}")
 
     summary_payload = {"timestamp": _timestamp, "datasets": combined}
@@ -399,7 +399,7 @@ def write_combined_summary(all_results: list[dict]) -> dict:
 # ---------------------------------------------------------------------------
 
 
-async def main():
+async def main() -> dict:
     print("[shared] Initializing VerifyController once...", flush=True)
     vc = VerifyController()
     load_hitl_models(vc, "shared")
@@ -409,8 +409,9 @@ async def main():
     for dataset_file in DATASET_FILES:
         all_results.append(await run_dataset(vc, dataset_file))
 
-    write_combined_summary(list(all_results))
+    return write_combined_summary(list(all_results))
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    summary = asyncio.run(main())
+    print("ACCURACY_SUMMARY_JSON=" + json.dumps(summary, ensure_ascii=False))
