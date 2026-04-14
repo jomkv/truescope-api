@@ -1175,19 +1175,32 @@ class VerifyController:
         return (limit, use_non_factcheck)
 
     def _sort_and_aggregate(
-        self, results: list[ArticleResultModel], config: dict[str, Any] | None
+        self,
+        results: list[ArticleResultModel],
+        config: dict[str, Any] | None,
     ) -> list[ArticleResultModel]:
         """Sort by NLI presence → combined score → fact-check preference, then mark aggregated."""
         (limit, use_non_factcheck) = self._load_config(config)
 
-        # Sort results first
-        results.sort(
-            key=lambda x: (
-                0 if x.nli_result else 1,
+        def sort_key(x):
+            has_nli = 0 if x.nli_result else 1
+            # Penalize signal misalignment: NLI says support but verdict is negative (or vice versa)
+            alignment_penalty = 0
+            if x.verdict is not None and x.nli_result:
+                nli = x.nli_result.relationship
+                if nli == NLILabel.SUPPORT and x.verdict < -0.2:
+                    alignment_penalty = 1  # deprioritize
+                elif nli == NLILabel.REFUTE and x.verdict > 0.2:
+                    alignment_penalty = 1
+            return (
+                has_nli,
+                alignment_penalty,
                 -x.combined_relevance_score,
                 0 if x.found_claim else 1,
             )
-        )
+
+        # Sort results first
+        results.sort(key=sort_key)
 
         aggregated_results: list[ArticleResultModel] = []
 
