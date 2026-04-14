@@ -49,6 +49,7 @@ jobs:
           DB_CA_PATH: ${{ secrets.DB_CA_PATH }}
           ACCURACY_SAVE_FILES: "0"
           ACCURACY_QUIET: "1"
+          PYTHONIOENCODING: "utf-8"
         shell: python
         run: |
           import asyncio
