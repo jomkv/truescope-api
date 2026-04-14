@@ -1067,6 +1067,8 @@ class VerifyController:
         tasks: list[Coroutine[Any, Any, ArticleResultModel]] = []
         search_hits: list[dict[str, Any]] = []
 
+        # Dummy change
+
         # Fact-check results
         factcheck_results = self.find_claims_with_articles(
             claim_embedding, self.DB_RETRIEVE_LIMIT, exclude_doc_ids=exclude_doc_ids
