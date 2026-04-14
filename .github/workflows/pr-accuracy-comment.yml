@@ -54,6 +54,12 @@ jobs:
           import asyncio
           import json
           import os
+          import sys
+
+          workspace = os.environ.get("GITHUB_WORKSPACE", os.getcwd())
+          os.chdir(workspace)
+          if workspace not in sys.path:
+              sys.path.insert(0, workspace)
 
           from tests.test_100_claims.test_accuracy_parallel import main
 
