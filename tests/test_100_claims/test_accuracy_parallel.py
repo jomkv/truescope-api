@@ -399,7 +399,7 @@ def write_combined_summary(all_results: list[dict]) -> dict:
 # ---------------------------------------------------------------------------
 
 
-async def main():
+async def main() -> dict:
     print("[shared] Initializing VerifyController once...", flush=True)
     vc = VerifyController()
     load_hitl_models(vc, "shared")
@@ -409,8 +409,9 @@ async def main():
     for dataset_file in DATASET_FILES:
         all_results.append(await run_dataset(vc, dataset_file))
 
-    write_combined_summary(list(all_results))
+    return write_combined_summary(list(all_results))
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    summary = asyncio.run(main())
+    print("ACCURACY_SUMMARY_JSON=" + json.dumps(summary, ensure_ascii=False))
