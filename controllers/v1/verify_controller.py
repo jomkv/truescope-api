@@ -1175,32 +1175,37 @@ class VerifyController:
         return (limit, use_non_factcheck)
 
     def _sort_and_aggregate(
-        self, results: list[ArticleResultModel], config: dict[str, Any] | None
+        self,
+        results: list[ArticleResultModel],
+        config: dict[str, Any] | None,
     ) -> list[ArticleResultModel]:
         """Sort by NLI presence → combined score → fact-check preference, then mark aggregated."""
         (limit, use_non_factcheck) = self._load_config(config)
 
-        # Sort results first
-        results.sort(
-            key=lambda x: (
-                0 if x.nli_result else 1,
+        def sort_key(x):
+            has_nli = 0 if x.nli_result else 1
+            alignment_penalty = 0
+            if x.verdict is not None and x.nli_result:
+                nli = x.nli_result.relationship
+                if nli == NLILabel.SUPPORT and x.verdict < -0.2:
+                    alignment_penalty = 1
+                elif nli == NLILabel.REFUTE and x.verdict > 0.35:  # raised from 0.2
+                    alignment_penalty = 1
+            return (
+                has_nli,
+                alignment_penalty,
                 -x.combined_relevance_score,
                 0 if x.found_claim else 1,
             )
-        )
+
+        results.sort(key=sort_key)
 
         aggregated_results: list[ArticleResultModel] = []
-
-        # Aggregate, get top n where n = max_evidences with respect to use_non_factcheck
         for result in results:
-            # If we have reached max_evidences, stop
             if len(aggregated_results) >= limit:
                 break
-
-            # If not using non-factcheck and current result is a non-factcheck, skip
             if not use_non_factcheck and result.found_verdict is None:
                 continue
-
             aggregated_results.append(result)
 
         return aggregated_results
