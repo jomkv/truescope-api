@@ -1,0 +1,15 @@
+services:
+  api:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.docker.prod
+    volumes:
+      # Trained adapters persist across rebuilds
+      - ./data:/app/data
+      # Feedback file persists across rebuilds
+      - ./feedback.json:/app/feedback.json
+      # DO Postgres CA cert mounted read-only for TLS verification
+      - ./certs:/app/certs:ro
