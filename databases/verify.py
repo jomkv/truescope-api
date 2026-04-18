@@ -11,7 +11,6 @@ logger = logging.getLogger(__name__)
 class VerifyDatabase:
     def __init__(self) -> None:
         self.session: SessionType = Session()
-        self.session: SessionType = Session()
 
     @staticmethod
     def claim_distance_col(embedding: list[float]):

@@ -32,8 +32,7 @@ async def verify_claim(verify: VerifyClaimModel):
         config=config,
     )
     entities = controller.extract_entities(verify.claim)
-    timeframe = controller.extract_claim_timeframe(verify.claim)
-    return {"entities": entities, "timeframe": timeframe, **results}
+    return {"entities": entities, "timeframe": [], **results}
 
 
 @router.post("/calculate")
