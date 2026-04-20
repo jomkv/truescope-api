@@ -96,9 +96,11 @@ class TranslationService:
                 no_repeat_ngram_size=3,
             )
 
-        generated_ids = outputs[0]
+        generated_ids = outputs[0].clone()
+        del outputs
         translated_text = self.tokenizer.decode(generated_ids, skip_special_tokens=True)
         translated_text = self.restore_storm_names(translated_text, placeholder_map)
+        del generated_ids
 
         # If translation seems to have failed (still contains Filipino words) try it with tgl_Latn
         if src_lang == "fil_Latn" and self.has_untranslated_tagalog(translated_text):

@@ -1,27 +1,56 @@
+import json
+import logging
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
 
 
+logger = logging.getLogger(__name__)
+
+
 class EmbeddingService:
+    @staticmethod
+    def _resolve_meta_path(raw_path: str) -> Path:
+        # Normalize Windows-style separators so Linux containers can resolve paths.
+        normalized = raw_path.replace("\\", "/").strip()
+        return Path(normalized)
+
     def __init__(self):
         # Default base model
         model_name = "sentence-transformers/all-MiniLM-L6-v2"
-        
+
         # Check for latest trained version
         try:
             meta_path = Path("data/model_adapters/embeddings_meta.json")
-            if meta_path.exists():
-                import json
+            if not meta_path.exists():
+                logger.warning(
+                    "Embedding meta file not found at %s; using base model.",
+                    meta_path,
+                )
+            else:
                 with open(meta_path, "r", encoding="utf-8") as f:
                     meta = json.load(f)
-                    trained_path = Path(meta.get("current_path", ""))
-                    if trained_path.exists():
+                raw_path = str(meta.get("current_path", "")).strip()
+                if not raw_path:
+                    logger.warning(
+                        "Embedding meta has empty current_path; using base model."
+                    )
+                else:
+                    trained_path = self._resolve_meta_path(raw_path)
+                    if not trained_path.exists():
+                        logger.warning(
+                            "Embedding adapter path not found; using base model. raw_path='%s' normalized='%s' cwd='%s'",
+                            raw_path,
+                            trained_path,
+                            Path.cwd(),
+                        )
+                    else:
                         model_name = str(trained_path)
-                        import logging
-                        logging.getLogger(__name__).info(f"Auto-loading trained embedding model: {model_name}")
+                        logger.warning(
+                            "Embedding model loaded from %s",
+                            model_name,
+                        )
         except Exception as e:
-            import logging
-            logging.getLogger(__name__).error(f"Error checking for trained model: {e}")
+            logger.error("Error checking for trained model: %s", e)
 
         self._model_name = model_name
         self.model = SentenceTransformer(model_name)
@@ -39,8 +68,7 @@ class EmbeddingService:
             self.model = SentenceTransformer(str(model_path))
             return True
         except Exception as e:
-            import logging
-            logging.getLogger(__name__).error(f"Failed to reload embedding model: {e}")
+            logger.error("Failed to reload embedding model: %s", e)
             return False
 
     def embed_text(self, text: str) -> list[float]:
