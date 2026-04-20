@@ -13,46 +13,26 @@ from constants.enums import NLILabel
 
 
 class RemarksGenerationService:
-    def __init__(
-        self,
-        use_llm: bool = True,
-    ):
-
+    def __init__(self, use_llm: bool = True):
         self.translation_service = TranslationService()
         self.micro_llm_model_name = "Vamsi/T5_Paraphrase_Paws"
         self.use_llm = use_llm
-
         self.micro_tokenizer = None
         self.micro_model = None
-        self.bart_summarizer = None
 
         if self.use_llm:
             config = AutoConfig.from_pretrained(self.micro_llm_model_name)
-
-            # Must be encoder-decoder model
             if not config.is_encoder_decoder:
                 raise ValueError(
                     "Selected micro LLM must be an encoder-decoder (T5-based) model."
                 )
-
             self.micro_tokenizer = AutoTokenizer.from_pretrained(
                 self.micro_llm_model_name
             )
             self.micro_model = AutoModelForSeq2SeqLM.from_pretrained(
                 self.micro_llm_model_name
             )
-
             self.micro_model.eval()
-
-            # BART summarizer fallback for broken excerpts
-            try:
-                self.bart_summarizer = pipeline(
-                    "summarization",
-                    model="facebook/bart-large-cnn",
-                    device=0 if torch.cuda.is_available() else -1,
-                )
-            except Exception:
-                pass
 
     def verdict_score_meaning(self, verdict_score: float, nli_relationship: str) -> str:
         relationship = nli_relationship.lower()
@@ -173,44 +153,21 @@ class RemarksGenerationService:
     def generate_remarks_from_full_text(
         self, full_text: str, verdict_score: float, nli_relationship: NLILabel
     ) -> str:
-        """BART fallback for nonsensical excerpts"""
         meaning = self.verdict_score_meaning(verdict_score, nli_relationship)
-
-        if not self.bart_summarizer or not full_text or len(full_text) < 50:
-            return (
-                f"The claim {meaning}, "
-                f"with a verdict score of {verdict_score:.2f} on a scale from -1 to 1."
-            )
-
-        try:
-            # Token limit
-            max_input = min(len(full_text), 1024)
-            input_text = full_text[:max_input]
-
-            # Dynamic length (40-60% of input)
-            input_word_count = len(input_text.split())
-            max_length = max(15, int(input_word_count * 0.5))
-            min_length = min(10, max(5, int(input_word_count * 0.25)))
-
-            summary = self.bart_summarizer(
-                input_text,
-                max_length=max_length,
-                min_length=min_length,
-                do_sample=False,
-            )
-
-            summary_text = summary[0]["summary_text"] if summary else ""
-            if summary_text:
-                summary_text = self.normalize_leading_determiner(summary_text)
-                summary_text = self.ensure_sentence_end(summary_text)
-                return (
-                    f"The article reports that {summary_text} "
-                    f"Based on this evidence, the claim {meaning}, "
-                    f"with a verdict score of {verdict_score:.2f} on a scale from -1 to 1."
+        if (
+            self.micro_model
+            and self.micro_tokenizer
+            and full_text
+            and len(full_text) >= 50
+        ):
+            excerpt = self.extract_excerpt(full_text, max_chars=240)
+            if excerpt and not self.is_nonsensical_excerpt(excerpt):
+                paraphrased = self.paraphrase_excerpt(excerpt)
+                paraphrased = self.normalize_leading_determiner(paraphrased)
+                paraphrased = self.ensure_sentence_end(paraphrased)
+                return self.format_remarks_with_article(
+                    paraphrased, meaning, verdict_score
                 )
-        except Exception:
-            pass
-
         return (
             f"The claim {meaning}, "
             f"with a verdict score of {verdict_score:.2f} on a scale from -1 to 1."
@@ -496,3 +453,28 @@ class RemarksGenerationService:
             )
 
         return self.format_remarks_with_article(excerpt, meaning, verdict_score)
+
+    def generate_remarks_batch(
+        self,
+        inputs: list[tuple[str, float, "NLILabel", bool]],
+    ) -> list[str]:
+        """
+        Run generate_remarks for all aggregated results in one executor call.
+
+        T5 generate() with do_sample=True produces variable-length outputs so true
+        model-level batching isn't straightforward without padding tricks. What this
+        buys us is removing the sequential await overhead in the WS loop — all
+        remarks are generated synchronously here in a single thread, then yielded
+        to the client together.
+
+        Args:
+            inputs: list of (text, verdict_score, nli_label, use_llm) tuples,
+                    matching the signature of generate_remarks().
+
+        Returns:
+            list of remark strings in the same order as inputs.
+        """
+        return [
+            self.generate_remarks(text, verdict_score, nli_label, use_llm)
+            for text, verdict_score, nli_label, use_llm in inputs
+        ]
