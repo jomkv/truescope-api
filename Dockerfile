@@ -9,8 +9,38 @@ WORKDIR /app
 
 # Install Python dependencies first (cached layer — only rebuilds if requirements.txt changes)
 COPY requirements.txt .
-RUN grep -v '^xx_ent_wiki_sm[[:space:]]*@' requirements.txt > /tmp/requirements.docker.txt \
-    && pip install --no-cache-dir -r /tmp/requirements.docker.txt
+RUN python - <<'PY'
+from pathlib import Path
+
+src = Path("requirements.txt")
+raw = src.read_bytes()
+
+text = None
+for enc in ("utf-8-sig", "utf-16", "utf-16-le", "utf-16-be", "cp1252"):
+    try:
+        text = raw.decode(enc)
+        break
+    except Exception:
+        pass
+
+if text is None:
+    raise SystemExit("Could not decode requirements.txt")
+
+out_lines = []
+for line in text.splitlines():
+    stripped = line.strip()
+    if stripped.lower().startswith("xx_ent_wiki_sm @"):
+        continue
+    out_lines.append(line)
+
+Path("/tmp/requirements.docker.txt").write_text(
+    "\n".join(out_lines) + "\n",
+    encoding="utf-8",
+)
+
+print(f"Prepared /tmp/requirements.docker.txt with {len(out_lines)} lines")
+PY
+RUN pip install --no-cache-dir -r /tmp/requirements.docker.txt
 
 # Download spaCy model into the image
 RUN python -m spacy download xx_ent_wiki_sm
@@ -27,8 +57,6 @@ AutoTokenizer.from_pretrained('facebook/nllb-200-distilled-600M'); \
 AutoModelForSeq2SeqLM.from_pretrained('facebook/nllb-200-distilled-600M'); \
 AutoTokenizer.from_pretrained('Vamsi/T5_Paraphrase_Paws'); \
 AutoModelForSeq2SeqLM.from_pretrained('Vamsi/T5_Paraphrase_Paws'); \
-AutoTokenizer.from_pretrained('facebook/bart-large-cnn'); \
-AutoModelForSeq2SeqLM.from_pretrained('facebook/bart-large-cnn'); \
 print('All runtime models cached'); \
 "
 
@@ -41,4 +69,4 @@ RUN test -f /app/certs/ca-certificate.crt
 EXPOSE 8000
 
 # Single worker only — multiple workers = each loads all models = OOM on 16GB
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1", "--log-level", "info"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1", "--log-level", "info", "--ws", "websockets-sansio"]
