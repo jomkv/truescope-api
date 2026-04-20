@@ -9,6 +9,7 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from core import server
+from core.config import ENVIRONMENT
 
 app = server.app
 
@@ -30,15 +31,22 @@ verify_controller = VerifyController()
 # Auto-reload trained model adapters on startup
 # ──────────────────────────────────────────────
 
+
 @app.on_event("startup")
 async def auto_reload_adapters():
     """On startup, reload any previously trained model adapters."""
+    if ENVIRONMENT == "production":
+        return
+
     try:
         from routers.v1.training_router import get_trainer
+
         trainer = get_trainer()
 
         nli_ok = trainer.reload_nli_into_service(verify_controller.nli_service)
-        emb_ok = trainer.reload_embeddings_into_service(verify_controller.embedding_service)
+        emb_ok = trainer.reload_embeddings_into_service(
+            verify_controller.embedding_service
+        )
 
         if nli_ok:
             logger.info("✅ NLI adapter auto-loaded on startup.")
@@ -52,6 +60,7 @@ async def auto_reload_adapters():
 # Simulation / HITL web interface
 # ──────────────────────────────────────────────
 
+
 @app.get("/simulation", response_class=HTMLResponse)
 async def simulation_page(request: Request):
     return templates.TemplateResponse("simulation.html", {"request": request})
@@ -61,7 +70,9 @@ async def simulation_page(request: Request):
 async def simulation_verify(data: dict):
     claim = data.get("claim", "")
     if not claim:
-        return JSONResponse({"evidences": [], "overall_verdict": None, "is_negated": False})
+        return JSONResponse(
+            {"evidences": [], "overall_verdict": None, "is_negated": False}
+        )
 
     raw_limit = data.get("aggregation_limit")
     aggregation_limit = None
@@ -71,7 +82,9 @@ async def simulation_verify(data: dict):
         except (ValueError, TypeError):
             aggregation_limit = None
 
-    result = await verify_controller.verify_claim(claim, aggregation_limit=aggregation_limit)
+    result = await verify_controller.verify_claim(
+        claim, aggregation_limit=aggregation_limit
+    )
     claim_entities = verify_controller.extract_entities(claim)
 
     evidences = []
@@ -109,12 +122,14 @@ async def simulation_verify(data: dict):
     for art in result.get("skipped", []):
         evidences.append(art_to_dict(art, skipped=True))
 
-    return JSONResponse({
-        "evidences": evidences,
-        "overall_verdict": result.get("overall_verdict"),
-        "truth_confidence_score": result.get("truth_confidence_score"),
-        "is_negated": result.get("is_negated", False),
-    })
+    return JSONResponse(
+        {
+            "evidences": evidences,
+            "overall_verdict": result.get("overall_verdict"),
+            "truth_confidence_score": result.get("truth_confidence_score"),
+            "is_negated": result.get("is_negated", False),
+        }
+    )
 
 
 # ──────────────────────────────────────────────
@@ -156,15 +171,18 @@ async def simulation_feedback(data: dict):
 # Threshold configuration endpoints
 # ──────────────────────────────────────────────
 
+
 @app.get("/simulation/thresholds")
 async def get_thresholds():
     """Return current relevance threshold values from the running controller."""
-    return JSONResponse({
-        "relevance_threshold": verify_controller.RELEVANCE_THRESHOLD,
-        "entity_threshold": verify_controller.ENTITY_THRESHOLD,
-        "combined_threshold": verify_controller.COMBINED_THRESHOLD,
-        "aggregation_limit": verify_controller.AGGREGATION_LIMIT,
-    })
+    return JSONResponse(
+        {
+            "relevance_threshold": verify_controller.RELEVANCE_THRESHOLD,
+            "entity_threshold": verify_controller.ENTITY_THRESHOLD,
+            "combined_threshold": verify_controller.COMBINED_THRESHOLD,
+            "aggregation_limit": verify_controller.AGGREGATION_LIMIT,
+        }
+    )
 
 
 @app.post("/simulation/thresholds")
