@@ -122,8 +122,9 @@ class StatsService:
         variance = sum((x - mean_bias) ** 2 for x in bias_values) / len(bias_values)
         std_dev = variance**0.5
 
-        # Normalize to 0-1 scale (max std dev is ~2 for range -2 to 2)
-        max_std_dev = 2.0
+        # Normalize to 0-1 scale 
+        # Max standard deviation with our current midpoint extremities (-4.5 to 4.5) is 4.5
+        max_std_dev = 4.5
         bias_divergence = min(std_dev / max_std_dev, 1.0)
 
         return (bias_divergence * 2) - 1
@@ -178,17 +179,18 @@ class StatsService:
         """
         Calculate overall bias consistency - how well bias patterns align with verdicts.
 
-        Computes a score on a -1 to 1 scale based on how consistently biased sources produce aligned verdicts.
-        A high score means biased sources reliably produce verdicts consistent with their bias.
-
+        Uses the Absolute Pearson Correlation Coefficient to determine if a source's 
+        political ideology reliably predicts the verdict it will give.
+        
         Returns -1 to 1 where:
-        - -1 = No consistency between bias and verdict
-        - 1 = Perfect consistency between bias and verdict
+        - -1 = No consistency (verdicts are completely independent of political bias)
+        - 1 = Perfect consistency (political bias perfectly predicts the verdict)
         """
         if not results:
             return 0.0
 
-        consistency_scores = []
+        bias_values = []
+        verdicts = []
 
         for result in results:
             bias = result.source_bias
@@ -198,25 +200,35 @@ class StatsService:
             if not bias or verdict is None:
                 continue
 
-            # Get bias value (-2 to 2)
-            bias_value = SOURCE_BIAS_SPECTRUM_MAP.get(bias, 0)
+            bias_value = SOURCE_BIAS_SPECTRUM_MAP.get(bias, 0.0)
+            bias_values.append(bias_value)
+            verdicts.append(verdict)
 
-            # Calculate how well verdict aligns with bias direction
-            # Bias consistency = how aligned the verdict is with the bias direction
-            # Normalize bias_value to 0-1 range and compare with verdict
-            bias_normalized = (bias_value + 2) / 4  # Convert -2 to 2 into 0 to 1
+        n = len(bias_values)
+        if n < 2:
+            return 0.0
 
-            # Normalize verdict from -1..1 to 0..1 for alignment comparison
-            verdict_normalized = (verdict + 1) / 2
+        mean_bias = sum(bias_values) / n
+        mean_verdict = sum(verdicts) / n
 
-            # Consistency = 1 - |difference| between bias direction and verdict
-            alignment = 1 - abs(bias_normalized - verdict_normalized)
-            consistency_scores.append(alignment)
+        var_bias = sum((x - mean_bias) ** 2 for x in bias_values)
+        var_verdict = sum((y - mean_verdict) ** 2 for y in verdicts)
 
-        # Return average consistency
-        consistency = (
-            sum(consistency_scores) / len(consistency_scores)
-            if consistency_scores
-            else 0.0
-        )
-        return (consistency * 2) - 1
+        # If there is no variance in bias (all checking sources share the same ideology)
+        # or no variance in verdicts (everyone perfectly agrees), correlation is undefined.
+        # This implies bias is NOT dividing the results.
+        if var_bias == 0 or var_verdict == 0:
+             # Return -1 to represent "No bias-driven polarization/consistency"
+            return -1.0
+
+        cov_xy = sum((x - mean_bias) * (y - mean_verdict) for x, y in zip(bias_values, verdicts))
+        
+        # Pearson Correlation Coefficient (-1 to 1)
+        r = cov_xy / ((var_bias * var_verdict) ** 0.5)
+
+        # We care about the absolute consistency. Both perfect negative correlation and
+        # perfect positive correlation indicate that the ideology is highly polarized regarding the topic.
+        abs_r = abs(r)
+
+        # Map absolute correlation from [0, 1] to the [-1, 1] scale
+        return (abs_r * 2) - 1

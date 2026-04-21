@@ -1137,7 +1137,21 @@ class VerifyController:
                     )
                 )
 
-        return user_claim_norm, user_claim_core_norm, is_negated, tasks, search_hits
+        # deduplicate final hits
+        unique_hits = []
+        seen_hit_ids = set()
+        for hit in search_hits:
+            if hit["doc_id"] not in seen_hit_ids:
+                seen_hit_ids.add(hit["doc_id"])
+                unique_hits.append(hit)
+
+        return (
+            user_claim_norm,
+            user_claim_core_norm,
+            is_negated,
+            tasks,
+            unique_hits,
+        )
 
     async def _run_pipeline(
         self,
@@ -1261,6 +1275,8 @@ class VerifyController:
         → STATS → REMARKS → COMPLETE.
         """
         # 1. Build tasks once and emit search hits before results start flowing
+        # and ensure the database session is cleared of any stale objects from previous runs
+        self.db.session.expire_all()
         _, _, _, tasks, search_hits = await self._prepare_pipeline_tasks(user_claim)
         yield {"type": StreamEventType.SEARCH_HITS, "hits": search_hits}
 
@@ -1268,9 +1284,14 @@ class VerifyController:
         remarks_tasks: list[tuple[str, ArticleResultModel]] = []
         loop = asyncio.get_event_loop()
 
-        # 2. Emit each result as soon as its task finishes
+        # 2. Emit each result as soon as its task finishes, but deduplicate by doc_id
+        emitted_ids = set()
         for completed in asyncio.as_completed(tasks):
             result = await completed
+            if result.doc_id in emitted_ids:
+                continue
+            emitted_ids.add(result.doc_id)
+
             if not result.skip_reason:
                 remarks_tasks.append((result.doc_id, result))
             yield {
