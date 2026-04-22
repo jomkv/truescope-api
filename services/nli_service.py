@@ -1,5 +1,6 @@
 import json
 import logging
+import os
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 from torch import Tensor
@@ -12,12 +13,44 @@ logger = logging.getLogger(__name__)
 
 class NLIService:
     @staticmethod
+    def _get_env_int(name: str, default: int, min_value: int = 1) -> int:
+        raw = os.getenv(name)
+        if raw is None:
+            return default
+        try:
+            value = int(raw)
+            if value < min_value:
+                logger.warning(
+                    "%s=%s is below minimum %s, using default %s",
+                    name,
+                    raw,
+                    min_value,
+                    default,
+                )
+                return default
+            return value
+        except ValueError:
+            logger.warning(
+                "%s=%s is invalid, expected integer. Using default %s",
+                name,
+                raw,
+                default,
+            )
+            return default
+
+    @staticmethod
     def _resolve_meta_path(raw_path: str) -> Path:
-        # Normalize Windows-style separators so Linux containers can resolve paths.
-        normalized = raw_path.replace("\\", "/").strip()
-        return Path(normalized)
+        return Path(raw_path.replace("\\", "/").strip())
 
     def __init__(self):
+        # Set to 1 so each NLI worker thread uses exactly 1 CPU.
+        # With NLI_MAX_THREADS=2 in the controller, this gives us 2 truly
+        # parallel NLI jobs, each pinned to 1 vCPU — no thread contention.
+        # The old default of 2 here with NLI_MAX_THREADS=1 used the same
+        # 2 CPUs but serialized requests rather than parallelising them.
+        self.torch_num_threads = self._get_env_int("NLI_TORCH_NUM_THREADS", 1)
+        torch.set_num_threads(self.torch_num_threads)
+
         model_name = "joeddav/xlm-roberta-large-xnli"
         self._model_name = model_name
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -65,11 +98,7 @@ class NLIService:
         }
 
     def load_adapter(self, adapter_path: str | Path) -> bool:
-        """
-        Hot-swap a LoRA-adapted model into this service.
-        Used by FeedbackTrainer.reload_nli_into_service().
-        Returns True if loaded successfully.
-        """
+        """Hot-swap a LoRA-adapted model into this service."""
         try:
             from peft import PeftModel
 
@@ -92,11 +121,7 @@ class NLIService:
 
     @staticmethod
     def _get_nli_uncertainty(probs_tensor: Tensor) -> float:
-        """
-        Calculate classification uncertainty using Shannon Entropy.
-        Higher entropy = flatter distribution = more uncertain.
-        For 3 classes, max entropy is log(3) approx 1.0986.
-        """
+        """Shannon entropy — higher = more uncertain. Max is log(3) ≈ 1.0986 for 3 classes."""
         eps = 1e-9
         entropy = -torch.sum(probs_tensor * torch.log(probs_tensor + eps))
         return entropy.item()
@@ -104,7 +129,6 @@ class NLIService:
     def classify_nli(
         self, premise: str, hypothesis: str
     ) -> tuple[NLILabel, float, float]:
-        torch.set_num_threads(2)
         device = next(self.model.parameters()).device
         inputs = self.tokenizer(
             premise, hypothesis, return_tensors="pt", truncation=True, max_length=512
@@ -113,7 +137,6 @@ class NLIService:
         with torch.no_grad():
             outputs = self.model(**inputs)
             probs = torch.softmax(outputs.logits, dim=-1)[0].detach().clone()
-        # Explicitly delete intermediate tensors to help GC under concurrent load
         del outputs, inputs
         label_id = int(torch.argmax(probs).item())
         result = (
@@ -127,13 +150,5 @@ class NLIService:
     def classify_nli_batch(
         self, premises: list[str], hypothesis: str
     ) -> list[tuple[NLILabel, float, float]]:
-        """
-        Run single-pair inference for each premise sequentially.
-
-        We intentionally do NOT pad-batch here. xlm-roberta-large produces
-        slightly different logits per sample when batched with padding vs run
-        alone, which is enough to flip borderline verdicts and degrade accuracy.
-        Looping classify_nli() is numerically identical to the original
-        sequential path while still consolidating the call site.
-        """
+        """Sequential per-pair inference (preserves numerical consistency vs batched padding)."""
         return [self.classify_nli(premise, hypothesis) for premise in premises]
