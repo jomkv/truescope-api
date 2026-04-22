@@ -20,6 +20,10 @@ NEGATION_PHRASES = [
     "debunked — ",
     "misleading claim that ",
     "fabricated claim that ",
+    "baseless claim that ",
+    "recycled claim that ",
+    "dismissed the claim that ",
+    "dismisses the claim that ",
 ]
 
 # Negation WORD/PATTERN pairs — regex to detect inline negations in sentences
@@ -36,4 +40,7 @@ NEGATION_WORD_PATTERNS = [
 ]
 
 # Individual negation tokens for keyword-based polarity checking
-NEGATION_TOKENS = {"not", "no", "never", "none", "cannot", "isnt", "hasnt", "didnt", "wasnt"}
+NEGATION_TOKENS = {
+    "not", "no", "never", "none", "cannot", "isnt", "hasnt", "didnt", "wasnt",
+    "baseless", "unbothered", "recycled", "fabricated", "hoax"
+}

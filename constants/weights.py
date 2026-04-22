@@ -26,13 +26,19 @@ SOURCE_BIAS_WEIGHT_MAP: dict[SourceBias, float] = {
 }
 
 # Political spectrum positioning for bias divergence calculations
-SOURCE_BIAS_SPECTRUM_MAP: dict[SourceBias, int] = {
-    SourceBias.LEFT: -2,
-    SourceBias.LEFT_CENTER: -1,
-    SourceBias.LEAST_BIASED: 0,
-    SourceBias.RIGHT_CENTER: 1,
-    SourceBias.RIGHT: 2,
-    SourceBias.NEUTRAL: 0,
+# Using midpoints of the AllSides -6 to +6 meter scale:
+# Left: -6.00 to -3.00 (midpoint -4.5)
+# Lean Left: -2.99 to -1.00 (midpoint -2.0)
+# Center: -0.99 to +0.99 (midpoint 0.0)
+# Lean Right: +1.00 to +2.99 (midpoint 2.0)
+# Right: +3.00 to +6.00 (midpoint 4.5)
+SOURCE_BIAS_SPECTRUM_MAP: dict[SourceBias, float] = {
+    SourceBias.LEFT: -4.5,
+    SourceBias.LEFT_CENTER: -2.0,
+    SourceBias.LEAST_BIASED: 0.0,
+    SourceBias.RIGHT_CENTER: 2.0,
+    SourceBias.RIGHT: 4.5,
+    SourceBias.NEUTRAL: 0.0,
 }
 
 NLI_LABEL_WEIGHT_MAP: dict[NLILabel, float] = {
