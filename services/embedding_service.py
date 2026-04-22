@@ -1,6 +1,7 @@
 import json
 import logging
 from sentence_transformers import SentenceTransformer
+from shared.helpers import resolve_meta_path
 from pathlib import Path
 
 
@@ -8,12 +9,6 @@ logger = logging.getLogger(__name__)
 
 
 class EmbeddingService:
-    @staticmethod
-    def _resolve_meta_path(raw_path: str) -> Path:
-        # Normalize Windows-style separators so Linux containers can resolve paths.
-        normalized = raw_path.replace("\\", "/").strip()
-        return Path(normalized)
-
     def __init__(self):
         # Default base model
         model_name = "sentence-transformers/all-MiniLM-L6-v2"
@@ -35,7 +30,7 @@ class EmbeddingService:
                         "Embedding meta has empty current_path; using base model."
                     )
                 else:
-                    trained_path = self._resolve_meta_path(raw_path)
+                    trained_path = resolve_meta_path(raw_path)
                     if not trained_path.exists():
                         logger.warning(
                             "Embedding adapter path not found; using base model. raw_path='%s' normalized='%s' cwd='%s'",

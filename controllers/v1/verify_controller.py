@@ -41,12 +41,12 @@ from services import (
 import unicodedata
 import re
 import asyncio
-import os
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Coroutine
 from collections import defaultdict
 from databases.verify import VerifyDatabase
 import logging
+from shared.helpers import get_env_int
 
 logger = logging.getLogger(__name__)
 
@@ -157,21 +157,17 @@ class VerifyController:
         # MAX_THREADS=3: shared pool for embedding, entity extraction, and
         #   remarks generation — all lighter than NLI, yield frequently.
         # ----------------------------------------------------------------
-        self.MAX_THREADS = self._get_env_int("VERIFY_MAX_THREADS", 3, min_value=1)
-        self.NLI_MAX_THREADS = self._get_env_int(
-            "VERIFY_NLI_MAX_THREADS", 2, min_value=1
-        )
+        self.MAX_THREADS = get_env_int("VERIFY_MAX_THREADS", 3, min_value=1)
+        self.NLI_MAX_THREADS = get_env_int("VERIFY_NLI_MAX_THREADS", 2, min_value=1)
 
-        self.MAX_CONCURRENT_PROCESSES = self._get_env_int(
+        self.MAX_CONCURRENT_PROCESSES = get_env_int(
             "VERIFY_MAX_CONCURRENT_PROCESSES", 7, min_value=1
         )
-        self.PER_REQUEST_CONCURRENCY_LIMIT = self._get_env_int(
+        self.PER_REQUEST_CONCURRENCY_LIMIT = get_env_int(
             "VERIFY_PER_REQUEST_CONCURRENCY_LIMIT", 4, min_value=1
         )
-        self.AGGREGATION_LIMIT = self._get_env_int(
-            "VERIFY_AGGREGATION_LIMIT", 3, min_value=1
-        )
-        self.DB_RETRIEVE_LIMIT = self._get_env_int(
+        self.AGGREGATION_LIMIT = get_env_int("VERIFY_AGGREGATION_LIMIT", 3, min_value=1)
+        self.DB_RETRIEVE_LIMIT = get_env_int(
             "VERIFY_DB_RETRIEVE_LIMIT", 20, min_value=1
         )
 
@@ -189,32 +185,6 @@ class VerifyController:
         self.NLI_CONFIDENCE_GATE = 0.60
         self.UNCERTAINTY_THRESHOLD = 0.80
         self.NEWS_SIMILARITY_THRESHOLD = 0.45
-
-    @staticmethod
-    def _get_env_int(name: str, default: int, min_value: int = 1) -> int:
-        raw = os.getenv(name)
-        if raw is None:
-            return default
-        try:
-            value = int(raw)
-            if value < min_value:
-                logger.warning(
-                    "%s=%s is below minimum %s, using default %s",
-                    name,
-                    raw,
-                    min_value,
-                    default,
-                )
-                return default
-            return value
-        except ValueError:
-            logger.warning(
-                "%s=%s is invalid, expected integer. Using default %s",
-                name,
-                raw,
-                default,
-            )
-            return default
 
     # -----------------------------------------------------------------------
     # Text utilities
@@ -602,7 +572,7 @@ class VerifyController:
         effective_sim = self.RELEVANCE_THRESHOLD
         effective_combined = self.COMBINED_THRESHOLD
 
-        if has_specific_match and entity_match_score >= 0.3:
+        if has_specific_match and entity_match_score >= self.ENTITY_THRESHOLD:
             effective_sim = -0.5  # effectively disabled
             effective_combined = 0.10
 
@@ -1047,7 +1017,7 @@ class VerifyController:
             if meets_gate:
                 verdict_score = self.compute_final_score(
                     verdict=Verdict(claim_verdict) if claim_verdict else None,
-                    source_bias=SourceBias(source_bias),
+                    source_bias=source_bias,
                     nli_label=nli_label,
                     nli_score=nli_score,
                     is_factcheck=is_factcheck,

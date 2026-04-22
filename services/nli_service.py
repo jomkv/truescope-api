@@ -1,54 +1,23 @@
 import json
 import logging
-import os
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 from torch import Tensor
 from constants.enums import NLILabel
 from pathlib import Path
-
+from shared.helpers import get_env_int, resolve_meta_path
 
 logger = logging.getLogger(__name__)
 
 
 class NLIService:
-    @staticmethod
-    def _get_env_int(name: str, default: int, min_value: int = 1) -> int:
-        raw = os.getenv(name)
-        if raw is None:
-            return default
-        try:
-            value = int(raw)
-            if value < min_value:
-                logger.warning(
-                    "%s=%s is below minimum %s, using default %s",
-                    name,
-                    raw,
-                    min_value,
-                    default,
-                )
-                return default
-            return value
-        except ValueError:
-            logger.warning(
-                "%s=%s is invalid, expected integer. Using default %s",
-                name,
-                raw,
-                default,
-            )
-            return default
-
-    @staticmethod
-    def _resolve_meta_path(raw_path: str) -> Path:
-        return Path(raw_path.replace("\\", "/").strip())
-
     def __init__(self):
         # Set to 1 so each NLI worker thread uses exactly 1 CPU.
         # With NLI_MAX_THREADS=2 in the controller, this gives us 2 truly
         # parallel NLI jobs, each pinned to 1 vCPU — no thread contention.
         # The old default of 2 here with NLI_MAX_THREADS=1 used the same
         # 2 CPUs but serialized requests rather than parallelising them.
-        self.torch_num_threads = self._get_env_int("NLI_TORCH_NUM_THREADS", 1)
+        self.torch_num_threads = get_env_int("NLI_TORCH_NUM_THREADS", 1)
         torch.set_num_threads(self.torch_num_threads)
 
         model_name = "joeddav/xlm-roberta-large-xnli"
@@ -73,7 +42,7 @@ class NLIService:
                 if not raw_path:
                     logger.warning("NLI meta has empty current_path; using base model.")
                 else:
-                    adapter_path = self._resolve_meta_path(raw_path)
+                    adapter_path = resolve_meta_path(raw_path)
                     if not adapter_path.exists():
                         logger.warning(
                             "NLI adapter path not found; using base model. raw_path='%s' normalized='%s' cwd='%s'",
