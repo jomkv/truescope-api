@@ -1200,7 +1200,21 @@ class VerifyController:
                     )
                 )
 
-        return user_claim_norm, user_claim_core_norm, is_negated, tasks, search_hits
+        # deduplicate final hits
+        unique_hits = []
+        seen_hit_ids = set()
+        for hit in search_hits:
+            if hit["doc_id"] not in seen_hit_ids:
+                seen_hit_ids.add(hit["doc_id"])
+                unique_hits.append(hit)
+
+        return (
+            user_claim_norm,
+            user_claim_core_norm,
+            is_negated,
+            tasks,
+            unique_hits,
+        )
 
     async def _run_pipeline(
         self,
