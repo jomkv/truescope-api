@@ -832,7 +832,9 @@ class VerifyController:
             nli_label_weight = NLI_LABEL_WEIGHT_MAP.get(nli_label, -1.0)
             if verdict_weight < 0:
                 # Double-negative guard: FALSE article + REFUTE
-                nli_label_weight = 1.0 if has_topical_match else -1.0
+                nli_label_weight = (
+                    1.0 if (has_topical_match and nli_score >= 0.85) else -1.0
+                )
 
             return round(
                 confidence_factor * bias_weight * verdict_weight * nli_label_weight, 2
@@ -1238,9 +1240,13 @@ class VerifyController:
                     alignment_penalty = 1
                 elif nli == NLILabel.REFUTE and x.verdict > 0.35:
                     alignment_penalty = 1
+
+            is_news = 0 if x.found_claim else 1  # found_claim means it's FC
+
             return (
                 has_nli,
                 alignment_penalty,
+                is_news,
                 -x.combined_relevance_score,
                 0 if x.found_claim else 1,
             )
