@@ -574,7 +574,7 @@ class VerifyController:
 
         if has_specific_match and entity_match_score >= self.ENTITY_THRESHOLD:
             effective_sim = -0.5  # effectively disabled
-            effective_combined = 0.10
+            # effective_combined = 0.10
 
         passes = (
             (not requires_specific_match or has_specific_match)
