@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 
 class VerifyDatabase:
     def __init__(self) -> None:
-        self.session: SessionType = Session()
-        self.session: SessionType = Session()
+        self.session_factory = Session
 
     @staticmethod
     def claim_distance_col(embedding: list[float]):
@@ -37,14 +36,14 @@ class VerifyDatabase:
         """
         try:
             distance_col = self.claim_distance_col(embedding)
-
-            return (
-                self.session.query(Claim, distance_col)
-                .filter(Claim.verdict != "UNKNOWN")
-                .order_by(distance_col)
-                .limit(limit)
-                .all()
-            )
+            with self.session_factory() as session:
+                return (
+                    session.query(Claim, distance_col)
+                    .filter(Claim.verdict != "UNKNOWN")
+                    .order_by(distance_col)
+                    .limit(limit)
+                    .all()
+                )
         except Exception as e:
             logger.error(f"Error while finding similar claims: {e}")
             raise e
@@ -64,13 +63,13 @@ class VerifyDatabase:
         """
         try:
             distance_col = self.chunk_distance_col(embedding)
-
-            return (
-                self.session.query(ArticleChunk, distance_col)
-                .order_by(distance_col)
-                .limit(limit)
-                .all()
-            )
+            with self.session_factory() as session:
+                return (
+                    session.query(ArticleChunk, distance_col)
+                    .order_by(distance_col)
+                    .limit(limit)
+                    .all()
+                )
         except Exception as e:
             logger.error(f"Error while finding similar chunks")
             raise e
@@ -90,12 +89,12 @@ class VerifyDatabase:
         """
         try:
             distance_col = self.chunk_distance_col(embedding)
-
-            return (
-                self.session.query(ArticleChunk, distance_col)
-                .filter(ArticleChunk.doc_id.in_(doc_ids))
-                .all()
-            )
+            with self.session_factory() as session:
+                return (
+                    session.query(ArticleChunk, distance_col)
+                    .filter(ArticleChunk.doc_id.in_(doc_ids))
+                    .all()
+                )
         except Exception as e:
             logger.error(f"Error while finding similar article chunks: {e}")
             raise e
@@ -111,7 +110,8 @@ class VerifyDatabase:
             list[Article]: List of Article objects matching the provided doc_ids.
         """
         try:
-            return self.session.query(Article).filter(Article.doc_id.in_(doc_ids)).all()
+            with self.session_factory() as session:
+                return session.query(Article).filter(Article.doc_id.in_(doc_ids)).all()
         except Exception as e:
             logger.error(f"Error while finding articles from doc_ids: {e}")
             raise e

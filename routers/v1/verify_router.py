@@ -8,6 +8,14 @@ from models.article_result_model import ArticleResultModel
 router = APIRouter()
 
 
+async def _safe_websocket_close(websocket: WebSocket):
+    """Best-effort close to avoid propagating transport-level close errors."""
+    try:
+        await websocket.close()
+    except Exception:
+        pass
+
+
 def _get_controller():
     """
     Return the shared VerifyController singleton from main.py.
@@ -32,8 +40,7 @@ async def verify_claim(verify: VerifyClaimModel):
         config=config,
     )
     entities = controller.extract_entities(verify.claim)
-    timeframe = controller.extract_claim_timeframe(verify.claim)
-    return {"entities": entities, "timeframe": timeframe, **results}
+    return {"entities": entities, "timeframe": [], **results}
 
 
 @router.post("/calculate")
@@ -71,7 +78,7 @@ async def websocket_verify_endpoint(websocket: WebSocket):
                     "details": e.errors(),
                 }
             )
-            await websocket.close()
+            await _safe_websocket_close(websocket)
 
             # Prevent error from propagating to parent try-catch
             return
@@ -80,7 +87,7 @@ async def websocket_verify_endpoint(websocket: WebSocket):
             await websocket.send_json(
                 {"type": StreamEventType.ERROR, "message": "No claim provided"}
             )
-            await websocket.close()
+            await _safe_websocket_close(websocket)
             return
 
         claim = payload.claim
@@ -106,7 +113,4 @@ async def websocket_verify_endpoint(websocket: WebSocket):
         except Exception:
             pass
     finally:
-        try:
-            await websocket.close()
-        except RuntimeError:
-            pass
+        await _safe_websocket_close(websocket)

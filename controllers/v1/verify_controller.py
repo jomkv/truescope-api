@@ -31,7 +31,6 @@ from constants.negations import (
     NEGATION_WORD_PATTERNS,
     NEGATION_TOKENS,
 )
-from dateparser.search import search_dates
 from services import (
     EmbeddingService,
     EntityExtractionService,
@@ -41,24 +40,33 @@ from services import (
 )
 import unicodedata
 import re
-from datetime import datetime
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Coroutine
 from collections import defaultdict
 from databases.verify import VerifyDatabase
 import logging
+from shared.helpers import get_env_int
 
 logger = logging.getLogger(__name__)
 
 
 # ---------------------------------------------------------------------------
-# Lightweight data containers — avoids passing a dozen args between helpers
+# Lightweight data containers
 # ---------------------------------------------------------------------------
 
 
 class _TokenSets:
     """Pre-computed token sets shared across gating steps."""
+
+    __slots__ = (
+        "claim_tokens",
+        "article_tokens",
+        "title_tokens",
+        "entity_parts",
+        "token_to_entity_map",
+        "meaningful_claim_tokens",
+    )
 
     def __init__(
         self,
@@ -79,6 +87,18 @@ class _TokenSets:
 
 class _GateResult:
     """Outcome of the relevance-gating pass."""
+
+    __slots__ = (
+        "passes",
+        "relevance_points",
+        "topical_matches",
+        "descriptor_matches",
+        "entity_token_matches",
+        "distinct_entities_matched",
+        "has_specific_match",
+        "requires_specific_match",
+        "skip_reasons",
+    )
 
     def __init__(
         self,
@@ -126,18 +146,44 @@ class VerifyController:
         self.SEMANTIC_WEIGHT = 0.7
         self.ENTITY_WEIGHT = 0.3
 
-        self.executor = ThreadPoolExecutor(max_workers=2)
+        # ----------------------------------------------------------------
+        # Threading / concurrency knobs
+        #
+        # NLI_MAX_THREADS=2 + NLI_TORCH_NUM_THREADS=1 (set in NLIService):
+        #   2 NLI jobs run truly in parallel, each pinned to 1 vCPU.
+        #   Old config (NLI_MAX_THREADS=1, torch_threads=2) used the same
+        #   2 CPUs but serialised all requests at the NLI step.
+        #
+        # MAX_THREADS=3: shared pool for embedding, entity extraction, and
+        #   remarks generation — all lighter than NLI, yield frequently.
+        # ----------------------------------------------------------------
+        self.MAX_THREADS = get_env_int("VERIFY_MAX_THREADS", 3, min_value=1)
+        self.NLI_MAX_THREADS = get_env_int("VERIFY_NLI_MAX_THREADS", 2, min_value=1)
 
-        self.AGGREGATION_LIMIT = 3
-        self.DB_RETRIEVE_LIMIT = 20
+        self.MAX_CONCURRENT_PROCESSES = get_env_int(
+            "VERIFY_MAX_CONCURRENT_PROCESSES", 7, min_value=1
+        )
+        self.PER_REQUEST_CONCURRENCY_LIMIT = get_env_int(
+            "VERIFY_PER_REQUEST_CONCURRENCY_LIMIT", 4, min_value=1
+        )
+        self.AGGREGATION_LIMIT = get_env_int("VERIFY_AGGREGATION_LIMIT", 3, min_value=1)
+        self.DB_RETRIEVE_LIMIT = get_env_int(
+            "VERIFY_DB_RETRIEVE_LIMIT", 20, min_value=1
+        )
+
+        # Separate executors: NLI is CPU-heavy and must not share a pool with
+        # lighter tasks that would otherwise queue behind a running NLI job.
+        self.executor = ThreadPoolExecutor(
+            max_workers=self.MAX_THREADS, thread_name_prefix="verify"
+        )
+        self.nli_executor = ThreadPoolExecutor(
+            max_workers=self.NLI_MAX_THREADS, thread_name_prefix="nli"
+        )
+
+        self._semaphore = asyncio.Semaphore(self.MAX_CONCURRENT_PROCESSES)
+
         self.NLI_CONFIDENCE_GATE = 0.60
         self.UNCERTAINTY_THRESHOLD = 0.80
-
-        # Minimum similarity for a news article to be scored.
-        # FC evidence has a matched claim as its premise (high precision), so the bar
-        # can stay at RELEVANCE_THRESHOLD (0.3). News articles have no verdict anchor
-        # and can introduce false positives at low similarity, so we require a stronger
-        # semantic signal before letting them influence the final score.
         self.NEWS_SIMILARITY_THRESHOLD = 0.45
 
     # -----------------------------------------------------------------------
@@ -171,6 +217,14 @@ class VerifyController:
         if sentence_matches:
             return cleaned[: sentence_matches[-1].end()].strip()
         return truncated.rsplit(" ", 1)[0].rstrip() + "..."
+
+    @staticmethod
+    def _truncate_content(article: Article, chunk_texts: str | None) -> str:
+        """Produce a ≤500-char display string. Extracted to avoid repeating this logic."""
+        content = article.content
+        if content and len(content) > 500:
+            return content[:500] + "..."
+        return content or chunk_texts or ""
 
     @staticmethod
     def build_chunk_text(
@@ -344,10 +398,6 @@ class VerifyController:
 
         return claim, False
 
-    def extract_claim_timeframe(self, user_claim: str) -> list[tuple[str, datetime]]:
-        # TODO: determine how to use extracted timeframe in pipeline logic
-        return search_dates(user_claim, settings={"RETURN_TIME_SPAN": True})
-
     # -----------------------------------------------------------------------
     # Entity extraction
     # -----------------------------------------------------------------------
@@ -454,7 +504,7 @@ class VerifyController:
         return results[:top_k]
 
     # -----------------------------------------------------------------------
-    # Token set pre-computation (called once per result, shared across gates)
+    # Token set pre-computation
     # -----------------------------------------------------------------------
 
     def _build_token_sets(
@@ -522,7 +572,7 @@ class VerifyController:
         effective_sim = self.RELEVANCE_THRESHOLD
         effective_combined = self.COMBINED_THRESHOLD
 
-        if has_specific_match and entity_match_score >= 0.3:
+        if has_specific_match and entity_match_score >= self.ENTITY_THRESHOLD:
             effective_sim = -0.5  # effectively disabled
             effective_combined = 0.10
 
@@ -671,10 +721,10 @@ class VerifyController:
         claim_tokens: set[str],
         title_tokens: set[str],
     ) -> tuple[NLILabel, float, float]:
-        """Run NLI and apply polarity guard. Returns (label, score, uncertainty)."""
-        loop = asyncio.get_event_loop()
+        """Run NLI via the dedicated executor and apply polarity guard."""
+        loop = asyncio.get_running_loop()
         nli_label, nli_score, nli_uncertainty = await loop.run_in_executor(
-            self.executor,
+            self.nli_executor,
             self.nli_service.classify_nli,
             nli_text,
             user_claim_norm,
@@ -758,8 +808,9 @@ class VerifyController:
         Returns a signed score in [-1, 1]:
             +1 = strong support for user claim (true)
             -1 = strong refutation (false)
-             0 = neutral / inconclusive
+            0 = neutral / inconclusive
         """
+
         if not is_factcheck:
             # Base score reduced from 0.75 → 0.50 to prevent news articles from
             # overriding strong FC signals. News evidence has no verdict anchor,
@@ -782,6 +833,7 @@ class VerifyController:
             if verdict_weight < 0:
                 # Double-negative guard: FALSE article + REFUTE
                 nli_label_weight = 1.0 if has_topical_match else -1.0
+
             return round(
                 confidence_factor * bias_weight * verdict_weight * nli_label_weight, 2
             )
@@ -805,6 +857,15 @@ class VerifyController:
     # Core per-result processor
     # -----------------------------------------------------------------------
 
+    async def _gather_with_limit(self, tasks, limit=4):
+        sem = asyncio.Semaphore(limit)
+
+        async def _wrap(coro):
+            async with sem:
+                return await coro
+
+        return list(await asyncio.gather(*[_wrap(t) for t in tasks]))
+
     async def process_result_async(
         self,
         user_claim_norm: str,
@@ -827,6 +888,10 @@ class VerifyController:
             5. NLI uncertainty / topical-precision / confidence gates
             6. Final score computation + negation flip
         """
+        # Compute display content once upfront — avoids the `"display_content" in dir()`
+        # anti-pattern from the original (checking local scope via dir() is undefined for locals).
+        display_content = self._truncate_content(article, chunk_texts)
+
         # --- 1. Build comparison strings ---
         if is_factcheck and claim_text:
             comparison_text = (claim_text or "") + " " + (chunk_texts or "")
@@ -834,28 +899,24 @@ class VerifyController:
             comparison_text = (article.content or "") + " " + (chunk_texts or "")
         comparison_title = article.title or ""
 
+        # Shared base fields reused across all return paths
+        base_fields = dict(
+            doc_id=article.doc_id,
+            title=article.title,
+            content=display_content,
+            found_claim=claim_text,
+            found_verdict=claim_verdict,
+            publish_date=article.publish_date.isoformat(),
+            source=article.source,
+            url=article.url,
+            source_bias=source_bias,
+            chunk_texts=chunk_texts,
+        )
+
         # --- 2. Early exit for low-similarity news articles ---
-        # News articles have no verdict anchor, so a weak semantic signal is more
-        # likely to introduce noise than useful evidence. Skip scoring entirely
-        # when similarity falls below NEWS_SIMILARITY_THRESHOLD.
         if not is_factcheck and similarity_score < self.NEWS_SIMILARITY_THRESHOLD:
             return ArticleResultModel(
-                doc_id=article.doc_id,
-                title=article.title,
-                content=(
-                    display_content
-                    if "display_content" in dir()
-                    else (
-                        article.content[:500] + "..."
-                        if article.content and len(article.content) > 500
-                        else (article.content or chunk_texts or "")
-                    )
-                ),
-                found_claim=claim_text,
-                found_verdict=claim_verdict,
-                publish_date=article.publish_date.isoformat(),
-                source=article.source,
-                url=article.url,
+                **base_fields,
                 similarity_score=round(similarity_score, 4),
                 entity_match_score=0.0,
                 combined_relevance_score=0.0,
@@ -865,8 +926,6 @@ class VerifyController:
                     f"News similarity too low ({similarity_score:.3f} < {self.NEWS_SIMILARITY_THRESHOLD})"
                 ],
                 source_type="news_article",
-                source_bias=source_bias,
-                chunk_texts=chunk_texts,
             )
 
         # --- 3. Scores ---
@@ -900,32 +959,8 @@ class VerifyController:
 
         skip_reasons: list[str] = []
         meets_gate = score_passes and keyword_gate.passes
-
-        # Build result dict
-        display_content = (
-            article.content[:500] + "..."
-            if article.content and len(article.content) > 500
-            else (article.content or chunk_texts or "")
-        )
-        result: dict = {
-            "doc_id": article.doc_id,
-            "title": article.title,
-            "content": display_content,
-            "found_claim": claim_text,
-            "found_verdict": claim_verdict,
-            "publish_date": article.publish_date.isoformat(),
-            "source": article.source,
-            "url": article.url,
-            "similarity_score": round(similarity_score, 4),
-            "entity_match_score": round(entity_match_score, 4),
-            "combined_relevance_score": combined_relevance_score,
-            "nli_result": None,
-            "verdict": None,
-            "skip_reason": skip_reasons,
-            "source_type": "fact_check" if is_factcheck else "news_article",
-            "source_bias": source_bias,
-            "chunk_texts": chunk_texts,
-        }
+        nli_result_dict = None
+        verdict_score = None
 
         # --- 6. NLI (only if gates pass) ---
         if meets_gate:
@@ -936,7 +971,7 @@ class VerifyController:
                 nli_text, user_claim_norm, ts.claim_tokens, ts.title_tokens
             )
 
-            # Display label flips for negated claims (UX only — scoring uses raw label)
+            # Display label flip for negated claims (UX only — scoring always uses raw label)
             nli_label_display = nli_label
             if is_negated:
                 if nli_label == NLILabel.SUPPORT:
@@ -944,7 +979,7 @@ class VerifyController:
                 elif nli_label == NLILabel.REFUTE:
                     nli_label_display = NLILabel.SUPPORT
 
-            result["nli_result"] = {
+            nli_result_dict = {
                 "relationship": nli_label_display,
                 "relationship_confidence": nli_score,
                 "relationship_uncertainty": nli_uncertainty,
@@ -975,15 +1010,14 @@ class VerifyController:
             skip_reasons.extend(nli_skip)
             meets_gate = nli_passes
 
-            # Update (possibly dampened) confidence on result
-            if result["nli_result"]:
-                result["nli_result"]["relationship_confidence"] = nli_score
+            # Update possibly-dampened confidence in the result dict
+            nli_result_dict["relationship_confidence"] = nli_score
 
             # --- Final score ---
             if meets_gate:
                 verdict_score = self.compute_final_score(
                     verdict=Verdict(claim_verdict) if claim_verdict else None,
-                    source_bias=SourceBias(source_bias),
+                    source_bias=source_bias,
                     nli_label=nli_label,
                     nli_score=nli_score,
                     is_factcheck=is_factcheck,
@@ -993,7 +1027,6 @@ class VerifyController:
                 )
                 if is_negated and verdict_score != 0:
                     verdict_score = -verdict_score
-                result["verdict"] = verdict_score
 
         # --- 7. Populate skip reasons if gate failed ---
         if not meets_gate and not skip_reasons:
@@ -1023,7 +1056,16 @@ class VerifyController:
             if not skip_reasons:
                 skip_reasons.append("Did not meet filtering criteria")
 
-        return ArticleResultModel(**result)
+        return ArticleResultModel(
+            **base_fields,
+            similarity_score=round(similarity_score, 4),
+            entity_match_score=round(entity_match_score, 4),
+            combined_relevance_score=combined_relevance_score,
+            nli_result=nli_result_dict,
+            verdict=verdict_score,
+            skip_reason=skip_reasons,
+            source_type="fact_check" if is_factcheck else "news_article",
+        )
 
     # -----------------------------------------------------------------------
     # Shared pipeline core (used by both REST and WS entry points)
@@ -1053,7 +1095,7 @@ class VerifyController:
         user_claim_norm = self.normalize_text(user_claim_for_matching)
         user_claim_core_norm = self.normalize_text(core_claim_text)
 
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_running_loop()
         claim_embedding, claim_entities = await asyncio.gather(
             loop.run_in_executor(
                 self.executor, self.embedding_service.embed_text, core_claim_text
@@ -1067,21 +1109,25 @@ class VerifyController:
         tasks: list[Coroutine[Any, Any, ArticleResultModel]] = []
         search_hits: list[dict[str, Any]] = []
 
-        # Fact-check results
-        factcheck_results = self.find_claims_with_articles(
+        def _hit(article: Article, source_type: str) -> dict:
+            return {
+                "doc_id": article.doc_id,
+                "title": article.title,
+                "url": article.url,
+                "publish_date": article.publish_date.strftime("%Y-%m-%d %H:%M:%S"),
+                "source": article.source,
+                "source_type": source_type,
+            }
+
+        for (
+            claim,
+            article,
+            similarity_score,
+            chunk_texts,
+        ) in self.find_claims_with_articles(
             claim_embedding, self.DB_RETRIEVE_LIMIT, exclude_doc_ids=exclude_doc_ids
-        )
-        for claim, article, similarity_score, chunk_texts in factcheck_results:
-            search_hits.append(
-                {
-                    "doc_id": article.doc_id,
-                    "title": article.title,
-                    "url": article.url,
-                    "publish_date": article.publish_date.strftime("%Y-%m-%d %H:%M:%S"),
-                    "source": article.source,
-                    "source_type": "fact_check",
-                }
-            )
+        ):
+            search_hits.append(_hit(article, "fact_check"))
             if article.doc_id not in processed_doc_ids:
                 processed_doc_ids.add(article.doc_id)
                 tasks.append(
@@ -1099,24 +1145,11 @@ class VerifyController:
                     )
                 )
 
-        # News/article results
         if not exclude_articles:
-            news_results = self.find_news_articles(
+            for article, similarity_score, chunk_texts in self.find_news_articles(
                 claim_embedding, self.DB_RETRIEVE_LIMIT
-            )
-            for article, similarity_score, chunk_texts in news_results:
-                search_hits.append(
-                    {
-                        "doc_id": article.doc_id,
-                        "title": article.title,
-                        "url": article.url,
-                        "publish_date": article.publish_date.strftime(
-                            "%Y-%m-%d %H:%M:%S"
-                        ),
-                        "source": article.source,
-                        "source_type": "news_article",
-                    }
-                )
+            ):
+                search_hits.append(_hit(article, "news_article"))
                 if article.doc_id in processed_doc_ids:
                     continue
                 if (article.type or "").strip().lower() == "fact-check":
@@ -1173,8 +1206,9 @@ class VerifyController:
                 exclude_articles=exclude_articles,
             )
         )
-
-        all_results: list[ArticleResultModel] = await asyncio.gather(*tasks)
+        all_results: list[ArticleResultModel] = await self._gather_with_limit(
+            tasks, limit=self.PER_REQUEST_CONCURRENCY_LIMIT
+        )
         return user_claim_norm, user_claim_core_norm, is_negated, list(all_results)
 
     def _load_config(self, config: dict[str, Any] | None):
@@ -1185,7 +1219,6 @@ class VerifyController:
         if config is not None:
             limit = config.get("maxEvidence", limit)
             use_non_factcheck = config.get("useNonFactcheck", use_non_factcheck)
-
         return (limit, use_non_factcheck)
 
     def _sort_and_aggregate(
@@ -1203,7 +1236,7 @@ class VerifyController:
                 nli = x.nli_result.relationship
                 if nli == NLILabel.SUPPORT and x.verdict < -0.2:
                     alignment_penalty = 1
-                elif nli == NLILabel.REFUTE and x.verdict > 0.35:  # raised from 0.2
+                elif nli == NLILabel.REFUTE and x.verdict > 0.35:
                     alignment_penalty = 1
             return (
                 has_nli,
@@ -1214,15 +1247,14 @@ class VerifyController:
 
         results.sort(key=sort_key)
 
-        aggregated_results: list[ArticleResultModel] = []
+        aggregated: list[ArticleResultModel] = []
         for result in results:
-            if len(aggregated_results) >= limit:
+            if len(aggregated) >= limit:
                 break
             if not use_non_factcheck and result.found_verdict is None:
                 continue
-            aggregated_results.append(result)
-
-        return aggregated_results
+            aggregated.append(result)
+        return aggregated
 
     # -----------------------------------------------------------------------
     # REST entry point
@@ -1235,21 +1267,15 @@ class VerifyController:
         exclude_articles: bool = False,
         config: dict[str, Any] | None = None,
     ) -> dict:
-        """
-        Main REST entry point for claim verification.
-
-        Returns a dict with: results, skipped, overall_verdict,
-        bias_divergence, truth_confidence_score, bias_consistency, is_negated.
-        """
-        _, _, is_negated, all_results = await self._run_pipeline(
-            user_claim,
-            exclude_doc_ids=exclude_doc_ids,
-            exclude_articles=exclude_articles,
-        )
+        async with self._semaphore:
+            _, _, is_negated, all_results = await self._run_pipeline(
+                user_claim,
+                exclude_doc_ids=exclude_doc_ids,
+                exclude_articles=exclude_articles,
+            )
 
         skipped = [r for r in all_results if r.skip_reason]
         filtered = [r for r in all_results if not r.skip_reason]
-
         aggregated = self._sort_and_aggregate(filtered, config)
         stats = self.calculate_stats(aggregated)
 
@@ -1270,69 +1296,99 @@ class VerifyController:
     async def verify_claim_stream_with_stats(
         self, user_claim: str, config: dict[str, Any] | None = None
     ):
-        """
-        Streams: SEARCH_HITS → per-RESULT events (as completed)
-        → STATS → REMARKS → COMPLETE.
-        """
-        # 1. Build tasks once and emit search hits before results start flowing
-        # and ensure the database session is cleared of any stale objects from previous runs
-        self.db.session.expire_all()
-        _, _, _, tasks, search_hits = await self._prepare_pipeline_tasks(user_claim)
-        yield {"type": StreamEventType.SEARCH_HITS, "hits": search_hits}
+        result_queue: asyncio.Queue = asyncio.Queue()
 
-        results: list[ArticleResultModel] = []
-        remarks_tasks: list[tuple[str, ArticleResultModel]] = []
-        loop = asyncio.get_event_loop()
+        async def _pipeline():
+            try:
+                async with self._semaphore:
+                    _, _, _, tasks, search_hits = await self._prepare_pipeline_tasks(
+                        user_claim
+                    )
+                    await result_queue.put(("hits", search_hits))
 
-        # 2. Emit each result as soon as its task finishes, but deduplicate by doc_id
-        emitted_ids = set()
-        for completed in asyncio.as_completed(tasks):
-            result = await completed
-            if result.doc_id in emitted_ids:
+                    task_sem = asyncio.Semaphore(self.PER_REQUEST_CONCURRENCY_LIMIT)
+
+                    async def _run_with_limit(coro):
+                        async with task_sem:
+                            return await coro
+
+                    # Results are emitted to the queue as they complete — each one
+                    # is forwarded to the client immediately by the consumer below.
+                    for coro in asyncio.as_completed(
+                        [_run_with_limit(t) for t in tasks]
+                    ):
+                        result = await coro
+                        await result_queue.put(("result", result))
+            except Exception as e:
+                await result_queue.put(("error", e))
+                return
+            await result_queue.put(("done", None))
+
+        pipeline_task = asyncio.create_task(_pipeline())
+
+        results_raw: list[ArticleResultModel] = []
+
+        while True:
+            try:
+                item = await asyncio.wait_for(result_queue.get(), timeout=15)
+            except asyncio.TimeoutError:
+                if pipeline_task.done():
+                    break
+                yield {"type": "heartbeat"}
                 continue
-            emitted_ids.add(result.doc_id)
 
-            if not result.skip_reason:
-                remarks_tasks.append((result.doc_id, result))
-            yield {
-                "type": StreamEventType.RESULT,
-                "data": result.model_dump(),
-                "skipped": bool(result.skip_reason),
-            }
-            results.append(result)
+            kind = item[0]
 
-        # 3. Emit stats
-        non_skipped = [r for r in results if not r.skip_reason]
+            if kind == "error":
+                raise item[1]
+            if kind == "hits":
+                yield {"type": StreamEventType.SEARCH_HITS, "hits": item[1]}
+            elif kind == "result":
+                result: ArticleResultModel = item[1]
+                results_raw.append(result)
+                yield {
+                    "type": StreamEventType.RESULT,
+                    "data": result.model_dump(),
+                    "skipped": bool(result.skip_reason),
+                }
+            elif kind == "done":
+                break
+
+        non_skipped = [r for r in results_raw if not r.skip_reason]
         aggregated = self._sort_and_aggregate(non_skipped, config)
-        aggregated_ids = [r.doc_id for r in aggregated]
+        aggregated_ids = {r.doc_id for r in aggregated}
 
         final_stats = self.calculate_stats(aggregated)
         yield {
             "type": StreamEventType.STATS,
-            "total_results": len(results),
+            "total_results": len(results_raw),
             "stats": final_stats,
-            "doc_ids": aggregated_ids,
+            "doc_ids": list(aggregated_ids),
         }
 
-        # 4. Emit remarks
-        for doc_id, result in remarks_tasks:
-            nli_label = (
-                result.nli_result.relationship
-                if result.nli_result
-                else NLILabel.NEUTRAL
-            )
-            verdict = result.verdict if result.verdict is not None else 0.0
-            remarks = await loop.run_in_executor(
-                self.executor,
-                self.remarks_generation_service.generate_remarks,
+        loop = asyncio.get_running_loop()
+        remarks_inputs = [
+            (
                 result.chunk_texts or result.content,
-                verdict,
-                nli_label,
+                result.verdict if result.verdict is not None else 0.0,
+                (
+                    result.nli_result.relationship
+                    if result.nli_result
+                    else NLILabel.NEUTRAL
+                ),
                 result.source_type != "fact_check",
             )
+            for result in aggregated
+        ]
+        all_remarks = await loop.run_in_executor(
+            self.executor,
+            self.remarks_generation_service.generate_remarks_batch,
+            remarks_inputs,
+        )
+        for result, remarks in zip(aggregated, all_remarks):
             yield {
                 "type": StreamEventType.REMARKS,
-                "doc_id": doc_id,
+                "doc_id": result.doc_id,
                 "remarks": remarks,
             }
 
