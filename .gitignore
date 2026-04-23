@@ -3,3 +3,4 @@
 __pycache__/
 feedback.json
 .env.docker.prod
+constants/entities

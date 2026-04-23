@@ -5,6 +5,7 @@
 __pycache__/
 *.pyc
 .env
+.env.docker.prod
 alembic/
 prod_test/
 alembic.ini
@@ -14,3 +15,4 @@ tests/LIAR/
 tests/results/
 tests/article_retrieval_eval.py
 tests/entity_matching_eval.py
+tests/production/
