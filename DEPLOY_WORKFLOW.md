@@ -25,7 +25,7 @@ When prompted:
 Set image and create release tag:
 
 ```powershell
-$IMAGE="<DOCKERHUB_USERNAME>/truescope-api"
+$IMAGE="jomkarlo/truescope-api"
 $TAG=(Get-Date -Format "yyyyMMdd-HHmm")
 ```
 
