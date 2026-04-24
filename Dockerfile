@@ -68,15 +68,15 @@ RUN test -f /app/certs/ca-certificate.crt
 
 # Runtime tuning knobs for verification pipeline (override at deploy time if needed)
 ENV NLI_TORCH_NUM_THREADS=1 \
-    VERIFY_NLI_MAX_THREADS=2 \
-    VERIFY_MAX_THREADS=3 \
-    VERIFY_MAX_CONCURRENT_PROCESSES=5 \
-    VERIFY_PER_REQUEST_CONCURRENCY_LIMIT=2 \
+    VERIFY_NLI_MAX_THREADS=4 \
+    VERIFY_MAX_THREADS=4 \
+    VERIFY_MAX_CONCURRENT_PROCESSES=7 \
+    VERIFY_PER_REQUEST_CONCURRENCY_LIMIT=3 \
     VERIFY_DB_RETRIEVE_LIMIT=20 \
-    VERIFY_AGGREGATION_LIMIT=3 
+    VERIFY_AGGREGATION_LIMIT=3
 
 EXPOSE 8000
 
 # Start with 2 workers to better utilize available RAM and improve throughput.
 # Each worker loads model state, so increase cautiously beyond 2.
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2", "--log-level", "info", "--ws", "websockets-sansio"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2", "--log-level", "info", "--ws", "websockets-sansio", "--timeout-keep-alive", "30", "--timeout-graceful-shutdown", "30"]
