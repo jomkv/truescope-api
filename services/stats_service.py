@@ -54,7 +54,7 @@ class StatsService:
                 if total_weight > 0
                 else 0
             )
-            
+
             # --- Neutral Dampening Logic ---
             # If the weighted average is near-neutral but contains strong signals,
             # ensure that a high-confidence Support or Refute isn't completely
@@ -63,10 +63,12 @@ class StatsService:
             # there's a clear consensus among non-neutral sources.
             non_neutral_verdicts = [v for v in verdicts if v != 0]
             non_neutral_weights = [w for v, w in zip(verdicts, weights) if v != 0]
-            
+
             if non_neutral_verdicts:
-                non_neutral_avg = sum(v * w for v, w in zip(non_neutral_verdicts, non_neutral_weights)) / sum(non_neutral_weights)
-                
+                non_neutral_avg = sum(
+                    v * w for v, w in zip(non_neutral_verdicts, non_neutral_weights)
+                ) / sum(non_neutral_weights)
+
                 # If there's clear non-neutral evidence, pull the overall verdict
                 # towards it, reducing the "gravity" of the 0.0 Neutral results.
                 # We blend the overall average with the non-neutral average (70/30)
@@ -84,13 +86,14 @@ class StatsService:
         truth_confidence_score = StatsService.calculate_truth_confidence(results)
 
         # 4. Calculate Bias Consistency
-        bias_consistency = StatsService.calculate_bias_consistency(results)
+        bias_consistency, raw_r = StatsService.calculate_bias_consistency(results)
 
         return {
             "overall_verdict": round(overall_verdict, 4),
             "bias_divergence": round(bias_divergence, 4),
             "truth_confidence_score": round(truth_confidence_score, 4),
             "bias_consistency": round(bias_consistency, 4),
+            "pearson_r": round(raw_r, 4),
             "total_processed": len(results),
         }
 
@@ -122,7 +125,7 @@ class StatsService:
         variance = sum((x - mean_bias) ** 2 for x in bias_values) / len(bias_values)
         std_dev = variance**0.5
 
-        # Normalize to 0-1 scale 
+        # Normalize to 0-1 scale
         # Max standard deviation with our current midpoint extremities (-4.5 to 4.5) is 4.5
         max_std_dev = 4.5
         bias_divergence = min(std_dev / max_std_dev, 1.0)
@@ -175,16 +178,18 @@ class StatsService:
         return (truth_confidence * 2) - 1
 
     @staticmethod
-    def calculate_bias_consistency(results: list[ArticleResultModel]) -> float:
+    def calculate_bias_consistency(
+        results: list[ArticleResultModel],
+    ) -> tuple[float, float]:
         """
         Calculate overall bias consistency - how well bias patterns align with verdicts.
 
-        Uses the Absolute Pearson Correlation Coefficient to determine if a source's 
+        Uses the Absolute Pearson Correlation Coefficient to determine if a source's
         political ideology reliably predicts the verdict it will give.
-        
-        Returns -1 to 1 where:
-        - -1 = No consistency (verdicts are completely independent of political bias)
-        - 1 = Perfect consistency (political bias perfectly predicts the verdict)
+
+        Returns a tuple (consistency, raw_r) where:
+        - consistency: -1 to 1 (how polarized/predictable the topic is)
+        - raw_r: -1 to 1 (the raw Pearson Correlation Coefficient)
         """
         if not results:
             return 0.0
@@ -206,7 +211,7 @@ class StatsService:
 
         n = len(bias_values)
         if n < 2:
-            return 0.0
+            return -1.0, 0.0
 
         mean_bias = sum(bias_values) / n
         mean_verdict = sum(verdicts) / n
@@ -218,11 +223,13 @@ class StatsService:
         # or no variance in verdicts (everyone perfectly agrees), correlation is undefined.
         # This implies bias is NOT dividing the results.
         if var_bias == 0 or var_verdict == 0:
-             # Return -1 to represent "No bias-driven polarization/consistency"
-            return -1.0
+            # Return -1 to represent "No bias-driven polarization/consistency"
+            return -1.0, 0.0
 
-        cov_xy = sum((x - mean_bias) * (y - mean_verdict) for x, y in zip(bias_values, verdicts))
-        
+        cov_xy = sum(
+            (x - mean_bias) * (y - mean_verdict) for x, y in zip(bias_values, verdicts)
+        )
+
         # Pearson Correlation Coefficient (-1 to 1)
         r = cov_xy / ((var_bias * var_verdict) ** 0.5)
 
@@ -231,4 +238,4 @@ class StatsService:
         abs_r = abs(r)
 
         # Map absolute correlation from [0, 1] to the [-1, 1] scale
-        return (abs_r * 2) - 1
+        return (abs_r * 2) - 1, r

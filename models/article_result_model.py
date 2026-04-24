@@ -22,3 +22,5 @@ class ArticleResultModel(BaseModel):
     source_bias: SourceBias
     chunk_texts: str | None
     is_aggregated: bool = False
+    potential_bias: bool = False
+    bias_reason: str | None = None

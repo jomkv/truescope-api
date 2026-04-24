@@ -6,6 +6,7 @@ from constants.weights import (
     VERDICT_WEIGHT_MAP,
     SOURCE_BIAS_WEIGHT_MAP,
     NLI_LABEL_WEIGHT_MAP,
+    SOURCE_BIAS_SPECTRUM_MAP,
 )
 from constants.enums import (
     Verdict,
@@ -853,6 +854,52 @@ class VerifyController:
         """Centralize usage of stats_service's calculate_stats via this function."""
         return self.stats_service.calculate_stats(evidences)
 
+    def _apply_smart_bias_flagging(
+        self, results: list[ArticleResultModel], stats: dict
+    ):
+        """Identifies articles that align with a detected partisan pattern."""
+        raw_r = stats.get("pearson_r", 0.0)
+        consistency = stats.get("bias_consistency", -1.0)
+
+        # Lowered threshold to 0.0 for thesis testing visibility
+        if consistency > 0.0:
+            for result in results:
+                if (
+                    result.verdict is not None
+                    and result.source_bias in SOURCE_BIAS_SPECTRUM_MAP
+                ):
+                    w = SOURCE_BIAS_SPECTRUM_MAP[result.source_bias]
+                    # Partisan Alignment check: (Source Bias * Verdict * raw_r) > 0.3
+                    # Lowered from 1.0 to 0.3 to identify moderate partisan signals
+                    if (w * result.verdict * raw_r) > 0.3:
+                        result.potential_bias = True
+
+                        # Narrative Explainability Engine
+                        bias_key = (
+                            result.source_bias.value
+                            if hasattr(result.source_bias, "value")
+                            else str(result.source_bias)
+                        )
+                        bias_label = bias_key.replace("_", "-").title()
+                        stance = "Supportive" if result.verdict > 0 else "Opposing"
+                        trend_pct = round(abs(raw_r) * 100, 0)
+
+                        # Define lean descriptions
+                        lean_desc = {
+                            "Left": "tends to favor perspectives associated with the political left",
+                            "Left-Center": "tends to favor perspectives associated with the political left, though not extremely so",
+                            "Right": "tends to favor perspectives associated with the political right",
+                            "Right-Center": "tends to favor perspectives associated with the political right, though not extremely so",
+                        }.get(bias_label, "has a specific ideological background")
+
+                        result.bias_reason = (
+                            f"This source is classified as {bias_label} because its coverage {lean_desc}. "
+                            f"The system detected a {trend_pct:.0f}% ideological trend across the media "
+                            f"on this topic, meaning there is a strong partisan split. "
+                            f"This outlet's {stance} stance aligns significantly with that detected "
+                            f"political pattern."
+                        )
+
     # -----------------------------------------------------------------------
     # Core per-result processor
     # -----------------------------------------------------------------------
@@ -1278,6 +1325,7 @@ class VerifyController:
         filtered = [r for r in all_results if not r.skip_reason]
         aggregated = self._sort_and_aggregate(filtered, config)
         stats = self.calculate_stats(aggregated)
+        self._apply_smart_bias_flagging(filtered, stats)
 
         return {
             "skipped": skipped,
@@ -1286,6 +1334,7 @@ class VerifyController:
             "bias_divergence": stats["bias_divergence"],
             "truth_confidence_score": stats["truth_confidence_score"],
             "bias_consistency": stats["bias_consistency"],
+            "pearson_r": stats.get("pearson_r", 0),
             "is_negated": is_negated,
         }
 
@@ -1359,11 +1408,13 @@ class VerifyController:
         aggregated_ids = {r.doc_id for r in aggregated}
 
         final_stats = self.calculate_stats(aggregated)
+        self._apply_smart_bias_flagging(results_raw, final_stats)
         yield {
             "type": StreamEventType.STATS,
             "total_results": len(results_raw),
             "stats": final_stats,
             "doc_ids": list(aggregated_ids),
+            "results": [r.model_dump() for r in results_raw if r.potential_bias],
         }
 
         loop = asyncio.get_running_loop()
@@ -1385,6 +1436,7 @@ class VerifyController:
             self.remarks_generation_service.generate_remarks_batch,
             remarks_inputs,
         )
+        # Send generated remarks for aggregated results
         for result, remarks in zip(aggregated, all_remarks):
             yield {
                 "type": StreamEventType.REMARKS,
