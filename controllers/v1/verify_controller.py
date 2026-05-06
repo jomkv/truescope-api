@@ -1034,6 +1034,29 @@ class VerifyController:
                 "analyzed_text": self.truncate_at_sentence(nli_text, 200),
             }
 
+            # --- Verdict-NLI alignment correction ---
+            # When a factcheck's own verdict is clearly positive but NLI says REFUTE
+            # (or verdict is clearly negative but NLI says SUPPORT) with high confidence,
+            # NLI is likely confused by similar-but-opposite claim framing in the evidence text.
+            # Dampen to NEUTRAL rather than letting it produce a strongly wrong-direction score.
+            if is_factcheck and claim_verdict is not None and nli_score >= 0.75:
+                verdict_enum = Verdict(claim_verdict)
+                verdict_weight = VERDICT_WEIGHT_MAP.get(verdict_enum, 0.0)
+                if nli_label == NLILabel.REFUTE and verdict_weight >= 0.5:
+                    nli_label = NLILabel.NEUTRAL
+                    nli_score = 0.5
+                elif nli_label == NLILabel.SUPPORT and verdict_weight <= -0.5:
+                    nli_label = NLILabel.NEUTRAL
+                    nli_score = 0.5
+                # Sync corrected values back to result dict and display label
+                if (
+                    nli_label == NLILabel.NEUTRAL
+                    and nli_result_dict["relationship"] != NLILabel.NEUTRAL
+                ):
+                    nli_label_display = NLILabel.NEUTRAL
+                    nli_result_dict["relationship"] = NLILabel.NEUTRAL
+                    nli_result_dict["relationship_confidence"] = nli_score
+
             # --- NLI gates ---
             specific_tokens_in_claim = {
                 t for t in ts.meaningful_claim_tokens if t not in ENTITY_GENERIC_TOKENS
@@ -1274,7 +1297,7 @@ class VerifyController:
         config: dict[str, Any] | None,
     ) -> list[ArticleResultModel]:
         """Sort by NLI presence → combined score → fact-check preference, then mark aggregated."""
-        (limit, use_non_factcheck) = self._load_config(config)
+        limit, use_non_factcheck = self._load_config(config)
 
         def sort_key(x):
             has_nli = 0 if x.nli_result else 1
