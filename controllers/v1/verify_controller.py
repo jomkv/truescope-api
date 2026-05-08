@@ -249,6 +249,22 @@ class VerifyController:
             used_chars += len(snippet) + 1
         return "\n\n".join(parts).strip() or None
 
+    @staticmethod
+    def sanitize_claim(claim: str) -> str:
+        claim = claim.strip()
+
+        # Strip leading non-alphanumeric characters (quotes, brackets, dashes, #, *, etc.)
+        claim = re.sub(r"^[^\w\"\u2018\u2019\u201c\u201d]+", "", claim)
+
+        # Strip trailing boundary noise: only quotes/brackets/whitespace, NOT dots or alphanumeric-adjacent punctuation.
+        # Dots are excluded because they appear in abbreviations (U.S., Dr., etc.)
+        claim = re.sub(r"[\s\"\u2018\u2019\u201c\u201d\)\]\}]+$", "", claim)
+
+        # Collapse any double spaces introduced by the above
+        claim = re.sub(r"\s+", " ", claim).strip()
+
+        return claim
+
     # -----------------------------------------------------------------------
     # Fuzzy / entity matching utilities
     # -----------------------------------------------------------------------
@@ -1160,6 +1176,7 @@ class VerifyController:
         Returns:
             (user_claim_norm, user_claim_core_norm, is_negated, tasks, search_hits)
         """
+        user_claim = self.sanitize_claim(user_claim)
         user_claim_for_matching = self.normalize_text(user_claim, lowercase=False)
         core_claim_text, is_negated = self.detect_claim_stance(user_claim_for_matching)
         user_claim_norm = self.normalize_text(user_claim_for_matching)
