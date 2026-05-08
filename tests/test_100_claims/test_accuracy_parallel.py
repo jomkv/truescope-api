@@ -8,7 +8,11 @@ from collections import defaultdict
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 from controllers.v1.verify_controller import VerifyController
 
-DATASET_FILES = ["jomTestCases.json", "negatedClaims.json"]
+DATASET_FILES = [
+    ("combinedCases.json", [0, 1]),
+    ("jomTestCases.json", [0, 1]),
+    ("negatedClaims.json", [0]),
+]
 _timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 _save_files = os.getenv("ACCURACY_SAVE_FILES", "1") == "1"
 _quiet_logs = os.getenv("ACCURACY_QUIET", "0") == "1"
@@ -175,9 +179,21 @@ def load_hitl_models(vc: VerifyController, dataset_name: str) -> None:
 # ---------------------------------------------------------------------------
 
 
-async def run_dataset(vc: VerifyController, dataset_filename: str) -> dict:
+async def run_dataset(
+    vc: VerifyController, dataset_filename: str, condition: int
+) -> dict:
+    """
+    vc: VerifyController
+    dataset_filename: JSON filename to run the test on
+    condtion: 0 = include, 1 = exclude
+    """
+    is_include = condition == 0
+
     dataset_path = os.path.join(os.path.dirname(__file__), dataset_filename)
-    dataset_name = os.path.splitext(dataset_filename)[0]
+    dataset_name = (
+        os.path.splitext(dataset_filename)[0]
+        + f'-{"include" if is_include else "exclude"}'
+    )  # Suffix with include or exclude as indicators
     results_path = os.path.join(
         os.path.dirname(__file__),
         f"test_accuracy_results_{dataset_name}_{_timestamp}.json",
@@ -201,7 +217,10 @@ async def run_dataset(vc: VerifyController, dataset_filename: str) -> dict:
         claim_id = entry["index"]
         exclude_docs = [entry["doc_id"]] if "doc_id" in entry else []
 
-        result = await vc.verify_claim(claim_text, exclude_doc_ids=exclude_docs)
+        if is_include:
+            result = await vc.verify_claim(claim_text)
+        else:
+            result = await vc.verify_claim(claim_text, exclude_doc_ids=exclude_docs)
 
         if not result["results"]:
             score_label = "NEUTRAL"
@@ -406,8 +425,9 @@ async def main() -> dict:
 
     # Run datasets sequentially to avoid loading multiple heavy model instances.
     all_results = []
-    for dataset_file in DATASET_FILES:
-        all_results.append(await run_dataset(vc, dataset_file))
+    for dataset_file, conditions in DATASET_FILES:
+        for condition in conditions:
+            all_results.append(await run_dataset(vc, dataset_file, condition))
 
     return write_combined_summary(list(all_results))
 

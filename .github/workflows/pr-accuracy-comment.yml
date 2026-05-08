@@ -84,32 +84,40 @@ jobs:
 
             const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
             let body;
+            let shouldFail = false;
 
             if (summaryJson) {
               try {
                 const summary = JSON.parse(summaryJson);
                 const datasets = summary.datasets || {};
-                const normal = datasets.jomTestCases;
-                const negated = datasets.negatedClaims;
+                const datasetLines = Object.entries(datasets).map(([name, data]) => (
+                  `- ${name}: **${pct(data?.accuracy)}** (${data?.correct ?? 'n/a'}/${data?.total ?? 'n/a'})`
+                )).join('\n');
+
+                if (!datasetLines) {
+                  shouldFail = true;
+                  throw new Error('No dataset results were returned in summary.datasets.');
+                }
 
                 body = `${marker}
                 ## Accuracy Check Results
 
-                - Normal dataset (jomTestCases): **${pct(normal?.accuracy)}** (${normal?.correct ?? 'n/a'}/${normal?.total ?? 'n/a'})
-                - Negated dataset (negatedClaims): **${pct(negated?.accuracy)}** (${negated?.correct ?? 'n/a'}/${negated?.total ?? 'n/a'})
+                ${datasetLines}
 
                 - Evaluation step outcome: ${evalStepOutcome}/${evalStepConclusion}
                 - Run: ${runUrl}`;
               } catch (error) {
+                shouldFail = true;
                 body = `${marker}
                 ## Accuracy Check Results
 
-                Accuracy evaluation produced summary output, but parsing failed.
+                Accuracy evaluation produced summary output, but parsing failed or contained no dataset results.
 
                 - Evaluation step outcome: ${evalStepOutcome}/${evalStepConclusion}
                 - Run: ${runUrl}`;
               }
             } else {
+              shouldFail = true;
               body = `${marker}
               ## Accuracy Check Results
 
@@ -143,4 +151,8 @@ jobs:
                 issue_number,
                 body,
               });
+            }
+
+            if (shouldFail) {
+              core.setFailed('PR accuracy evaluation did not return dataset results.');
             }
