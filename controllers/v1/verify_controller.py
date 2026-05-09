@@ -575,7 +575,7 @@ class VerifyController:
 
         if has_specific_match and entity_match_score >= self.ENTITY_THRESHOLD:
             effective_sim = -0.5  # effectively disabled
-            effective_combined = 0.10
+            # effective_combined = 0.10
 
         passes = (
             (not requires_specific_match or has_specific_match)
@@ -833,7 +833,9 @@ class VerifyController:
             nli_label_weight = NLI_LABEL_WEIGHT_MAP.get(nli_label, -1.0)
             if verdict_weight < 0:
                 # Double-negative guard: FALSE article + REFUTE
-                nli_label_weight = 1.0 if has_topical_match else -1.0
+                nli_label_weight = (
+                    1.0 if (has_topical_match and nli_score >= 0.85) else -1.0
+                )
 
             return round(
                 confidence_factor * bias_weight * verdict_weight * nli_label_weight, 2
@@ -1308,9 +1310,13 @@ class VerifyController:
                     alignment_penalty = 1
                 elif nli == NLILabel.REFUTE and x.verdict > 0.35:
                     alignment_penalty = 1
+
+            is_news = 0 if x.found_claim else 1  # found_claim means it's FC
+
             return (
                 has_nli,
                 alignment_penalty,
+                is_news,
                 -x.combined_relevance_score,
                 0 if x.found_claim else 1,
             )
